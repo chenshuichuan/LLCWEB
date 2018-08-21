@@ -1,0 +1,135 @@
+﻿<!DOCTYPE html>
+<!--本文件用于前端测试使用，后台已经解析路径"/test.html" 即可访问-->
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>计划管理</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          th:href="@{https://fonts.googleapis.com/icon?family=Material+Icons}" rel="stylesheet">
+    <link href="../static/assets/materialize/css/materialize.min.css"
+          th:href="@{assets/materialize/css/materialize.min.css}" rel="stylesheet"/>
+    <!-- Bootstrap Styles-->
+    <link href="../static/assets/css/bootstrap.css"
+          th:href="@{/assets/css/bootstrap.css}" rel="stylesheet"/>
+    <!-- FontAwesome Styles-->
+    <link href="../static/assets/css/font-awesome.css"
+          th:href="@{/assets/css/font-awesome.css}" rel="stylesheet"/>
+    <!-- Custom Styles-->
+    <link href="../static/assets/css/custom-styles.css"
+          th:href="@{/assets/css/custom-styles.css}" rel="stylesheet"/>
+    <!-- Google Fonts-->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans'
+          th:href="@{http://fonts.googleapis.com/css?family=Open+Sans}" rel='stylesheet' type='text/css'/>
+
+    <!-- commom Styles-->
+    <link href="../static/custom/css/common.css"
+          th:href="@{/custom/css/common.css}" rel="stylesheet"/>
+
+    <link href="../static/assets/plugins/selector/css/bootstrap-select.min.css"
+          th:href="@{/assets/plugins/selector/css/bootstrap-select.min.css}" rel="stylesheet">
+    <style>
+        .special {
+            font-weight: bold !important;
+            color: #fff !important;
+            background: #bc0000 !important;
+            text-transform: uppercase;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<div id="wrapper">
+    <!-- top side start-->
+    <div  th:include="template/top_side_template :: topside"></div>
+    <!-- top side end-->
+    <!-- left side start-->
+    <nav class="navbar-default navbar-side" role="navigation"
+         th:include="template/left_side_template :: leftside"></nav>
+    <!-- left side end-->
+    <div id="page-wrapper">
+        <div id="header" class="header">
+            <ol class="breadcrumb">
+                <li><a href="#">计划监控</a></li>
+                <li class="active">计划管理</li>
+            </ol>
+        </div>
+
+        <div id="page-inner">
+            <div class="row" style="margin-top: -40px;">
+                <div class="col-md-12">
+                    <!--<iframe th:src="@{/iframe/workers.html}"-->
+                            <!--src="./iframe/plan.html" frameborder=0 allowfullscreen></iframe>-->
+                </div>
+                <div class="col-md-12">
+                    <div id="plan-panel">
+                        <!---->
+                        <!--计划详细信息面板-->
+                        <!--计划表格-->
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <select id="select-test" class="form-control selectpicker" title="请选择省份11111" multiple>
+
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <select class="selectpicker">
+                        <option data-content="<i class='fa fa-tasks'></i>Relish">Relish</option>
+                    </select>
+
+                </div>
+            </div>
+            <footer th:include="template/footer_template :: my_footer">
+            </footer>
+        </div>
+        <!-- /. PAGE INNER  -->
+    </div>
+    <!-- /. PAGE WRAPPER  -->
+</div>
+<!-- /. WRAPPER  -->
+<!-- JS Scripts-->
+<!-- jQuery Js -->
+<script src="../static/assets/js/jquery-1.10.2.js"
+        th:src="@{/assets/js/jquery-1.10.2.js}"></script>
+<!-- Bootstrap Js -->
+<script src="../static/assets/js/bootstrap.min.js"
+        th:src="@{/assets/js/bootstrap.min.js}"></script>
+<!--&lt;!&ndash; Metis Menu Js &ndash;&gt;-->
+<!--<script src="../static/assets/js/jquery.metisMenu.js"-->
+        <!--th:src="@{/assets/js/jquery.metisMenu.js}"></script>-->
+<!--&lt;!&ndash;通用 Custom Js &ndash;&gt;-->
+<!--<script src="../static/assets/js/custom-scripts.js"-->
+        <!--th:src="@{/assets/js/custom-scripts.js}"></script>-->
+<!--<script src="../static/custom/js/common.js"-->
+        <!--th:src="@{/custom/js/commom.js}"></script>-->
+
+<script src="../static/assets/plugins/selector/js/bootstrap-select.min.js"
+        th:src="@{/assets/plugins/selector/js/bootstrap-select.min.js}"></script>
+
+<script>
+
+    $(document).ready(function () {
+        //$("#select-test").empty();
+        var option="";
+        for (var i =0 ; i<5;i++){
+            option+= "<option"+ " value='"+i+ "' data-content=\"<span class='label "+
+                (i%2 ? "label-success'>" : "label-warning'>")+
+                "name"+i +"</span>\">"+"name"+i+ "</option>";
+
+        }
+        alert(option);
+        $("#select-test").prepend(option);
+        //    刷新
+        $('#select-test').selectpicker('refresh');
+
+    });
+</script>
+</body>
+
+</html>

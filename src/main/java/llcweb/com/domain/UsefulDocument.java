@@ -1,22 +1,17 @@
-package llcweb.com.domain.models; /***********************************************************************
+package llcweb.com.domain; /***********************************************************************
  * Module:  Document.java
  * Author:  Ricardo
  * Purpose: Defines the Class Document
  ***********************************************************************/
 
-import javax.persistence.*;
 import java.util.Date;
 
-/** 文档类
+/** 封装搜索信息的文档类
  * @pdOid f86d4902-a99e-4dbd-97ed-b6c5472765bc */
-@Entity
-@Table(name="document")
-public class Document {
+public class UsefulDocument {
    /** 文章id
     * 
     * @pdOid b19668b5-6362-4ec1-8d8b-e8083a74a39f */
-   @Id
-   @GeneratedValue
    public long id;
    /** 作者id
     * 
@@ -34,20 +29,14 @@ public class Document {
     * 
     * @pdOid b6632517-862f-4d63-8faa-8623d1d90cf0 */
    public String content;
-   /** 创建时间
+   /** 最早时间
     * 
     * @pdOid a8870d71-f2da-4d8a-bfad-efdffd3aa2d4 */
-   @Column(columnDefinition="DATE",name="createDate")
-   public Date createDate;
-   /** 修改时间
+   public Date FirstDate;
+   /** 最晚时间
     * 
     * @pdOid 8117e7b1-5fdd-4b3b-9a8d-2a1d58284cc6 */
-   @Column(columnDefinition="DATE",name="modifyDate")
-   public Date modifyDate;
-   /** 注释
-    * 
-    * @pdOid 8639391d-4744-442b-9b12-febf59fdbf3a */
-   public String infor;
+   public Date LastDate;
 
    public long getId() {
       return id;
@@ -89,41 +78,32 @@ public class Document {
       this.content = content;
    }
 
-   public Date getCreateDate() {
-      return createDate;
-   }
+    public Date getFirstDate() {
+        return FirstDate;
+    }
 
-   public void setCreateDate(Date createDate) {
-      this.createDate = createDate;
-   }
+    public void setFirstDate(Date firstDate) {
+        FirstDate = firstDate;
+    }
 
-   public Date getModifyDate() {
-      return modifyDate;
-   }
+    public Date getLastDate() {
+        return LastDate;
+    }
 
-   public void setModifyDate(Date modifyDate) {
-      this.modifyDate = modifyDate;
-   }
+    public void setLastDate(Date lastDate) {
+        LastDate = lastDate;
+    }
 
-   public String getInfor() {
-      return infor;
-   }
-
-   public void setInfor(String infor) {
-      this.infor = infor;
-   }
-
-   @Override
-   public String toString() {
-      return "Document{" +
-              "id=" + id +
-              ", authorId=" + authorId +
-              ", author='" + author +
-              ", title='" + title +
-              ", content='" + content +
-              ", createDate=" + createDate +
-              ", modifyDate=" + modifyDate +
-              ", infor='" + infor +
-              '}';
-   }
+    @Override
+    public String toString() {
+        return "UsefulDocument{" +
+                "id=" + id +
+                ", authorId=" + authorId +
+                ", author='" + author + '\'' +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", FirstDate=" + FirstDate +
+                ", LastDate=" + LastDate +
+                '}';
+    }
 }

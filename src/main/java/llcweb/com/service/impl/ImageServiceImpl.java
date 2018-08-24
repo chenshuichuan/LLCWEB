@@ -1,7 +1,7 @@
 package llcweb.com.service.impl;
 
 import llcweb.com.dao.repository.ImageRepository;
-import llcweb.com.domain.UsefulImage;
+import llcweb.com.domain.entity.UsefulImage;
 import llcweb.com.domain.models.Image;
 import llcweb.com.service.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;

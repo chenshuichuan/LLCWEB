@@ -7,46 +7,32 @@ package llcweb.com.domain.models; /*********************************************
 import javax.persistence.*;
 import java.util.Date;
 
-/** 文档类
- * @pdOid f86d4902-a99e-4dbd-97ed-b6c5472765bc */
+/**
+ * 文档类
+ */
 @Entity
 @Table(name="document")
 public class Document {
-   /** 文章id
-    * 
-    * @pdOid b19668b5-6362-4ec1-8d8b-e8083a74a39f */
+
+   //文章id
    @Id
    @GeneratedValue
    public long id;
-   /** 作者id
-    * 
-    * @pdOid c9d8e504-8f4d-44b2-ab87-5b5062aa42f0 */
+   //作者id
    public int authorId = 0;
-   /** 作者
-    *
-    * @pdOid c9d8e504-8f4d-44b2-ab87-5b5062aa42f0 */
+   //作者
   public String author;
-   /** 文章标题
-    * 
-    * @pdOid 2a5cdd5d-0200-497c-b388-fee7931829aa */
+   //文章标题
    public String title;
-   /** 文章内容
-    * 
-    * @pdOid b6632517-862f-4d63-8faa-8623d1d90cf0 */
+   //文章内容
    public String content;
-   /** 创建时间
-    * 
-    * @pdOid a8870d71-f2da-4d8a-bfad-efdffd3aa2d4 */
-   @Column(columnDefinition="DATE",name="createDate")
+   //创建时间
+   @Column(columnDefinition="DATE",name="createDate") //指定字段类型和命名
    public Date createDate;
-   /** 修改时间
-    * 
-    * @pdOid 8117e7b1-5fdd-4b3b-9a8d-2a1d58284cc6 */
+   //修改时间
    @Column(columnDefinition="DATE",name="modifyDate")
    public Date modifyDate;
-   /** 注释
-    * 
-    * @pdOid 8639391d-4744-442b-9b12-febf59fdbf3a */
+   //注释
    public String infor;
 
    public long getId() {

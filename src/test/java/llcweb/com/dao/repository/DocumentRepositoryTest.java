@@ -1,6 +1,6 @@
 package llcweb.com.dao.repository;
 
-import llcweb.com.domain.UsefulDocument;
+import llcweb.com.domain.entity.UsefulDocument;
 import llcweb.com.domain.models.Document;
 import llcweb.com.service.DocumentService;
 import org.junit.Assert;

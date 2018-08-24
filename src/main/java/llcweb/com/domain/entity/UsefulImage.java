@@ -1,4 +1,4 @@
-package llcweb.com.domain;
+package llcweb.com.domain.entity;
 
 import java.util.Date;
 
@@ -11,23 +11,13 @@ import java.util.Date;
  **/
 public class UsefulImage {
     public int id;
-    /** 照片描述(相当于标题）
-     *
-     * @pdOid 8393be4e-3238-42d5-8eec-5d65bb26e282 */
-
     public String description;
-    /** 照片日期
-     *
-     * @pdOid ccf35a27-a918-4f8c-b220-ceb345850357 */
+
+    //搜索时间段
     public Date firstDate;
     public Date lastDate;
-    /** 照片拥有者、或是上传者id
-     *
-     * @pdOid f1c4220d-41c3-4f25-a5b2-d941bd4a8b8c */
+
     public int ownerId;
-    /** 照片拥有者、或是上传者
-     *
-     * @pdOid f1c4220d-41c3-4f25-a5b2-d941bd4a8b8c */
     public String owner;
 
     public UsefulImage() {

@@ -1,7 +1,7 @@
 package llcweb.com.service.impl;
 
 import llcweb.com.dao.repository.DocumentRepository;
-import llcweb.com.domain.UsefulDocument;
+import llcweb.com.domain.entity.UsefulDocument;
 import llcweb.com.domain.models.Document;
 import llcweb.com.service.DocumentService;
 import org.springframework.beans.factory.annotation.Autowired;

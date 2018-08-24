@@ -1,6 +1,6 @@
 package llcweb.com.service;
 
-import llcweb.com.domain.UsefulDocument;
+import llcweb.com.domain.entity.UsefulDocument;
 import llcweb.com.domain.models.Document;
 import org.springframework.data.domain.Page;
 

@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -15,6 +16,13 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface ImageRepository extends JpaRepository<Image,Integer>{
+    /**
+     * 动态查询+分页
+     **/
     Page<Image> findAll(Specification<Image> spec, Pageable pageable);
-
+    /**
+     * 模糊查询
+     **/
+    @Query("from Image i where i.description like %?1% or owner like %?1%")
+    Page<Image> findByOneKey(String key,Pageable pageable);
 }

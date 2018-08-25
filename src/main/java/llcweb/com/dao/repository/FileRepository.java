@@ -1,7 +1,7 @@
 package llcweb.com.dao.repository;
 
 
-import llcweb.com.domain.models.Document;
+import llcweb.com.domain.models.File;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
@@ -13,15 +13,15 @@ import org.springframework.data.jpa.repository.Query;
  * Description: 文档类的repository类
  * Date: 2018/8/22
  */
-public interface DocumentRepository extends JpaRepository<Document,Integer>{
+public interface FileRepository extends JpaRepository<File,Integer>{
 
     /**
      * 分页动态查询
      **/
-    Page<Document> findAll(Specification<Document> specification, Pageable pageable);
+    Page<File> findAll(Specification<File> specification, Pageable pageable);
     /**
      * 模糊查询
      **/
-    @Query("from Document d where d.author like %?1% or content like %?1% or title like %?1%")
-    Page<Document> findByOneKey(String key,Pageable pageable);
+    @Query("from File f where f.owner like %?1% or introduction like %?1% or model like %?1%")
+    Page<File> findByOneKey(String key, Pageable pageable);
 }

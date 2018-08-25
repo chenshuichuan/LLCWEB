@@ -16,32 +16,15 @@ import java.util.Date;
  **/
 public class UsefulDocument {
 
-    public long id;
-    public int authorId = 0;
     public String author;
     public String title;
+    public String model;
 
     /**
      * 按以下时间段搜索
      **/
     public Date FirstDate;
     public Date LastDate;
-
-    public long getId() {
-      return id;
-   }
-
-    public void setId(long id) {
-      this.id = id;
-   }
-
-    public int getAuthorId() {
-      return authorId;
-   }
-
-    public void setAuthorId(int authorId) {
-      this.authorId = authorId;
-   }
 
     public String getAuthor() {
       return author;
@@ -75,11 +58,17 @@ public class UsefulDocument {
         LastDate = lastDate;
     }
 
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
     @Override
     public String toString() {
         return "UsefulDocument{" +
-                "id=" + id +
-                ", authorId=" + authorId +
                 ", author='" + author + '\'' +
                 ", title='" + title + '\'' +
                 ", FirstDate=" + FirstDate +

@@ -10,25 +10,17 @@ import java.util.Date;
  * @return
  **/
 public class UsefulImage {
-    public int id;
+
     public String description;
 
     //搜索时间段
     public Date firstDate;
     public Date lastDate;
 
-    public int ownerId;
     public String owner;
+    public String model;
 
     public UsefulImage() {
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getDescription() {
@@ -55,19 +47,19 @@ public class UsefulImage {
         this.lastDate = lastDate;
     }
 
-    public int getOwnerId() {
-        return ownerId;
-    }
-
-    public void setOwnerId(int ownerId) {
-        this.ownerId = ownerId;
-    }
-
     public String getOwner() {
         return owner;
     }
 
     public void setOwner(String owner) {
         this.owner = owner;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
     }
 }

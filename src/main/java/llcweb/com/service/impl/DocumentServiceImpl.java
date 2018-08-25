@@ -16,8 +16,6 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 public class DocumentServiceImpl implements DocumentService {
@@ -28,16 +26,8 @@ public class DocumentServiceImpl implements DocumentService {
     @Override
     public Page<Document> findAll(UsefulDocument document, int pageNum, int pageSize) {
 
-        List<Sort.Order> orders = new ArrayList<Sort.Order>();
-        if (document.getFirstDate() != null) {
-            orders.add(new Sort.Order(Sort.Direction.DESC, "createDate"));
-        } else if (document.getLastDate() != null) {
-            orders.add(new Sort.Order(Sort.Direction.DESC, "createDate"));
-        } else {
-            orders.add(new Sort.Order(Sort.Direction.ASC, "id"));
-        }
-        Sort sort = new Sort(orders);
-        Pageable pageable=new PageRequest(pageNum,pageSize,sort);
+        //按时间排序
+        Pageable pageable=new PageRequest(pageNum,pageSize, Sort.Direction.DESC,"createDate");
 
         Page<Document> documentList = documentRepository.findAll(new Specification<Document>() {
             @Override
@@ -54,6 +44,9 @@ public class DocumentServiceImpl implements DocumentService {
                 }
                 if (document.getTitle() != null) {
                     predicate.getExpressions().add(cd.like(root.get("title"), "%" + document.getTitle() + "%"));
+                }
+                if (document.getModel() != null) {
+                    predicate.getExpressions().add(cd.like(root.get("model"), "%" + document.getModel() + "%"));
                 }
                 return predicate;
             }

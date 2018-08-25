@@ -27,13 +27,8 @@ public class ImageServiceImpl implements ImageService {
     public Page<Image> findAll(UsefulImage image, int pageNum,int pageSize) {
 
         List<Sort.Order> orders = new ArrayList<Sort.Order>();
-        if (image.getFirstDate() != null) {
-            orders.add(new Sort.Order(Sort.Direction.DESC, "date"));
-        } else if (image.getLastDate() != null) {
-            orders.add(new Sort.Order(Sort.Direction.DESC, "date"));
-        } else {
-            orders.add(new Sort.Order(Sort.Direction.ASC, "id"));
-        }
+        //按时间排序
+        orders.add(new Sort.Order(Sort.Direction.DESC, "date"));
         Sort sort = new Sort(orders);
         Pageable pageable=new PageRequest(pageNum,pageSize,sort);
 
@@ -52,6 +47,9 @@ public class ImageServiceImpl implements ImageService {
                 }
                 if (image.getOwner() != null) {
                     predicate.getExpressions().add(cd.like(root.get("description"), "%" + image.getOwner() + "%"));
+                }
+                if (image.getModel() != null) {
+                    predicate.getExpressions().add(cd.like(root.get("model"), "%" + image.getModel() + "%"));
                 }
                 return predicate;
             }

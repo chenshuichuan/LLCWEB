@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
 
 /**
@@ -94,4 +95,9 @@ public class ImageRepositoryTest {
         }
     }
 
+    @Test
+    public void findByOneKey(){
+        Page<Image> imageList=imageRepository.findByOneKey("haien",new PageRequest(0,10, Sort.Direction.DESC,"date"));
+        Assert.assertThat(imageList.getTotalElements(),is(10L));
+    }
 }

@@ -22,6 +22,7 @@ public interface DocumentRepository extends JpaRepository<Document,Integer>{
     /**
      * 模糊查询
      **/
-    @Query("from Document d where d.author like %?1% or content like %?1% or title like %?1%")
+    @Query("from Document d where d.author like %?1% or d.content like %?1% " +
+            "or d.title like %?1% or d.model like %?1%")
     Page<Document> findByOneKey(String key,Pageable pageable);
 }

@@ -1,0 +1,63 @@
+package llcweb.com.dao.repository;
+
+import llcweb.com.domain.entity.UsefulConference;
+import llcweb.com.domain.models.Conference;
+import llcweb.com.service.ConferenceService;
+import org.junit.Assert;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
+import static org.hamcrest.Matchers.is;
+
+/**
+ * @Author haien
+ * @Description 会议的测试类
+ * @Date 19:03 2018/8/22
+ **/
+@RunWith(SpringRunner.class)
+@SpringBootTest
+@Transactional
+public class ConferenceRepositoryTest {
+
+    @Autowired
+    private ConferenceRepository conferenceRepository;
+    @Autowired
+    private ConferenceService conferenceService;
+
+    @Test
+    public void add() throws ParseException {
+        Conference conference=new Conference();
+        conference.setAuthor("haien");
+        conference.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2018-08-28"));
+        conference.setModel("项目组");
+        conference.setTitle("项目组第1次会议");
+        conference.setType("小组会议");
+        Assert.assertThat(conferenceRepository.save(conference).getId(),is(0));
+    }
+
+    @Test
+    public void findAll() throws ParseException {
+        UsefulConference conference=new UsefulConference();
+        conference.setFirstDate(new SimpleDateFormat("yyyy-MM-dd").parse("2018-08-28"));
+        conference.setLastDate(new SimpleDateFormat("yyyy-MM-dd").parse("2018-08-28"));
+        Page<Conference> conferences=conferenceService.findAll(conference,1,3);
+        Assert.assertThat(conferences.getTotalElements(),is(12L));
+    }
+
+    @Test
+    public void findByOneKey(){
+        Page<Conference> conferences=conferenceRepository.findByOneKey("haien",new PageRequest(0,10, Sort.Direction.DESC,"date"));
+        Assert.assertThat(conferences.getTotalElements(),is(12L));
+    }
+
+}

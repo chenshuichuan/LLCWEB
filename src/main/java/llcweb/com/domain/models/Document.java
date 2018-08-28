@@ -27,10 +27,10 @@ public  class Document {
    //文章内容
    private String content;
    //创建时间
-   @Column(columnDefinition="DATE",name="createDate") //指定字段类型和命名
+   @Column(columnDefinition="DATE") //指定字段类型和命名
    private Date createDate;
    //修改时间
-   @Column(columnDefinition="DATE",name="modifyDate")
+   @Column(columnDefinition="DATE")
    private Date modifyDate;
    //注释
    private String infor;

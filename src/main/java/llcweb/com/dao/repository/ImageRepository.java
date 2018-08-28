@@ -23,6 +23,6 @@ public interface ImageRepository extends JpaRepository<Image,Integer>{
     /**
      * 模糊查询
      **/
-    @Query("from Image i where i.description like %?1% or owner like %?1%")
+    @Query("from Image i where i.description like %?1% or i.owner like %?1%")
     Page<Image> findByOneKey(String key,Pageable pageable);
 }

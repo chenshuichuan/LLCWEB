@@ -17,7 +17,7 @@ public  class Document {
    //文章id
    @Id
    @GeneratedValue
-   private long id;
+   private int id;
    //作者id
    private int authorId = 0;
    //作者
@@ -50,11 +50,11 @@ public  class Document {
       this.model = model;
    }
 
-   public long getId() {
+   public int getId() {
       return id;
    }
 
-   public void setId(long id) {
+   public void setId(int id) {
       this.id = id;
    }
 

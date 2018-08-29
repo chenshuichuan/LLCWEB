@@ -16,7 +16,9 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ImageServiceImpl implements ImageService {
 
@@ -56,5 +58,64 @@ public class ImageServiceImpl implements ImageService {
         }, pageable);
 
         return imageList;
+    }
+
+    /**
+     * 添加image
+     */
+    @Override
+    public Map<String,Object> add(Image image) {
+        Map<String,Object> map=new HashMap<>();
+
+        if(imageRepository.findOne(image.getId())==null){
+            if(imageRepository.save(image)!=null){
+                map.put("result",1);
+                map.put("msg","图片添加成功！");
+                return map;
+            }
+        }
+        map.put("result",0);
+        map.put("msg","添加失败，请确认图片是否已存在！");
+        return map;
+    }
+
+    /**
+     * 更新image
+     */
+    @Override
+    public Map<String,Object> update(Image image) {
+
+        Map<String,Object> map=new HashMap<>();
+
+        if(imageRepository.findOne(image.getId())!=null){
+            if(imageRepository.save(image)!=null){
+                map.put("result",1);
+                map.put("msg","图片修改成功！");
+                return map;
+            }
+        }
+        map.put("result",0);
+        map.put("msg","更新失败，请确认图片是否存在！");
+        return map;
+    }
+
+    /**
+     * 删除image
+     */
+    @Override
+    public Map<String,Object> delete(Image image) {
+
+        Map<String,Object> map=new HashMap<>();
+
+        if(imageRepository.findOne(image.getId())!=null){
+            if(imageRepository.save(image)!=null){
+                map.put("result",1);
+                map.put("msg","图片已删除！");
+                return map;
+            }
+        }
+        map.put("result",0);
+        map.put("msg","删除失败，请确认图片是否存在！");
+        return map;
     }
 }

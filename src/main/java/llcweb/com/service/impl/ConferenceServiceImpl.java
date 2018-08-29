@@ -16,6 +16,8 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 public class ConferenceServiceImpl implements ConferenceService {
@@ -56,5 +58,64 @@ public class ConferenceServiceImpl implements ConferenceService {
         }, pageable);
 
         return conferences;
+    }
+
+    /**
+     * 添加conference
+     */
+    @Override
+    public Map<String,Object> add(Conference conference) {
+        Map<String,Object> map=new HashMap<>();
+
+        if(conferenceRepository.findOne(conference.getId())==null){
+            if(conferenceRepository.save(conference)!=null){
+                map.put("result",1);
+                map.put("msg","会议记录添加成功！");
+                return map;
+            }
+        }
+        map.put("result",0);
+        map.put("msg","添加失败，请确认会议记录是否已存在！");
+        return map;
+    }
+
+    /**
+     * 更新conference
+     */
+    @Override
+    public Map<String,Object> update(Conference conference) {
+
+        Map<String,Object> map=new HashMap<>();
+
+        if(conferenceRepository.findOne(conference.getId())!=null){
+            if(conferenceRepository.save(conference)!=null){
+                map.put("result",1);
+                map.put("msg","会议记录修改成功！");
+                return map;
+            }
+        }
+        map.put("result",0);
+        map.put("msg","更新失败，请确认会议记录是否存在！");
+        return map;
+    }
+
+    /**
+     * 删除conference
+     */
+    @Override
+    public Map<String,Object> delete(Conference conference) {
+
+        Map<String,Object> map=new HashMap<>();
+
+        if(conferenceRepository.findOne(conference.getId())!=null){
+            if(conferenceRepository.save(conference)!=null){
+                map.put("result",1);
+                map.put("msg","会议记录已删除！");
+                return map;
+            }
+        }
+        map.put("result",0);
+        map.put("msg","删除失败，请确认会议记录是否存在！");
+        return map;
     }
 }

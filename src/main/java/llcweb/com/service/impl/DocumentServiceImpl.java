@@ -16,6 +16,8 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 public class DocumentServiceImpl implements DocumentService {
@@ -23,6 +25,9 @@ public class DocumentServiceImpl implements DocumentService {
     @Autowired
     private DocumentRepository documentRepository;
 
+    /**
+      * 动态查找
+     */
     @Override
     public Page<Document> findAll(UsefulDocument document, int pageNum, int pageSize) {
 
@@ -53,5 +58,64 @@ public class DocumentServiceImpl implements DocumentService {
         }, pageable);
 
         return documentList;
+    }
+
+    /**
+     * 添加document
+     */
+    @Override
+    public Map<String,Object> add(Document document) {
+        Map<String,Object> map=new HashMap<>();
+
+        if(documentRepository.findOne(document.getId())==null){
+            if(documentRepository.save(document)!=null){
+                map.put("result",1);
+                map.put("msg","文档添加成功！");
+                return map;
+            }
+        }
+        map.put("result",0);
+        map.put("msg","添加失败，请确认文档是否已存在！");
+        return map;
+    }
+
+    /**
+     * 更新document
+     */
+    @Override
+    public Map<String,Object> update(Document document) {
+
+        Map<String,Object> map=new HashMap<>();
+
+        if(documentRepository.findOne(document.getId())!=null){
+            if(documentRepository.save(document)!=null){
+                map.put("result",1);
+                map.put("msg","文档修改成功！");
+                return map;
+            }
+        }
+        map.put("result",0);
+        map.put("msg","更新失败，请确认文档是否存在！");
+        return map;
+    }
+
+    /**
+     * 删除document
+     */
+    @Override
+    public Map<String,Object> delete(Document document) {
+
+        Map<String,Object> map=new HashMap<>();
+
+        if(documentRepository.findOne(document.getId())!=null){
+            if(documentRepository.save(document)!=null){
+                map.put("result",1);
+                map.put("msg","文档已删除！");
+                return map;
+            }
+        }
+        map.put("result",0);
+        map.put("msg","删除失败，请确认文档是否存在！");
+        return map;
     }
 }

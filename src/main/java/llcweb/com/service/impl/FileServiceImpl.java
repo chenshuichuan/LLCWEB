@@ -16,6 +16,8 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 public class FileServiceImpl implements FileService {
@@ -53,5 +55,64 @@ public class FileServiceImpl implements FileService {
         }, pageable);
 
         return fileList;
+    }
+
+    /**
+     * 添加file
+     */
+    @Override
+    public Map<String,Object> add(File file) {
+        Map<String,Object> map=new HashMap<>();
+
+        if(fileRepository.findOne(file.getId())==null){
+            if(fileRepository.save(file)!=null){
+                map.put("result",1);
+                map.put("msg","文件添加成功！");
+                return map;
+            }
+        }
+        map.put("result",0);
+        map.put("msg","添加失败，请确认文件是否已存在！");
+        return map;
+    }
+
+    /**
+     * 更新file
+     */
+    @Override
+    public Map<String,Object> update(File file) {
+
+        Map<String,Object> map=new HashMap<>();
+
+        if(fileRepository.findOne(file.getId())!=null){
+            if(fileRepository.save(file)!=null){
+                map.put("result",1);
+                map.put("msg","文件修改成功！");
+                return map;
+            }
+        }
+        map.put("result",0);
+        map.put("msg","更新失败，请确认文件是否存在！");
+        return map;
+    }
+
+    /**
+     * 删除file
+     */
+    @Override
+    public Map<String,Object> delete(File file) {
+
+        Map<String,Object> map=new HashMap<>();
+
+        if(fileRepository.findOne(file.getId())!=null){
+            if(fileRepository.save(file)!=null){
+                map.put("result",1);
+                map.put("msg","文件已删除！");
+                return map;
+            }
+        }
+        map.put("result",0);
+        map.put("msg","删除失败，请确认文件是否存在！");
+        return map;
     }
 }

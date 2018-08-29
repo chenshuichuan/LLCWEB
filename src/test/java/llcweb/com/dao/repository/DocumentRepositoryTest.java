@@ -18,7 +18,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.notNullValue;
 
 /**
  * @Author haien
@@ -29,6 +28,7 @@ import static org.hamcrest.Matchers.notNullValue;
  **/
 @RunWith(SpringRunner.class)
 @SpringBootTest
+//@Transactional
 public class DocumentRepositoryTest {
 
     @Autowired
@@ -39,14 +39,12 @@ public class DocumentRepositoryTest {
     @Test
     public void add(){
         Document document=new Document();
-        for(int i=1;i<=10;i++){
-            document.setId(i);
-            document.setAuthor("haien"+i);
-            document.setContent("balabala"+i);
-            document.setTitle("项目组第"+i+"次会议");
-            document.setCreateDate(new Date());
-            Assert.assertThat(documentRepository.save(document),notNullValue());
-        }
+        document.setId(1);
+        document.setAuthor("haien");
+        document.setContent("balabala");
+        document.setTitle("项目组第13次会议");
+        document.setCreateDate(new Date());
+        Assert.assertThat(documentRepository.save(document).getAuthor(),is("haien"));
     }
 
     @Test
@@ -57,7 +55,6 @@ public class DocumentRepositoryTest {
         //document.setAuthor("haien2");
         Page<Document> documents=documentService.findAll(document,1,3);
         Assert.assertThat(documents.getTotalElements(),is(4L));
-        System.out.println(documents.getSort());
     }
 
     @Test

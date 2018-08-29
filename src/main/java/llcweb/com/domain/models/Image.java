@@ -17,20 +17,30 @@ public class Image {
     //图片主键
     @Id
     @GeneratedValue
-    public int id;
+    private int id;
     //照片描述(相当于标题）
-    public String description;
+    private String description;
     //照片日期
     @Column(columnDefinition="DATE")
-    public Date date;
+    private Date date;
     //照片拥有者、或是上传者id
-    public int ownerId;
+    private int ownerId;
     //照片拥有者、或是上传者
-    public String owner;
+    private String owner;
     //照片地址
-    public String path;
+    private String path;
+    //组别
+    private String model;
+
 
     public Image() {
+    }
+
+    public Image(String description, Date date, String owner, String model) {
+        this.description = description;
+        this.date = date;
+        this.owner = owner;
+        this.model = model;
     }
 
     public int getId() {
@@ -79,6 +89,14 @@ public class Image {
 
     public void setPath(String path) {
         this.path = path;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
     }
 
     @Override

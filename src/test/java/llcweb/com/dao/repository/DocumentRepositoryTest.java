@@ -9,12 +9,15 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
 
 /**
@@ -51,12 +54,16 @@ public class DocumentRepositoryTest {
         UsefulDocument document=new UsefulDocument();
         document.setFirstDate(new SimpleDateFormat("yyyy-MM-dd").parse("2018-08-22"));
         document.setLastDate(new SimpleDateFormat("yyyy-MM-dd").parse("2018-08-25"));
-        document.setAuthor("haien2");
-        Page<Document> documents=documentService.findAll(document,0,3);
-        for (Document document1 : documents) {
-            System.out.println(document1);
-        }
+        //document.setAuthor("haien2");
+        Page<Document> documents=documentService.findAll(document,1,3);
+        Assert.assertThat(documents.getTotalElements(),is(4L));
+        System.out.println(documents.getSort());
     }
 
+    @Test
+    public void findByOneKey(){
+        Page<Document> documents=documentRepository.findByOneKey("haien",new PageRequest(0,10, Sort.Direction.DESC,"createDate"));
+        Assert.assertThat(documents.getTotalElements(),is(12L));
+    }
 
 }

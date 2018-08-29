@@ -12,28 +12,43 @@ import java.util.Date;
  */
 @Entity
 @Table(name="document")
-public class Document {
+public  class Document {
 
    //文章id
    @Id
    @GeneratedValue
-   public long id;
+   private long id;
    //作者id
-   public int authorId = 0;
+   private int authorId = 0;
    //作者
-  public String author;
+   private String author;
    //文章标题
-   public String title;
+   private String title;
    //文章内容
-   public String content;
+   private String content;
    //创建时间
-   @Column(columnDefinition="DATE",name="createDate") //指定字段类型和命名
-   public Date createDate;
+   @Column(columnDefinition="DATE") //指定字段类型和命名
+   private Date createDate;
    //修改时间
-   @Column(columnDefinition="DATE",name="modifyDate")
-   public Date modifyDate;
+   @Column(columnDefinition="DATE")
+   private Date modifyDate;
    //注释
-   public String infor;
+   private String infor;
+   //组别
+   private String model;
+
+   public Document() {
+   }
+
+   public Document(String author, String title, String content, Date createDate, Date modifyDate, String infor, String model) {
+      this.author = author;
+      this.title = title;
+      this.content = content;
+      this.createDate = createDate;
+      this.modifyDate = modifyDate;
+      this.infor = infor;
+      this.model = model;
+   }
 
    public long getId() {
       return id;
@@ -99,7 +114,15 @@ public class Document {
       this.infor = infor;
    }
 
-   @Override
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    @Override
    public String toString() {
       return "Document{" +
               "id=" + id +

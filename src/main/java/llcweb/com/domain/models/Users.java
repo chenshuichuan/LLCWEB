@@ -14,30 +14,27 @@ import java.util.*;
 
 /** 用户表
  * 
- * @pdOid 46004338-2d9a-4942-aa30-2ec6003aefd5 */
+ */
 
 @Entity
 @Table(name="users")
 public class Users implements Serializable,UserDetails {
    /** user id
     * 
-    * @pdOid d05d1325-1951-432b-b019-e7056fd21a15 */
+    */
    @Id
    @GeneratedValue
    public int id;
-
    /** user name
     * 
     * @pdOid 3ece049d-ae34-40ff-851e-874a89284d0a */
    private String username;
-
-   /** @pdOid a1788584-1977-45d8-aaef-fb7c598274b2 */
-   public String password;
-
-   /** @pdOid e975446e-34c9-4731-b9aa-7e1081145dcd */
-   public Date updateTime;
-   /** @pdOid e4b378a6-835c-4092-b64b-e40192b32cb8 */
-   public int peopleId;
+   //用户密码
+   private String password;
+   //更新日期
+   private Date updateTime;
+   //人物id
+   private int peopleId;
 
    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
    @JoinTable(
@@ -49,6 +46,7 @@ public class Users implements Serializable,UserDetails {
                    @JoinColumn(name = "ur_role_id")
            }
    )
+   //角色表
    private List<Roles> roles;
 
    @Override
@@ -60,6 +58,18 @@ public class Users implements Serializable,UserDetails {
          auths.add(new SimpleGrantedAuthority(role.getrFlag()));
       }
       return auths;
+   }
+   public Users(){
+   }
+
+   public Users(long id,String username,String password,Date updateTime,int peopleId,
+                List<Roles> roles){
+      this.id = id;
+      this.username = username;
+      this.password = password;
+      this.updateTime = updateTime;
+      this.peopleId = peopleId;
+      this.roles = roles;
    }
 
    @Override

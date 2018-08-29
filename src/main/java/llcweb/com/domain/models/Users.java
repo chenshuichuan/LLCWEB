@@ -24,7 +24,7 @@ public class Users implements Serializable,UserDetails {
     * @pdOid d05d1325-1951-432b-b019-e7056fd21a15 */
    @Id
    @GeneratedValue
-   public long id;
+   public int id;
 
    /** user name
     * 
@@ -39,7 +39,7 @@ public class Users implements Serializable,UserDetails {
    /** @pdOid e4b378a6-835c-4092-b64b-e40192b32cb8 */
    public int peopleId;
 
-   @ManyToMany(fetch = FetchType.EAGER)
+   @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
    @JoinTable(
            name = "users_roles",
            joinColumns = {
@@ -100,11 +100,11 @@ public class Users implements Serializable,UserDetails {
       this.roles = roles;
    }
 
-   public long getId() {
+   public int getId() {
       return id;
    }
 
-   public void setId(long id) {
+   public void setId(int id) {
       this.id = id;
    }
 

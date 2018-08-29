@@ -2,6 +2,7 @@ package llcweb.com.service;
 
 import llcweb.com.domain.entity.UsefulDocument;
 import llcweb.com.domain.models.Document;
+import llcweb.com.domain.models.Users;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
@@ -14,7 +15,7 @@ public interface DocumentService {
      */
     public Page<Document> findAll(UsefulDocument document, int pageNum, int pageSize);
 
-    public List<Document> selectAll(int userId);
+    public List<Document> selectAll(Users user);
     public Map<String,Object> add(Document document);
     public Map<String,Object> update(Document document);
     public Map<String,Object> delete(Document document);

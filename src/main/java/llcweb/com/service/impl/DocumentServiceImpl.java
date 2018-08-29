@@ -3,6 +3,8 @@ package llcweb.com.service.impl;
 import llcweb.com.dao.repository.DocumentRepository;
 import llcweb.com.domain.entity.UsefulDocument;
 import llcweb.com.domain.models.Document;
+import llcweb.com.domain.models.Roles;
+import llcweb.com.domain.models.Users;
 import llcweb.com.service.DocumentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,7 +18,9 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -58,6 +62,24 @@ public class DocumentServiceImpl implements DocumentService {
         }, pageable);
 
         return documentList;
+    }
+
+    /**
+     * 查找用户编辑过的文档
+     */
+    @Override
+    public List<Document> selectAll(Users user) {
+        List<Document> documents=new ArrayList<>();
+        List<Roles> roles=user.getRoles();
+        for(Roles role:roles){
+            //管理员查看所有文档
+            if(role.getrName().equals("admin")){
+                documents=documentRepository.findAll();
+            }else{ //普通用户查看本人编辑文档
+                documents=documentRepository.findByAuthorId(user.getId());
+            }
+        }
+        return documents;
     }
 
     /**

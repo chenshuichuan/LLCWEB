@@ -8,6 +8,8 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import java.util.List;
+
 /**
  * Created by:Haien
  * Description: 文档类的repository类
@@ -25,4 +27,6 @@ public interface DocumentRepository extends JpaRepository<Document,Integer>{
     @Query("from Document d where d.author like %?1% or d.content like %?1% " +
             "or d.title like %?1% or d.model like %?1%")
     Page<Document> findByOneKey(String key,Pageable pageable);
+
+    List<Document> findByAuthorId(int id);
 }

@@ -132,19 +132,19 @@ public class DocumentServiceImpl implements DocumentService {
     @Override
     public Map<String,Object> delete(Document document) {
 
-        Map<String,Object> map=new HashMap<>();
+        Map<String, Object> map = new HashMap<>();
 
-        if(documentRepository.findOne(document.getId())!=null){
-            if(documentRepository.save(document)!=null){
-                map.put("result",1);
-                map.put("msg","文档已删除！");
+        if (documentRepository.findOne(document.getId()) != null) {
+            if (documentRepository.save(document) != null) {
+                map.put("result", 1);
+                map.put("msg", "文档已删除！");
                 return map;
             }
         }
-        map.put("result",0);
-        map.put("msg","删除失败，请确认文档是否存在！");
+        map.put("result", 0);
+        map.put("msg", "删除失败，请确认文档是否存在！");
         return map;
-      
+    }
     @Override
     public List<DocumentInfo> documentsToDocumentInfos(List<Document> documentList){
         List<DocumentInfo> documentInfoList = new ArrayList<>();

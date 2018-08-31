@@ -27,18 +27,18 @@ public class DocumentController {
     private UsersRepository usersRepository;
     @Autowired
     private UsersService usersService;
-    @RequestMapping("/test.html")
-    public ModelAndView test(){
-
-        List<String> learnList =new ArrayList<>();
-        learnList.add("hello1");
-        learnList.add("hello2");
-        ModelAndView modelAndView = new ModelAndView("test");
-        //添加当前登录用户
-        Users users = usersService.getCurrentUser();
-        modelAndView.addObject("user", users);
-        modelAndView.addObject("learnList", learnList);
-        return modelAndView;
-    }
+//    @RequestMapping("/test.html")
+//    public ModelAndView test(){
+//
+//        List<String> learnList =new ArrayList<>();
+//        learnList.add("hello1");
+//        learnList.add("hello2");
+//        ModelAndView modelAndView = new ModelAndView("test");
+//        //添加当前登录用户
+//        Users users = usersService.getCurrentUser();
+//        modelAndView.addObject("user", users);
+//        modelAndView.addObject("learnList", learnList);
+//        return modelAndView;
+//    }
 
 }

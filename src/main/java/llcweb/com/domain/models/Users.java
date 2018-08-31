@@ -62,7 +62,7 @@ public class Users implements Serializable,UserDetails {
    public Users(){
    }
 
-   public Users(long id,String username,String password,Date updateTime,int peopleId,
+   public Users(int id,String username,String password,Date updateTime,int peopleId,
                 List<Roles> roles){
       this.id = id;
       this.username = username;

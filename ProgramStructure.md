@@ -14,7 +14,7 @@ LLCWEB
       * domain     实体类文件夹
       * service    业务逻辑层
       * tools      实用工具包
-      * Application:  <p style="color: red;">程序运行入口文件</p>
+      * Application:  <span style="color: red;">程序运行入口文件</span>
       * resource
   * test: 单元测试编写文件夹
 * .gitignore: git管理忽略跟踪配置文件

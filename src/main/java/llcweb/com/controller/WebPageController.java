@@ -35,38 +35,28 @@ public class WebPageController {
         learnList.add("hello2");
         ModelAndView modelAndView = new ModelAndView("test");
         //添加当前登录用户
-        Users users = usersService.getCurrentUser();
-        modelAndView.addObject("user", users);
         modelAndView.addObject("learnList", learnList);
         return modelAndView;
     }
     @RequestMapping("/")
     public ModelAndView index(){
         ModelAndView modelAndView = new ModelAndView("index");
-        Users users = usersService.getCurrentUser();
-        modelAndView.addObject("user", users);
         return modelAndView;
     }
     @RequestMapping("/index.html")
     public ModelAndView index1(){
         ModelAndView modelAndView = new ModelAndView("index");
-        Users users = usersService.getCurrentUser();
-        modelAndView.addObject("user", users);
         return modelAndView;
     }
     @RequestMapping("/index")
     public ModelAndView index2(){
 
         ModelAndView modelAndView = new ModelAndView("index");
-        Users users = usersService.getCurrentUser();
-        modelAndView.addObject("user", users);
         return modelAndView;
     }
     @RequestMapping("/main")
     public ModelAndView main(){
         ModelAndView modelAndView = new ModelAndView("index");
-        Users users = usersService.getCurrentUser();
-        modelAndView.addObject("user", users);
         return modelAndView;
     }
 

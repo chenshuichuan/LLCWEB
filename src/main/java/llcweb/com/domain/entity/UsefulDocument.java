@@ -26,6 +26,10 @@ public class UsefulDocument {
     public Date FirstDate;
     public Date LastDate;
 
+    public UsefulDocument() {
+
+    }
+
     public String getAuthor() {
       return author;
    }

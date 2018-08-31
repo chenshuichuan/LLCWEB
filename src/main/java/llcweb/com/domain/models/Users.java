@@ -24,9 +24,10 @@ public class Users implements Serializable,UserDetails {
     */
    @Id
    @GeneratedValue
-   //用户id
-   private long id;
-   //用户名称
+   public int id;
+   /** user name
+    * 
+    * @pdOid 3ece049d-ae34-40ff-851e-874a89284d0a */
    private String username;
    //用户密码
    private String password;
@@ -35,7 +36,7 @@ public class Users implements Serializable,UserDetails {
    //人物id
    private int peopleId;
 
-   @ManyToMany(fetch = FetchType.EAGER)
+   @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
    @JoinTable(
            name = "users_roles",
            joinColumns = {
@@ -109,11 +110,11 @@ public class Users implements Serializable,UserDetails {
       this.roles = roles;
    }
 
-   public long getId() {
+   public int getId() {
       return id;
    }
 
-   public void setId(long id) {
+   public void setId(int id) {
       this.id = id;
    }
 

@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import static org.hamcrest.Matchers.is;
 
@@ -34,11 +35,16 @@ public class ConferenceRepositoryTest {
     @Autowired
     private ConferenceService conferenceService;
 
+    private Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse("2018-08-28");
+    private Date date2 = new SimpleDateFormat("yyyy-MM-dd").parse("2018-08-25");
+    public ConferenceRepositoryTest() throws ParseException {
+    }
+
     @Test
     public void add() throws ParseException {
         Conference conference=new Conference();
         conference.setAuthor("haien");
-        conference.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2018-08-28"));
+        conference.setDate(date1);
         conference.setModel("项目组");
         conference.setTitle("项目组第1次会议");
         conference.setType("小组会议");
@@ -48,8 +54,8 @@ public class ConferenceRepositoryTest {
     @Test
     public void findAll() throws ParseException {
         UsefulConference conference=new UsefulConference();
-        conference.setFirstDate(new SimpleDateFormat("yyyy-MM-dd").parse("2018-08-28"));
-        conference.setLastDate(new SimpleDateFormat("yyyy-MM-dd").parse("2018-08-28"));
+        conference.setFirstDate(date1);
+        conference.setLastDate(date1);
         Page<Conference> conferences=conferenceService.findAll(conference,1,3);
         Assert.assertThat(conferences.getTotalElements(),is(12L));
     }

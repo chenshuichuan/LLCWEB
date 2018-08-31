@@ -35,6 +35,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/assets/**")
                 .antMatchers("/custom/**")
                 .antMatchers("/iframe/**")
+                .antMatchers("/home/**")
                 .antMatchers("/fortable/**");
     }
     @Override
@@ -50,7 +51,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginPage("/login")
                 //设置默认登录成功跳转页面
-                .defaultSuccessUrl("/index").failureUrl("/login?error").permitAll()
+                .defaultSuccessUrl("/admin/index").failureUrl("/login?error").permitAll()
                 //开启cookie保存用户数据
                 .and()
                 .rememberMe()

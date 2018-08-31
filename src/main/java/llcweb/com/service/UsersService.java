@@ -1,11 +1,10 @@
 package llcweb.com.service;
 
 
+import llcweb.com.domain.entity.UsefulUsers;
 import llcweb.com.domain.models.Users;
 import llcweb.com.tools.PageParam;
 import org.springframework.data.domain.Page;
-
-import java.util.List;
 
 /**
  * Created by:Ricardo
@@ -21,15 +20,15 @@ public interface UsersService {
      */
     void add();
     /*
-    *更新信息
-    */
+     *更新信息
+     */
     void updateById(int id);
     /*
-    *根据id查找
-    */
+     *根据id查找
+     */
     void findById(int id);
     /*
-    *删除
+     *删除
     * */
     void deleteById(int id);
 
@@ -41,4 +40,5 @@ public interface UsersService {
 
     Users getCurrentUser();
 
+    Page<Users> findAll(UsefulUsers document, int pageNum, int pageSize);
 }

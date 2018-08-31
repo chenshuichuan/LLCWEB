@@ -19,4 +19,5 @@ public interface DocumentService {
     public Map<String,Object> add(Document document);
     public Map<String,Object> update(Document document);
     public Map<String,Object> delete(Document document);
+
 }

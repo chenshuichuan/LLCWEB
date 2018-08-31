@@ -2,6 +2,7 @@ package llcweb.com.service.impl;
 
 
 import llcweb.com.dao.repository.UsersRepository;
+import llcweb.com.domain.entity.UsefulUsers;
 import llcweb.com.domain.models.Users;
 import llcweb.com.service.UsersService;
 import llcweb.com.tools.PageParam;
@@ -91,6 +92,11 @@ public class UsersServiceImpl implements UsersService {
         Users users = usersRepository.findByUsernameAndPassword(userDetails.getUsername(),userDetails.getPassword());
         if(users!=null)logger.info("users id = "+users.getId()+",worker's id="+users.getPeopleId());
         return users;
+    }
+
+    @Override
+    public Page<Users> findAll(UsefulUsers document, int pageNum, int pageSize) {
+        return null;
     }
 
 

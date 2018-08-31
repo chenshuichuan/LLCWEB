@@ -69,16 +69,30 @@ public class DocumentServiceImpl implements DocumentService {
      */
     @Override
     public List<Document> selectAll(Users user) {
+
         List<Document> documents=new ArrayList<>();
         List<Roles> roles=user.getRoles();
+
+        //管理员查看所有文档
         for(Roles role:roles){
-            //管理员查看所有文档
-            if(role.getrName().equals("admin")){
+            if(role.getrFlag().equals("ADMIN")){
                 documents=documentRepository.findAll();
-            }else{ //普通用户查看本人编辑文档
-                documents=documentRepository.findByAuthorId(user.getId());
+                return documents;
             }
         }
+
+        //组长查看本人编辑文档
+        for(Roles role:roles){
+            //管理员查看所有文档
+            if(role.getrFlag().equals("GROUP")){
+                documents=documentRepository.findByModel("user.getModel()");
+                return documents;
+            }
+        }
+
+        //普通用户查找编辑过的文档
+        documents=documentRepository.findByAuthorId(user.getId());
+        documents=documentRepository.findByAuthorId(user.getId());
         return documents;
     }
 

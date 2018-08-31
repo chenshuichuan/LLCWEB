@@ -29,4 +29,5 @@ public interface DocumentRepository extends JpaRepository<Document,Integer>{
     Page<Document> findByOneKey(String key,Pageable pageable);
 
     List<Document> findByAuthorId(int id);
+    List<Document> findByModel(String model);
 }

@@ -70,7 +70,7 @@ public class UsersServiceImpl implements UsersService {
             public Predicate toPredicate(Root<Users> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
                 List<Predicate> predicates = new ArrayList<>(); //所有的断言
                 if(StringUtils.isNotBlank(users.getUsername())){ //添加断言
-                    Predicate likeUserName = cb.like(root.get("username").as(String.class),users.getUsername()+"%");
+                    Predicate likeUserName = cb.like(root.get("username").as(String.class),"%"+users.getUsername()+"%");
                     predicates.add(likeUserName);
                 }
                 return cb.and(predicates.toArray(new Predicate[0]));

@@ -63,4 +63,10 @@ public class DocumentRepositoryTest {
         Assert.assertThat(documents.getTotalElements(),is(12L));
     }
 
+    @Test
+    public void findByAuthorId(){
+        Page<Document> documents=documentRepository.findByAuthorId(1,new PageRequest(0,10, Sort.Direction.DESC,"createDate"));
+        Assert.assertThat(documents.getTotalElements(),is(3L));
+    }
+
 }

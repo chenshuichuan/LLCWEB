@@ -1,22 +1,20 @@
-package llcweb.com.domain.models; /***********************************************************************
+package llcweb.com.domain.entities; /***********************************************************************
  * Module:  Document.java
  * Author:  Ricardo
  * Purpose: Defines the Class Document
  ***********************************************************************/
 
+import llcweb.com.domain.models.Document;
+
 import javax.persistence.*;
 import java.util.Date;
 
 /**
- * 文档类
+ * 文档简单类，用于分页，不包含content字段，考虑content字段可能大，传输耗时
  */
-@Entity
-@Table(name="document")
-public  class Document {
 
-   //文章id
-   @Id
-   @GeneratedValue
+public  class DocumentInfo {
+
    private Integer id;
    //作者id
    private Integer authorId = 0;
@@ -25,33 +23,35 @@ public  class Document {
    //文章标题
    private String title;
    //文章内容
-   private String content;
+   //private String content;
    //创建时间
-   @Column(columnDefinition="DATE") //指定字段类型和命名
    private Date createDate;
    //修改时间
-   @Column(columnDefinition="DATE")
    private Date modifyDate;
    //注释
    private String infor;
    //组别
    private String model;
 
-   public Document() {
+   public DocumentInfo() {
    }
 
-   public Document(String author, String title, String content, Date createDate, Date modifyDate, String infor, String model) {
-      this.author = author;
-      this.title = title;
-      this.content = content;
-      this.createDate = createDate;
-      this.modifyDate = modifyDate;
-      this.infor = infor;
-      this.model = model;
+   public DocumentInfo(Document document) {
+      this.id = document.getId();
+      this.authorId = document.getAuthorId();
+      this.author = document.getAuthor();
+      this.title = document.getTitle();
+      //this.content = content;
+      this.createDate = document.getCreateDate();
+      this.modifyDate = document.getModifyDate();
+      this.infor = document.getInfor();
+      this.model = document.getModel();
    }
+
    public Integer getId() {
       return id;
    }
+
    public void setId(Integer id) {
       this.id = id;
    }
@@ -80,13 +80,6 @@ public  class Document {
       this.title = title;
    }
 
-   public String getContent() {
-      return content;
-   }
-
-   public void setContent(String content) {
-      this.content = content;
-   }
 
    public Date getCreateDate() {
       return createDate;
@@ -120,17 +113,4 @@ public  class Document {
         this.model = model;
     }
 
-    @Override
-   public String toString() {
-      return "Document{" +
-              "id=" + id +
-              ", authorId=" + authorId +
-              ", author='" + author +
-              ", title='" + title +
-              ", content='" + content +
-              ", createDate=" + createDate +
-              ", modifyDate=" + modifyDate +
-              ", infor='" + infor +
-              '}';
-   }
 }

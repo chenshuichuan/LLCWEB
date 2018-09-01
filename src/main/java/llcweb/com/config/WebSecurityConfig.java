@@ -35,6 +35,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/assets/**")
                 .antMatchers("/custom/**")
                 .antMatchers("/iframe/**")
+                .antMatchers("/home/**")
                 .antMatchers("/fortable/**");
     }
     @Override
@@ -44,13 +45,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .headers().frameOptions().sameOrigin()
                 .and()
                 .authorizeRequests()
-                .antMatchers("/index", "/message/").permitAll()   //定义不需要认证就可以访问的URL
-                .anyRequest().authenticated()//所有请求必须登陆后访问
+//                .antMatchers("/admin/**", "**/api/**", "**/add/**","**/update/**")//定义不需要认证就可以访问的URL
+//                .permitAll()
+                .antMatchers("/admin/**", "**/api/**", "**/add/**","**/update/**")
+                //.antMatchers("/index", "/message/")
+
+                //.anyRequest()//所有请求必须登陆后访问
+                .authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")
                 //设置默认登录成功跳转页面
-                .defaultSuccessUrl("/index").failureUrl("/login?error").permitAll()
+                .defaultSuccessUrl("/admin/index").failureUrl("/login?error").permitAll()
                 //开启cookie保存用户数据
                 .and()
                 .rememberMe()

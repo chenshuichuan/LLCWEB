@@ -1,6 +1,8 @@
 package llcweb.com.controller;
 
+import llcweb.com.dao.repository.DocumentRepository;
 import llcweb.com.dao.repository.UsersRepository;
+import llcweb.com.domain.models.Document;
 import llcweb.com.domain.models.Users;
 import llcweb.com.service.UsersService;
 import org.slf4j.Logger;
@@ -25,6 +27,7 @@ public class WebPageController {
 
     @Autowired
     private UsersRepository usersRepository;
+    private DocumentRepository documentRepository;
     @Autowired
     private UsersService usersService;
     @RequestMapping("/test.html")
@@ -35,38 +38,40 @@ public class WebPageController {
         learnList.add("hello2");
         ModelAndView modelAndView = new ModelAndView("test");
         //添加当前登录用户
-        Users users = usersService.getCurrentUser();
-        modelAndView.addObject("user", users);
         modelAndView.addObject("learnList", learnList);
         return modelAndView;
     }
     @RequestMapping("/")
     public ModelAndView index(){
         ModelAndView modelAndView = new ModelAndView("index");
-        Users users = usersService.getCurrentUser();
-        modelAndView.addObject("user", users);
         return modelAndView;
     }
     @RequestMapping("/index.html")
     public ModelAndView index1(){
         ModelAndView modelAndView = new ModelAndView("index");
-        Users users = usersService.getCurrentUser();
-        modelAndView.addObject("user", users);
         return modelAndView;
     }
     @RequestMapping("/index")
     public ModelAndView index2(){
 
         ModelAndView modelAndView = new ModelAndView("index");
-        Users users = usersService.getCurrentUser();
-        modelAndView.addObject("user", users);
         return modelAndView;
     }
     @RequestMapping("/main")
     public ModelAndView main(){
         ModelAndView modelAndView = new ModelAndView("index");
-        Users users = usersService.getCurrentUser();
-        modelAndView.addObject("user", users);
+        return modelAndView;
+    }
+
+    /**
+     * 文档首页的控制器
+     */
+    @RequestMapping("/document.html")
+    public ModelAndView document(){
+        ModelAndView modelAndView=new ModelAndView("document");
+        Users user=usersService.getCurrentUser();
+        List<Document> documentList=documentRepository.findByAuthorId(user.getId());
+        modelAndView.addObject("documentList",documentList);
         return modelAndView;
     }
 

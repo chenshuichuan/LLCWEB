@@ -93,6 +93,9 @@ public class AdminPageController {
         return modelAndView;
     }
 
+    /**
+     *更新、新建文档？？？
+     */
     @RequestMapping("/edit.html")
     public ModelAndView edit(@RequestParam("id")int id){
 

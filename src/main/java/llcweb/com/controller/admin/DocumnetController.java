@@ -1,14 +1,10 @@
 package llcweb.com.controller.admin;
 
 import llcweb.com.dao.repository.DocumentRepository;
-import llcweb.com.dao.repository.UsersRepository;
 import llcweb.com.domain.entities.DocumentInfo;
-import llcweb.com.domain.entity.UsefulDocument;
 import llcweb.com.domain.models.Document;
-import llcweb.com.domain.models.Users;
 import llcweb.com.service.DocumentService;
 import llcweb.com.service.UsersService;
-import llcweb.com.tools.PageParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -43,7 +38,10 @@ public class DocumnetController {
     @Autowired
     private UsersService usersService;
 
-    @RequestMapping(value = "/page",method = RequestMethod.GET)
+    /**
+     * 取代模糊查找？？？
+     */
+    @RequestMapping(value = "/document",method = RequestMethod.POST)
     @ResponseBody
     public Map<String,Object> page(HttpServletRequest request, HttpServletResponse response){
         Map<String,Object> map =new HashMap<String,Object>();
@@ -159,6 +157,13 @@ public class DocumnetController {
             logger.error("保存文档失败！");
         }
         map.put("data",document);
+        return map;
+    }
+
+    @RequestMapping(value="delete",method = RequestMethod.GET)
+    @ResponseBody
+    public Map<String,Object> delete(@RequestParam("id")Integer id){
+        Map<String,Object> map=documentService.delete(id);
         return map;
     }
 }

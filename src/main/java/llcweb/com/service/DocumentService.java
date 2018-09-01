@@ -19,8 +19,7 @@ public interface DocumentService {
 
     public Page<Document> selectAll(Users user,int pageNum,int pageSize);
     public Map<String,Object> add(Document document);
-    public Map<String,Object> update(Document document);
-    public Map<String,Object> delete(Document document);
+    public Map<String,Object> delete(int id);
 
     /**
      * ???

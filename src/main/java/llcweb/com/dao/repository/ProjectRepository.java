@@ -23,12 +23,12 @@ public interface ProjectRepository extends JpaRepository<Project,Integer>{
 	Page<Project> findAll(Specification<Project> specification, Pageable pageable);
 	
 	
-	//模糊查询
-	@Query("from Project p where p.responsiblePerson like %?1%" 
-			+ "or p.requireNum like %?1%"
-			+ "or p.projectType like %?1%"
-			+ "or p.projectName like %?1%")
-	Page<Project> findByOneKey(String key, Pageable pageable);
+//	//模糊查询
+//	@Query("from Project p where p.responsiblePerson like %?1%"
+//			+ "or p.requireNum like %?1%"
+//			+ "or p.projectType like %?1%"
+//			+ "or p.projectName like %?1%")
+//	Page<Project> findByOneKey(String key, Pageable pageable);
 
 }
 

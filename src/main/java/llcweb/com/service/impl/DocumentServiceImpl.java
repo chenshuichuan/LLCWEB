@@ -120,7 +120,7 @@ public class DocumentServiceImpl implements DocumentService {
     /**
      * 更新document
      */
-    @Override
+    //@Override
     public Map<String,Object> update(Document document) {
 
         Map<String,Object> map=new HashMap<>();

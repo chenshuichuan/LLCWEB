@@ -79,6 +79,11 @@ public class ConferenceServiceImpl implements ConferenceService {
         return map;
     }
 
+    @Override
+    public Map<String, Object> delete(int id) {
+        return null;
+    }
+
     /**
      * 更新conference
      */

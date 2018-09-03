@@ -1,3 +1,5 @@
+package llcweb.com.dao.repository;
+
 import static org.junit.Assert.*;
 
 /**

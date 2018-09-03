@@ -19,6 +19,6 @@ public interface TaskRepository extends JpaRepository<Task,Integer>{
     /**
      * 分页动态查询
      **/
-    Page<File> getPage(Specification<File> specification, Pageable pageable);
+    Page<File> findAll(Specification<File> specification, Pageable pageable);
 
 }

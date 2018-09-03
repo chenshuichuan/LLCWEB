@@ -1,5 +1,7 @@
 .idea
 .idea/*
+.eclipse
+.eclipse/*
 target
 **.log
 rebel.xml

@@ -27,6 +27,22 @@ public class UsefulProject {
 	public UsefulProject() {
 		
 	}
+	
+	
+
+	public UsefulProject(String responsiblePerson, String requireNum, String projectType, String projectName,
+			String team, Date firstDate, Date lastDate) {
+		super();
+		this.responsiblePerson = responsiblePerson;
+		this.requireNum = requireNum;
+		this.projectType = projectType;
+		this.projectName = projectName;
+		this.team = team;
+		FirstDate = firstDate;
+		LastDate = lastDate;
+	}
+
+
 
 	public String getResponsiblePerson() {
 		return responsiblePerson;

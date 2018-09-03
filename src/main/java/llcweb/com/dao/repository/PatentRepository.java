@@ -6,6 +6,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import llcweb.com.domain.models.Paper;
 import llcweb.com.domain.models.Patent;
 
 /**
@@ -15,5 +16,5 @@ import llcweb.com.domain.models.Patent;
  */
 
 public interface PatentRepository extends JpaRepository<Patent,Integer>{
-	public Page<Patent> findAll(Specification<Patent> specification, Pageable pageable);
+	Page<Patent> findAll(Specification<Patent> spec, Pageable pageable);
 }

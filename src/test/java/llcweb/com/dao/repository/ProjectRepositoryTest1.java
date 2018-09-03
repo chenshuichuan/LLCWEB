@@ -15,6 +15,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Slice;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import llcweb.com.domain.entity.UsefulProject;
 import llcweb.com.domain.models.Project;
@@ -35,7 +36,7 @@ public class ProjectRepositoryTest1 {
 		
 		Project project = new Project();
 		
-		for(int i=1;i<=20;i++){
+		for(int i=1;i<=8;i++){
 		
 			project.setId(i);	
 			project.setStatus("ing");
@@ -46,7 +47,7 @@ public class ProjectRepositoryTest1 {
 			project.setResponsiblePerson("re");
 			project.setRequireNum("CN");
 			project.setProjectType("xy");
-			project.setProjectName("金融组第" + i + "个项目");
+			project.setProjectName("第二次测试图像组第" + i + "个项目");
 			project.setMembers("who");
 			project.setTeam("999");
 			project.setProjectDes("test");
@@ -61,19 +62,14 @@ public class ProjectRepositoryTest1 {
 	}
 	
 	
-   @Test
-    public void findAll() throws ParseException {
-        UsefulProject project=new UsefulProject();
-        project.setFirstDate(new SimpleDateFormat("yyyy-MM-dd").parse("2018-08-25"));
-        project.setLastDate(new SimpleDateFormat("yyyy-MM-dd").parse("2018-09-02"));
-        Page<Project> projectList=projectService.findAll(project,1,3);
-        Assert.assertThat(projectList.getTotalElements(),is(91L));
-        System.out.println(((Slice<Project>) project).getSort());
-    }
-	
-	//@Test
-	//public void findByOneKey() 
-	
-
+	   @Test
+	    public void findAll() throws ParseException {
+	        UsefulProject project=new UsefulProject();
+	        project.setFirstDate(new SimpleDateFormat("yyyy-MM-dd").parse("2018-08-25"));
+	        project.setLastDate(new SimpleDateFormat("yyyy-MM-dd").parse("2018-09-02"));
+	        Page<Project> projectList=projectService.findAll(project,1,3);
+	        Assert.assertThat(projectList.getTotalElements(),is(91L));
+	        System.out.println(((Slice<Project>) project).getSort());
+	    }
 
 }

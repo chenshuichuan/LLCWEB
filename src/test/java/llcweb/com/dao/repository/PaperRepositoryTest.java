@@ -42,8 +42,7 @@ public class PaperRepositoryTest {
 			paper.setOriginalLink("www.github.com");
 			paper.setPeriodical("SCI第" + i + "区论文");
 			paper.setSourceLink("www.google.com");
-			paper.setTitle("语义分割" + i + "种方法综述");
-		
+			paper.setTitle("GAN" + i + "种方法综述");
 			Assert.assertThat(paperRepository.saveAndFlush(paper), notNullValue());
 	}
 	}

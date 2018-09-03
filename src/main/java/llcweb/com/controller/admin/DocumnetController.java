@@ -9,6 +9,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -39,7 +42,7 @@ public class DocumnetController {
     private UsersService usersService;
 
     /**
-     * 取代模糊查找？？？
+     * 模糊查找
      */
     @RequestMapping(value = "/document",method = RequestMethod.POST)
     @ResponseBody
@@ -53,43 +56,15 @@ public class DocumnetController {
         //数据长度
         String pageSize = request.getParameter("pageSize");
         int size = Integer.parseInt(pageSize);
+        //页码
         int currentPage = Integer.parseInt(startIndex)/size+1;
-        Document document = new Document();
+        //关键词
         String fuzzy = request.getParameter("fuzzySearch");
-        if("true".equals(fuzzy)){//模糊查找
-            String searchValue = request.getParameter("fuzzy");
-            if (searchValue!=null&&!searchValue.equals("")) {
-                document.setAuthor(searchValue);
-                document.setContent(searchValue);
-                document.setInfor(searchValue);
-                document.setModel(searchValue);
-                document.setTitle(searchValue);
-            }
-        }
-//        UsefulDocument usefulDocument =  new UsefulDocument();
-//
-//        String fuzzy = request.getParameter("fuzzySearch");
-//        if("true".equals(fuzzy)){//模糊查找
-//            String searchValue = request.getParameter("fuzzy");
-//            logger.info("searchValue="+searchValue);
-//            if (searchValue!=null&&!searchValue.equals("")) {
-//                usefulDocument.setAuthor(searchValue);
-//                //usefulDocument.setContent(searchValue);
-//                usefulDocument.setTitle(searchValue);
-//                usefulDocument.setModel(searchValue);
-//            }
-//        }
-        //高级查找
-        else{
-//            String username = request.getParameter("username");
-//            if (username!=null&&!username.equals("")) {
-//                users.setUsername(username);
-//            }
 
+        //模糊查找
+        Pageable pageable=new PageRequest(currentPage-1,size, Sort.Direction.DESC,"createDate");
+        Page<Document> documentPage = documentRepository.findByOneKey(fuzzy,pageable);
 
-        }
-        //Page<Document> documentPage = documentService.findAll(usefulDocument,currentPage-1,size);
-        Page<Document> documentPage = documentService.getPage(currentPage-1,size,document);
         List<DocumentInfo> documentInfoList = documentService.documentsToDocumentInfos(documentPage.getContent());
         //总记录数
         long total = documentPage.getTotalElements();

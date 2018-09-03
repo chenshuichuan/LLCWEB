@@ -1,12 +1,7 @@
-package llcweb.com.domain.entities; /***********************************************************************
- * Module:  Document.java
- * Author:  Ricardo
- * Purpose: Defines the Class Document
- ***********************************************************************/
+package llcweb.com.domain.entities;
 
 import llcweb.com.domain.models.Document;
 
-import javax.persistence.*;
 import java.util.Date;
 
 /**

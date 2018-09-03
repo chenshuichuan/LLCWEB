@@ -39,6 +39,14 @@ public class DocumentServiceImpl implements DocumentService {
         //按时间排序
         Pageable pageable=new PageRequest(pageNum,pageSize, Sort.Direction.DESC,"createDate");
 
+        //规格定义
+        Specification<Document> specification =new Specification<Document>() {
+            @Override
+            public Predicate toPredicate(Root<Document> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+                return null;
+            }
+        };
+
         Page<Document> documentList = documentRepository.findAll(new Specification<Document>() {
             @Override
             public Predicate toPredicate(Root<Document> root, CriteriaQuery<?> query, CriteriaBuilder cd) {
@@ -120,7 +128,7 @@ public class DocumentServiceImpl implements DocumentService {
     /**
      * 更新document
      */
-    @Override
+    //@Override
     public Map<String,Object> update(Document document) {
 
         Map<String,Object> map=new HashMap<>();
@@ -151,6 +159,7 @@ public class DocumentServiceImpl implements DocumentService {
             map.put("msg", "文档已删除！");
             return map;
         }
+
         map.put("result", 0);
         map.put("msg", "删除失败，请确认文档是否存在！");
         return map;
@@ -170,7 +179,7 @@ public class DocumentServiceImpl implements DocumentService {
     }
 
     /**
-     * 重写第一个方法：动态查找？？？但是没有按时间查找
+     * 模糊查询？？？
      */
     @Override
     public Page<Document> getPage(int pageNum, int pageSize, Document example) {

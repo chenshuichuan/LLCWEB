@@ -101,6 +101,7 @@ public class AdminPageController {
 
         ModelAndView modelAndView = new ModelAndView("/admin/document_edit");
         Document document;
+		//为什么要新建一个文档类？？？
         if(id<=0){
             document = new Document();
             document.setTitle("新建文档");

@@ -79,7 +79,7 @@ public class FileServiceImpl implements FileService {
     /**
      * 更新file
      */
-    @Override
+    //@Override
     public Map<String,Object> update(File file) {
 
         Map<String,Object> map=new HashMap<>();
@@ -100,17 +100,17 @@ public class FileServiceImpl implements FileService {
      * 删除file
      */
     @Override
-    public Map<String,Object> delete(File file) {
+    public Map<String,Object> delete(int id) {
 
         Map<String,Object> map=new HashMap<>();
 
-        if(fileRepository.findOne(file.getId())!=null){
-            if(fileRepository.save(file)!=null){
-                map.put("result",1);
-                map.put("msg","文件已删除！");
-                return map;
-            }
+        if(fileRepository.findOne(id)!=null){
+            fileRepository.delete(id);
+            map.put("result",1);
+            map.put("msg","文件已删除！");
+            return map;
         }
+
         map.put("result",0);
         map.put("msg","删除失败，请确认文件是否存在！");
         return map;

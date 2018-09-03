@@ -56,7 +56,7 @@ public class AdminPageControllerTest {
         Map<String,Object> map=new HashMap<>();
         map.put("param1","valueaa"); //???
         mvc.perform(MockMvcRequestBuilders.post("/admin/resource_document.html?pageNum=1&pageSize=10")
-                .contentType(MediaType.APPLICATION_JSON_UTF8).content(JSONObject.toJSONString(map)))
+                .contentType(MediaType.APPLICATION_JSON_UTF8).content(JSONObject.toJSONString(map))) //将map转为string类型
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 //.andExpect(content().contentType(MediaType.TEXT_PLAIN)) //预期返回值的媒体类型 text/html;charset=UTF-8不知对应哪种类型
                 .andDo(MockMvcResultHandlers.print()); //打印报头等信息

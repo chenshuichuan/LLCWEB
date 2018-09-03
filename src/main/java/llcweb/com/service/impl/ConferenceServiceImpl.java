@@ -82,7 +82,7 @@ public class ConferenceServiceImpl implements ConferenceService {
     /**
      * 更新conference
      */
-    @Override
+    //@Override
     public Map<String,Object> update(Conference conference) {
 
         Map<String,Object> map=new HashMap<>();
@@ -103,16 +103,15 @@ public class ConferenceServiceImpl implements ConferenceService {
      * 删除conference
      */
     @Override
-    public Map<String,Object> delete(Conference conference) {
+    public Map<String,Object> delete(int id) {
 
         Map<String,Object> map=new HashMap<>();
 
-        if(conferenceRepository.findOne(conference.getId())!=null){
-            if(conferenceRepository.save(conference)!=null){
-                map.put("result",1);
-                map.put("msg","会议记录已删除！");
-                return map;
-            }
+        if(conferenceRepository.findOne(id)!=null){
+            conferenceRepository.delete(id);
+            map.put("result",1);
+            map.put("msg","会议记录已删除！");
+            return map;
         }
         map.put("result",0);
         map.put("msg","删除失败，请确认会议记录是否存在！");

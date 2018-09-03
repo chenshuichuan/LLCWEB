@@ -7,3 +7,7 @@ rebel.xml
 *.xlsx
 *.iml
 log_path
+.classpath
+.project
+.settings
+.settings/*

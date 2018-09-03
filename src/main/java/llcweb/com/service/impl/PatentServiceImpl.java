@@ -1,5 +1,10 @@
 package llcweb.com.service.impl;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
@@ -11,19 +16,24 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import llcweb.com.dao.repository.PatentRepository;
 import llcweb.com.domain.entity.UsefulPatent;
-import llcweb.com.domain.models.Paper;
+import llcweb.com.domain.models.Patent;
+import llcweb.com.domain.models.Patent;
+import llcweb.com.domain.models.Roles;
+import llcweb.com.domain.models.Users;
 import llcweb.com.domain.models.Patent;
 import llcweb.com.service.PatentService;
 
+@Service
 public class PatentServiceImpl implements PatentService {
+	
 	@Autowired
 	private PatentRepository patentRepository;
 	
-
-
 	@Override
 	public Page<Patent> findAll(UsefulPatent patent, int pageNum, int pageSize) {
 		
@@ -62,6 +72,117 @@ public class PatentServiceImpl implements PatentService {
 			}
         }, pageable);
         
+		return patentList;
+	}
+	
+	/**
+	 * 添加专利
+	 */
+
+	@Override
+	public Map<String, Object> add(Patent patent) {
+        Map<String,Object> map=new HashMap<>();
+
+        if(patentRepository.findOne(patent.getId())==null){
+            if(patentRepository.save(patent)!=null){
+                map.put("result",1);
+                map.put("msg","专利添加成功！");
+                return map;
+            }
+        }
+        map.put("result",0);
+        map.put("msg","添加失败，请确认专利是否已存在！");
+        return map;
+    }
+
+	/**
+	 * 更新修改专利
+	 */
+	@Override
+	public Map<String, Object> update(Patent patent) {
+		Map<String,Object> map=new HashMap<>();
+        if(patentRepository.findOne(patent.getId())!=null){
+            if(patentRepository.save(patent)!=null){
+                map.put("result",1);
+                map.put("msg","专利信息修改成功");
+                return map;
+            }
+        }
+        map.put("result",0);
+        map.put("msg","更新失败，请确认专利是否存在！");
+        return map;
+	}
+	
+	/**
+	 * 删除专利
+	 */
+	@Override
+	public Map<String, Object> delete(Patent patent) {
+
+        Map<String, Object> map = new HashMap<>();
+
+        if (patentRepository.findOne(patent.getId()) != null) {
+            if (patentRepository.save(patent) != null) {
+                map.put("result", 1);
+                map.put("msg", "专利已删除！");
+                return map;
+            }
+        }
+        map.put("result", 0);
+        map.put("msg", "删除失败，请确认专利是否存在！");
+        return map;
+    }
+	
+	/**
+	 * 分页
+	 */
+	@Override
+	public Page<Patent> getPage(int pageNum, int pageSize, Patent patent) {
+       
+      
+		Specification<Patent> specification = new Specification<Patent>() {
+       	
+       	@Override
+       	public Predicate toPredicate(Root<Patent> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+       		List<Predicate> predicates = new ArrayList<>();
+       		if(patent.getTitle() != null) {
+       			predicates.add(cb.like(root.get("title"),"%" +  patent.getTitle() + "%"));
+				 }
+       		if(patent.getAuthorList() != null) {
+					 predicates.add(cb.like(root.get("authorList"),"%" +  patent.getAuthorList() + "%"));
+					 }
+       		if(patent.getBelongProject() != null) {
+					 predicates.add(cb.like(root.get("belongProject"),"%" +  patent.getBelongProject() + "%"));
+					 }
+       		if(patent.getAgency() != null) {
+					predicates.add(cb.like(root.get("agency"),"%" +  patent.getAgency() + "%"));
+					 }
+       		
+            return cb.and(predicates.toArray(new Predicate[0]));
+        }
+    };
+    
+    //分页信息
+    Pageable pageable = new PageRequest(pageNum,pageSize); //页码
+    //查询
+    return patentRepository.findAll(specification,pageable);
+       }
+	/**
+	 * 权限查看专利
+	 */
+	@Override
+	public List<Patent> selectAll(Users user) {
+		List<Patent> patentList = new ArrayList<>();
+		List<Roles> roles = user.getRoles();
+		for(Roles role: roles) {
+			//管理员查看所有专利
+			if(role.getrName().equals("admin")) {
+				patentList = patentRepository.findAll();
+			}
+			else {
+				patentList = patentRepository.findByAuthorList(user.getId());
+			}
+		}
 		return patentList;
 	}
 

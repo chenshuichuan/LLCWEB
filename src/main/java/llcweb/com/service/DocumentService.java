@@ -17,12 +17,16 @@ public interface DocumentService {
      */
     public Page<Document> findAll(UsefulDocument document, int pageNum, int pageSize);
 
-    public List<Document> selectAll(Users user);
+    public Page<Document> selectAll(Users user,int pageNum,int pageSize);
     public Map<String,Object> add(Document document);
-    public Map<String,Object> update(Document document);
-    public Map<String,Object> delete(Document document);
+    public Map<String,Object> delete(int id);
 
+    /**
+     * ???
+     */
     List<DocumentInfo> documentsToDocumentInfos(List<Document> documentList);
+    /**
+     * ???
+     */
     Page<Document> getPage(int pageNum, int pageSize,Document document);
-
 }

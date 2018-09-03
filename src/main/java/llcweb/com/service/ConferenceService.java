@@ -14,6 +14,5 @@ public interface ConferenceService<T> {
     public Page<T> findAll(UsefulConference conference, int pageNum, int pageSize);
 
     public Map<String,Object> add(Conference conference);
-    public Map<String,Object> update(Conference conference);
-    public Map<String,Object> delete(Conference conference);
+    public Map<String,Object> delete(int id);
 }

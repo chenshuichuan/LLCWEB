@@ -1,9 +1,4 @@
-package llcweb.com.domain.models; /***********************************************************************
- * Module:  Users.java
- * Author:  Ricardo
- * Purpose: Defines the Class Users
- ***********************************************************************/
-
+package llcweb.com.domain.models;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,7 +10,6 @@ import java.util.*;
 /** 用户表
  * 
  */
-
 @Entity
 @Table(name="users")
 public class Users implements Serializable,UserDetails {
@@ -24,10 +18,10 @@ public class Users implements Serializable,UserDetails {
     */
    @Id
    @GeneratedValue
-   public int id;
+   private int id;
    /** user name
     * 
-    * @pdOid 3ece049d-ae34-40ff-851e-874a89284d0a */
+    */
    private String username;
    //用户密码
    private String password;

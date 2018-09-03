@@ -1,6 +1,5 @@
 package llcweb.com.service.impl;
 
-import llcweb.com.dao.repository.ConferenceRepository;
 import llcweb.com.dao.repository.UsersRepository;
 import llcweb.com.domain.models.Users;
 import llcweb.com.service.UsersService;
@@ -13,8 +12,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Date;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by:Ricardo

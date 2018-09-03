@@ -6,8 +6,6 @@ import llcweb.com.domain.models.Users;
 import llcweb.com.tools.PageParam;
 import org.springframework.data.domain.Page;
 
-import java.util.List;
-
 /**
  * Created by:Ricardo
  * Description:

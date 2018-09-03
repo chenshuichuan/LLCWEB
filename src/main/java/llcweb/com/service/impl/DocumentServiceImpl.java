@@ -9,10 +9,7 @@ import llcweb.com.domain.models.Users;
 import llcweb.com.service.DocumentService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.*;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
@@ -73,17 +70,31 @@ public class DocumentServiceImpl implements DocumentService {
      * 查找用户编辑过的文档
      */
     @Override
-    public List<Document> selectAll(Users user) {
-        List<Document> documents=new ArrayList<>();
+    public Page<Document> selectAll(Users user,int pageNum,int pageSize) {
+
+        Page<Document> documents;
         List<Roles> roles=user.getRoles();
+        Pageable page=new PageRequest(pageNum,pageSize, Sort.Direction.DESC,"createDate");
+
+        //管理员查看所有文档
         for(Roles role:roles){
-            //管理员查看所有文档
-            if(role.getrName().equals("admin")){
-                documents=documentRepository.findAll();
-            }else{ //普通用户查看本人编辑文档
-                documents=documentRepository.findByAuthorId(user.getId());
+            if(role.getrFlag().equals("ADMIN")){
+                documents=documentRepository.findAll(page);
+                return documents;
             }
         }
+
+        //组长查看本人编辑文档
+        for(Roles role:roles){
+            //管理员查看所有文档
+            if(role.getrFlag().equals("GROUP")){
+                documents=documentRepository.findByModel("user.getModel()",page);
+                return documents;
+            }
+        }
+
+        //普通用户查找编辑过的文档
+        documents=documentRepository.findByAuthorId(user.getId(),page);
         return documents;
     }
 
@@ -130,21 +141,24 @@ public class DocumentServiceImpl implements DocumentService {
      * 删除document
      */
     @Override
-    public Map<String,Object> delete(Document document) {
+    public Map<String,Object> delete(int id) {
 
         Map<String, Object> map = new HashMap<>();
 
-        if (documentRepository.findOne(document.getId()) != null) {
-            if (documentRepository.save(document) != null) {
-                map.put("result", 1);
-                map.put("msg", "文档已删除！");
-                return map;
-            }
+        if (documentRepository.findOne(id) != null) {
+            documentRepository.delete(id);
+            map.put("result", 1);
+            map.put("msg", "文档已删除！");
+            return map;
         }
         map.put("result", 0);
         map.put("msg", "删除失败，请确认文档是否存在！");
         return map;
     }
+
+    /**
+     * ???
+     */
     @Override
     public List<DocumentInfo> documentsToDocumentInfos(List<Document> documentList){
         List<DocumentInfo> documentInfoList = new ArrayList<>();
@@ -155,6 +169,9 @@ public class DocumentServiceImpl implements DocumentService {
         return documentInfoList;
     }
 
+    /**
+     * 重写第一个方法：动态查找？？？但是没有按时间查找
+     */
     @Override
     public Page<Document> getPage(int pageNum, int pageSize, Document example) {
         //规格定义

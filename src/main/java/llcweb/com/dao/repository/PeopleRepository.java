@@ -6,7 +6,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface PeopleRepository extends JpaRepository<People,Integer>{
+import java.util.List;
+
+public interface PeopleRepository extends JpaRepository<People,Integer> {
     Page<People> findAll(Specification<People> spec, Pageable pageable);
     /**
      *根据姓名和密码查询
@@ -19,13 +21,13 @@ public interface PeopleRepository extends JpaRepository<People,Integer>{
     /**
      *根据年级查询
      */
-    People findByGrade(String grade);
+    List<People> findByGrade(String grade);
     /**
      *根据职位查询
      */
-    People findByPosition(String position);
+    List<People> findByPosition(String position);
     /**
      *根据加入年份查询
      */
-    People findByIntroduction(int introduction);
+    List<People> findByIntroduction(int introduction);
 }

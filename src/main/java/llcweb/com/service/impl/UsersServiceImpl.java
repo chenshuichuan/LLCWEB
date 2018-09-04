@@ -2,6 +2,7 @@ package llcweb.com.service.impl;
 
 
 import llcweb.com.dao.repository.UsersRepository;
+import llcweb.com.domain.entity.UsefulUsers;
 import llcweb.com.domain.models.Users;
 import llcweb.com.service.UsersService;
 import llcweb.com.tools.PageParam;
@@ -69,7 +70,7 @@ public class UsersServiceImpl implements UsersService {
             public Predicate toPredicate(Root<Users> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
                 List<Predicate> predicates = new ArrayList<>(); //所有的断言
                 if(StringUtils.isNotBlank(users.getUsername())){ //添加断言
-                    Predicate likeUserName = cb.like(root.get("username").as(String.class),users.getUsername()+"%");
+                    Predicate likeUserName = cb.like(root.get("username").as(String.class),"%"+users.getUsername()+"%");
                     predicates.add(likeUserName);
                 }
                 return cb.and(predicates.toArray(new Predicate[0]));
@@ -91,6 +92,11 @@ public class UsersServiceImpl implements UsersService {
         Users users = usersRepository.findByUsernameAndPassword(userDetails.getUsername(),userDetails.getPassword());
         if(users!=null)logger.info("users id = "+users.getId()+",worker's id="+users.getPeopleId());
         return users;
+    }
+
+    @Override
+    public Page<Users> findAll(UsefulUsers document, int pageNum, int pageSize) {
+        return null;
     }
 
 

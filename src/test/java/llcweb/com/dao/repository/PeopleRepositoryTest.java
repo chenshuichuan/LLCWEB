@@ -1,4 +1,5 @@
 package llcweb.com.dao.repository;
+<<<<<<< HEAD
 import llcweb.com.domain.models.People;
 import org.junit.Assert;
 import org.junit.Test;
@@ -6,6 +7,10 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+=======
+
+import static org.junit.Assert.*;
+>>>>>>> 48976cb113d6a1b6e3afccc1fa4a511297c0948e
 
 /**
  * Created by:Ricardo
@@ -13,6 +18,7 @@ import org.springframework.test.context.junit4.SpringRunner;
  * Date: 2018/8/24
  * Time: 14:29
  */
+<<<<<<< HEAD
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class PeopleRepositoryTest {
@@ -45,3 +51,8 @@ public class PeopleRepositoryTest {
         Assert.assertNotNull(peopleRepository.findByIntroduction(new People().getIntroduction()));
     }
 }
+=======
+public class PeopleRepositoryTest {
+
+}
+>>>>>>> 48976cb113d6a1b6e3afccc1fa4a511297c0948e

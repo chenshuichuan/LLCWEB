@@ -127,6 +127,7 @@
             <artifactId>poi-ooxml</artifactId>
             <version>3.17</version>
         </dependency>
+<<<<<<< HEAD
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -141,6 +142,8 @@
             <version>RELEASE</version>
             <scope>compile</scope>
         </dependency>
+=======
+>>>>>>> 48976cb113d6a1b6e3afccc1fa4a511297c0948e
 
     </dependencies>
 

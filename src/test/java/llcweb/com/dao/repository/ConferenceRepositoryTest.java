@@ -37,23 +37,35 @@ public class ConferenceRepositoryTest {
 
     private Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse("2018-08-28");
     private Date date2 = new SimpleDateFormat("yyyy-MM-dd").parse("2018-08-25");
+<<<<<<< HEAD
 
+=======
+>>>>>>> 48976cb113d6a1b6e3afccc1fa4a511297c0948e
     public ConferenceRepositoryTest() throws ParseException {
     }
 
     @Test
     public void add() throws ParseException {
+<<<<<<< HEAD
         Conference conference = new Conference();
+=======
+        Conference conference=new Conference();
+>>>>>>> 48976cb113d6a1b6e3afccc1fa4a511297c0948e
         conference.setAuthor("haien");
         conference.setDate(date1);
         conference.setModel("项目组");
         conference.setTitle("项目组第1次会议");
         conference.setType("小组会议");
+<<<<<<< HEAD
         Assert.assertThat(conferenceRepository.save(conference).getId(), is(0));
+=======
+        Assert.assertThat(conferenceRepository.save(conference).getId(),is(0));
+>>>>>>> 48976cb113d6a1b6e3afccc1fa4a511297c0948e
     }
 
     @Test
     public void findAll() throws ParseException {
+<<<<<<< HEAD
         UsefulConference conference = new UsefulConference();
         conference.setFirstDate(date1);
         conference.setLastDate(date1);
@@ -66,4 +78,19 @@ public class ConferenceRepositoryTest {
         Page<Conference> conferences = conferenceRepository.findByOneKey("haien", new PageRequest(0, 10, Sort.Direction.DESC, "date"));
         Assert.assertThat(conferences.getTotalElements(), is(12L));
     }
+=======
+        UsefulConference conference=new UsefulConference();
+        conference.setFirstDate(date1);
+        conference.setLastDate(date1);
+        Page<Conference> conferences=conferenceService.findAll(conference,1,3);
+        Assert.assertThat(conferences.getTotalElements(),is(12L));
+    }
+
+    @Test
+    public void findByOneKey(){
+        Page<Conference> conferences=conferenceRepository.findByOneKey("haien",new PageRequest(0,10, Sort.Direction.DESC,"date"));
+        Assert.assertThat(conferences.getTotalElements(),is(12L));
+    }
+
+>>>>>>> 48976cb113d6a1b6e3afccc1fa4a511297c0948e
 }

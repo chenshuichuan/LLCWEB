@@ -9,8 +9,7 @@ rebel.xml
 *.xlsx
 *.iml
 log_path
+log_path/*
 .classpath
 .project
-.settings
-.settings/*
 LLCWEB.iml___jb_tmp___

@@ -10,6 +10,8 @@ rebel.xml
 *.iml
 log_path
 log_path/*
+.settings
+.settings/*
 .classpath
 .project
 LLCWEB.iml___jb_tmp___

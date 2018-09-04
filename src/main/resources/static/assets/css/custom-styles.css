@@ -223,6 +223,10 @@ display:inline-block;
 margin-bottom: 30px;
 width:100%;
 }
+.gay {
+    /* background-color: #1CC09F; */
+    color: #929292;
+}
 .green {
 /* background-color: #1CC09F; */
 color: #fff;

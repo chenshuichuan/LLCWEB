@@ -76,6 +76,11 @@ public class FileServiceImpl implements FileService {
         return map;
     }
 
+    @Override
+    public Map<String, Object> delete(int id) {
+        return null;
+    }
+
     /**
      * 更新file
      */

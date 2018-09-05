@@ -8,9 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-
-import static org.junit.Assert.*;
-
 /**
  * Created by:Ricardo
  * Description:
@@ -30,7 +27,7 @@ public class PeopleRepositoryTest {
     }
     @Test
     public void findByNameAndPassword(){
-        Assert.assertNotNull(peopleRepository.findByNameAndPassword(new People().getName(),new People().getPasswd()));
+        Assert.assertNotNull(peopleRepository.findByNameAndPasswd(new People().getName(),new People().getPasswd()));
     }
     @Test
     public void findByName(){

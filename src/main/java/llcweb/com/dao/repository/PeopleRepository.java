@@ -15,7 +15,7 @@ public interface PeopleRepository extends JpaRepository<People,Integer>{
     /**
      *根据姓名和密码查询
      */
-    People findByNameAndPassword(String name, String passwd);
+    People findByNameAndPasswd(String name, String passwd);
     /**
      *根据姓名查询
      */

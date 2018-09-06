@@ -1,0 +1,3 @@
+#图片保存路径
+image:
+  location: ./images

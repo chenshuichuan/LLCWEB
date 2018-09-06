@@ -3,9 +3,11 @@ package llcweb.com.service;
 import llcweb.com.domain.entity.UsefulFile;
 import llcweb.com.domain.models.File;
 import org.springframework.data.domain.Page;
+import org.springframework.stereotype.Service;
 
 import java.util.Map;
 
+@Service
 public interface FileService {
 
     /**

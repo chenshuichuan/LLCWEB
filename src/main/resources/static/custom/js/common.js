@@ -25,9 +25,7 @@ function delCookie(name) {
     setCookie(name, null, -1);
 };
 
-<<<<<<< HEAD
 
-=======
 /*常量*/
 Date.prototype.toLocaleString = function() {
     return this.getFullYear() + "/" + (this.getMonth() + 1) + "/" + this.getDate();
@@ -37,7 +35,7 @@ function dateToString(date) {
     if(date===null)return "未知";
     else return new Date(date).toLocaleString();
 }
->>>>>>> upstream/develop
+
 $(document).ready(function(){
     $(".dropdown-button").dropdown();
     $("#sideNav").click(function(){

@@ -15,23 +15,24 @@
     <!-- FontAwesome Styles-->
     <link href="../../static/assets/css/font-awesome.css"
           th:href="@{/assets/css/font-awesome.css}" rel="stylesheet"/>
-    <!-- Morris Chart Styles-->
-    <link href="../../static/assets/js/morris/morris-0.4.3.min.css"
-          th:href="@{/assets/js/morris/morris-0.4.3.min.css}" rel="stylesheet"/>
     <!-- Custom Styles-->
     <link href="../../static/assets/css/custom-styles.css"
           th:href="@{/assets/css/custom-styles.css}" rel="stylesheet"/>
     <!-- Google Fonts-->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans'
           th:href="@{http://fonts.googleapis.com/css?family=Open+Sans}" rel='stylesheet' type='text/css'/>
-    <link href="../../static/assets/js/Lightweight-Chart/cssCharts.css"
-          th:href="@{/assets/js/Lightweight-Chart/cssCharts.css}" rel="stylesheet">
+    <link href="../../static/assets/plugins/boostrap-switch/css/bootstrap-switch.min.css"
+          th:href="@{/assets/plugins/boostrap-switch/css/bootstrap-switch.min.css}" rel="stylesheet">
+
+    <!-- Custom Styles-->
+    <link href="../../static/custom/css/admin-index.css"
+          th:href="@{/custom/css/admin-index.css}" rel="stylesheet"/>
 </head>
 
 <body>
 <div id="wrapper">
     <!-- top side start-->
-    <div  th:include="admin/template/top_side_template :: admin_topside"></div>
+    <div th:include="admin/template/top_side_template :: admin_topside"></div>
     <!-- top side end-->
     <!-- left side start-->
     <nav class="navbar-default navbar-side" role="navigation"
@@ -49,158 +50,168 @@
         </div>
 
         <div id="page-inner">
-            <div class="dashboard-cards">
-                <div class="row">
-                    <div class="col-xs-12 col-sm-6 col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-4 col-sm-12 col-xs-12">
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <a class="btn-a" href="javascript:void(0);">
+                                        <i style="padding-right: 10px;" class="fa fa-sign-in fa-3x pull-right"></i>
+                                        打卡
+                                    </a>
+                                </div>
 
-                        <div class="card horizontal cardIcon waves-effect waves-dark">
-                            <div class="card-image red">
-                                <i class="material-icons dp48">import_export</i>
-                            </div>
-                            <div class="card-stacked red">
-                                <div class="card-content">
-                                    <h3>84,198</h3>
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <ul class="list-group">
+                                        <li class="list-group-item">
+                                            <span class="badge green">2018-09-04 08:40:40</span>
+                                            <i class="text-success fa fa-check-circle"></i>
+                                            上午
+                                        </li>
+                                        <li class="list-group-item">
+                                            <span class="badge">未打卡</span>
+                                            <i class="text-danger fa fa-clock-o"></i>
+                                            下午
+                                        </li>
+                                        <li class="list-group-item">
+                                            <span class="badge">未打卡</span>
+                                            <i class="text-danger fa fa-clock-o"></i>
+                                            晚上
+                                        </li>
+                                    </ul>
                                 </div>
-                                <div class="card-action">
-                                    <strong>REVENUE</strong>
-                                </div>
                             </div>
+
                         </div>
                     </div>
-                    <div class="col-xs-12 col-sm-6 col-md-3">
-                        <div class="card horizontal cardIcon waves-effect waves-dark">
-                            <div class="card-image orange">
-                                <i class="material-icons dp48">shopping_cart</i>
-                            </div>
-                            <div class="card-stacked orange">
-                                <div class="card-content">
-                                    <h3>36,540</h3>
-                                </div>
+                    <div class="row">
+                        <div class="col-md-4 col-sm-12 col-xs-12">
+                            <div class="card">
                                 <div class="card-action">
-                                    <strong>SALES</strong>
+                                    <b>新的一天，给自己定个小目标吧！</b>
+                                    <a id="btn-add-mytask" href="#"><i style="color: #0b9612;" class="fa fa-plus fa-lg"></i></a>
+                                    <!--这个控件会卡。。-->
+                                    <!--<span class="switch" data-on="info" data-off="success">-->
+                                        <!--<input  name="my-task-switch" type="checkbox" checked/>-->
+                                    <!--</span>-->
+                                    <a id="btn-finished-task" href="#"><i style="color: #e19e19;" class="fa fa-circle-o fa-lg"></i></a>
+                                    <a id="btn-unfinished-task" href="#"><i style="color: #0b9612;" class="fa fa-check-circle fa-lg"></i></a>
                                 </div>
+                                <div class="card-image">
+                                    <div class="collection" style="overflow-y:auto; height:400px;">
+                                        <a href="#!" class="collection-item">今天看10篇论文！
+                                            <span class="badge green">完成</span>
+                                            <span class="badge grey" >2018-09-04</span>
+                                        </a>
+                                        <a href="#!" class="collection-item">今天写100000行代码！
+                                            <span class="badge">未完成</span>
+                                            <span class="badge grey" >2018-09-04</span>
+                                        </a>
+                                        <a href="#!" class="collection-item">今天写100000行代码！
+                                            <span class="badge">未完成</span>
+                                            <span class="badge grey" >2018-09-04</span>
+                                        </a>
+                                        <a href="#!" class="collection-item">今天写100000行代码！
+                                            <span class="badge">未完成</span>
+                                            <span class="badge grey" >2018-09-04</span>
+                                        </a>
+                                        <a href="#!" class="collection-item">今天写100000行代码！
+                                            <span class="badge">未完成</span>
+                                            <span class="badge grey" >2018-09-04</span>
+                                        </a>
+                                        <a href="#!" class="collection-item">今天写100000行代码！
+                                            <span class="badge">未完成</span>
+                                            <span class="badge grey" >2018-09-04</span>
+                                        </a>
+                                        <a href="#!" class="collection-item">今天写100000行代码！
+                                            <span class="badge">未完成</span>
+                                            <span class="badge grey" >2018-09-04</span>
+                                        </a>
+                                        <a href="#!" class="collection-item">今天写100000行代码！
+                                            <span class="badge">未完成</span>
+                                            <span class="badge grey" >2018-09-04</span>
+                                        </a>
+                                        <a href="#!" class="collection-item">今天写100000行代码！
+                                            <span class="badge">未完成</span>
+                                            <span class="badge grey" >2018-09-04</span>
+                                        </a>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
-                    </div>
-
-
-                    <div class="col-xs-12 col-sm-6 col-md-3">
-
-                        <div class="card horizontal cardIcon waves-effect waves-dark">
-                            <div class="card-image blue">
-                                <i class="material-icons dp48">equalizer</i>
-                            </div>
-                            <div class="card-stacked blue">
-                                <div class="card-content">
-                                    <h3>24,225</h3>
-                                </div>
+                        <div class="col-md-8 col-sm-12 col-xs-12">
+                            <div class="card">
                                 <div class="card-action">
-                                    <strong>PRODUCTS</strong>
+                                    <b style="color: #e12fab">太赫兹组</b>任务
+                                    <!--这个控件会卡。。-->
+                                    <div style="float: right;" class="switch" data-on="info" data-off="success">
+                                        <input name="my-task-switch" type="checkbox" checked/>
+                                    </div>
+                                </div>
+                                <div class="card-image">
+                                    <ul class="collection" style="overflow-y:auto; height:400px;">
+                                        <li class="collection-item avatar">
+                                            <i class="circle fa fa-check-circle green"></i>
+                                            <span class="title">XXX完成论文《XXXXXXXXXXXXXXX》</span>
+                                            <p>First Line 请XXX与2018/080/05完成论文、专利设计</p>
+                                            <p>作者<span class="badge">2018-09-05</span></p>
+                                        </li>
+                                        <li class="collection-item avatar">
+                                            <i class="circle fa fa-circle-o red"></i>
+                                            <span class="title">XXX完成论文《XXXXXXXXXXXXXXX》</span>
+                                            <p>First Line 请XXX与2018/080/05完成论文、专利设计</p>
+                                            <p>作者<span class="badge">2018-09-05</span></p>
+
+                                        </li>
+                                        <li class="collection-item avatar">
+                                            <i class="circle fa fa-circle-o red"></i>
+                                            <span class="title">XXX完成论文《XXXXXXXXXXXXXXX》</span>
+                                            <p>First Line 请XXX与2018/080/05完成论文、专利设计</p>
+                                            <p>作者<span class="badge">2018-09-05</span></p>
+
+                                        </li>
+                                        <li class="collection-item avatar">
+                                            <i class="circle fa fa-circle-o red"></i>
+                                            <span class="title">XXX完成论文《XXXXXXXXXXXXXXX》</span>
+                                            <p>First Line 请XXX与2018/080/05完成论文、专利设计</p>
+                                            <p>作者<span class="badge">2018-09-05</span></p>
+
+                                        </li>
+                                        <li class="collection-item avatar">
+                                            <i class="circle fa fa-circle-o red"></i>
+                                            <span class="title">XXX完成论文《XXXXXXXXXXXXXXX》</span>
+                                            <p>First Line 请XXX与2018/080/05完成论文、专利设计</p>
+                                            <p>作者<span class="badge">2018-09-05</span></p>
+
+                                        </li>
+                                        <li class="collection-item avatar">
+                                            <i class="circle fa fa-circle-o red"></i>
+                                            <span class="title">XXX完成论文《XXXXXXXXXXXXXXX》</span>
+                                            <p>First Line 请XXX与2018/080/05完成论文、专利设计</p>
+                                            <p>作者<span class="badge">2018-09-05</span></p>
+
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
+
+
                         </div>
-
-                    </div>
-                    <div class="col-xs-12 col-sm-6 col-md-3">
-
-                        <div class="card horizontal cardIcon waves-effect waves-dark">
-                            <div class="card-image green">
-                                <i class="material-icons dp48">supervisor_account</i>
-                            </div>
-                            <div class="card-stacked green">
-                                <div class="card-content">
-                                    <h3>88,658</h3>
-                                </div>
-                                <div class="card-action">
-                                    <strong>VISITS</strong>
-                                </div>
-                            </div>
-                        </div>
-
                     </div>
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-md-4 col-sm-12 col-xs-12">
-                    <div class="card">
-                        <div class="card-action">
-                            <b>Tasks Panel</b>
-                        </div>
-                        <div class="card-image">
-                            <div class="collection">
-                                <a href="#!" class="collection-item">Red<span class="new badge red"
-                                                                              data-badge-caption="red">4</span></a>
-                                <a href="#!" class="collection-item">Blue<span class="new badge blue"
-                                                                               data-badge-caption="blue">4</span></a>
-                                <a href="#!" class="collection-item"><span class="badge">1</span>Alan</a>
-                                <a href="#!" class="collection-item"><span class="new badge">4</span>Alan</a>
-                                <a href="#!" class="collection-item">Alan<span class="new badge blue"
-                                                                               data-badge-caption="blue">4</span></a>
-                                <a href="#!" class="collection-item"><span class="badge">14</span>Alan</a>
-                                <a href="#!" class="collection-item">Custom Badge Captions<span class="new badge"
-                                                                                                data-badge-caption="custom caption">4</span></a>
-                                <a href="#!" class="collection-item">Custom Badge Captions<span class="badge"
-                                                                                                data-badge-caption="custom caption">4</span></a>
-                            </div>
-                        </div>
 
-                    </div>
-
-                </div>
-                <div class="col-md-8 col-sm-12 col-xs-12">
-                    <div class="card">
-                        <div class="card-action">
-                            <b>User List</b>
-                        </div>
-                        <div class="card-image">
-                            <ul class="collection">
-                                <li class="collection-item avatar">
-                                    <i class="material-icons circle green">track_changes</i>
-                                    <span class="title">Title</span>
-                                    <p>First Line <br>
-                                        Second Line
-                                    </p>
-                                    <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-                                </li>
-                                <li class="collection-item avatar">
-                                    <i class="material-icons circle">folder</i>
-                                    <span class="title">Title</span>
-                                    <p>First Line <br>
-                                        Second Line
-                                    </p>
-                                    <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-                                </li>
-                                <li class="collection-item avatar">
-                                    <i class="material-icons circle green">track_changes</i>
-                                    <span class="title">Title</span>
-                                    <p>First Line <br>
-                                        Second Line
-                                    </p>
-                                    <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-                                </li>
-                                <li class="collection-item avatar">
-                                    <i class="material-icons circle red">play_arrow</i>
-                                    <span class="title">Title</span>
-                                    <p>First Line <br>
-                                        Second Line
-                                    </p>
-                                    <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
-
-                </div>
-            </div>
             <!-- /. ROW  -->
             <div class="fixed-action-btn horizontal click-to-toggle">
                 <a href="#header" class="btn-floating btn-large red"><i class="material-icons">publish</i></a>
             </div>
             <div class="row">
                 <div class="col-md-4 col-sm-12 col-xs-12">
-                    hello jbrel
+                </div>
+                <div class="col-md-4 col-sm-12 col-xs-12">
                 </div>
             </div>
             <footer th:include="admin/template/footer_template :: admin_footer">
@@ -223,20 +234,13 @@
 <!-- Metis Menu Js -->
 <script src="../../static/assets/js/jquery.metisMenu.js"
         th:src="@{/assets/js/jquery.metisMenu.js}"></script>
-<!-- Morris Chart Js -->
-<script src="../../static/assets/js/morris/raphael-2.1.0.min.js"
-        th:src="@{/assets/js/morris/raphael-2.1.0.min.js}"></script>
-<script src="../../static/assets/js/morris/morris.js"
-        th:src="@{/assets/js/morris/morris.js}"></script>
-<script src="../../static/assets/js/easypiechart.js"
-        th:src="@{/assets/js/easypiechart.js}"></script>
-<script src="../../static/assets/js/easypiechart-data.js"
-        th:src="@{/assets/js/easypiechart-data.js}"></script>
-<script src="../../static/assets/js/Lightweight-Chart/jquery.chart.js"
-        th:src="@{/assets/js/Lightweight-Chart/jquery.chart.js}"></script>
+<script src="../../static/assets/plugins/boostrap-switch/js/bootstrap-switch.min.js"
+        th:src="@{/assets/plugins/boostrap-switch/js/bootstrap-switch.min.js}"></script>
 <!-- Custom Js -->
 <script src="../../static/custom/js/common.js"
         th:src="@{/custom/js/common.js}"></script>
+<script src="../../static/custom/js/index.js"
+        th:src="@{/custom/js/index.js}"></script>
 </body>
 
 </html>

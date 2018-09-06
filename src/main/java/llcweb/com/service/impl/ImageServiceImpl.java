@@ -5,11 +5,14 @@ import llcweb.com.domain.entity.UsefulImage;
 import llcweb.com.domain.models.Image;
 import llcweb.com.service.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -20,10 +23,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Service
+//@ConfigurationProperties(prefix="image")
 public class ImageServiceImpl implements ImageService {
 
     @Autowired
     private ImageRepository imageRepository;
+
+    @Value("${image.location}")
+    private String path;
 
     @Override
     public Page<Image> findAll(UsefulImage image, int pageNum,int pageSize) {
@@ -117,5 +125,19 @@ public class ImageServiceImpl implements ImageService {
         map.put("result",0);
         map.put("msg","删除失败，请确认图片是否存在！");
         return map;
+    }
+
+    /**
+     * @Author haien
+     * @Description 保存图片到项目
+     * @Date 2018/9/6
+     * @Param [file]
+     * @return java.lang.String
+     **/
+    @Override
+    public String saveImg(MultipartFile file) {
+
+
+        return null;
     }
 }

@@ -9,6 +9,8 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import llcweb.com.domain.models.Paper;
+import llcweb.com.domain.models.Patent;
 import llcweb.com.domain.models.Patent;
 
 /**
@@ -18,10 +20,10 @@ import llcweb.com.domain.models.Patent;
  */
 
 public interface PatentRepository extends JpaRepository<Patent,Integer>{
-	Page<Patent> findAll(Specification<Patent> spec, Pageable pageable);
+	Page<Patent> findAll(Specification<Patent> specification, Pageable pageable);
 
-	List<Patent> findByAuthorList(int id);
-
+//	List<Patent> findByAuthorList(int id);
+/*
 	//模糊查询
 	@Query("from patent p where p.appliDate like %?1% "
 			+ "or p.authorList like %?1% "
@@ -29,5 +31,6 @@ public interface PatentRepository extends JpaRepository<Patent,Integer>{
 			+ "or p.publiNum like %?1% "
 			+ "or p.agency like %?1% "
 			+ "or p.appliPeople like %?1% ")
-	Page<Patent> findByOneKey(String string, PageRequest pageRequest);
+	Page<Patent> findByOneKey(String string, PageRequest pageRequest);*/
+	Page<Patent> findByAuthorList(String userName, Pageable pageable);
 }

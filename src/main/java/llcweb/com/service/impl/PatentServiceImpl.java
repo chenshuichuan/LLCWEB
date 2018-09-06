@@ -21,7 +21,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import llcweb.com.dao.repository.PatentRepository;
 import llcweb.com.domain.entity.UsefulPatent;
+import llcweb.com.domain.models.Paper;
 import llcweb.com.domain.models.Patent;
+import llcweb.com.domain.models.Project;
 import llcweb.com.domain.models.Patent;
 import llcweb.com.domain.models.Roles;
 import llcweb.com.domain.models.Users;
@@ -76,6 +78,43 @@ public class PatentServiceImpl implements PatentService {
 	}
 	
 	/**
+	 * 权限查看论文
+	 */
+	@Override
+	public Page<Patent> selectAll(Users user,int pageNum,int pageSize) {
+		
+		Page<Patent> patents;
+		List<Roles> roles = user.getRoles();
+		Users users = new Users();
+		Pageable pageable=new PageRequest(pageNum,pageSize, Sort.Direction.DESC,"publicDate");
+		
+	       //管理员查看所有论文
+        for(Roles role:roles){
+            if(role.getrFlag().equals("ADMIN")){
+            	patents=patentRepository.findAll(pageable);
+            	 //papers=paperRepository.findByAuthorList(users.getUsername(), pageable);
+                return patents;
+            }
+        }
+        
+  //查看某个组的论文
+        for(Roles role:roles){
+            //组长查看某个组的论文
+            if(role.getrFlag().equals("GROUP")){
+                patents=patentRepository.findByAuthorList(users.getUsername(), pageable);
+                return patents;
+            }
+        }
+        patents=patentRepository.findAll(pageable);
+        return patents;
+
+/*        //普通用户查找编辑过的论文
+        projects=projectRepository.findByAuthorId(user.getId(),page);
+        return projects;*/
+    }
+	
+	
+	/**
 	 * 添加专利
 	 */
 
@@ -116,26 +155,24 @@ public class PatentServiceImpl implements PatentService {
 	/**
 	 * 删除专利
 	 */
-	@Override
-	public Map<String, Object> delete(Patent patent) {
+	public Map<String, Object> delete(int id) {
 
         Map<String, Object> map = new HashMap<>();
 
-        if (patentRepository.findOne(patent.getId()) != null) {
-            if (patentRepository.save(patent) != null) {
-                map.put("result", 1);
-                map.put("msg", "专利已删除！");
-                return map;
-            }
+        if (patentRepository.findOne(id) != null) {
+        	patentRepository.delete(id);
+            map.put("result", 1);
+            map.put("msg", "专利已删除！");
+            return map;
         }
         map.put("result", 0);
         map.put("msg", "删除失败，请确认专利是否存在！");
         return map;
     }
-	
-	/**
+
+/*	*//**
 	 * 分页
-	 */
+	 *//*
 	@Override
 	public Page<Patent> getPage(int pageNum, int pageSize, Patent patent) {
        
@@ -167,23 +204,6 @@ public class PatentServiceImpl implements PatentService {
     //查询
     return patentRepository.findAll(specification,pageable);
        }
-	/**
-	 * 权限查看专利
-	 */
-	@Override
-	public List<Patent> selectAll(Users user) {
-		List<Patent> patentList = new ArrayList<>();
-		List<Roles> roles = user.getRoles();
-		for(Roles role: roles) {
-			//管理员查看所有专利
-			if(role.getrName().equals("admin")) {
-				patentList = patentRepository.findAll();
-			}
-			else {
-				patentList = patentRepository.findByAuthorList(user.getId());
-			}
-		}
-		return patentList;
-	}
-
+*/
+	
 }

@@ -20,11 +20,11 @@ public interface PaperService {
 	 */
 	 public Page<Paper> findAll(UsefulPaper paper, int pageNum, int pageSize);
 	 
-	 public List<Paper> selectAll(Users user);
+	 public Page<Paper> selectAll(Users user,int pageNum,int pageSize);
 	 
 	 public Map<String, Object> add(Paper paper);
 	 public Map<String, Object> update(Paper paper);
-	 public Map<String, Object> delete(Paper paper);
+	 public Map<String, Object> delete(int id);
 	 
-	 Page<Paper> getPage(int pageNum, int pageSize, Paper paper);
+	// Page<Paper> getPage(int pageNum, int pageSize, Paper paper);
 }

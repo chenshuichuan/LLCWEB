@@ -27,11 +27,13 @@ public interface ProjectService {
 
 	public Page<Project> findAll(UsefulProject project, int pageNum, int pageSize);
 	
-	public List<Project> selectAll(Users user);
+	public Page<Project> selectAll(Users user, int pageNum, int pageSize);
 	
 	 public Map<String, Object> add(Project project);
 	 public Map<String, Object> update(Project project);
-	 public Map<String, Object> delete(Project project);
+	 public Map<String, Object> delete(int id);
 	 
-	 Page<Project> getPage(int pageNum, int pageSize, Project project);
+	
+
+	
 }

@@ -72,13 +72,12 @@ public class ProjectRepositoryTest1 {
 	        project.setLastDate(new SimpleDateFormat("yyyy-MM-dd").parse("2018-09-02"));
 	        Page<Project> projectList=projectService.findAll(project,1,3);
 	        Assert.assertThat(projectList.getTotalElements(),is(91L));
-	        System.out.println(((Slice<Project>) project).getSort());
 	    }
 	   
-	    @Test
+/*	    @Test
 	    public void findByOneKey(){
 	        Page<Project> projectList = projectRepository.findByOneKey("heiheihei",new PageRequest(0,10, Sort.Direction.DESC,"startDate"));
 	        Assert.assertThat(projectList.getTotalElements(),is(12L));
 	    }
-
+*/
 }

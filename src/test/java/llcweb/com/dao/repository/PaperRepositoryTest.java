@@ -58,10 +58,10 @@ public class PaperRepositoryTest {
 	        Assert.assertThat(paperList.getTotalElements(),is(91L));
 	        System.out.println(((Slice<Paper>) paper).getSort());
 	    }
-	   
+/*	   
 	    @Test
 	    public void findByOneKey(){
 	        Page<Paper> paperList = paperRepository.findByOneKey("sci",new PageRequest(0,10, Sort.Direction.DESC,"date"));
 	        Assert.assertThat(paperList.getTotalElements(),is(12L));
-	    }
+	    }*/
 }

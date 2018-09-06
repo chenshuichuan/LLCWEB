@@ -10,7 +10,6 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -22,8 +21,6 @@ import org.springframework.stereotype.Service;
 import llcweb.com.dao.repository.PaperRepository;
 import llcweb.com.domain.entity.UsefulPaper;
 import llcweb.com.domain.models.Paper;
-import llcweb.com.domain.models.Paper;
-import llcweb.com.domain.models.Project;
 import llcweb.com.domain.models.Roles;
 import llcweb.com.domain.models.Users;
 import llcweb.com.service.PaperService;
@@ -76,21 +73,37 @@ public class PaperServiceImpl implements PaperService {
 	 * 权限查看论文
 	 */
 	@Override
-	public List<Paper> selectAll(Users user) {
-		List<Paper> paperList = new ArrayList<>();
+	public Page<Paper> selectAll(Users user,int pageNum,int pageSize) {
+		
+		Page<Paper> papers;
 		List<Roles> roles = user.getRoles();
-		for(Roles role: roles) {
-			//管理员查看所有论文
-			if(role.getrName().equals("admin")) {
-				paperList = paperRepository.findAll();
-			}
-			else {
-				paperList = paperRepository.findByAuthorList(user.getId());
-			}
-		}
-		return paperList;
-	}
-	
+		Users users = new Users();
+		Pageable pageable=new PageRequest(pageNum,pageSize, Sort.Direction.DESC,"date");
+		
+	       //管理员查看所有论文
+        for(Roles role:roles){
+            if(role.getrFlag().equals("ADMIN")){
+            	papers=paperRepository.findAll(pageable);
+            	 //papers=paperRepository.findByAuthorList(users.getUsername(), pageable);
+                return papers;
+            }
+        }
+        
+  //查看某个组的论文
+        for(Roles role:roles){
+            //组长查看某个组的论文
+            if(role.getrFlag().equals("GROUP")){
+                papers=paperRepository.findByAuthorList(users.getUsername(), pageable);
+                return papers;
+            }
+        }
+        papers=paperRepository.findAll(pageable);
+        return papers;
+
+/*        //普通用户查找编辑过的论文
+        projects=projectRepository.findByAuthorId(user.getId(),page);
+        return projects;*/
+    }
 	
 	/**
 	 * 修改论文信息
@@ -112,26 +125,24 @@ public class PaperServiceImpl implements PaperService {
 	/**
 	 * 删除论文
 	 */
-	@Override
-	public Map<String, Object> delete(Paper paper) {
+	public Map<String, Object> delete(int id) {
 
         Map<String, Object> map = new HashMap<>();
 
-        if (paperRepository.findOne(paper.getId()) != null) {
-            if (paperRepository.save(paper) != null) {
-                map.put("result", 1);
-                map.put("msg", "论文已删除！");
-                return map;
-            }
+        if (paperRepository.findOne(id) != null) {
+        	paperRepository.delete(id);
+            map.put("result", 1);
+            map.put("msg", "论文已删除！");
+            return map;
         }
         map.put("result", 0);
         map.put("msg", "删除失败，请确认论文是否存在！");
         return map;
     }
 
-	/**
+/*	*//**
 	 * 分页
-	 */
+	 *//*
 	@Override
 	public Page<Paper> getPage(int pageNum, int pageSize, Paper paper) {
        
@@ -161,7 +172,7 @@ public class PaperServiceImpl implements PaperService {
     Pageable pageable = new PageRequest(pageNum,pageSize); //页码
     //查询
     return paperRepository.findAll(specification,pageable);
-       }
+       }*/
 	
 	/**
 	 * 添加论文信息

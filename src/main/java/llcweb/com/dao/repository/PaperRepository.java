@@ -18,16 +18,18 @@ import llcweb.com.domain.models.Paper;
 
 public interface PaperRepository extends JpaRepository<Paper,Integer>{
 	
-	
+	//分页查询
 	Page<Paper> findAll(Specification<Paper> spec, Pageable pageable);
 	
-	@Query("from Paper p where p.title like %?1%"
+/*	@Query("from Paper p where p.title like %?1%"
 			+ "or p.authorList like %?1%"
 			+ "or p.belongProject like %?1%"
 			+ "or p.periodical like %?1%"
 			)
-	Page<Paper> findByOneKey(String key, Pageable pageable);
+	Page<Paper> findByOneKey(String key, Pageable pageable);*/
 
-	List<Paper> findByAuthorList(int id);
+	Page<Paper> findByAuthorList(String userName, Pageable pageable);
+
+	//Page<Paper> findByTeam(String string, Pageable pageable);
 	
 }

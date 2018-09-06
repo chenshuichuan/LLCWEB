@@ -24,6 +24,7 @@ import llcweb.com.domain.models.Project;
 import llcweb.com.domain.models.Project;
 import llcweb.com.domain.models.Project;
 import llcweb.com.domain.models.Project;
+import llcweb.com.domain.models.Project;
 import llcweb.com.domain.models.Roles;
 import llcweb.com.domain.models.Users;
 import llcweb.com.service.ProjectService;
@@ -80,7 +81,56 @@ public class ProjectServiceImpl implements ProjectService {
         
 		return projectList;
 	}
+	
+    /**
+     * 查找用户编辑过的项目
+     */
+    @Override
+    public Page<Project> selectAll(Users user,int pageNum,int pageSize) {
 
+        Page<Project> projects;
+        List<Roles> roles=user.getRoles();
+        Users users = new Users();
+        Pageable page=new PageRequest(pageNum,pageSize, Sort.Direction.DESC,"startDate");
+
+        //管理员查看所有项目
+        for(Roles role:roles){
+            if(role.getrFlag().equals("ADMIN")){
+                projects=projectRepository.findAll(page);
+            	 //projects=projectRepository.findByTeam("car", page);
+                return projects;
+            }
+        }
+
+        //查看某个组的项目
+        for(Roles role:roles){
+            //管理员查看所有项目
+            if(role.getrFlag().equals("ADMIN")){
+                projects=projectRepository.findByTeam("car", page);
+                return projects;
+            }
+        }
+        
+  //查看某个组的项目
+        for(Roles role:roles){
+            //组长查看某个组的项目
+            if(role.getrFlag().equals("GROUP")){
+                projects=projectRepository.findByTeam(users.getTeam(), page);
+                return projects;
+            }
+        }
+        projects=projectRepository.findAll(page);
+        return projects;
+
+/*        //普通用户查找编辑过的项目
+        projects=projectRepository.findByAuthorId(user.getId(),page);
+        return projects;*/
+    }
+	
+	
+	/**
+	 *  添加项目
+	 */
 	@Override
 	public Map<String, Object> add(Project project) {
         Map<String,Object> map=new HashMap<>();
@@ -96,6 +146,11 @@ public class ProjectServiceImpl implements ProjectService {
         map.put("msg","添加失败，请确认项目是否已存在！");
         return map;
     }
+	
+	/*
+	 * 修改项目
+	 * @see llcweb.com.service.ProjectService#update(llcweb.com.domain.models.Project)
+	 */
 
 	@Override
 	public Map<String, Object> update(Project project) {
@@ -112,23 +167,27 @@ public class ProjectServiceImpl implements ProjectService {
         return map;
 	}
 
+	/*
+	 * 删除项目
+	 * @see llcweb.com.service.ProjectService#delete(llcweb.com.domain.models.Project)
+	 */
 	@Override
-	public Map<String, Object> delete(Project project) {
+	public Map<String, Object> delete(int id) {
 
         Map<String, Object> map = new HashMap<>();
 
-        if (projectRepository.findOne(project.getId()) != null) {
-            if (projectRepository.save(project) != null) {
-                map.put("result", 1);
-                map.put("msg", "项目已删除！");
-                return map;
-            }
+        if (projectRepository.findOne(id) != null) {
+        	projectRepository.delete(id);
+            map.put("result", 1);
+            map.put("msg", "项目已删除！");
+            return map;
         }
         map.put("result", 0);
         map.put("msg", "删除失败，请确认项目是否存在！");
         return map;
     }
 
+/*	
 	@Override
 	public Page<Project> getPage(int pageNum, int pageSize, Project project) {
 	      
@@ -167,24 +226,7 @@ public class ProjectServiceImpl implements ProjectService {
 	    //查询
 	    return projectRepository.findAll(specification,pageable);
 	       }
-	/**
-	 * 权限查看项目
-	 */
-	@Override
-	public List<Project> selectAll(Users user) {
-		List<Project> projectList = new ArrayList<>();
-		List<Roles> roles = user.getRoles();
-		for(Roles role: roles) {
-			//管理员查看所有项目
-			if(role.getrName().equals("admin")) {
-				projectList = projectRepository.findAll();
-			}
-			else {
-				projectList = projectRepository.findByAuthorList(user.getId());
-			}
-		}
-		return projectList;
-	}
+*/
 	
 
 }

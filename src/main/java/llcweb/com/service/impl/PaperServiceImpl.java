@@ -69,9 +69,9 @@ public class PaperServiceImpl implements PaperService {
 		return paperList;
 	}
 	
-	/**
-	 * 权限查看论文
-	 */
+/*	*//**
+	 * 论文应该不需要权限查看吧。。
+	 *//*
 	@Override
 	public Page<Paper> selectAll(Users user,int pageNum,int pageSize) {
 		
@@ -100,10 +100,10 @@ public class PaperServiceImpl implements PaperService {
         papers=paperRepository.findAll(pageable);
         return papers;
 
-/*        //普通用户查找编辑过的论文
+        //普通用户查找编辑过的论文
         projects=projectRepository.findByAuthorId(user.getId(),page);
-        return projects;*/
-    }
+        return projects;
+    }*/
 	
 	/**
 	 * 修改论文信息

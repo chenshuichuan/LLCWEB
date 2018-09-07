@@ -22,6 +22,6 @@ public interface PatentService {
 	 
 	// Page<Patent> getPage(int pageNum, int pageSize, Patent patent);
 
-	Page<Patent> selectAll(Users user, int pageNum, int pageSize);
+	//Page<Patent> selectAll(Users user, int pageNum, int pageSize);
 	
 }

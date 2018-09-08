@@ -128,17 +128,36 @@ public class ImageServiceImpl implements ImageService {
         String fileName=image.getId()+image.getModel()+image.getOwnerId()+"."+suffix;
 
         try {
-            BufferedOutputStream bos=new BufferedOutputStream(new FileOutputStream(path+ File.separator+fileName));
-            /**可以直接获取MultipartFile的字节数组，这样就省了先获取InputStream再用一个1024的字节数组去read出来的麻烦
+            /**
+             * 直接获取MultipartFile的字节数组，这样就省了先获取InputStream再用一个1024的字节数组去read出来的麻烦
              * 重点是FileInputStream fis=(FileInputStream)file.getInputStream()抛异常：
              * java.lang.ClassCastException: java.io.ByteArrayInputStream cannot be cast to java.io.FileInputStream
-             * 因为getInputStream()有两种返回，ByteArrayInputStream和FileInputStream
+             * 因为getInputStream()有两种返回，ByteArrayInputStream和FileInputStream(实际上返回值是InputStream)，视情况而定
             */
+
             byte[] flush=file.getBytes();
+            BufferedOutputStream bos=new BufferedOutputStream(new FileOutputStream(path+ File.separator+fileName));
             //已转为字节数组，可一次性写出
             bos.write(flush);
             bos.flush();
             bos.close();
+
+            /**
+             * 直接用InputStream接收
+             * 好像所有文件返回的都是ByteArrayInputStream，用它接收也行
+             */
+            /*
+            InputStream fileInputStream = file.getInputStream();
+            BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(path + File.separator + fileName));
+            byte[] bs = new byte[1024];
+            int len;
+            while ((len = fileInputStream.read(bs)) != -1) {
+                bos.write(bs, 0, len);
+            }
+            bos.flush();
+            bos.close();
+            */
+
         } catch (IOException e) {
             e.printStackTrace();
             throw new BusinessException(ReturnCode.CODE_FAIL, "格式错误！");

@@ -14,6 +14,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 
 import java.io.File;
@@ -24,7 +25,7 @@ import static org.springframework.security.test.web.servlet.setup.SecurityMockMv
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-//@Transactional
+@Transactional
 public class ImageControllerTest {
 
     @Autowired
@@ -43,13 +44,13 @@ public class ImageControllerTest {
      **/
     @WithUserDetails(value="admin",userDetailsServiceBeanName = "loginServiceImpl")
     public void uploadImageTest() throws BusinessException{
-        File file=new File("./data/test3.jpg");
+        File file=new File("./data/001_商城的演示.avi");
         try {
             mvc.perform(
                     MockMvcRequestBuilders
                         .fileUpload("/image/upload?group=数据组&description=hello")
                         .file(
-                                new MockMultipartFile("file","test3.jpg",
+                                new MockMultipartFile("file","001_商城的演示.avi",
                                             "multipart/form-data",new FileInputStream(file))
                         )       //name:转换后的文件名（不知何故只能写file）originalFilename：原文件名称
                                 //contentType：转换后的文件类型 FileInputStream：文件输入流

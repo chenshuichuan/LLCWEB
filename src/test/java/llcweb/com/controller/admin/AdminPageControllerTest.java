@@ -27,7 +27,7 @@ import static org.springframework.security.test.web.servlet.setup.SecurityMockMv
 
 /**
  * Created by:Haien
- * Description:
+ * Description:后台管理系统首页测试类
  * Date: 2018/8/30
  */
 @RunWith(SpringRunner.class)

@@ -79,15 +79,11 @@ public class ConferenceServiceImpl implements ConferenceService {
         return map;
     }
 
-    @Override
-    public Map<String, Object> delete(int id) {
-        return null;
-    }
-
     /**
      * 更新conference
      */
-    //@Override
+    /*
+    @Override
     public Map<String,Object> update(Conference conference) {
 
         Map<String,Object> map=new HashMap<>();
@@ -103,7 +99,7 @@ public class ConferenceServiceImpl implements ConferenceService {
         map.put("msg","更新失败，请确认会议记录是否存在！");
         return map;
     }
-
+*/
     /**
      * 删除conference
      */

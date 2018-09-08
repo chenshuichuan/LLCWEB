@@ -1,6 +1,8 @@
 package llcweb.com.service.impl;
 
 import llcweb.com.dao.repository.ImageRepository;
+import llcweb.com.domain.entity.BusinessException;
+import llcweb.com.domain.entity.ReturnCode;
 import llcweb.com.domain.entity.UsefulImage;
 import llcweb.com.domain.models.Image;
 import llcweb.com.service.ImageService;
@@ -18,10 +20,9 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import java.io.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Service
 //@ConfigurationProperties(prefix="image")
@@ -72,59 +73,43 @@ public class ImageServiceImpl implements ImageService {
      * 添加image
      */
     @Override
-    public Map<String,Object> add(Image image) {
-        Map<String,Object> map=new HashMap<>();
-
+    public int add(Image image) throws BusinessException {
+        Image image1=null;
         if(imageRepository.findOne(image.getId())==null){
-            if(imageRepository.save(image)!=null){
-                map.put("result",1);
-                map.put("msg","图片添加成功！");
-                return map;
+            image1=imageRepository.save(image);
+            if(image1==null){
+                throw new BusinessException(ReturnCode.CODE_FAIL,"图片已存在！");
             }
         }
-        map.put("result",0);
-        map.put("msg","添加失败，请确认图片是否已存在！");
-        return map;
+        return image1.getId();
     }
 
     /**
      * 更新image
      */
     @Override
-    public Map<String,Object> update(Image image) {
-
-        Map<String,Object> map=new HashMap<>();
+    public void update(Image image) throws BusinessException {
 
         if(imageRepository.findOne(image.getId())!=null){
             if(imageRepository.save(image)!=null){
-                map.put("result",1);
-                map.put("msg","图片修改成功！");
-                return map;
+                return;
             }
         }
-        map.put("result",0);
-        map.put("msg","更新失败，请确认图片是否存在！");
-        return map;
+        throw new BusinessException(ReturnCode.CODE_FAIL,"图片不存在！");
     }
 
     /**
      * 删除image
      */
     @Override
-    public Map<String,Object> delete(Image image) {
-
-        Map<String,Object> map=new HashMap<>();
+    public void delete(Image image) throws BusinessException {
 
         if(imageRepository.findOne(image.getId())!=null){
             if(imageRepository.save(image)!=null){
-                map.put("result",1);
-                map.put("msg","图片已删除！");
-                return map;
+                return;
             }
         }
-        map.put("result",0);
-        map.put("msg","删除失败，请确认图片是否存在！");
-        return map;
+        throw new BusinessException(ReturnCode.CODE_FAIL,"图片不存在！");
     }
 
     /**
@@ -135,9 +120,29 @@ public class ImageServiceImpl implements ImageService {
      * @return java.lang.String
      **/
     @Override
-    public String saveImg(MultipartFile file) {
+    public String saveImg(MultipartFile file,Image image) throws BusinessException {
+        //拼接文件名
+        String originalFileName=file.getOriginalFilename();
+        String suffix=originalFileName.substring(originalFileName.lastIndexOf(".")+1);
+        //加上id防止重名，如果觉得太简单可以用originalFileName代替suffix
+        String fileName=image.getId()+image.getModel()+image.getOwnerId()+"."+suffix;
 
-
-        return null;
+        try {
+            BufferedOutputStream bos=new BufferedOutputStream(new FileOutputStream(path+ File.separator+fileName));
+            /**可以直接获取MultipartFile的字节数组，这样就省了先获取InputStream再用一个1024的字节数组去read出来的麻烦
+             * 重点是FileInputStream fis=(FileInputStream)file.getInputStream()抛异常：
+             * java.lang.ClassCastException: java.io.ByteArrayInputStream cannot be cast to java.io.FileInputStream
+             * 因为getInputStream()有两种返回，ByteArrayInputStream和FileInputStream
+            */
+            byte[] flush=file.getBytes();
+            //已转为字节数组，可一次性写出
+            bos.write(flush);
+            bos.flush();
+            bos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new BusinessException(ReturnCode.CODE_FAIL, "格式错误！");
+        }
+        return fileName;
     }
 }

@@ -17,6 +17,5 @@ public interface FileService {
 
     public Map<String,Object> add(File file);
     public Map<String,Object> delete(int id);
-    Map<String,Object> delete(File file);
     public Map<String,Object> update(File file);
 }

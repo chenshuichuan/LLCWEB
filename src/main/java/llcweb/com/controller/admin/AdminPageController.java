@@ -8,7 +8,6 @@ import llcweb.com.service.UsersService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -95,7 +94,6 @@ public class AdminPageController {
     /**
      *更新、新建文档
      */
-    /*
     @RequestMapping("/edit.html")
     public ModelAndView edit(@RequestParam(value="id",required=false)Integer id){ //required:不是必须传入的参数，未传入用null填充，故用integer类型不易出错
 
@@ -117,5 +115,4 @@ public class AdminPageController {
         modelAndView.addObject("document", document);
         return modelAndView;
     }
-    */
 }

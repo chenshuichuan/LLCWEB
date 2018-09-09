@@ -54,10 +54,13 @@ public class DocumnetController {
         String pageSize = request.getParameter("pageSize");
         int size = Integer.parseInt(pageSize);
         int currentPage = Integer.parseInt(startIndex)/size+1;
+        logger.info("size = "+size+",currentPage = "+currentPage);
+
         Document document = new Document();
         String fuzzy = request.getParameter("fuzzySearch");
         if("true".equals(fuzzy)){//模糊查找
             String searchValue = request.getParameter("fuzzy");
+            logger.info("fuzzy = "+fuzzy+",searchValue = "+searchValue);
             if (searchValue!=null&&!searchValue.equals("")) {
                 document.setAuthor(searchValue);
                 document.setContent(searchValue);
@@ -93,6 +96,8 @@ public class DocumnetController {
         List<DocumentInfo> documentInfoList = documentService.documentsToDocumentInfos(documentPage.getContent());
         //总记录数
         long total = documentPage.getTotalElements();
+        logger.info("total="+total);
+
         map.put("pageData", documentInfoList);
         map.put("total", total);
         map.put("draw", draw);

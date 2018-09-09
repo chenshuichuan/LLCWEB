@@ -8,6 +8,8 @@ import llcweb.com.domain.models.Roles;
 import llcweb.com.domain.models.Users;
 import llcweb.com.service.DocumentService;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.data.jpa.domain.Specification;
@@ -26,7 +28,7 @@ import java.util.Map;
 
 @Service
 public class DocumentServiceImpl implements DocumentService {
-
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private DocumentRepository documentRepository;
 
@@ -183,14 +185,17 @@ public class DocumentServiceImpl implements DocumentService {
                 if(StringUtils.isNotBlank(example.getAuthor())){ //添加断言
                     Predicate like = cb.like(root.get("author").as(String.class),"%"+example.getAuthor()+"%");
                     predicates.add(like);
+                    logger.info("author="+example.getAuthor());
                 }
                 if(StringUtils.isNotBlank(example.getContent())){ //添加断言
                     Predicate like = cb.like(root.get("content").as(String.class),"%"+example.getContent()+"%");
                     predicates.add(like);
+                    logger.info("author="+example.getAuthor());
                 }
                 if(StringUtils.isNotBlank(example.getTitle())){ //添加断言
                     Predicate like = cb.like(root.get("title").as(String.class),"%"+example.getTitle()+"%");
                     predicates.add(like);
+                    logger.info("author="+example.getAuthor());
                 }
                 if(StringUtils.isNotBlank(example.getInfor())){ //添加断言
                     Predicate like = cb.like(root.get("infor").as(String.class),"%"+example.getInfor()+"%");
@@ -204,7 +209,7 @@ public class DocumentServiceImpl implements DocumentService {
             }
         };
         //分页信息
-        Pageable pageable = new PageRequest(pageNum,pageSize); //页码：前端从1开始，jpa从0开始，做个转换
+        Pageable pageable = new PageRequest(pageNum,pageSize);
         //查询
         return documentRepository.findAll(specification,pageable);
     }

@@ -17,7 +17,7 @@ public  class DocumentInfo {
    private String author;
    //文章标题
    private String title;
-   //文章内容
+   //文章内容，除去内容，传输轻便
    //private String content;
    //创建时间
    private Date createDate;

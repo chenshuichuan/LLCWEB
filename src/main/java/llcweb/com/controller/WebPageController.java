@@ -2,8 +2,6 @@ package llcweb.com.controller;
 
 import llcweb.com.dao.repository.DocumentRepository;
 import llcweb.com.dao.repository.UsersRepository;
-import llcweb.com.domain.models.Document;
-import llcweb.com.domain.models.Users;
 import llcweb.com.service.UsersService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -60,18 +58,6 @@ public class WebPageController {
     @RequestMapping("/main")
     public ModelAndView main(){
         ModelAndView modelAndView = new ModelAndView("index");
-        return modelAndView;
-    }
-
-    /**
-     * 文档首页的控制器
-     */
-    @RequestMapping("/document.html")
-    public ModelAndView document(){
-        ModelAndView modelAndView=new ModelAndView("document");
-        Users user=usersService.getCurrentUser();
-        List<Document> documentList=documentRepository.findByAuthorId(user.getId());
-        modelAndView.addObject("documentList",documentList);
         return modelAndView;
     }
 

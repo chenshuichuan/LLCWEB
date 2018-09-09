@@ -27,18 +27,10 @@ public interface UsersRepository extends JpaRepository<Users,Integer>{
      */
     Users findByUsernameAndPassword(String userName, String password);
     Users findByUsername(String userName);
-    //存在问题
+
     /**
      * 模糊查询
      **/
     @Query("from Users j where j.username like %?1%")
     Page<Users> findByOneKey(String key,Pageable pageable);
-        /**
-
-//     * 模糊查询
-//     **/
-//    @Query(value = "select * from Users j where j.author like %?1% or content like %?1% or title like %?1% "+
-//            " order by ctime asc", nativeQuery = true)
-//    Page<Users> getFromOneKey(String key,Pageable pageable);
-
 }

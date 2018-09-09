@@ -1,29 +1,37 @@
 package llcweb.com.service.impl;
 
 import llcweb.com.dao.repository.FileRepository;
+import llcweb.com.domain.entity.BusinessException;
+import llcweb.com.domain.entity.ReturnCode;
 import llcweb.com.domain.entity.UsefulFile;
 import llcweb.com.domain.models.File;
 import llcweb.com.service.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-import java.util.HashMap;
-import java.util.Map;
+import java.io.BufferedOutputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 @Service
 public class FileServiceImpl implements FileService {
 
     @Autowired
     private FileRepository fileRepository;
+
+    @Value("${image.location}")
+    private String path; //文件保存路径
 
     @Override
     public Page<File> findAll(UsefulFile file, int pageNum, int pageSize) {
@@ -61,58 +69,70 @@ public class FileServiceImpl implements FileService {
      * 添加file
      */
     @Override
-    public Map<String,Object> add(File file) {
-        Map<String,Object> map=new HashMap<>();
-
+    public int add(File file) throws BusinessException {
+        File file1=null;
         if(fileRepository.findOne(file.getId())==null){
-            if(fileRepository.save(file)!=null){
-                map.put("result",1);
-                map.put("msg","文件添加成功！");
-                return map;
+            file1=fileRepository.save(file);
+            if(file1==null){
+                throw new BusinessException(ReturnCode.CODE_FAIL,"文件已存在！");
             }
         }
-        map.put("result",0);
-        map.put("msg","添加失败，请确认文件是否已存在！");
-        return map;
+        return file1.getId();
     }
 
     /**
      * 更新file
      */
-    //@Override
-    public Map<String,Object> update(File file) {
-
-        Map<String,Object> map=new HashMap<>();
+    @Override
+    public void update(File file) throws BusinessException {
 
         if(fileRepository.findOne(file.getId())!=null){
             if(fileRepository.save(file)!=null){
-                map.put("result",1);
-                map.put("msg","文件修改成功！");
-                return map;
+                return;
             }
         }
-        map.put("result",0);
-        map.put("msg","更新失败，请确认文件是否存在！");
-        return map;
+        throw new BusinessException(ReturnCode.CODE_FAIL,"文件不存在！");
     }
 
     /**
      * 删除file
      */
     @Override
-    public Map<String,Object> delete(int id) {
-
-        Map<String,Object> map=new HashMap<>();
+    public void delete(int id) throws BusinessException {
 
         if(fileRepository.findOne(id)!=null){
             fileRepository.delete(id);
-            map.put("result",1);
-            map.put("msg","文件已删除！");
-            return map;
         }
-
-        map.put("result",0);
-        map.put("msg","删除失败，请确认文件是否存在！");
-        return map;
+        throw new BusinessException(ReturnCode.CODE_FAIL,"文件不存在！");
     }
+
+    /**
+     * @Author haien
+     * @Description 保存文件
+     * @Date 2018/9/8
+     * @Param [multipartFile, file]
+     * @return java.lang.String
+     **/
+    @Override
+    public String saveFile(MultipartFile multipartFile, File file) throws BusinessException {
+        //拼接文件名
+        String originalFileName=multipartFile.getOriginalFilename();
+        String suffix=originalFileName.substring(originalFileName.lastIndexOf(".")+1);
+        //加上id防止重名，如果觉得太简单可以用originalFileName代替suffix
+        String fileName=file.getId()+file.getModel()+file.getOwner()+"."+suffix;
+
+        try {
+            byte[] flush=multipartFile.getBytes();
+            BufferedOutputStream bos=new BufferedOutputStream(new FileOutputStream(path+ java.io.File.separator +fileName));
+            //已转为字节数组，可一次性写出
+            bos.write(flush);
+            bos.flush();
+            bos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new BusinessException(ReturnCode.CODE_FAIL, "格式错误！");
+        }
+        return fileName;
+    }
+
 }

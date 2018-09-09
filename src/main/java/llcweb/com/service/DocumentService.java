@@ -15,9 +15,9 @@ public interface DocumentService {
     /**
      * 动态查找
      */
-    public Page<Document> findAll(UsefulDocument document, int pageNum, int pageSize);
+    public Page<Document> activeSearch(UsefulDocument document, int pageNum, int pageSize);
 
-    public Page<Document> selectAll(Users user,int pageNum,int pageSize);
+    public Page<Document> selectByRole(Users user,int pageNum,int pageSize);
     public Map<String,Object> add(Document document);
     public Map<String,Object> delete(int id);
 

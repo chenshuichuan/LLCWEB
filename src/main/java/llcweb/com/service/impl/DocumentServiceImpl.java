@@ -34,7 +34,7 @@ public class DocumentServiceImpl implements DocumentService {
       * 动态查找
      */
     @Override
-    public Page<Document> findAll(UsefulDocument document, int pageNum, int pageSize) {
+    public Page<Document> activeSearch(UsefulDocument document, int pageNum, int pageSize) {
 
         //按时间排序
         Pageable pageable=new PageRequest(pageNum,pageSize, Sort.Direction.DESC,"createDate");
@@ -75,10 +75,10 @@ public class DocumentServiceImpl implements DocumentService {
 
 
     /**
-     * 查找用户编辑过的文档
+     * 根据用户权限获取文档
      */
     @Override
-    public Page<Document> selectAll(Users user,int pageNum,int pageSize) {
+    public Page<Document> selectByRole(Users user,int pageNum,int pageSize) {
 
         Page<Document> documents;
         List<Roles> roles=user.getRoles();

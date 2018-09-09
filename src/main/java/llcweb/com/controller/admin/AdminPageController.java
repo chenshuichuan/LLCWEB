@@ -8,6 +8,7 @@ import llcweb.com.service.UsersService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -80,19 +81,21 @@ public class AdminPageController {
 
     /**
      * 文档首页的控制器
+     * 未测试
      */
     @RequestMapping("/resource_document.html")
-    public ModelAndView resource_document(){
+    public ModelAndView resource_document(@RequestParam("pageNum")Integer pageNum,
+                                          @RequestParam("pageSize")Integer pageSize){
         ModelAndView modelAndView = new ModelAndView("/admin/resource_document");
         Users users = usersService.getCurrentUser();
         //根据用户权限查找文档
-       // Page<Document> documentList= documentService.selectAll(users,pageNum-1,pageSize);
+        Page<Document> documentList= documentService.selectByRole(users,pageNum-1,pageSize);
         modelAndView.addObject("user", users);
         return modelAndView;
     }
 
     /**
-     *更新、新建文档
+     * 跳转更新、新建文档页面
      */
     @RequestMapping("/edit.html")
     public ModelAndView edit(@RequestParam(value="id",required=false)Integer id){ //required:不是必须传入的参数，未传入用null填充，故用integer类型不易出错
@@ -101,12 +104,14 @@ public class AdminPageController {
         Document document;
 		//新建
         if(id==null){
+            //用于前端读取数据
             document = new Document();
             document.setTitle("新建文档");
             document.setModel("");
             document.setInfor("");
             document.setContent("新建文档");
         }
+        //更新
         else{
             document= documentRepository.findOne(id);
         }

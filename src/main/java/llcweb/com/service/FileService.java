@@ -15,9 +15,9 @@ public interface FileService {
      */
     public Page<File> findAll(UsefulFile file, int pageNum, int pageSize);
 
-    public int add(File file);
-    public void delete(int id);
-    public void update(File file);
+    public int add(File file) throws BusinessException;
+    public void delete(int id) throws BusinessException;
+    public void update(File file) throws BusinessException;
 
     public String saveFile(MultipartFile multipartFile, File file)throws BusinessException;
 }

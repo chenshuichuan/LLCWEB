@@ -2,6 +2,7 @@ package llcweb.com.controller.admin;
 
 import llcweb.com.dao.repository.DocumentRepository;
 import llcweb.com.domain.entities.DocumentInfo;
+import llcweb.com.domain.entity.UsefulDocument;
 import llcweb.com.domain.models.Document;
 import llcweb.com.service.DocumentService;
 import llcweb.com.service.UsersService;
@@ -9,9 +10,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,6 +18,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -61,10 +62,35 @@ public class DocumnetController {
         //关键词
         String fuzzy = request.getParameter("fuzzySearch");
 
+        Page<Document> documentPage = null;
         //模糊查找
-        Pageable pageable=new PageRequest(currentPage-1,size, Sort.Direction.DESC,"createDate");
-        Page<Document> documentPage = documentRepository.findByOneKey(fuzzy,pageable);
+        if("true".equals(fuzzy)){
+            String searchValue=request.getParameter("fuzzy");
+            documentPage = documentService.fuzzySearch(currentPage-1,size,searchValue);
+        }
+        //高级查找
+        else{
+            String author=request.getParameter("author");
+            String infor=request.getParameter("infor");
+            String model=request.getParameter("model");
+            String title=request.getParameter("title");
+            String firstDate1=request.getParameter("firstDate");
+            String lastDate1=request.getParameter("lastDate");
+            //字符串对象转为日期对象
+            Date firstDate=null;
+            Date lastDate=null;
+            try {
+                firstDate=new SimpleDateFormat("yyyy-MM-dd").parse(firstDate1);
+                lastDate=new SimpleDateFormat("yyyy-MM-dd").parse(lastDate1);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
 
+            UsefulDocument document=new UsefulDocument(author,title,model,infor,firstDate,lastDate);
+            documentPage = documentService.activeSearch(document,currentPage-1,size);
+        }
+
+        //剔除文档内容，传送轻便
         List<DocumentInfo> documentInfoList = documentService.documentsToDocumentInfos(documentPage.getContent());
         //总记录数
         long total = documentPage.getTotalElements();
@@ -76,9 +102,12 @@ public class DocumnetController {
         return map;
     }
 
+    /**
+     * 浏览文档
+     **/
     @RequestMapping(value = "/getDocumentById",method = RequestMethod.GET)
     @ResponseBody
-    public Map<String,Object> getDocumentById(HttpServletRequest request, HttpServletResponse response,
+    public Map<String,Object> getDocumById(HttpServletRequest request, HttpServletResponse response,
                                               @RequestParam("id")int id){
         Map<String,Object> map =new HashMap<String,Object>();
 
@@ -96,11 +125,14 @@ public class DocumnetController {
         return map;
     }
 
-    //保存文档，若id不存在则新建文档
+    /**
+     * 保存文档，若id不存在则新建文档
+     **/
     @RequestMapping(value = "/save",method = RequestMethod.POST)
     @ResponseBody
     public Map<String,Object> save(HttpServletRequest request, HttpServletResponse response){
         Map<String,Object> map =new HashMap<String,Object>();
+
         String id = request.getParameter("id");
         String content = request.getParameter("content");
         String title = request.getParameter("title");
@@ -108,13 +140,15 @@ public class DocumnetController {
         String group = request.getParameter("group");
         Document document;
         boolean flag = true;
+
         //更新文档
         if (id!=null&&!id.equals("")&&Integer.parseInt(id)>0){
              document = documentRepository.findOne(Integer.parseInt(id));
             if(document==null){
                 flag= false;
             }
-        }//新建文档 所以前端新建文档时，传的id要为空或<=0
+        }
+        //新建文档 所以前端新建文档时，传的id要为空
         else document = new Document();
 
         if(flag){
@@ -135,10 +169,24 @@ public class DocumnetController {
         return map;
     }
 
+    /**
+     * 删除文档
+     **/
     @RequestMapping(value="delete",method = RequestMethod.GET)
     @ResponseBody
     public Map<String,Object> delete(@RequestParam("id")Integer id){
-        Map<String,Object> map=documentService.delete(id);
+        Map<String,Object> map=new HashMap<>();
+        Document document=documentRepository.findOne(id);
+        if (document == null) {
+            map.put("result", 0);
+            map.put("message", "删除文档失败！");
+            logger.error("删除文档失败！");
+        }else{
+            documentRepository.delete(id);
+            map.put("result", 1);
+            map.put("message", "成功删除文档！");
+            logger.info("成功删除文档！");
+        }
         return map;
     }
 }

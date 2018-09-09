@@ -61,6 +61,8 @@ public class DocumnetController {
         //关键词
         String fuzzy = request.getParameter("fuzzySearch");
 
+        logger.info("size = "+size+",currentPage = "+currentPage);
+
         //模糊查找
         Pageable pageable=new PageRequest(currentPage-1,size, Sort.Direction.DESC,"createDate");
         Page<Document> documentPage = documentRepository.findByOneKey(fuzzy,pageable);
@@ -68,6 +70,8 @@ public class DocumnetController {
         List<DocumentInfo> documentInfoList = documentService.documentsToDocumentInfos(documentPage.getContent());
         //总记录数
         long total = documentPage.getTotalElements();
+        logger.info("total="+total);
+
         map.put("pageData", documentInfoList);
         map.put("total", total);
         map.put("draw", draw);

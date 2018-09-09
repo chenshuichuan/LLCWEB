@@ -1,0 +1,41 @@
+.article{
+    margin:20px;
+}
+
+.article_title{
+    border-top:2px solid #eee;
+    border-bottom:2px solid #eee;
+    text-align:center;
+    overflow:hidden;
+}
+
+.article_title>h3, .article_title>p{
+    line-height:40px;
+}
+
+.article_body{
+    overflow:hidden;
+}
+
+.article_body>img{
+    margin:10px 0;
+    width:300px;
+    display:inline-block;
+    float:none;
+}
+
+.article_index{
+    padding:10px;
+    background:#acc7d5;
+    border:2px solid #eee;
+    border-radius:10px;
+}
+
+.article_index>p, .article_index>a{
+    display:inline-block;
+}
+
+.article_index>a:hover{
+    color:black;
+    text-decoration:underline;
+}

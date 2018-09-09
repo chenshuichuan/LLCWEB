@@ -1,0 +1,68 @@
+
+/************************************Bottom***********************************************/
+.bottom{
+    background:#202332;     /*底部背景色*/
+    height: 105px;
+    width: 100%;
+}
+
+.bottom_container{
+    border:0;
+}
+
+.bottom_content{
+    margin: auto;
+    overflow:hidden;
+}
+.bottom_left{
+    float:left;
+    width:165px;
+    height:105px;
+
+}
+
+.bottom_left a{
+    position:relative;
+    left:5px;
+    top:20px;
+}
+
+
+.bottom_right{
+    height:105px;
+    float:left;
+    color:#c8c7c7;     /*底部文字颜色*/
+    width:795px;
+}
+
+.bottom_right span{
+    position:relative;
+    left:20px;
+    top:4px;
+    font-size:12px;
+}
+
+.bottom_right ul li{
+    position:relative;
+    top:5px;
+    left:20px;
+    width:380px;
+    height:20px;
+    list-style:none;
+    font-size:12px;
+    float:left;
+}
+
+.mail_href,.admin_href{
+    color:#c8c7c7;     /*邮箱链接颜色*/
+    font-size:12px;
+}
+
+.mail_href:link,.mail_href:visited,.admin_href:link,.admin_href:visited{
+    text-decoration:underline;
+}
+
+.mail_href:hover,.admin_href:hover{
+    text-decoration:none;
+    color:#b7cefd;
+}

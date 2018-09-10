@@ -1,36 +1,34 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head lang="en">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
     <!--<title>LLC实验室网站</title>-->
-    <link rel="shortcut icon" href="images/bitbug_favicon .ico"/>
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link href="css/reset.css" rel="stylesheet" >
-    <link href="css/public.css" rel="stylesheet" >
-    <link href="css/index.css" rel="stylesheet" >
-   <!--<script type="text/javascript" src="jquery-1.12.4.min.js"></script>-->
+    <link rel="shortcut icon" href="../../static/home/images/bitbug_favicon.ico"
+          th:href="@{/home/images/bitbug_favicon.ico}"/>
+    <link href="../../static/home/css/reset.css" rel="stylesheet"
+          th:href="@{/home/css/reset.css}">
+    <link href="../../static/home/css/public.css" rel="stylesheet"
+          th:herf="@{/home/css/public.css}">
+    <link href="../../static/home/css/index.css" rel="stylesheet"
+          th:herf="@{/home/css/index.css}">
+    <script type="text/javascript" src="../../static/home/js/jquery-1.12.4.min.js"
+            th:herf="@{home/js/jquery-1.12.4.min.js}"></script>
     <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-     <meta name="description" content="jPaginate - jQuery Pagination Plugin"/>
+    <meta name="description" content="jPaginate - jQuery Pagination Plugin"/>
     <meta name="keywords" content="jquery, plugin, pagination, fancy"/>
-    <title>联系我们——广东省信息物理融合系统重点实验室</title>
-    <script src="Scripts/jquery-3.1.0.js"></script>
-    <link rel="stylesheet" href="Admin/font-awesome.min.css">
-    <link rel="stylesheet" href="css/header.css" type="text/css"/>
-    <link rel="stylesheet" href="css/sidebar.css" type="text/css">
-    <link rel="stylesheet" href="css/meeting.css" type="text/css"/>
-    <link rel="stylesheet" href="css/style.css" type="text/css"/>
-    <link rel="stylesheet" href="css/bottom.css" type="text/css">
-    <link rel="stylesheet" href="css/papers.css" type="text/css"/>
-    <script src="Scripts/jquery.paginate.js"></script>
-    <script src="js/json.js"></script>
-    <script src="Admin/common.js"></script>
-    <!--<script src="js/papers.js"></script>
-    <script src="js/header.js"></script>
-    <script src="js/bottom.js"></script>-->
-    <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
-    <meta name="keywords" content="百度地图,百度地图API，百度地图自定义工具，百度地图所见即所得工具" />
-    <meta name="description" content="百度地图API自定义地图，帮助用户在可视化操作下生成百度地图" />
+    <title>实验室概况——广东省信息物理融合系统重点实验室</title>
+    <link rel="stylesheet" href="../../static/home/css/header.css" type="text/css"
+          th:href="@{/home/css/header.css}"/>
+    <link rel="stylesheet" href="../../static/home/css/sidebar.css" type="text/css"
+          th:href="@{/home/css/sidebar.css}"/>
+    <link rel="stylesheet" href="../../static/home/css/meeting.css" type="text/css"
+          th:href="@{/home/css/meeting.css}"/>
+    <link rel="stylesheet" href="../../static/home/css/style.css" type="text/css"
+          th:href="@{/home/css/style.css}"/>
+    <link rel="stylesheet" href="../../static/home/css/papers.css" type="text/css"
+          th:href="@{/home/css/papers.css}"/>
 
     <!--引用百度地图API-->
     <style type="text/css">
@@ -81,16 +79,16 @@
                 <a href="index.html" class="hon">首页</a>
             </li>
             <li class="item">
-                <a href="Team introduction.html" class="hon">实验室概况</a>
+                <a href="Team_introduction.html" class="hon">实验室概况</a>
                 <ul class="subnav">
-                    <li><a href="Team introduction.html" class="hon1">团队简介</a></li>
-                    <li><a href="Institutional%20profile.html" class="hon1">机构简介</a></li>
-                    <li><a href="project%20brief.html" class="hon1">项目简介</a></li>
+                    <li><a href="Team_introduction.html" class="hon1">团队简介</a></li>
+                    <li><a href="Institutional_profile.html" class="hon1">机构简介</a></li>
+                    <li><a href="project_brief.html" class="hon1">项目简介</a></li>
 
                 </ul>
             </li>
             <li class="item">
-                <a href="Research Team.html" class="hon">科研团队</a>
+                <a href="Research_Team.html" class="hon">科研团队</a>
                 <ul class="subnav">
                     <li><a href="Professor.html" class="hon1">教授</a></li>
                     <li><a href="Associate professor.html" class="hon1">副教授</a></li>
@@ -99,17 +97,17 @@
                 </ul>
             </li>
             <li class="item">
-                <a href="Research Project.html" class="hon">科学研究</a>
+                <a href="Research_Project.html" class="hon">科学研究</a>
 
             </li>
             <li class="item">
-                <a href="Academic communication.html" class="hon">学术交流</a>
+                <a href="Academic_communication.html" class="hon">学术交流</a>
             </li>
             <li class="item">
-                <a href="scientific achievements.html" class="hon">科研成果</a>
+                <a href="scientific_achievements.html" class="hon">科研成果</a>
             </li>
             <li class="item">
-                <a href="Talent training.html" class="hon">人才培养</a>
+                <a href="Talent_training.html" class="hon">人才培养</a>
                 <ul class="subnav" >
                     <li><a href="postdoctor.html" class="hon1">博士后</a></li>
                     <li><a href="doctor.html" class="hon1">博士</a></li>
@@ -117,10 +115,10 @@
                 </ul>
             </li>
             <li class="item">
-                <a href="Cultural activity.html" class="hon">文化活动</a>
+                <a href="Cultural_activity.html" class="hon">文化活动</a>
             </li>
             <li class="item">
-                <a href="Talent recruitment.html" class="hon">人才招聘</a>
+                <a href="Talent_recruitment.html" class="hon">人才招聘</a>
             </li>
         </ul>
     </div>
@@ -135,7 +133,7 @@
 
 
 				<div class="connetion">
-					<img src="images/995743fc870c576.jpg" style="width: 40px;margin-top: 0px;">
+					<img src="../../static/home/images/995743fc870c576.jpg" th:src="@{home/images/995743fc870c576.jpg}"  style="width: 40px;margin-top: 0px;">
 					<span style="font-size: 20px;font-weight: bold;">联系我们</span>
 					<div class='wrap info' style="margin-top: 25px;margin-left: 0px; width: 900px;">
                     <label>地址：</label>
@@ -149,7 +147,7 @@
                     <br><label>电话：</label>
                     <span>+86-20-39322465</span>
 					</div>
-					<img src="images/images.png" style="width: 70px;margin-left: 519px;margin-top: -53px;">
+					<img src="../../static/home/images/images.png" th:src="@{home/images/images.png}" style="width: 70px;margin-left: 519px;margin-top: -53px;">
 				</div>
 
 

@@ -1,6 +1,9 @@
+
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head lang="en">
+
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
     <!--<title>LLC实验室网站</title>-->
@@ -30,15 +33,6 @@
     <link rel="stylesheet" href="../../static/home/css/papers.css" type="text/css"
           th:href="@{/home/css/papers.css}"/>
 
-    <!--引用百度地图API-->
-    <style type="text/css">
-        html,body{margin:0;padding:0;}
-        .iw_poi_title {color:#CC5522;font-size:14px;font-weight:bold;overflow:hidden;padding-right:13px;white-space:nowrap;}
-        .iw_poi_content {font:12px arial,sans-serif;overflow:visible;padding-top:4px;white-space:-moz-pre-wrap;word-wrap:break-word;}
-        .anchorBL{display:none;}
-
-    </style>
-
 </head>
 <body>
 <div class="public-header">
@@ -49,7 +43,7 @@
             </div>
             <ul class="public-header-list">
                 <li><a href="#">登录</a></li>
-                <li><a href="contact us.html">联系我们</a></li>
+                <li><a href="contact_us.html">联系我们</a></li>
             </ul>
         </div>
     </div>
@@ -125,39 +119,46 @@
 </div>
 <div class="middle">
     <div class="container middle_container">
-        <div class="middle_content" style="margin-left: -400px;">
+        <div class="middle_content">
             <div class="middle_l" id="temlate_middle">
                 <!-- <h1><span>机构概况</span></h1> -->
+                <ul id='resultType' class="tmo_list2">
+                    <li class="ll first"><span>学术交流</span></li>
+                    <li class='ll'>
+                        <a href='Academic_communication.html' class='ll_ref'>
+                            <i></i>
+                            <span>学术活动</span>
+                        </a>
+                    </li>
+                    <li class='ll'>
+                        <a href='Academic_conference.html' class='ll_ref'>
+                            <i></i>
+                            <span>学术会议</span>
+                        </a>
+                    </li>
+                    <li class='ll'>
+                        <a href='Academic_cooperation.html' class='ll_ref' style="background:#6ad;">
+                            <i></i>
+                            <span>学术合作</span>
+                        </a>
+                    </li>
+                </ul>
+
             </div>
             <div class="middle_r">
-
-
-				<div class="connetion">
-					<img src="../../static/home/images/995743fc870c576.jpg" th:src="@{home/images/995743fc870c576.jpg}"  style="width: 40px;margin-top: 0px;">
-					<span style="font-size: 20px;font-weight: bold;">联系我们</span>
-					<div class='wrap info' style="margin-top: 25px;margin-left: 0px; width: 900px;">
-                    <label>地址：</label>
-                    <span>广州市番禺区广州大学城外环西路100号广东工业大学工学二号馆303-305</span>
-					<br><label>邮编：</label>
-                    <span>51006</span>
-                    <br><label>邮箱：</label>
-                    <span>llcheng@gdut.edu.cn</span>
-                    <br><label>联系人：</label>
-                    <span>程良伦</span>
-                    <br><label>电话：</label>
-                    <span>+86-20-39322465</span>
-					</div>
-					<img src="../../static/home/images/images.png" th:src="@{home/images/images.png}" style="width: 70px;margin-left: 519px;margin-top: -53px;">
-				</div>
-
-
-				<div style="margin-bottom: 60px;">
-					<div style="margin-top: 80px;margin-left: 230px;">留言板</div>
-					<textarea style="resize:none;width: 645px;height: 114px;" id="message" type="text"></textarea><br/>
-        			<div id="display_area"></div>
-        			<input value="提交" type="button" id="btn" />
-
+                <div class="crumb">
+                    <ul id="crumbs">
+                        <li><a href="index.html">首页</a></li>
+                        <li><span>&nbsp;/&nbsp;</span></li>
+                        <li><a href="Academic_communication.html">学术交流</a></li>
+                        <li><span>&nbsp;/&nbsp;</span></li>
+                        <li><a href="Academic_cooperation.html">学术合作</a></li>
+                    </ul>
                 </div>
+                <br>
+                <h4>暂无内容~</h4>
+<!--
+
             </div>
         </div>
     </div>
@@ -177,7 +178,6 @@
 </div>
 
 </body>
-
     <!--二级菜单栏-->
     <script>
      $(function(){
@@ -191,9 +191,4 @@
          })
      });
     </script>
-
-
-
-
-
 </html>

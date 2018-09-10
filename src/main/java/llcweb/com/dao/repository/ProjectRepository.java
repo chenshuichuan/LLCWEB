@@ -14,7 +14,7 @@ import llcweb.com.domain.models.Project;
 
 /**
  * Created by:Tong
- * Description: 项目类的repository类
+ * Description: 项目的repository类
  * Date: 2018/8/24
  */
 

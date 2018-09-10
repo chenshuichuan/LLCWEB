@@ -77,7 +77,7 @@ public class PatentServiceImpl implements PatentService {
 		return patentList;
 	}
 	
-/*	*//**
+/*	//**
 	 * 专利应该也不需要权限查看
 	 *//*
 	@Override

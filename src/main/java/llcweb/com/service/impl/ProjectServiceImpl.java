@@ -197,46 +197,7 @@ public class ProjectServiceImpl implements ProjectService {
         }
         return usefulProjectList;
     }
-/*	
-	@Override
-	public Page<Project> getPage(int pageNum, int pageSize, Project project) {
-	      
-			Specification<Project> specification = new Specification<Project>() {
-	       	
-	       	@Override
-	       	public Predicate toPredicate(Root<Project> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-	       		List<Predicate> predicates = new ArrayList<>();
-	       		if(project.getTitle() != null) {
-	       			predicates.add(cb.like(root.get("title"),"%" +  project.getTitle() + "%"));
-					 }
-	       		if(project.getMembers() != null) {
-						 predicates.add(cb.like(root.get("members"),"%" +  project.getMembers() + "%"));
-						 }
-	       		if(project.getProjectName() != null) {
-						 predicates.add(cb.like(root.get("projectName"),"%" +  project.getProjectName() + "%"));
-						 }
-	       		if(project.getProjectType() != null) {
-						predicates.add(cb.like(root.get("projectType"),"%" +  project.getProjectType() + "%"));
-						 }
-				 if(project.getResponsiblePerson() != null) {
-					 	predicates.add(cb.like(root.get("responsiblePeople"),"%" +  project.getResponsiblePerson() + "%"));
-				 		}
-				 if(project.getRequireNum() != null) {
-					 	predicates.add(cb.like(root.get("requireNum"),"%" +  project.getRequireNum() + "%"));
-				 		}
-				 if(project.getTeam() != null) {
-					 	predicates.add(cb.like(root.get("team"),"%" +  project.getTeam() + "%"));
-				 		}
-	            return cb.and(predicates.toArray(new Predicate[0]));
-	        }
-	    };
-	    
-	    //分页信息
-	    Pageable pageable = new PageRequest(pageNum,pageSize); //页码
-	    //查询
-	    return projectRepository.findAll(specification,pageable);
-	       }
-*/
+
 	
 
 }

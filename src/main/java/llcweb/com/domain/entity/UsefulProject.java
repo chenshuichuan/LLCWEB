@@ -1,6 +1,8 @@
 package llcweb.com.domain.entity;
 
 import java.util.Date;
+
+import llcweb.com.domain.models.Project;
 /**
  * @Author tong
  * @Description 封装搜索信息的项目类, 主要在搜索项目时封装搜索条件
@@ -40,6 +42,17 @@ public class UsefulProject {
 		this.team = team;
 		FirstDate = firstDate;
 		LastDate = lastDate;
+	}
+	
+	public UsefulProject(Project project) {
+		super();
+		this.responsiblePerson = responsiblePerson;
+		this.requireNum = requireNum;
+		this.projectType = projectType;
+		this.projectName = projectName;
+		this.team = team;
+		this.FirstDate = FirstDate;
+		this.LastDate = LastDate;
 	}
 
 

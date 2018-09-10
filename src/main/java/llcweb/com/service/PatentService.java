@@ -18,10 +18,5 @@ public interface PatentService {
 	 public Map<String, Object> update(Patent patent);
 	 public Map<String, Object> delete(int id);
 	 
-	 //public List<Patent> selectAll(Users user);
-	 
-	// Page<Patent> getPage(int pageNum, int pageSize, Patent patent);
-
-	//Page<Patent> selectAll(Users user, int pageNum, int pageSize);
 	
 }

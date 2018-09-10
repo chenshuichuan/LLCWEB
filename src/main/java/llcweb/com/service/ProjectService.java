@@ -35,7 +35,6 @@ public interface ProjectService {
 
 	List<UsefulProject> projectsToUsefulProject(List<Project> projectList);
 
-	//List<UserfulProject> projectsToUsefulProject(List<Project> projectList);
 	 
 	
 

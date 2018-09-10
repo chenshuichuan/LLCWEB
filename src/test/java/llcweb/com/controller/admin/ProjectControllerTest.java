@@ -21,6 +21,11 @@ import org.springframework.web.context.WebApplicationContext;
 import llcweb.com.Application;
 import llcweb.com.domain.User;
 
+/**
+ * @author tong
+ * controller测试类
+ *
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = Application.class)
 @WebAppConfiguration(value = "/LLCWEB/src/main/java/llcweb/com/Application")

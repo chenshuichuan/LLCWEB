@@ -140,9 +140,7 @@ public class PaperServiceImpl implements PaperService {
         return map;
     }
 
-/*	*//**
-	 * 分页
-	 *//*
+/*	
 	@Override
 	public Page<Paper> getPage(int pageNum, int pageSize, Paper paper) {
        

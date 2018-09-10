@@ -32,7 +32,7 @@ import llcweb.com.service.UsersService;
 
 /**
  * @author tong
- * @Description:此文件用于项目类的数据接口
+ * @Description:用于项目类的数据接口
  * @Date:15:03 2018/9/9
  */
 @Controller

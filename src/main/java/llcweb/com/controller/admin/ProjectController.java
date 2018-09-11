@@ -6,7 +6,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,10 +17,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import llcweb.com.dao.repository.ProjectRepository;
@@ -38,7 +37,7 @@ import llcweb.com.service.UsersService;
 @Controller
 @RequestMapping("/project")
 public class ProjectController{
-	private Logger logger = LoggerFactory.getLogger(this.getClass());
+	private org.slf4j.Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired
 	private ProjectRepository projectRepository;
@@ -118,9 +117,9 @@ public class ProjectController{
 	/*
 	 * 根据项目id查询
 	 */
-    @RequestMapping(value = "/getProjectById",method = RequestMethod.GET)
+    @RequestMapping(value = "/getProjectById/{id}",method = RequestMethod.GET)
     @ResponseBody
-    public Map<String, Object> getProjectById(HttpServletRequest request, HttpServletResponse response, @RequestParam("id")int id){
+    public Map<String, Object> getProjectById(HttpServletRequest request, HttpServletResponse response, @PathVariable(value = "id")int id){
     	Map<String, Object> map = new HashMap<String, Object>();
     	
     	Project project = projectRepository.findOne(id);

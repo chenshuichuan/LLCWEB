@@ -21,8 +21,6 @@ import org.springframework.stereotype.Service;
 import llcweb.com.dao.repository.PaperRepository;
 import llcweb.com.domain.entity.UsefulPaper;
 import llcweb.com.domain.models.Paper;
-import llcweb.com.domain.models.Roles;
-import llcweb.com.domain.models.Users;
 import llcweb.com.service.PaperService;
 
 @Service
@@ -101,8 +99,8 @@ public class PaperServiceImpl implements PaperService {
         return papers;
 
         //普通用户查找编辑过的论文
-        projects=projectRepository.findByAuthorId(user.getId(),page);
-        return projects;
+        papers=paperRepository.findByAuthorId(user.getId(),page);
+        return papers;
     }*/
 	
 	/**
@@ -190,5 +188,15 @@ public class PaperServiceImpl implements PaperService {
         map.put("msg","添加失败，请确认论文是否已存在！");
         return map;
     }
+
+	@Override
+	public List<UsefulPaper> papersToUsefulPaper(List<Paper> paperList) {
+        List<UsefulPaper> usefulPaperList = new ArrayList<>();
+        for (Paper paper: paperList){
+            UsefulPaper usefulPaper = new UsefulPaper(paper);
+            usefulPaperList.add(usefulPaper);
+        }
+        return usefulPaperList;
+	}
 	
 }

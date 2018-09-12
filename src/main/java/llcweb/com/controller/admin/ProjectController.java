@@ -90,7 +90,7 @@ public class ProjectController{
 		String fuzzy = request.getParameter("fuzzySearch");
 		if("ture".equals(fuzzy)) {
 			String searchValue = request.getParameter("fuzzy");
-			if(searchValue != null && searchValue.equals("")) {
+			if(searchValue != null && !searchValue.equals("")) {
 				project.setResponsiblePerson(searchValue);
 				project.setRequireNum(searchValue);
 				project.setProjectType(searchValue);

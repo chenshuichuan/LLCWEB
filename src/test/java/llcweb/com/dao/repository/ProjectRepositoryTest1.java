@@ -13,11 +13,14 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Slice;
+import org.springframework.data.domain.Sort;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import llcweb.com.domain.entity.UsefulProject;
+import llcweb.com.domain.models.Conference;
 import llcweb.com.domain.models.Project;
 import llcweb.com.service.ProjectService;
 
@@ -69,7 +72,12 @@ public class ProjectRepositoryTest1 {
 	        project.setLastDate(new SimpleDateFormat("yyyy-MM-dd").parse("2018-09-02"));
 	        Page<Project> projectList=projectService.findAll(project,1,3);
 	        Assert.assertThat(projectList.getTotalElements(),is(91L));
-	        System.out.println(((Slice<Project>) project).getSort());
 	    }
-
+	   
+/*	    @Test
+	    public void findByOneKey(){
+	        Page<Project> projectList = projectRepository.findByOneKey("heiheihei",new PageRequest(0,10, Sort.Direction.DESC,"startDate"));
+	        Assert.assertThat(projectList.getTotalElements(),is(12L));
+	    }
+*/
 }

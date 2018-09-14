@@ -1,0 +1,173 @@
+.team_group{
+    width:100%;
+    margin-top:10px;
+    overflow:hidden;
+}
+
+.team_head{
+    line-height:40px;
+    overflow:hidden;
+}
+
+.team_circle{
+    line-height:10px;
+    color:gray;
+    margin:15px 0;
+    float:left;
+}
+
+.team_line{
+    height:2px;
+    margin:19px 0;
+    background:#ddd;
+    float:left;
+}
+
+#professor span, #associate_pro span, #lecturer span, #postdoctor span, #doctor span, #graduate span{
+    margin:0 10px;
+    font-size:14px;
+    font-weight:bold;
+    float: left;
+}
+
+.team_head span{
+    margin:0 10px;
+    font-size:14px;
+    font-weight:bold;
+    float:left;
+}
+
+.team_content>li{
+    margin:0 20px;
+    float:left;
+    text-align:center;
+}
+
+.team_content a{ overflow:hidden; }
+
+.team_name{
+    display:inline-block;
+    padding:10px;
+}
+
+.bg0{ background:#035ba6; }
+
+.middle_r>ul{
+    width:800px;
+    margin:25px;
+}
+
+.middle_r>ul>li{
+    border-radius:10px;
+    overflow:hidden;
+}
+
+.middle_r>ul>li .record_t{
+    margin:20px 20px 0;
+    min-height:250px;
+}
+
+.middle_r>ul>li .record_l{
+    float:left;
+    border:1px solid #aaa;
+    box-shadow:2px 2px 2px gray;
+}
+
+.middle_r>ul>li .record_r{
+    overflow:hidden;
+}
+
+.middle_r>ul>li .record_r>table{
+    width:89%;
+    min-height:180px;
+    margin:0 25px;
+}
+
+.middle_r>ul>li .record_r>table td{
+    font-size:12px;
+    padding-left:5px;
+    word-wrap:break-word;
+    font-weight:bold;
+}
+
+.middle_r>ul>li .record_b{
+    width:90%;
+    min-height:150px;
+    margin:30px 20px;
+    border:3px solid white;
+    border-radius:4px;
+}
+
+.middle_r>ul>li .record_b>h4{
+    margin:5px;
+    font-weight:bold;
+}
+
+.middle_r>ul>li .record_b>p{
+    font-size:14px;
+    text-indent:20px;
+    word-wrap:break-word;
+}
+
+#lecturer_mes>li, #associate_mes>li, #professor_mes>li, #postdoctor_mes>li, #doctor_mes>li, #graduate_mes>li{
+    margin-bottom:10px;
+}
+
+.show_life{
+    border:1px solid gray;
+    overflow:hidden;
+    display:inline-block;
+    box-shadow:2px 2px 2px black;
+    text-align:center;
+    background:white;
+    transition:background .5s ease;
+    margin-right:10px;
+}
+
+.show_life:hover{
+    background:#eee;
+}
+
+.show_life>div>a{
+    margin:5px 5px 0;
+    overflow:hidden;
+    display:inline-block;
+}
+
+.show_life>a{
+    font-size:14px;
+    font-weight:bold;
+}
+
+.show{
+    margin-top:10px;
+}
+
+.picture_show{
+    overflow:hidden;
+}
+
+.picture_show>li{
+    float:left;
+    overflow:hidden;
+    margin:10px;
+    padding:5px;
+    border:1px solid skyblue;
+    transition:background .7s;
+}
+
+.picture_show>li:hover{
+    background:#eee;
+}
+
+.more_pic{
+    width:48px;
+    height:48px;
+    border-radius:24px;
+    background:url(../images/dayu.png) no-repeat;
+    position:absolute;
+    top:50%;
+    right:-50px;
+    transform:translate(-50%,0);
+}
+

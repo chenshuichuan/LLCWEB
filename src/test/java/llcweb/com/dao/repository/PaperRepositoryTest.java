@@ -12,9 +12,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Slice;
-import org.springframework.data.domain.Sort;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import llcweb.com.domain.entity.UsefulPaper;
@@ -58,10 +56,4 @@ public class PaperRepositoryTest {
 	        Assert.assertThat(paperList.getTotalElements(),is(91L));
 	        System.out.println(((Slice<Paper>) paper).getSort());
 	    }
-/*	   
-	    @Test
-	    public void findByOneKey(){
-	        Page<Paper> paperList = paperRepository.findByOneKey("sci",new PageRequest(0,10, Sort.Direction.DESC,"date"));
-	        Assert.assertThat(paperList.getTotalElements(),is(12L));
-	    }*/
 }

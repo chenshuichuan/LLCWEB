@@ -1,8 +1,6 @@
 package llcweb.com.domain.entity;
 
 import java.util.Date;
-
-import llcweb.com.domain.models.Paper;
 /**
  * @Author tong
  * @Description 封装搜索信息的论文类, 主要在搜索论文时封装搜索条件
@@ -29,34 +27,6 @@ public class UsefulPaper {
 	public UsefulPaper() {
 		
 	}
-	
-	
-
-
-
-	public UsefulPaper(String title, String authorList, String belongProject, String periodical, Date firstDate,
-			Date lastDate) {
-		super();
-		this.title = title;
-		this.authorList = authorList;
-		this.belongProject = belongProject;
-		this.periodical = periodical;
-		this.firstDate = firstDate;
-		this.lastDate = lastDate;
-	}
-
-	public UsefulPaper(Paper paper) {
-		super();
-		this.title = title;
-		this.authorList = authorList;
-		this.belongProject = belongProject;
-		this.periodical = periodical;
-		this.firstDate = firstDate;
-		this.lastDate = lastDate;
-	}
-
-
-
 
 	public String getTitle() {
 		return title;

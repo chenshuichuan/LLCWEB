@@ -41,7 +41,7 @@ public class DocumnetController {
     /**
      * 取代模糊查找？？？
      */
-    @RequestMapping(value = "/page",method = RequestMethod.GET)
+    @RequestMapping(value = "/document",method = RequestMethod.POST)
     @ResponseBody
     public Map<String,Object> page(HttpServletRequest request, HttpServletResponse response){
         Map<String,Object> map =new HashMap<String,Object>();

@@ -38,6 +38,23 @@ public class UsefulPatent {
 		this.firstDate = firstDate;
 		this.lastDate = lastDate;
 	}
+	
+	public UsefulPatent(String title, String authorList, String belongProject, String publicNum, String agency,
+			Date firstDate, Date lastDate) {
+		super();
+		this.title = title;
+		this.authorList = authorList;
+		this.belongProject = belongProject;
+		this.publicNum = publicNum;
+		this.agency = agency;
+		this.firstDate = firstDate;
+		this.lastDate = lastDate;
+	}
+
+	public UsefulPatent() {
+		
+	}
+	
 	public String getTitle() {
 		return title;
 	}

@@ -31,7 +31,7 @@ import llcweb.com.service.UsersService;
 
 /**
  * @author tong
- * @Description:用于论文类的数据接口
+ * @Description:用于论文的数据接口
  * @Date: 21:23 2018/09/11
  *
  */

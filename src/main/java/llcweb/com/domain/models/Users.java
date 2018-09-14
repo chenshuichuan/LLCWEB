@@ -29,6 +29,8 @@ public class Users implements Serializable,UserDetails {
    private Date updateTime;
    //人物id
    private int peopleId;
+   //所属组别
+   private String team;
 
    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
    @JoinTable(
@@ -56,17 +58,24 @@ public class Users implements Serializable,UserDetails {
    public Users(){
    }
 
-   public Users(int id,String username,String password,Date updateTime,int peopleId,
+   public Users(int id,String username,String password,Date updateTime,int peopleId,String team, 
                 List<Roles> roles){
       this.id = id;
       this.username = username;
       this.password = password;
       this.updateTime = updateTime;
       this.peopleId = peopleId;
+      this.team = team;
       this.roles = roles;
    }
 
-   @Override
+   public String getTeam() {
+	return team;
+}
+public void setTeam(String team) {
+	this.team = team;
+}
+@Override
    public String getPassword() {
       return this.password;
    }

@@ -27,7 +27,7 @@ import static org.springframework.security.test.web.servlet.setup.SecurityMockMv
 
 /**
  * Created by:Haien
- * Description:
+ * Description:后台管理系统首页测试类
  * Date: 2018/8/30
  */
 @RunWith(SpringRunner.class)
@@ -55,8 +55,8 @@ public class AdminPageControllerTest {
 
         Map<String,Object> map=new HashMap<>();
         map.put("param1","valueaa"); //???
-        mvc.perform(MockMvcRequestBuilders.post("/admin/resource_document.html?pageNum=1&pageSize=10")
-                .contentType(MediaType.APPLICATION_JSON_UTF8).content(JSONObject.toJSONString(map)))
+        mvc.perform(MockMvcRequestBuilders.post("/admin/resource_document.html")
+                .contentType(MediaType.APPLICATION_JSON_UTF8).content(JSONObject.toJSONString(map))) //？？？
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 //.andExpect(content().contentType(MediaType.TEXT_PLAIN)) //预期返回值的媒体类型 text/html;charset=UTF-8不知对应哪种类型
                 .andDo(MockMvcResultHandlers.print()); //打印报头等信息

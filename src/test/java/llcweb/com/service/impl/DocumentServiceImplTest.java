@@ -33,7 +33,7 @@ public class DocumentServiceImplTest {
     @Test
     public void selectAllTest() throws Exception{
         Users user=usersRepository.findByUsername("user1");
-        Page<Document> documents=documentService.selectAll(user,0,10);
+        Page<Document> documents=documentService.selectByRole(user,0,10);
         Assert.assertThat(documents.getTotalElements(),is(2L));
     }
 

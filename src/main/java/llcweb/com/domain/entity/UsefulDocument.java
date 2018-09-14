@@ -19,6 +19,8 @@ public class UsefulDocument {
     public String author;
     public String title;
     public String model;
+    //或者content，反正哪个是简介用哪个
+    public String info;
 
     /**
      * 按以下时间段搜索
@@ -28,6 +30,22 @@ public class UsefulDocument {
 
     public UsefulDocument() {
 
+    }
+
+    public UsefulDocument(String author, String title, String model, String info) {
+        this.author = author;
+        this.title = title;
+        this.model = model;
+        this.info = info;
+    }
+
+    public UsefulDocument(String author, String title, String model, String info, Date firstDate, Date lastDate) {
+        this.author = author;
+        this.title = title;
+        this.model = model;
+        this.info = info;
+        FirstDate = firstDate;
+        LastDate = lastDate;
     }
 
     public String getAuthor() {
@@ -68,6 +86,15 @@ public class UsefulDocument {
 
     public void setModel(String model) {
         this.model = model;
+    }
+
+
+    public String getInfo() {
+        return info;
+    }
+
+    public void setInfo(String info) {
+        this.info = info;
     }
 
     @Override

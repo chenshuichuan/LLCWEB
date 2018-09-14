@@ -13,6 +13,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Slice;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import llcweb.com.domain.entity.UsefulPatent;
@@ -51,20 +52,14 @@ public class PatentRepositoryTest {
 		}
 	}
 
-		@Test
-	    public void findAll() throws ParseException {
-        UsefulPatent patent = new UsefulPatent();
-	        patent.setFirstDate(new SimpleDateFormat("yyyy-MM-dd").parse("1970-01-01"));
-	        patent.setLastDate(new SimpleDateFormat("yyyy-MM-dd").parse("2018-09-02"));
-	        Page<Patent> patentList = patentService.findAll(patent,1,3);
-	        Assert.assertThat(patentList.getTotalElements(),is(11L));
-	        //System.out.println(((Slice<Patent>) patent).getSort());
-	    }
-		
-/*	    @Test
-	    public void findByOneKey(){
-	        Page<Patent> patentList = patentRepository.findByOneKey("test",new PageRequest(0,10, Sort.Direction.DESC,"publicDate"));
-	        Assert.assertThat(patentList.getTotalElements(),is(12L));
-	    }*/
+//		@Test
+//	    public void findAll() throws ParseException {
+//        UsefulPatent patent = new UsefulPatent();
+//	        patent.setFirstDate(new SimpleDateFormat("yyyy-MM-dd").parse("1970-01-01"));
+//	        patent.setLastDate(new SimpleDateFormat("yyyy-MM-dd").parse("2018-09-02"));
+//	        Page<Patent> patentList = patentService.findAll(patent,1,3);
+//	        Assert.assertThat(patentList.getTotalElements(),is(11L));
+//	        System.out.println(((Slice<Patent>) patent).getSort());
+//	    }
 
 }

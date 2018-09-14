@@ -83,12 +83,11 @@ public class AdminPageController {
      * 文档首页的控制器
      */
     @RequestMapping("/resource_document.html")
-    public ModelAndView resource_document(@RequestParam("pageNum")Integer pageNum,
-                                          @RequestParam("pageSize")Integer pageSize){
+    public ModelAndView resource_document(){
         ModelAndView modelAndView = new ModelAndView("/admin/resource_document");
         Users users = usersService.getCurrentUser();
         //根据用户权限查找文档
-        Page<Document> documentList= documentService.selectAll(users,pageNum-1,pageSize);
+       // Page<Document> documentList= documentService.selectAll(users,pageNum-1,pageSize);
         modelAndView.addObject("user", users);
         return modelAndView;
     }

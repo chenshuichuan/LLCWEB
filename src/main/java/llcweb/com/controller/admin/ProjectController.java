@@ -31,12 +31,13 @@ import llcweb.com.service.UsersService;
 
 /**
  * @author tong
+ * @param <AjaxObject>
  * @Description:用于项目类的数据接口
  * @Date:15:03 2018/9/9
  */
 @Controller
 @RequestMapping("/project")
-public class ProjectController{
+public class ProjectController<AjaxObject>{
 	private org.slf4j.Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired
@@ -222,6 +223,31 @@ public class ProjectController{
 		return map;
     	
     }
+    
+    /*
+     * 新增项目
+     */
+    @RequestMapping(value = "add", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String,Object> addProject(@RequestBody Project project) {
+    	
+    	Map<String,Object> map =new HashMap<String,Object>();
+    	projectRepository.save(project);
+    	
+    	Project newProject = projectRepository.findOne(project.getId());
+    	
+    	if(newProject == null){
+        map.put("result", 1);
+        map.put("message", "成功保存项目！");
+        logger.info("成功保存项目！");
+    }else{
+        map.put("result", 0);
+        map.put("message", "保存项目失败！");
+        logger.error("保存项目失败！");
+    }
+    map.put("data",project);
+    return map;
+}
 
 	
 	

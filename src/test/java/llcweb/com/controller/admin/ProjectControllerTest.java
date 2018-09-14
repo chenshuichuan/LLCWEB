@@ -17,6 +17,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.servlet.ModelAndView;
 
 import llcweb.com.Application;
 import llcweb.com.domain.User;
@@ -53,19 +54,22 @@ public class ProjectControllerTest {
          */
      
     
-/*    @Test
+    @Test
     public void saveProject() throws Exception{
     	//String json = "{\"status\":\"ing\",\"money\":\"1111\",\"end_date\":\"2018-09-10\"}";
-    	String json = "{\"id\":\"999\", \"status\":\"ing\",\"money\":\"111\",\"end_date\":\"2018-09-10\", \"start_date\":\"2018-09-10\",\"title\":\"teacher\",\"responsible_person\":\"me\", \"require_num\":\"123456\",\"project_type\":\"纵向\",\"project_name\":\"ohuo\", \"members\":\"HAHAHAA\",\"team\":\"Spring\",\"project_des\":\"http://tengj.top/\", \"project_aim\":\"HAHAHAA\",\"host_unit\":\"Spring\",\"co_unit\":\"http://tengj.top/\", \"undertake_unit\":\"hst\"}";
-    	mvc.perform(MockMvcRequestBuilders.post("/project/save")
-    			 .accept(MediaType.APPLICATION_JSON_UTF8)
-                 .content(json.getBytes()) //传json参数
-                 .session(session)
+    	//String json = "{\"id\":\"999\", \"status\":\"ing\",\"money\":\"111\",\"end_date\":\"2018-09-10\", \"start_date\":\"2018-09-10\",\"title\":\"teacher\",\"responsible_person\":\"me\", \"require_num\":\"123456\",\"project_type\":\"纵向\",\"project_name\":\"ohuo\", \"members\":\"HAHAHAA\",\"team\":\"Spring\",\"project_des\":\"http://tengj.top/\", \"project_aim\":\"HAHAHAA\",\"host_unit\":\"Spring\",\"co_unit\":\"http://tengj.top/\", \"undertake_unit\":\"hst\"}";
+    	mvc.perform(MockMvcRequestBuilders.post("/project/save").contentType(MediaType.APPLICATION_FORM_URLENCODED).param("id", "888").param("status", "ing").param("money", "888").param("end_date", "2018-09-10").param("start_date", "2018-09-11").param("title", "teacher").param("responsible_person", "kevin").param("project_type", "纵向").param("project_name", "test").param("members", "hk").param("team", "Spring").param("host_unit", "GDUT").param("co_unit", "GDUT").param("undertake_unit", "GDUT").param("project_des", "hahahah").param("project_aim", "wuwuw")
+    			.contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                 //.content(json.getBytes()) //传json参数
+		        .session(session)
+		 
+    			   
+    			
          )
     	.andExpect(MockMvcResultMatchers.status().isOk())
         .andDo(MockMvcResultHandlers.print());
     				
-    }*/
+    }
     
     /*
      * 新增删除测试

@@ -137,38 +137,6 @@ public class PaperServiceImpl implements PaperService {
         map.put("msg", "删除失败，请确认论文是否存在！");
         return map;
     }
-
-/*	
-	@Override
-	public Page<Paper> getPage(int pageNum, int pageSize, Paper paper) {
-       
-      
-		Specification<Paper> specification = new Specification<Paper>() {
-       	
-       	@Override
-       	public Predicate toPredicate(Root<Paper> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-       		List<Predicate> predicates = new ArrayList<>();
-       		if(paper.getTitle() != null) {
-       			predicates.add(cb.like(root.get("title"),"%" +  paper.getTitle() + "%"));
-				 }
-       		if(paper.getAuthorList() != null) {
-					 predicates.add(cb.like(root.get("authorList"),"%" +  paper.getAuthorList() + "%"));
-					 }
-       		if(paper.getBelongProject() != null) {
-					 predicates.add(cb.like(root.get("belongProject"),"%" +  paper.getBelongProject() + "%"));
-					 }
-       		if(paper.getPeriodical() != null) {
-					predicates.add(cb.like(root.get("periodical"),"%" +  paper.getPeriodical() + "%"));
-					 }
-            return cb.and(predicates.toArray(new Predicate[0]));
-        }
-    };
-    
-    //分页信息
-    Pageable pageable = new PageRequest(pageNum,pageSize); //页码
-    //查询
-    return paperRepository.findAll(specification,pageable);
-       }*/
 	
 	/**
 	 * 添加论文信息

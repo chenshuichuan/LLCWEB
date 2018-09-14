@@ -20,6 +20,7 @@ import llcweb.com.domain.models.Patent;
  */
 
 public interface PatentRepository extends JpaRepository<Patent,Integer>{
+	
 	Page<Patent> findAll(Specification<Patent> specification, Pageable pageable);
 
 	Page<Patent> findByAuthorList(String userName, Pageable pageable);

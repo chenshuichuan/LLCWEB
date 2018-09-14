@@ -170,7 +170,7 @@ public class ProjectServiceImpl implements ProjectService {
 
 	/*
 	 * 删除项目
-	 * @see llcweb.com.service.ProjectService#delete(llcweb.com.domain.models.Project)
+	 *
 	 */
 	@Override
 	public Map<String, Object> delete(int id) {

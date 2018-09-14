@@ -25,6 +25,7 @@ public interface ProjectRepository extends JpaRepository<Project,Integer>{
 	//分页查询
 	Page<Project> findAll(Specification<Project> specification, Pageable pageable);
 	
+	//根据小组查询
     Page<Project> findByTeam(String team,Pageable pageable);
     
 	

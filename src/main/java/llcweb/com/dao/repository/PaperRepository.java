@@ -21,7 +21,7 @@ public interface PaperRepository extends JpaRepository<Paper,Integer>{
 	//分页查询
 	Page<Paper> findAll(Specification<Paper> spec, Pageable pageable);
 	
-
+	//根据作者查询
 	Page<Paper> findByAuthorList(String userName, Pageable pageable);
 
 	

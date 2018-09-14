@@ -32,7 +32,8 @@ public interface ProjectService {
 	 public Map<String, Object> add(Project project);
 	 public Map<String, Object> update(Project project);
 	 public Map<String, Object> delete(int id);
-
+	 
+	
 	List<UsefulProject> projectsToUsefulProject(List<Project> projectList);
 
 	 

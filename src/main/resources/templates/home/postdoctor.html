@@ -4,117 +4,108 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
     <!--<title>LLC实验室网站</title>-->
-    <link rel="shortcut icon" href="images/bitbug_favicon .ico"/>
+    <link rel="shortcut icon" href="../../static/home/images/bitbug_favicon .ico"
+    th:href="@{/home/images/bitbug_favicon .ico}"/>
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link href="css/reset.css" rel="stylesheet" >
-    <link href="css/public.css" rel="stylesheet" >
-    <link href="css/index.css" rel="stylesheet" >
-   <script type="text/javascript" src="jquery-1.12.4.min.js"></script>
+    <link href="../../static/home/css/reset.css" rel="stylesheet" th:href="@{/home/css/reset.css}">
+    <link href="../../static/home/css/public.css" rel="stylesheet" th:href="@{/home/css/public.css}">
+    <link href="../../static/home/css/index.css" rel="stylesheet" th:href="@{/home/css/index.css}">
+   <script type="text/javascript" src="../../static/home/js/jquery-1.12.4.min.js" th:href="@{/js/jquery-1.12.4.min.js}"></script>
     <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
      <meta name="description" content="jPaginate - jQuery Pagination Plugin"/>
     <meta name="keywords" content="jquery, plugin, pagination, fancy"/>
     <title>人才培养——广东省信息物理融合系统重点实验室</title>
-    <script src="Scripts/jquery-3.1.0.js"></script>
-    <link rel="stylesheet" href="Admin/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/header.css" type="text/css"/>
-    <link rel="stylesheet" href="css/sidebar.css" type="text/css">
-    <link rel="stylesheet" href="css/meeting.css" type="text/css"/>
-    <link rel="stylesheet" href="css/style.css" type="text/css"/>
-    <link rel="stylesheet" href="css/bottom.css" type="text/css">
-    <link rel="stylesheet" href="css/papers.css" type="text/css"/>
-    <!-- 本子网页需要的css文件 -->
-    <link rel="stylesheet" href="css/team.css" type="text/css">
-    <script src="Scripts/jquery.paginate.js"></script>
-    <script src="js/json.js"></script>
-    <script src="Admin/js/common.js"></script>
-    <script src="js/papers.js"></script>
-    <script src="js/header.js"></script>
-    <script src="js/bottom.js"></script>
-
+    <link rel="stylesheet" href="../../static/home/css/header.css" type="text/css" th:href="@{/home/css/header.css}"/>
+    <link rel="stylesheet" href="../../static/home/css/sidebar.css" type="text/css" th:href="@{/home/css/sidebar.css}">
+    <link rel="stylesheet" href="../../static/home/css/meeting.css" type="text/css" th:href="@{/home/css/meeting.css}"/>
+    <link rel="stylesheet" href="../../static/home/css/style.css" type="text/css" th:href="@{/home/css/style.css}"/>
+    <link rel="stylesheet" href="../../static/home/css/papers.css" type="text/css" th:href="@{/home/css/papers.css}"/>
+    <link rel="stylesheet" href="../../static/home/css/team.css" th:href="@{/home/css/team.css}">
+    <script src="../../static/home/Scripts/jquery.paginate.js" th:href="@{/Scripts/jquery.paginate.js}"></script>
 </head>
 <body>
-<div class="public-header">
-    <div class="public-header-top">
-        <div class="public-container">
-            <div class="public-left">
-                <p>欢迎访问广东省信息物理融合系统重点实验室官网</p>
-            </div>
-            <ul class="public-header-list">
-                <li><a href="#">登录</a></li>
-                <li><a href="contact us.html">联系我们</a></li>
-            </ul>
-        </div>
-    </div>
-    <div class="public-header-middle public-container clearfix">
-        <div class="public-left">
-            <div class="logo">
-                <a href=""></a>
-            </div>
-        </div>
-        <div class="public-middle">
-
-        </div>
-        <div class="public-right">
-            <div class="public-search" style="margin-right: 40px;">
-              <input type="text" class="public-input-text">
-              <input type="submit" class="public-input-btn" value>
-
-
-
+  <div class="public-header">
+      <div class="public-header-top">
+          <div class="public-container">
+              <div class="public-left">
+                  <p>欢迎访问广东省信息物理融合系统重点实验室官网</p>
+              </div>
+              <ul class="public-header-list">
+                  <li><a href="#">登录</a></li>
+                  <li><a href="contact_us.html">联系我们</a></li>
+              </ul>
+          </div>
+      </div>
+      <div class="public-header-middle public-container clearfix">
+          <div class="public-left">
+              <div class="logo">
+                  <a href=""></a>
+              </div>
+          </div>
+          <div class="public-middle">
 
           </div>
-        </div>
-    </div>
-    <div class="public-nav">
-        <ul>
-            <li class="item">
-                <a href="index.html" class="hon">首页</a>
-            </li>
-            <li class="item">
-                <a href="Team introduction.html" class="hon">实验室概况</a>
-                <ul class="subnav">
-                    <li><a href="Team introduction.html" class="hon1">团队简介</a></li>
-                    <li><a href="Institutional%20profile.html" class="hon1">机构简介</a></li>
-                    <li><a href="project%20brief.html" class="hon1">项目简介</a></li>
+          <div class="public-right">
+              <div class="public-search" style="margin-right: 40px;">
+                <input type="text" class="public-input-text">
+                <input type="submit" class="public-input-btn" value>
 
-                </ul>
-            </li>
-            <li class="item">
-                <a href="Research Team.html" class="hon">科研团队</a>
-                <ul class="subnav">
-                    <li><a href="Professor.html" class="hon1">教授</a></li>
-                    <li><a href="Associate professor.html" class="hon1">副教授</a></li>
-                    <li><a href="Lecturer.html" class="hon1">讲师</a></li>
 
-                </ul>
-            </li>
-            <li class="item">
-                <a href="Research Project.html" class="hon">科学研究</a>
 
-            </li>
-            <li class="item">
-                <a href="Academic communication.html" class="hon">学术交流</a>
-            </li>
-            <li class="item">
-                <a href="scientific achievements.html" class="hon">科研成果</a>
-            </li>
-            <li class="item">
-                <a href="Talent training.html" class="hon">人才培养</a>
-                <ul class="subnav" >
-                    <li><a href="postdoctor.html" class="hon1">博士后</a></li>
-                    <li><a href="doctor.html" class="hon1">博士</a></li>
-                    <li><a href="graduate.html" class="hon1">研究生</a></li>
-                </ul>
-            </li>
-            <li class="item">
-                <a href="Cultural activity.html" class="hon">文化活动</a>
-            </li>
-            <li class="item">
-                <a href="Talent recruitment.html" class="hon">人才招聘</a>
-            </li>
-        </ul>
-    </div>
-</div>
+
+            </div>
+          </div>
+      </div>
+      <div class="public-nav">
+          <ul>
+              <li class="item">
+                  <a href="index.html" class="hon">首页</a>
+              </li>
+              <li class="item">
+                  <a href="Team_introduction.html" class="hon">实验室概况</a>
+                  <ul class="subnav">
+                      <li><a href="Team_introduction.html" class="hon1">团队简介</a></li>
+                      <li><a href="Institutional_profile.html" class="hon1">机构简介</a></li>
+                      <li><a href="project_brief.html" class="hon1">项目简介</a></li>
+
+                  </ul>
+              </li>
+              <li class="item">
+                  <a href="Research_Team.html" class="hon">科研团队</a>
+                  <ul class="subnav">
+                      <li><a href="Professor.html" class="hon1">教授</a></li>
+                      <li><a href="Associate_professor.html" class="hon1">副教授</a></li>
+                      <li><a href="Lecturer.html" class="hon1">讲师</a></li>
+
+                  </ul>
+              </li>
+              <li class="item">
+                  <a href="Research_Project.html" class="hon">科学研究</a>
+
+              </li>
+              <li class="item">
+                  <a href="Academic_communication.html" class="hon">学术交流</a>
+              </li>
+              <li class="item">
+                  <a href="scientific_achievements.html" class="hon">科研成果</a>
+              </li>
+              <li class="item">
+                  <a href="Talent_training.html" class="hon">人才培养</a>
+                  <ul class="subnav" >
+                      <li><a href="postdoctor.html" class="hon1">博士后</a></li>
+                      <li><a href="doctor.html" class="hon1">博士</a></li>
+                      <li><a href="graduate.html" class="hon1">研究生</a></li>
+                  </ul>
+              </li>
+              <li class="item">
+                  <a href="Cultural_activity.html" class="hon">文化活动</a>
+              </li>
+              <li class="item">
+                  <a href="Talent_recruitment.html" class="hon">人才招聘</a>
+              </li>
+          </ul>
+      </div>
+  </div>
 <div class="middle">
     <div class="container middle_container">
         <div class="middle_content">
@@ -148,11 +139,11 @@
                     <ul id="crumbs">
                         <li><a href="index.html">首页</a></li>
                         <li><span>&nbsp;/&nbsp;</span></li>
-                        <li><a href="Talent training.html">人才培养</a></li>
+                        <li><a href="Talent_training.html">人才培养</a></li>
                         <li><span>&nbsp;/&nbsp;</span></li>
                         <li><a href="postdoctor.html">博士后</a></li>
                         <li style="float:right;">
-                            <a href="Talent training.html" style="font-size:12px;color:#2c76c7;">«返回</a>
+                            <a href="Talent_training.html" style="font-size:12px;color:#2c76c7;">«返回</a>
                         </li>
                     </ul>
                 </div>
@@ -166,10 +157,10 @@
                     <!--图片、老师名称、链接需要改变 -->
                     <ul class="team_content" style="overflow:hidden;">
                         <li>
-                            <a href="Talent/post demo.html">
-                                <img src="images/rencai.jpg" alt="博士后A" width="120">
+                            <a href="Talent/post_demo.html">
+                                <img src="../../static/home/images/rencai.jpg" th:src="@{/home/images/rencai.jpg}" alt="博士后A" width="120">
                             </a>
-                            <a href="Talent/post demo.html" class="team_name"><h4>博士A</h4></a>
+                            <a href="Talent/post_demo.html" class="team_name"><h4>博士A</h4></a>
                         </li>
                     </ul>
                 </div>

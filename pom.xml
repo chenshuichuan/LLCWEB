@@ -110,12 +110,6 @@
             <version>0.23.0.RELEASE</version>
         </dependency>
 
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
-            <version>1.2.31</version>
-        </dependency>
-
         <!--解析Excel文档依赖-->
         <dependency>
             <groupId>org.apache.poi</groupId>

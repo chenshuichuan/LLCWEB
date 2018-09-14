@@ -44,11 +44,11 @@ public class DocumentRepositoryTest {
         Assert.assertThat(documentRepository.save(document).getAuthor(),is("haien"));
     }
 
-    @Test
-    public void findByOneKey(){
-        Page<Document> documents=documentRepository.findByOneKey("haien",new PageRequest(0,10, Sort.Direction.DESC,"createDate"));
-        Assert.assertThat(documents.getTotalElements(),is(12L));
-    }
+//    @Test
+//    public void findByOneKey(){
+//        Page<Document> documents=documentRepository.findByOneKey("haien",new PageRequest(0,10, Sort.Direction.DESC,"createDate"));
+//        Assert.assertThat(documents.getTotalElements(),is(12L));
+//    }
 
     @Test
     public void findByAuthorId(){

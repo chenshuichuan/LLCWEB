@@ -48,28 +48,14 @@ public class AdminPageController {
         return modelAndView;
     }
 
-    @RequestMapping("/")
+    @RequestMapping({"/","/index.html","/index","/main","/main.html"})
     public ModelAndView index(){
         ModelAndView modelAndView = new ModelAndView("/admin/index");
         Users users = usersService.getCurrentUser();
         modelAndView.addObject("user", users);
         return modelAndView;
     }
-    @RequestMapping("/index.html")
-    public ModelAndView index1(){
-        ModelAndView modelAndView = new ModelAndView("/admin/index");
-        Users users = usersService.getCurrentUser();
-        modelAndView.addObject("user", users);
-        return modelAndView;
-    }
-    @RequestMapping("/index")
-    public ModelAndView index2(){
 
-        ModelAndView modelAndView = new ModelAndView("/admin/index");
-        Users users = usersService.getCurrentUser();
-        modelAndView.addObject("user", users);
-        return modelAndView;
-    }
     @RequestMapping("/system_users.html")
     public ModelAndView system_users(){
 
@@ -87,8 +73,8 @@ public class AdminPageController {
     public ModelAndView resource_document(){
         ModelAndView modelAndView = new ModelAndView("/admin/resource_document");
         Users users = usersService.getCurrentUser();
-        //根据用户权限查找文档
-        Page<Document> documentList= documentService.selectByRole(users,0,10);
+        //根据用户权限查找文档,不需要在此查找数据
+        //Page<Document> documentList= documentService.selectByRole(users,0,10);
         modelAndView.addObject("user", users);
         return modelAndView;
     }

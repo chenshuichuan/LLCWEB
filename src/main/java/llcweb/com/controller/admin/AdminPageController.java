@@ -81,32 +81,36 @@ public class AdminPageController {
 
     /**
      * 文档首页的控制器
+     * 未测试
      */
     @RequestMapping("/resource_document.html")
     public ModelAndView resource_document(){
         ModelAndView modelAndView = new ModelAndView("/admin/resource_document");
         Users users = usersService.getCurrentUser();
         //根据用户权限查找文档
-       // Page<Document> documentList= documentService.selectAll(users,pageNum-1,pageSize);
+        Page<Document> documentList= documentService.selectByRole(users,0,10);
         modelAndView.addObject("user", users);
         return modelAndView;
     }
 
     /**
-     *更新、新建文档？？？
+     * 跳转更新、新建文档页面
      */
     @RequestMapping("/edit.html")
-    public ModelAndView edit(@RequestParam("id")int id){
+    public ModelAndView edit(@RequestParam(value="id",required=false)Integer id){ //required:不是必须传入的参数，未传入用null填充，故用integer类型不易出错
 
         ModelAndView modelAndView = new ModelAndView("/admin/document_edit");
         Document document;
-        if(id<=0){
+		//新建
+        if(id==null){
+            //用于前端读取数据
             document = new Document();
             document.setTitle("新建文档");
             document.setModel("");
             document.setInfor("");
             document.setContent("新建文档");
         }
+        //更新
         else{
             document= documentRepository.findOne(id);
         }

@@ -15,6 +15,4 @@ public interface ConferenceService<T> {
 
     public Map<String,Object> add(Conference conference);
     public Map<String,Object> delete(int id);
-    Map<String,Object> update(Conference conference);
-    Map<String,Object> delete(Conference conference);
 }

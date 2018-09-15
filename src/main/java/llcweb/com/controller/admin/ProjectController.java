@@ -128,7 +128,8 @@ public class ProjectController{
             map.put("result", 1);
             map.put("message", "成功获取项目！");
             logger.info("成功获取项目！");
-        }else{
+        }
+    	else{
             map.put("result", 0);
             map.put("message", "获取项目失败！");
             logger.error("获取项目失败！");

@@ -13,10 +13,14 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import llcweb.com.domain.entity.UsefulPatent;
+import llcweb.com.domain.models.Paper;
 import llcweb.com.domain.models.Patent;
+import llcweb.com.domain.models.Project;
 import llcweb.com.service.PatentService;
 
 @RunWith(SpringRunner.class)
@@ -58,6 +62,12 @@ public class PatentRepositoryTest {
 	        patent.setLastDate(new SimpleDateFormat("yyyy-MM-dd").parse("2018-09-02"));
 	        Page<Patent> patentList = patentService.findAll(patent,1,3);
 	        Assert.assertThat(patentList.getTotalElements(),is(11L));
+	    }
+		
+	    @Test
+	    public void findByOneKey(){
+	        Page<Patent> patentList = patentRepository.findByOneKey("第",new PageRequest(0,10, Sort.Direction.DESC,"id"));
+	        Assert.assertThat(patentList.getTotalElements(),is(12L));
 	    }
 
 

@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import llcweb.com.dao.repository.PaperRepository;
 import llcweb.com.domain.entity.UsefulPaper;
 import llcweb.com.domain.models.Paper;
+import llcweb.com.domain.models.Project;
 import llcweb.com.service.PaperService;
 import llcweb.com.service.UsersService;
 
@@ -205,4 +206,29 @@ public class PaperController {
 		return map;
     	
     }
+    
+    /*
+     * 新增项目
+     */
+    @RequestMapping(value = "add", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String,Object> addProject(@RequestBody Paper paper) {
+    	
+    	Map<String,Object> map =new HashMap<String,Object>();
+    	paperRepository.save(paper);
+    	
+    	Paper newPaper = paperRepository.findOne(paper.getId());
+    	
+    	if(newPaper == null){
+        map.put("result", 1);
+        map.put("message", "成功保存项目！");
+        logger.info("成功保存项目！");
+    }else{
+        map.put("result", 0);
+        map.put("message", "保存项目失败！");
+        logger.error("保存项目失败！");
+    }
+    map.put("data",paper);
+    return map;
+}
 }

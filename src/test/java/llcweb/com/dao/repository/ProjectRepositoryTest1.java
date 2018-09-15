@@ -21,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import llcweb.com.domain.entity.UsefulProject;
 import llcweb.com.domain.models.Conference;
+import llcweb.com.domain.models.File;
 import llcweb.com.domain.models.Project;
 import llcweb.com.service.ProjectService;
 
@@ -73,5 +74,11 @@ public class ProjectRepositoryTest1 {
 	        Page<Project> projectList=projectService.findAll(project,1,3);
 	        Assert.assertThat(projectList.getTotalElements(),is(91L));
 	    }
+	   
+	   @Test
+	   public void findByOneKey() throws ParseException{
+		   Page<Project> projects =projectRepository.findByOneKey("图像组",new PageRequest(0,10, Sort.Direction.DESC,"id")); 
+	        Assert.assertThat(projects.getTotalElements(),is(1L));
+	   }
 	   
 }

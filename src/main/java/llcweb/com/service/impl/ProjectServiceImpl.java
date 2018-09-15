@@ -150,7 +150,7 @@ public class ProjectServiceImpl implements ProjectService {
 	
 	/*
 	 * 修改项目
-	 * @see llcweb.com.service.ProjectService#update(llcweb.com.domain.models.Project)
+	 * 
 	 */
 
 	@Override

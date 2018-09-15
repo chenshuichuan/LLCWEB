@@ -1,16 +1,11 @@
 package llcweb.com.dao.repository;
 
-import java.util.List;
-
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import llcweb.com.domain.models.Paper;
-import llcweb.com.domain.models.Patent;
 import llcweb.com.domain.models.Patent;
 
 /**
@@ -24,4 +19,16 @@ public interface PatentRepository extends JpaRepository<Patent,Integer>{
 	Page<Patent> findAll(Specification<Patent> specification, Pageable pageable);
 
 	Page<Patent> findByAuthorList(String userName, Pageable pageable);
+	
+	@Query(value = "SELECT p from Patent p where p.title like %?1%"
+				+ "or p.authorList like %?1%"
+				+ "or p.belongProject like %?1%"
+				+ "or p.appliNum like %?1%"
+				+ "or p.publicNum like %?1%"
+				+ "or p.agency like %?1%"
+				+ "or p.appliPeople like %?1%"
+				)
+	Page<Patent> findByOneKey(String key, Pageable pageable);
+	
+	
 }

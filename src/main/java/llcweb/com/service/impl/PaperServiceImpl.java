@@ -21,8 +21,6 @@ import org.springframework.stereotype.Service;
 import llcweb.com.dao.repository.PaperRepository;
 import llcweb.com.domain.entity.UsefulPaper;
 import llcweb.com.domain.models.Paper;
-import llcweb.com.domain.models.Roles;
-import llcweb.com.domain.models.Users;
 import llcweb.com.service.PaperService;
 
 @Service
@@ -101,8 +99,8 @@ public class PaperServiceImpl implements PaperService {
         return papers;
 
         //普通用户查找编辑过的论文
-        projects=projectRepository.findByAuthorId(user.getId(),page);
-        return projects;
+        papers=paperRepository.findByAuthorId(user.getId(),page);
+        return papers;
     }*/
 	
 	/**
@@ -139,40 +137,6 @@ public class PaperServiceImpl implements PaperService {
         map.put("msg", "删除失败，请确认论文是否存在！");
         return map;
     }
-
-/*	*//**
-	 * 分页
-	 *//*
-	@Override
-	public Page<Paper> getPage(int pageNum, int pageSize, Paper paper) {
-       
-      
-		Specification<Paper> specification = new Specification<Paper>() {
-       	
-       	@Override
-       	public Predicate toPredicate(Root<Paper> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-       		List<Predicate> predicates = new ArrayList<>();
-       		if(paper.getTitle() != null) {
-       			predicates.add(cb.like(root.get("title"),"%" +  paper.getTitle() + "%"));
-				 }
-       		if(paper.getAuthorList() != null) {
-					 predicates.add(cb.like(root.get("authorList"),"%" +  paper.getAuthorList() + "%"));
-					 }
-       		if(paper.getBelongProject() != null) {
-					 predicates.add(cb.like(root.get("belongProject"),"%" +  paper.getBelongProject() + "%"));
-					 }
-       		if(paper.getPeriodical() != null) {
-					predicates.add(cb.like(root.get("periodical"),"%" +  paper.getPeriodical() + "%"));
-					 }
-            return cb.and(predicates.toArray(new Predicate[0]));
-        }
-    };
-    
-    //分页信息
-    Pageable pageable = new PageRequest(pageNum,pageSize); //页码
-    //查询
-    return paperRepository.findAll(specification,pageable);
-       }*/
 	
 	/**
 	 * 添加论文信息
@@ -192,5 +156,15 @@ public class PaperServiceImpl implements PaperService {
         map.put("msg","添加失败，请确认论文是否已存在！");
         return map;
     }
+
+	@Override
+	public List<UsefulPaper> papersToUsefulPaper(List<Paper> paperList) {
+        List<UsefulPaper> usefulPaperList = new ArrayList<>();
+        for (Paper paper: paperList){
+            UsefulPaper usefulPaper = new UsefulPaper(paper);
+            usefulPaperList.add(usefulPaper);
+        }
+        return usefulPaperList;
+	}
 	
 }

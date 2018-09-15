@@ -1,7 +1,12 @@
-package llcweb.com.domain.entities;
+package llcweb.com.domain.entities; /***********************************************************************
+ * Module:  Document.java
+ * Author:  Ricardo
+ * Purpose: Defines the Class Document
+ ***********************************************************************/
 
 import llcweb.com.domain.models.Document;
 
+import javax.persistence.*;
 import java.util.Date;
 
 /**
@@ -17,7 +22,7 @@ public  class DocumentInfo {
    private String author;
    //文章标题
    private String title;
-   //文章内容，除去内容，传输轻便
+   //文章内容
    //private String content;
    //创建时间
    private Date createDate;

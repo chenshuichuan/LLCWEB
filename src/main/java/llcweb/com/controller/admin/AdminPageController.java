@@ -48,14 +48,28 @@ public class AdminPageController {
         return modelAndView;
     }
 
-    @RequestMapping({"/","/index.html","/index","/main","/main.html"})
+    @RequestMapping("/")
     public ModelAndView index(){
         ModelAndView modelAndView = new ModelAndView("/admin/index");
         Users users = usersService.getCurrentUser();
         modelAndView.addObject("user", users);
         return modelAndView;
     }
+    @RequestMapping("/index.html")
+    public ModelAndView index1(){
+        ModelAndView modelAndView = new ModelAndView("/admin/index");
+        Users users = usersService.getCurrentUser();
+        modelAndView.addObject("user", users);
+        return modelAndView;
+    }
+    @RequestMapping("/index")
+    public ModelAndView index2(){
 
+        ModelAndView modelAndView = new ModelAndView("/admin/index");
+        Users users = usersService.getCurrentUser();
+        modelAndView.addObject("user", users);
+        return modelAndView;
+    }
     @RequestMapping("/system_users.html")
     public ModelAndView system_users(){
 
@@ -67,36 +81,32 @@ public class AdminPageController {
 
     /**
      * 文档首页的控制器
-     * 未测试
      */
     @RequestMapping("/resource_document.html")
     public ModelAndView resource_document(){
         ModelAndView modelAndView = new ModelAndView("/admin/resource_document");
         Users users = usersService.getCurrentUser();
-        //根据用户权限查找文档,不需要在此查找数据
-        //Page<Document> documentList= documentService.selectByRole(users,0,10);
+        //根据用户权限查找文档
+       // Page<Document> documentList= documentService.selectAll(users,pageNum-1,pageSize);
         modelAndView.addObject("user", users);
         return modelAndView;
     }
 
     /**
-     * 跳转更新、新建文档页面
+     *更新、新建文档？？？
      */
     @RequestMapping("/edit.html")
-    public ModelAndView edit(@RequestParam(value="id",required=false)Integer id){ //required:不是必须传入的参数，未传入用null填充，故用integer类型不易出错
+    public ModelAndView edit(@RequestParam("id")int id){
 
         ModelAndView modelAndView = new ModelAndView("/admin/document_edit");
         Document document;
-		//新建
-        if(id==null){
-            //用于前端读取数据
+        if(id<=0){
             document = new Document();
             document.setTitle("新建文档");
             document.setModel("");
             document.setInfor("");
             document.setContent("新建文档");
         }
-        //更新
         else{
             document= documentRepository.findOne(id);
         }

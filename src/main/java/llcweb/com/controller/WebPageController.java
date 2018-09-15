@@ -39,11 +39,26 @@ public class WebPageController {
         modelAndView.addObject("learnList", learnList);
         return modelAndView;
     }
-    @RequestMapping({"/","/index.html","/index","/main","/main.html"})
+    @RequestMapping("/")
     public ModelAndView index(){
         ModelAndView modelAndView = new ModelAndView("index");
         return modelAndView;
     }
+    @RequestMapping("/index.html")
+    public ModelAndView index1(){
+        ModelAndView modelAndView = new ModelAndView("index");
+        return modelAndView;
+    }
+    @RequestMapping("/index")
+    public ModelAndView index2(){
 
+        ModelAndView modelAndView = new ModelAndView("index");
+        return modelAndView;
+    }
+    @RequestMapping("/main")
+    public ModelAndView main(){
+        ModelAndView modelAndView = new ModelAndView("index");
+        return modelAndView;
+    }
 
 }

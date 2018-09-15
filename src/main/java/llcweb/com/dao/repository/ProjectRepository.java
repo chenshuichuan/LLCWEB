@@ -1,11 +1,14 @@
 package llcweb.com.dao.repository;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import llcweb.com.domain.models.Document;
 import llcweb.com.domain.models.Project;
 
 
@@ -22,13 +25,8 @@ public interface ProjectRepository extends JpaRepository<Project,Integer>{
 	//分页查询
 	Page<Project> findAll(Specification<Project> specification, Pageable pageable);
 	
-	
-//	//模糊查询
-//	@Query("from Project p where p.responsiblePerson like %?1%"
-//			+ "or p.requireNum like %?1%"
-//			+ "or p.projectType like %?1%"
-//			+ "or p.projectName like %?1%")
-//	Page<Project> findByOneKey(String key, Pageable pageable);
+    Page<Project> findByTeam(String team,Pageable pageable);
+    
 
 }
 

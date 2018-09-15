@@ -83,11 +83,20 @@
     margin:0 25px;
 }
 
-.middle_r>ul>li .record_r>table td{
+.middle_r>ul>li .record_r>table td:nth-child(odd){
     font-size:12px;
     padding-left:5px;
     word-wrap:break-word;
     font-weight:bold;
+    float:left;
+}
+
+.middle_r>ul>li .record_r>table td:nth-child(even){
+    font-size:12px;
+    padding-left:5px;
+    word-wrap:break-word;
+    font-weight:bold;
+    float:right;
 }
 
 .middle_r>ul>li .record_b{

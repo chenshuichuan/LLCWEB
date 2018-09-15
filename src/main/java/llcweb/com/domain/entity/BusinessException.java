@@ -2,7 +2,7 @@ package llcweb.com.domain.entity;
 
 /**
  * @Author haien
- * @Description 全局异常
+ * @Description 自定义异常
  * @Date 2018/9/6
  * @Param
  * @return

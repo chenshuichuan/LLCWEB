@@ -11,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 
@@ -25,7 +26,7 @@ import static org.hamcrest.Matchers.is;
  **/
 @RunWith(SpringRunner.class)
 @SpringBootTest
-//@Transactional
+@Transactional
 public class DocumentRepositoryTest {
 
     @Autowired
@@ -46,7 +47,7 @@ public class DocumentRepositoryTest {
 
     @Test
     public void findByOneKey(){
-        Page<Document> documents=documentRepository.findByOneKey("haien",new PageRequest(0,10, Sort.Direction.DESC,"createDate"));
+        Page<Document> documents=documentService.fuzzySearch(0,10,"haien");
         Assert.assertThat(documents.getTotalElements(),is(12L));
     }
 

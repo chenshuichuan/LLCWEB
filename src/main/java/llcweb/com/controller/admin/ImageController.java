@@ -24,7 +24,7 @@ import java.util.Map;
 
 /**
  * @Author haien
- * @Description 文件控制器
+ * @Description 图片控制器
  * @Date 22:05 2018/9/5
  **/
 @RestController

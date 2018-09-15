@@ -46,6 +46,8 @@ public class WebPageController {
         ModelAndView modelAndView = new ModelAndView("index");
         return modelAndView;
     }
+
+    //用于postman测试
     @ResponseBody
     @RequestMapping("/hello")
     public Users hello(){

@@ -36,11 +36,10 @@ public class Image {
     public Image() {
     }
 
-    public Image(String description, Date date, String owner, int ownerId, String model) {
+    public Image(String description, Date date, String owner, String model) {
         this.description = description;
         this.date = date;
         this.owner = owner;
-        this.ownerId = ownerId;
         this.model = model;
     }
 

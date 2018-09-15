@@ -26,18 +26,14 @@ public class File {
     //文件上传者
     @Column(length = 10)
     private String owner;
-    //上传者id
-    private int ownerId;
 
     public File() {
     }
 
-    public File(String introduction, Date date, String model,String owner,int ownerId) {
+    public File(String introduction, Date date, String model) {
         this.introduction = introduction;
         this.date = date;
         this.model = model;
-        this.owner=owner;
-        this.ownerId=ownerId;
     }
 
     public int getId() {
@@ -79,20 +75,11 @@ public class File {
     public void setModel(String model) {
         this.model = model;
     }
-
     public String getOwner() {
         return owner;
     }
 
     public void setOwner(String owner) {
         this.owner = owner;
-    }
-
-    public int getOwnerId() {
-        return ownerId;
-    }
-
-    public void setOwnerId(int ownerId) {
-        this.ownerId = ownerId;
     }
 }

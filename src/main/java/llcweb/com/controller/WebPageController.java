@@ -2,12 +2,14 @@ package llcweb.com.controller;
 
 import llcweb.com.dao.repository.DocumentRepository;
 import llcweb.com.dao.repository.UsersRepository;
+import llcweb.com.domain.models.Users;
 import llcweb.com.service.UsersService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
@@ -44,6 +46,10 @@ public class WebPageController {
         ModelAndView modelAndView = new ModelAndView("index");
         return modelAndView;
     }
-
+    @ResponseBody
+    @RequestMapping("/hello")
+    public Users hello(){
+       return usersRepository.findOne(1);
+    }
 
 }

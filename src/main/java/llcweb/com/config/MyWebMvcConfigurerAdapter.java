@@ -87,7 +87,7 @@ public class MyWebMvcConfigurerAdapter extends WebMvcConfigurerAdapter {
 
         //日期格式转换
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-        mapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH"));
+        mapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
         
         //Long类型转String类型
         SimpleModule simpleModule = new SimpleModule();

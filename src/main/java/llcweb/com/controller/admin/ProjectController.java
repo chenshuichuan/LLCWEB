@@ -37,7 +37,7 @@ import llcweb.com.service.UsersService;
  */
 @Controller
 @RequestMapping("/project")
-public class ProjectController<AjaxObject>{
+public class ProjectController{
 	private org.slf4j.Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired

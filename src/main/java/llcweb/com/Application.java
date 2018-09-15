@@ -17,6 +17,8 @@ public class Application {
         System.out.println("path1="+path1);
     }
 
+
+
     @Autowired
     private Environment env;
 

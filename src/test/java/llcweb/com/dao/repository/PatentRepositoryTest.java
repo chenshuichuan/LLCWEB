@@ -58,7 +58,13 @@ public class PatentRepositoryTest {
 	        patent.setLastDate(new SimpleDateFormat("yyyy-MM-dd").parse("2018-09-02"));
 	        Page<Patent> patentList = patentService.findAll(patent,1,3);
 	        Assert.assertThat(patentList.getTotalElements(),is(11L));
+	        //System.out.println(((Slice<Patent>) patent).getSort());
 	    }
-
+		
+/*	    @Test
+	    public void findByOneKey(){
+	        Page<Patent> patentList = patentRepository.findByOneKey("test",new PageRequest(0,10, Sort.Direction.DESC,"publicDate"));
+	        Assert.assertThat(patentList.getTotalElements(),is(12L));
+	    }*/
 
 }

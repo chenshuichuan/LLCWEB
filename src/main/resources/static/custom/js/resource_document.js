@@ -167,7 +167,7 @@ $(document).ready(function () {
 
 
     $("#btn-search").click(function () {
-        documentManage.fuzzySearch=  false;
+        documentManage.fuzzySearch=  true;
         _table.draw();
     });
     $("#btn-advanced-search").click(function () {

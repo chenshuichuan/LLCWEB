@@ -2,8 +2,6 @@ package llcweb.com.domain.entity;
 
 import java.util.Date;
 
-import llcweb.com.domain.models.Patent;
-
 /**
  * @Author tong
  * @Description 封装搜索信息的专利类, 主要在搜索专利时封装搜索条件
@@ -27,33 +25,6 @@ public class UsefulPatent {
 	//按以下时间段搜索
 	public Date firstDate;
 	public Date lastDate;
-	
-	public UsefulPatent(Patent patent) {
-		super();
-		this.title = title;
-		this.authorList = authorList;
-		this.belongProject = belongProject;
-		this.publicNum = publicNum;
-		this.agency = agency;
-		this.firstDate = firstDate;
-		this.lastDate = lastDate;
-	}
-	
-	public UsefulPatent(String title, String authorList, String belongProject, String publicNum, String agency,
-			Date firstDate, Date lastDate) {
-		super();
-		this.title = title;
-		this.authorList = authorList;
-		this.belongProject = belongProject;
-		this.publicNum = publicNum;
-		this.agency = agency;
-		this.firstDate = firstDate;
-		this.lastDate = lastDate;
-	}
-
-	public UsefulPatent() {
-		
-	}
 	
 	public String getTitle() {
 		return title;

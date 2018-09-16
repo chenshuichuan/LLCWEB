@@ -9,8 +9,8 @@ import org.springframework.data.repository.NoRepositoryBean;
 import java.io.Serializable;
 
 /**
- * @Author haien
- * @Description 资源类的泛型接口
+ * @Author Haien
+ * @Description 资源类的泛型接口,可分别创建某种资源的repository来继承该接口
  * @Date 2018/9/14
  * @Param
  * @return
@@ -24,4 +24,5 @@ public interface ResourceRepository<T,ID extends Serializable> extends JpaReposi
 
     Page<T> findByAuthorId(int id,Pageable pageable);
     Page<T> findByModel(String model,Pageable pageable);
+
 }

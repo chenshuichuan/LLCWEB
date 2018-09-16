@@ -20,6 +20,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +36,7 @@ public class ImageServiceImpl implements ImageService {
     private String path;
 
     @Override
-    public Page<Image> findAll(UsefulImage image, int pageNum,int pageSize) {
+    public Page<Image> activeSearch(UsefulImage image, int pageNum,int pageSize) {
 
         List<Sort.Order> orders = new ArrayList<Sort.Order>();
         //按时间排序
@@ -57,7 +58,7 @@ public class ImageServiceImpl implements ImageService {
                     predicate.getExpressions().add(cd.lessThanOrEqualTo(root.get("date"), image.getLastDate()));
                 }
                 if (image.getOwner() != null) {
-                    predicate.getExpressions().add(cd.like(root.get("description"), "%" + image.getOwner() + "%"));
+                    predicate.getExpressions().add(cd.like(root.get("author"), "%" + image.getOwner() + "%"));
                 }
                 if (image.getModel() != null) {
                     predicate.getExpressions().add(cd.like(root.get("model"), "%" + image.getModel() + "%"));
@@ -67,21 +68,6 @@ public class ImageServiceImpl implements ImageService {
         }, pageable);
 
         return imageList;
-    }
-
-    /**
-     * 添加image
-     */
-    @Override
-    public int add(Image image) throws BusinessException {
-        Image image1=null;
-        if(imageRepository.findOne(image.getId())==null){
-            image1=imageRepository.save(image);
-            if(image1==null){
-                throw new BusinessException(ReturnCode.CODE_FAIL,"图片已存在！");
-            }
-        }
-        return image1.getId();
     }
 
     /**
@@ -124,7 +110,7 @@ public class ImageServiceImpl implements ImageService {
         //拼接文件名
         String originalFileName=file.getOriginalFilename();
         String suffix=originalFileName.substring(originalFileName.lastIndexOf(".")+1);
-        String fileName=image.getId()+image.getModel()+image.getOwnerId()+"."+suffix;
+        String fileName=image.getId()+image.getModel()+image.getAuthorId()+"."+suffix;
 
         try {
             BufferedOutputStream bos=new BufferedOutputStream(new FileOutputStream(path+ File.separator+fileName));
@@ -140,6 +126,21 @@ public class ImageServiceImpl implements ImageService {
             e.printStackTrace();
             throw new BusinessException(ReturnCode.CODE_FAIL, "格式错误！");
         }
-        return fileName;
+        return path+fileName;
     }
+
+    @Override
+    public void getOutputStream(Image image, HttpServletResponse response) throws IOException {
+        String fileName=image.getOriginalName();
+        byte[] buff=new byte[1024];
+        BufferedInputStream bis=new BufferedInputStream(new FileInputStream(image.getPath()));
+        OutputStream os=response.getOutputStream(); //服务器向浏览器发送字节输出流
+        int len=0;
+        while ((len=bis.read(buff))!=-1){
+            os.write(buff,0,len);
+        }
+        os.flush();
+        bis.close();
+    }
+
 }

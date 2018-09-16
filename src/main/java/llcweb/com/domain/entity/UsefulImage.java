@@ -23,6 +23,14 @@ public class UsefulImage {
     public UsefulImage() {
     }
 
+    public UsefulImage(String description, Date firstDate, Date lastDate, String owner, String model) {
+        this.description = description;
+        this.firstDate = firstDate;
+        this.lastDate = lastDate;
+        this.owner = owner;
+        this.model = model;
+    }
+
     public String getDescription() {
         return description;
     }

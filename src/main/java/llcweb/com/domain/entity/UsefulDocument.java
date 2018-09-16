@@ -1,4 +1,5 @@
-package llcweb.com.domain.entity; /***********************************************************************
+package llcweb.com.domain.entity;
+/***********************************************************************
  * Module:  Document.java
  * Author:  Ricardo
  * Purpose: Defines the Class Document
@@ -32,13 +33,9 @@ public class UsefulDocument {
 
     }
 
-    public UsefulDocument(String author, String title, String model, String info) {
-        this.author = author;
-        this.title = title;
-        this.model = model;
-        this.info = info;
-    }
-
+    /*
+     * 用于高级查询
+     */
     public UsefulDocument(String author, String title, String model, String info, Date firstDate, Date lastDate) {
         this.author = author;
         this.title = title;

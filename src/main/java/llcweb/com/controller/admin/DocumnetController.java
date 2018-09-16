@@ -10,6 +10,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -68,10 +71,15 @@ public class DocumnetController {
         //模糊查找
         if("true".equals(fuzzy)){
             String searchValue=request.getParameter("fuzzy");
-            documentPage = documentService.fuzzySearch(currentPage-1,size,searchValue);
+            //日志
+            logger.info("模糊查询---关键词："+searchValue);
+            Pageable pageable=new PageRequest(currentPage-1,size, Sort.Direction.DESC,"createDate");
+            documentPage = documentRepository.fuzzySearch(searchValue,pageable);
         }
         //高级查找
         else{
+            //日志
+            logger.info("---高级查询---");
             String author=request.getParameter("author");
             String infor=request.getParameter("infor");
             String model=request.getParameter("model");
@@ -112,8 +120,10 @@ public class DocumnetController {
     @RequestMapping(value = "/getDocumentById",method = RequestMethod.GET)
     @ResponseBody
     public Map<String,Object> getDocumById(HttpServletRequest request, HttpServletResponse response,
-                                              @RequestParam("id")int id){
+                                              @RequestParam("id")Integer id){
         Map<String,Object> map =new HashMap<String,Object>();
+
+        logger.info("---浏览文档：id="+id+"---");
 
         Document document = documentRepository.findOne(id);
         if(document!=null){

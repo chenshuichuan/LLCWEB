@@ -24,24 +24,26 @@ public class Image {
     @Column(columnDefinition="DATE")
     private Date date;
     //照片拥有者、或是上传者id
-    private int ownerId;
+    private int authorId;
     //照片拥有者、或是上传者
-    private String owner;
+    private String author;
     //照片地址
     private String path;
     //组别
     private String model;
-
+    //原文件名
+    private String originalName;
 
     public Image() {
     }
 
-    public Image(String description, Date date, String owner, int ownerId, String model) {
+    public Image(String description, Date date, String author, int authorId, String model,String originalName) {
         this.description = description;
         this.date = date;
-        this.owner = owner;
-        this.ownerId = ownerId;
+        this.author = author;
+        this.authorId = authorId;
         this.model = model;
+        this.originalName = originalName;
     }
 
     public int getId() {
@@ -68,20 +70,20 @@ public class Image {
         this.date = date;
     }
 
-    public int getOwnerId() {
-        return ownerId;
+    public int getAuthorId() {
+        return authorId;
     }
 
-    public void setOwnerId(int ownerId) {
-        this.ownerId = ownerId;
+    public void setAuthorId(int authorId) {
+        this.authorId = authorId;
     }
 
-    public String getOwner() {
-        return owner;
+    public String getAuthor() {
+        return author;
     }
 
-    public void setOwner(String owner) {
-        this.owner = owner;
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
     public String getPath() {
@@ -100,15 +102,11 @@ public class Image {
         this.model = model;
     }
 
-    @Override
-    public String toString() {
-        return "Image{" +
-                "id=" + id +
-                ", description='" + description  +
-                ", date=" + date +
-                ", ownerId=" + ownerId +
-                ", owner='" + owner +
-                ", path='" + path +
-                '}';
+    public String getOriginalName() {
+        return originalName;
+    }
+
+    public void setOriginalName(String originalName) {
+        this.originalName = originalName;
     }
 }

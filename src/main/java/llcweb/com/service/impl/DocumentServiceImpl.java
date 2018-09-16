@@ -82,33 +82,6 @@ public class DocumentServiceImpl implements DocumentService {
 
         //查询
         return documentRepository.findAll(specification,pageable);
-
-        /*
-        Page<Document> documentList = documentRepository.findAll(new Specification<Document>() {
-            @Override
-            public Predicate toPredicate(Root<Document> root, CriteriaQuery<?> query, CriteriaBuilder cd) {
-                Predicate predicate = cd.conjunction();
-                if (StringUtils.isNotBlank(document.getAuthor())) {
-                    predicate.getExpressions().add(cd.like(root.get("author"), "%" + document.getAuthor() + "%"));
-                }
-                if (document.getFirstDate() != null) {
-                    predicate.getExpressions().add(cd.greaterThanOrEqualTo(root.get("createDate"), document.getFirstDate()));
-                }
-                if (document.getLastDate() != null) {
-                    predicate.getExpressions().add(cd.lessThanOrEqualTo(root.get("createDate"), document.getLastDate()));
-                }
-                if (StringUtils.isNotBlank(document.getTitle())) {
-                    predicate.getExpressions().add(cd.like(root.get("title"), "%" + document.getTitle() + "%"));
-                }
-                if (StringUtils.isNotBlank(document.getModel())) {
-                    predicate.getExpressions().add(cd.like(root.get("model"), "%" + document.getModel() + "%"));
-                }
-                return predicate;
-            }
-        }, pageable);
-
-        return documentList;
-        */
     }
 
 
@@ -216,54 +189,4 @@ public class DocumentServiceImpl implements DocumentService {
         return documentInfoList;
     }
 
-    /**
-     * 模糊查询
-     */
-    @Override
-    public Page<Document> fuzzySearch(int pageNum, int pageSize, String key) {
-        //封装关键词
-        UsefulDocument document=new UsefulDocument(key,key,key,key);
-        //调用动态拼接完成查询操作
-        Page<Document> documents=activeSearch(document,pageNum,pageSize);
-        return documents;
-
-        /*
-        //规格定义
-        Specification<Document> specification = new Specification<Document>() {
-
-            @Override
-            public Predicate toPredicate(Root<Document> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-                List<Predicate> predicates = new ArrayList<>(); //所有的断言
-                if(StringUtils.isNotBlank(example.getAuthor())){ //添加断言
-                    Predicate like = cb.like(root.get("author").as(String.class),"%"+example.getAuthor()+"%");
-                    predicates.add(like);
-                    logger.info("author="+example.getAuthor());
-                }
-                if(StringUtils.isNotBlank(example.getContent())){ //添加断言
-                    Predicate like = cb.like(root.get("content").as(String.class),"%"+example.getContent()+"%");
-                    predicates.add(like);
-                    logger.info("author="+example.getAuthor());
-                }
-                if(StringUtils.isNotBlank(example.getTitle())){ //添加断言
-                    Predicate like = cb.like(root.get("title").as(String.class),"%"+example.getTitle()+"%");
-                    predicates.add(like);
-                    logger.info("author="+example.getAuthor());
-                }
-                if(StringUtils.isNotBlank(example.getInfor())){ //添加断言
-                    Predicate like = cb.like(root.get("infor").as(String.class),"%"+example.getInfor()+"%");
-                    predicates.add(like);
-                }
-                if(StringUtils.isNotBlank(example.getModel())){ //添加断言
-                    Predicate like = cb.like(root.get("model").as(String.class),"%"+example.getModel()+"%");
-                    predicates.add(like);
-                }
-                return cb.and(predicates.toArray(new Predicate[0]));
-            }
-        };
-        //分页信息
-        Pageable pageable = new PageRequest(pageNum,pageSize);
-        //查询
-        return documentRepository.findAll(specification,pageable);
-        */
-    }
 }

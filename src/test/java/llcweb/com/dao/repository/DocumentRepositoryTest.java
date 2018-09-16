@@ -46,8 +46,8 @@ public class DocumentRepositoryTest {
     }
 
     @Test
-    public void findByOneKey(){
-        Page<Document> documents=documentService.fuzzySearch(0,10,"haien");
+    public void fuzzySearch(){
+        Page<Document> documents=documentRepository.fuzzySearch("haien",new PageRequest(0,10, Sort.Direction.DESC,"createDate"));
         Assert.assertThat(documents.getTotalElements(),is(12L));
     }
 

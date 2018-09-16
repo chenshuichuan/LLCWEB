@@ -28,8 +28,5 @@ public interface DocumentService {
      * 文档转换为省略内容的文档
      */
     List<DocumentInfo> documentsToDocumentInfos(List<Document> documentList);
-    /**
-     * 模糊查询
-     */
-    Page<Document> fuzzySearch(int pageNum, int pageSize,String key);
+
 }

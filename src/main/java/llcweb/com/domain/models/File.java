@@ -25,19 +25,21 @@ public class File {
     private String model;
     //文件上传者
     @Column(length = 10)
-    private String owner;
+    private String author;
     //上传者id
-    private int ownerId;
+    private int authorId;
+    //原文件名
+    private String originalName;
 
     public File() {
     }
 
-    public File(String introduction, Date date, String model,String owner,int ownerId) {
+    public File(String introduction, Date date, String model,String author,int authorId) {
         this.introduction = introduction;
         this.date = date;
         this.model = model;
-        this.owner=owner;
-        this.ownerId=ownerId;
+        this.author=author;
+        this.authorId=authorId;
     }
 
     public int getId() {
@@ -80,19 +82,27 @@ public class File {
         this.model = model;
     }
 
-    public String getOwner() {
-        return owner;
+    public String getAuthor() {
+        return author;
     }
 
-    public void setOwner(String owner) {
-        this.owner = owner;
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
-    public int getOwnerId() {
-        return ownerId;
+    public int getAuthorId() {
+        return authorId;
     }
 
-    public void setOwnerId(int ownerId) {
-        this.ownerId = ownerId;
+    public void setAuthorId(int authorId) {
+        this.authorId = authorId;
+    }
+
+    public String getOriginalName() {
+        return originalName;
+    }
+
+    public void setOriginalName(String originalName) {
+        this.originalName = originalName;
     }
 }

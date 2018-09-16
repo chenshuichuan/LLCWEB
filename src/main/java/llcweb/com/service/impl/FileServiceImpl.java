@@ -44,7 +44,7 @@ public class FileServiceImpl implements FileService {
             public Predicate toPredicate(Root<File> root, CriteriaQuery<?> query, CriteriaBuilder cd) {
                 Predicate predicate = cd.conjunction();
                 if (file.getOwner() != null) {
-                    predicate.getExpressions().add(cd.like(root.get("owner"), "%" + file.getOwner() + "%"));
+                    predicate.getExpressions().add(cd.like(root.get("author"), "%" + file.getOwner() + "%"));
                 }
                 if (file.getFirstDate() != null) {
                     predicate.getExpressions().add(cd.greaterThanOrEqualTo(root.get("date"), file.getFirstDate()));
@@ -119,7 +119,7 @@ public class FileServiceImpl implements FileService {
         String originalFileName=multipartFile.getOriginalFilename();
         String suffix=originalFileName.substring(originalFileName.lastIndexOf(".")+1);
         //加上id防止重名，如果觉得太简单可以用originalFileName代替suffix
-        String fileName=file.getId()+file.getModel()+file.getOwner()+"."+suffix;
+        String fileName=file.getId()+file.getModel()+file.getAuthor()+"."+suffix;
 
         try {
             byte[] flush=multipartFile.getBytes();

@@ -22,4 +22,5 @@ public interface DocumentRepository extends ResourceRepository<Document,Integer>
             " or d.infor like %?1%" +
             " or d.model like %?1%")
     Page<Document> fuzzySearch(String key, Pageable pageable);
+
 }

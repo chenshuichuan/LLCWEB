@@ -1,9 +1,4 @@
 package llcweb.com.domain.models;
-/***********************************************************************
- * Module:  Image.java
- * Author:  Ricardo
- * Purpose: Defines the Class Image
- ***********************************************************************/
 
 import javax.persistence.*;
 import java.util.Date;

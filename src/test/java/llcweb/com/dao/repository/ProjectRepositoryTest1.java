@@ -74,10 +74,4 @@ public class ProjectRepositoryTest1 {
 	        Assert.assertThat(projectList.getTotalElements(),is(91L));
 	    }
 	   
-/*	    @Test
-	    public void findByOneKey(){
-	        Page<Project> projectList = projectRepository.findByOneKey("heiheihei",new PageRequest(0,10, Sort.Direction.DESC,"startDate"));
-	        Assert.assertThat(projectList.getTotalElements(),is(12L));
-	    }
-*/
 }

@@ -1,6 +1,6 @@
 package llcweb.com.service;
 
-import llcweb.com.domain.entity.BusinessException;
+import llcweb.com.exception.BusinessException;
 import llcweb.com.domain.entity.UsefulImage;
 import llcweb.com.domain.models.Image;
 import org.springframework.data.domain.Page;
@@ -26,7 +26,7 @@ public interface ImageService {
      * @Param [file]
      * @return java.lang.String
      **/
-    public String saveImg(MultipartFile file,Image image)throws BusinessException;
+    public String saveImg(MultipartFile file, Image image)throws BusinessException;
 
     public void getOutputStream(Image image,HttpServletResponse response) throws IOException;
 }

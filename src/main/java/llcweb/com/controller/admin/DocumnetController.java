@@ -1,3 +1,4 @@
+
 package llcweb.com.controller.admin;
 
 import llcweb.com.dao.repository.DocumentRepository;
@@ -120,7 +121,7 @@ public class DocumnetController {
     @RequestMapping(value = "/getDocumentById",method = RequestMethod.GET)
     @ResponseBody
     public Map<String,Object> getDocumById(HttpServletRequest request, HttpServletResponse response,
-                                              @RequestParam("id")Integer id){
+                                           @RequestParam("id")Integer id){
         Map<String,Object> map =new HashMap<String,Object>();
 
         logger.info("---浏览文档：id="+id+"---");
@@ -157,7 +158,7 @@ public class DocumnetController {
 
         //更新文档
         if (id!=null&&!id.equals("")&&Integer.parseInt(id)>0){
-             document = documentRepository.findOne(Integer.parseInt(id));
+            document = documentRepository.findOne(Integer.parseInt(id));
             if(document==null){
                 flag= false;
             }

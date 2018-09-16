@@ -1,6 +1,6 @@
 package llcweb.com.controller.admin;
 
-import llcweb.com.domain.entity.BusinessException;
+import llcweb.com.exception.BusinessException;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

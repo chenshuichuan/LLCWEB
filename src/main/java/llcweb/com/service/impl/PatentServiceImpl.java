@@ -21,7 +21,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import llcweb.com.dao.repository.PatentRepository;
 import llcweb.com.domain.entity.UsefulPatent;
-import llcweb.com.domain.models.Paper;
+import llcweb.com.domain.entity.UsefulPatent;
+import llcweb.com.domain.models.Patent;
 import llcweb.com.domain.models.Patent;
 import llcweb.com.domain.models.Project;
 import llcweb.com.domain.models.Patent;
@@ -77,7 +78,7 @@ public class PatentServiceImpl implements PatentService {
 		return patentList;
 	}
 	
-/*	*//**
+/*	//**
 	 * 专利应该也不需要权限查看
 	 *//*
 	@Override
@@ -170,40 +171,15 @@ public class PatentServiceImpl implements PatentService {
         return map;
     }
 
-/*	*//**
-	 * 分页
-	 *//*
 	@Override
-	public Page<Patent> getPage(int pageNum, int pageSize, Patent patent) {
-       
-      
-		Specification<Patent> specification = new Specification<Patent>() {
-       	
-       	@Override
-       	public Predicate toPredicate(Root<Patent> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-       		List<Predicate> predicates = new ArrayList<>();
-       		if(patent.getTitle() != null) {
-       			predicates.add(cb.like(root.get("title"),"%" +  patent.getTitle() + "%"));
-				 }
-       		if(patent.getAuthorList() != null) {
-					 predicates.add(cb.like(root.get("authorList"),"%" +  patent.getAuthorList() + "%"));
-					 }
-       		if(patent.getBelongProject() != null) {
-					 predicates.add(cb.like(root.get("belongProject"),"%" +  patent.getBelongProject() + "%"));
-					 }
-       		if(patent.getAgency() != null) {
-					predicates.add(cb.like(root.get("agency"),"%" +  patent.getAgency() + "%"));
-					 }
-       		
-            return cb.and(predicates.toArray(new Predicate[0]));
+	public List<UsefulPatent> patentsToUsefulpatent(List<Patent> patentList) {
+        List<UsefulPatent> usefulPatentList = new ArrayList<>();
+        for (Patent patent: patentList){
+            UsefulPatent usefulPatent = new UsefulPatent(patent);
+            usefulPatentList.add(usefulPatent);
         }
-    };
-    
-    //分页信息
-    Pageable pageable = new PageRequest(pageNum,pageSize); //页码
-    //查询
-    return patentRepository.findAll(specification,pageable);
-       }
-*/
+        return usefulPatentList;
+	}
+
 	
 }

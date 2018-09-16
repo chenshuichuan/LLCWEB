@@ -1,8 +1,8 @@
 package llcweb.com.service.impl;
 
 import llcweb.com.dao.repository.ImageRepository;
-import llcweb.com.domain.entity.BusinessException;
-import llcweb.com.domain.entity.ReturnCode;
+import llcweb.com.exception.BusinessException;
+import llcweb.com.exception.ReturnCode;
 import llcweb.com.domain.entity.UsefulImage;
 import llcweb.com.domain.models.Image;
 import llcweb.com.service.ImageService;
@@ -13,7 +13,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
-import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -25,8 +24,6 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Service
-//@ConfigurationProperties(prefix="image")
 public class ImageServiceImpl implements ImageService {
 
     @Autowired
@@ -142,5 +139,4 @@ public class ImageServiceImpl implements ImageService {
         os.flush();
         bis.close();
     }
-
 }

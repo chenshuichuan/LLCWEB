@@ -1,9 +1,4 @@
 package llcweb.com.domain.entity;
-/***********************************************************************
- * Module:  Document.java
- * Author:  Ricardo
- * Purpose: Defines the Class Document
- ***********************************************************************/
 
 import java.util.Date;
 
@@ -46,20 +41,20 @@ public class UsefulDocument {
     }
 
     public String getAuthor() {
-      return author;
-   }
+        return author;
+    }
 
     public void setAuthor(String author) {
-      this.author = author;
-   }
+        this.author = author;
+    }
 
     public String getTitle() {
-      return title;
-   }
+        return title;
+    }
 
     public void setTitle(String title) {
-      this.title = title;
-   }
+        this.title = title;
+    }
 
     public Date getFirstDate() {
         return FirstDate;

@@ -59,7 +59,9 @@ public class PaperRepositoryTest {
 	        System.out.println(((Slice<Paper>) paper).getSort());
 	    }
 	   
-	   	   
+	    /*
+	     * 模糊查询测试
+	     */
 	    @Test
 	    public void findByOneKey(){
 	        Page<Paper> paperList = paperRepository.findByOneKey("方法",new PageRequest(0,10, Sort.Direction.DESC,"id"));

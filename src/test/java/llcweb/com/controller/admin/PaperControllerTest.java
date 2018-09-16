@@ -23,7 +23,7 @@ import llcweb.com.domain.User;
 
 /**
  * @author tong
- *controller测试
+ * @controller测试
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = Application.class)

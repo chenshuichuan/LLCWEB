@@ -30,10 +30,6 @@ public class UsefulPaper {
 		
 	}
 	
-	
-
-
-
 	public UsefulPaper(String title, String authorList, String belongProject, String periodical, Date firstDate,
 			Date lastDate) {
 		super();

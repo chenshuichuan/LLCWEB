@@ -24,7 +24,7 @@ import llcweb.com.domain.User;
 
 /**
  * @author tong
- * controller测试类
+ * @controller测试类
  *
  */
 @RunWith(SpringRunner.class)

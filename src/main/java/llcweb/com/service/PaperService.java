@@ -23,7 +23,7 @@ public interface PaperService {
 	 public Map<String, Object> update(Paper paper);
 	 public Map<String, Object> delete(int id);
 	 
-	 
+
 	 List<UsefulPaper> papersToUsefulPaper(List<Paper> paperList);
 
 }

@@ -64,6 +64,9 @@ public class PatentRepositoryTest {
 	        Assert.assertThat(patentList.getTotalElements(),is(11L));
 	    }
 		
+	    /*
+	     * 模糊查询测试
+	     */
 	    @Test
 	    public void findByOneKey(){
 	        Page<Patent> patentList = patentRepository.findByOneKey("第",new PageRequest(0,10, Sort.Direction.DESC,"id"));

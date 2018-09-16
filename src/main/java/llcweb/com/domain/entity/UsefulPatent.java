@@ -28,6 +28,11 @@ public class UsefulPatent {
 	public Date firstDate;
 	public Date lastDate;
 	
+
+	public UsefulPatent() {
+		
+	}
+	
 	public UsefulPatent(Patent patent) {
 		super();
 		this.title = title;
@@ -51,9 +56,6 @@ public class UsefulPatent {
 		this.lastDate = lastDate;
 	}
 
-	public UsefulPatent() {
-		
-	}
 	
 	public String getTitle() {
 		return title;

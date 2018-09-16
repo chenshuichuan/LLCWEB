@@ -27,7 +27,7 @@ public interface ProjectRepository extends JpaRepository<Project,Integer>{
     Page<Project> findByTeam(String team,Pageable pageable);
     
     /**
-     * 模糊查询
+     * 实现模糊查询
      **/
     @Query(value = "SELECT p from Project p where p.status like %?1% " + 
     		"or p.title like %?1% " + 

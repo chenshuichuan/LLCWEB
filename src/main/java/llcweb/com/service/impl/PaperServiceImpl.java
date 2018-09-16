@@ -66,43 +66,7 @@ public class PaperServiceImpl implements PaperService {
         
 		return paperList;
 	}
-	
-/*	*//**
-	 * 论文应该不需要权限查看吧。。
-	 *//*
-	@Override
-	public Page<Paper> selectAll(Users user,int pageNum,int pageSize) {
-		
-		Page<Paper> papers;
-		List<Roles> roles = user.getRoles();
-		Users users = new Users();
-		Pageable pageable=new PageRequest(pageNum,pageSize, Sort.Direction.DESC,"date");
-		
-	       //管理员查看所有论文
-        for(Roles role:roles){
-            if(role.getrFlag().equals("ADMIN")){
-            	papers=paperRepository.findAll(pageable);
-            	 //papers=paperRepository.findByAuthorList(users.getUsername(), pageable);
-                return papers;
-            }
-        }
-        
-  //查看某个组的论文
-        for(Roles role:roles){
-            //组长查看某个组的论文
-            if(role.getrFlag().equals("GROUP")){
-                papers=paperRepository.findByAuthorList(users.getUsername(), pageable);
-                return papers;
-            }
-        }
-        papers=paperRepository.findAll(pageable);
-        return papers;
 
-        //普通用户查找编辑过的论文
-        papers=paperRepository.findByAuthorId(user.getId(),page);
-        return papers;
-    }*/
-	
 	/**
 	 * 修改论文信息
 	 */

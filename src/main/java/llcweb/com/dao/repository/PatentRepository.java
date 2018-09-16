@@ -19,7 +19,9 @@ public interface PatentRepository extends JpaRepository<Patent,Integer>{
 	Page<Patent> findAll(Specification<Patent> specification, Pageable pageable);
 
 	Page<Patent> findByAuthorList(String userName, Pageable pageable);
-	
+	/*
+	 * 模糊查询
+	 */
 	@Query(value = "SELECT p from Patent p where p.title like %?1%"
 				+ "or p.authorList like %?1%"
 				+ "or p.belongProject like %?1%"

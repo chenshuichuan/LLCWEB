@@ -24,6 +24,9 @@ public interface PaperRepository extends JpaRepository<Paper,Integer>{
 	//根据作者查询
 	Page<Paper> findByAuthorList(String userName, Pageable pageable);
 	
+	/*
+	 * 模糊查询
+	 */
 		@Query(value = "SELECT p from Paper p where p.title like %?1% "
 				+ "or p.authorList like %?1% "
 				+ "or p.belongProject like %?1% "

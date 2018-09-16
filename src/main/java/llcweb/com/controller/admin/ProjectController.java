@@ -118,7 +118,7 @@ public class ProjectController{
 	/*
 	 * 根据项目id查询
 	 */
-    @RequestMapping(value = "/getProjectById/{id}",method = RequestMethod.GET)
+    @RequestMapping(value = "/getProjectById/{id}", method = RequestMethod.GET)
     @ResponseBody
     public Map<String, Object> getProjectById(HttpServletRequest request, HttpServletResponse response, @PathVariable(value = "id")int id){
     	Map<String, Object> map = new HashMap<String, Object>();

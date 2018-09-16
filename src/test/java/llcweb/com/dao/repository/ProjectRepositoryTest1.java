@@ -75,6 +75,9 @@ public class ProjectRepositoryTest1 {
 	        Assert.assertThat(projectList.getTotalElements(),is(91L));
 	    }
 	   
+	    /*
+	     * 模糊查询测试
+	     */
 	   @Test
 	   public void findByOneKey() throws ParseException{
 		   Page<Project> projects =projectRepository.findByOneKey("图像组",new PageRequest(0,10, Sort.Direction.DESC,"id")); 

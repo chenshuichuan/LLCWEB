@@ -208,7 +208,7 @@ public class PaperController {
     }
     
     /*
-     * 新增项目
+     * 新增论文
      */
     @RequestMapping(value = "add", method = RequestMethod.POST)
     @ResponseBody

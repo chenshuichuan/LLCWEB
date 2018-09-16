@@ -30,8 +30,6 @@ public class UsefulProject {
 		
 	}
 	
-	
-
 	public UsefulProject(String responsiblePerson, String requireNum, String projectType, String projectName,
 			String team, Date firstDate, Date lastDate) {
 		super();

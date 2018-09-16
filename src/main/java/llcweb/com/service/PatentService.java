@@ -19,7 +19,7 @@ public interface PatentService {
 	 public Map<String, Object> add(Patent patent);
 	 public Map<String, Object> update(Patent patent);
 	 public Map<String, Object> delete(int id);
-	 
+
 	 List<UsefulPatent> patentsToUsefulpatent(List<Patent> patentList);
 	 
 	

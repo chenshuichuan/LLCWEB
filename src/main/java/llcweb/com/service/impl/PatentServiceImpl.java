@@ -78,42 +78,6 @@ public class PatentServiceImpl implements PatentService {
 		return patentList;
 	}
 	
-/*	//**
-	 * 专利应该也不需要权限查看
-	 *//*
-	@Override
-	public Page<Patent> selectAll(Users user,int pageNum,int pageSize) {
-		
-		Page<Patent> patents;
-		List<Roles> roles = user.getRoles();
-		Users users = new Users();
-		Pageable pageable=new PageRequest(pageNum,pageSize, Sort.Direction.DESC,"publicDate");
-		
-	       //管理员查看所有专利
-        for(Roles role:roles){
-            if(role.getrFlag().equals("ADMIN")){
-            	patents=patentRepository.findAll(pageable);
-            	 //papers=paperRepository.findByAuthorList(users.getUsername(), pageable);
-                return patents;
-            }
-        }
-        
-  //查看某个组的专利
-        for(Roles role:roles){
-            //组长查看某个组的专利
-            if(role.getrFlag().equals("GROUP")){
-                patents=patentRepository.findByAuthorList(users.getUsername(), pageable);
-                return patents;
-            }
-        }
-        patents=patentRepository.findAll(pageable);
-        return patents;
-
-        //普通用户查找编辑过的专利
-        projects=projectRepository.findByAuthorId(user.getId(),page);
-        return projects;
-    }
-	*/
 	
 	/**
 	 * 添加专利

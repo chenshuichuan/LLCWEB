@@ -1,6 +1,5 @@
 package llcweb.com.dao.repository;
 
-import llcweb.com.domain.entity.UsefulDocument;
 import llcweb.com.domain.models.Document;
 import llcweb.com.service.DocumentService;
 import org.junit.Assert;
@@ -14,8 +13,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import static org.hamcrest.Matchers.is;

@@ -34,7 +34,7 @@ public class FileServiceImpl implements FileService {
     private String path; //文件保存路径
 
     @Override
-    public Page<File> findAll(UsefulFile file, int pageNum, int pageSize) {
+    public Page<File> activeSearch(UsefulFile file, int pageNum, int pageSize) {
 
         //按时间排序
         Pageable pageable=new PageRequest(pageNum,pageSize, Sort.Direction.DESC,"date");

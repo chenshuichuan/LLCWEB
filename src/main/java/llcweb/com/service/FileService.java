@@ -2,19 +2,22 @@ package llcweb.com.service;
 
 import llcweb.com.domain.entity.UsefulFile;
 import llcweb.com.domain.models.File;
+import llcweb.com.exception.BusinessException;
 import org.springframework.data.domain.Page;
-
-import java.util.Map;
+import org.springframework.web.multipart.MultipartFile;
 
 public interface FileService {
 
     /**
      * 动态查找
      */
-    public Page<File> findAll(UsefulFile file, int pageNum, int pageSize);
+    public Page<File> activeSearch(UsefulFile file, int pageNum, int pageSize);
 
-    public Map<String,Object> add(File file);
-    public Map<String,Object> delete(int id);
-    Map<String,Object> delete(File file);
-    public Map<String,Object> update(File file);
+    public void update(File file)throws BusinessException;
+    public void delete(File file)throws BusinessException;
+
+    /**
+     * 上传文件
+     */
+    public String saveFile(MultipartFile multipartFile, File file) throws BusinessException;
 }

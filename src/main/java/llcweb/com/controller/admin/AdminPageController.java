@@ -8,7 +8,6 @@ import llcweb.com.service.UsersService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -87,13 +86,13 @@ public class AdminPageController {
         ModelAndView modelAndView = new ModelAndView("/admin/resource_document");
         Users users = usersService.getCurrentUser();
         //根据用户权限查找文档
-       // Page<Document> documentList= documentService.selectAll(users,pageNum-1,pageSize);
+        //Page<Document> documentList= documentService.selectAll(users,0,10);
         modelAndView.addObject("user", users);
         return modelAndView;
     }
 
     /**
-     *更新、新建文档？？？
+     * 准备访问更新、新建文档页面
      */
     @RequestMapping("/edit.html")
     public ModelAndView edit(@RequestParam("id")int id){

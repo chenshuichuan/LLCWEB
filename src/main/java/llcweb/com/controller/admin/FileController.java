@@ -17,14 +17,13 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -52,16 +51,17 @@ public class FileController {
 
     /**
      * @Author haien
-     * @Description 文件上传
+     * @Description 更新/添加文件
      * @Date 2018/9/5
      * @Param [image]
      * @return java.util.Map<java.lang.String,java.lang.Object>
      **/
-    @RequestMapping("/upload")
+    @PostMapping("/save")
     @Transactional
-    public Map<String,Object> uploadFile(@RequestParam("file")MultipartFile multipartFile,
-                                          @RequestParam("group")String group,
-                                          @RequestParam("introduction")String introduction){
+    public Map<String,Object> saveFile(@RequestParam("file")MultipartFile multipartFile,
+                                        @RequestParam("group")String group,
+                                        @RequestParam("introduction")String introduction,
+                                        @RequestParam(value="id",required = false)Integer id){
         Map<String,Object> map=new HashMap<>();
 
         //验证文件是否为空
@@ -71,23 +71,70 @@ public class FileController {
             return map;
         }
 
-        logger.info("上传文件：name="+multipartFile.getOriginalFilename()+",type="+multipartFile.getContentType());
-
-        /*保存图片*/
+        /*保存文件*/
         //保存到数据库
+            //添加
+        File file=null;
+        if (null == id) {
+            logger.info("添加文件：name=" + multipartFile.getOriginalFilename() + ",type=" + multipartFile.getContentType());
+            file=new File();
+        }
+            //更新
+        else if (id > 0) {
+            logger.info("更新文件：id=" + id + "name=" + multipartFile.getOriginalFilename() + ",type=" + multipartFile.getContentType());
+            file=fileRepository.findOne(id);
+            if(file==null){
+                map.put("result", 0);
+                map.put("message", "找不到该文件！");
+                return map;
+            }
+        } else {
+            map.put("result", 0);
+            map.put("message", "参数错误！");
+            return map;
+        }
+        //获取当前用户
         Users user=usersService.getCurrentUser();
         String userName=user.getUsername();
         int userId=usersRepository.findByUsername(userName).getId();
-        File file=new File(introduction,new Date(),group,userName,userId,multipartFile.getOriginalFilename());
-        //获取数据库生成的id
+        //保存数据
+        if(introduction==null || introduction.length()>50){
+            map.put("result", 0);
+            map.put("message", "请填写50字内的简介！");
+            return map;
+        }
+        //填充字段
+        file.setIntroduction(introduction);
+        file.setDate(new Date());
+        file.setAuthor(userName);
+        file.setAuthorId(userId);
+        file.setModel(group);
+        file.setOriginalName(multipartFile.getOriginalFilename());
+
+        //获取数据库生成的id，用于生成唯一命名
         file = fileRepository.save(file);
-        map.put("result",0);
-        map.put("message","上传失败，请确认文件是否已存在！");
 
         //保存到项目
         String path;
+        //更新操作应当先删除原有文件
+        if(id!=null&&id>0){
+            path=file.getPath();
+            //删除文件
+            try {
+                fileService.deleteFile(path);
+            } catch (FileNotFoundException e) {
+                map.put("result",0);
+                map.put("message","项目中不存在该文件！");
+                return map;
+            } catch (BusinessException e) {
+                e.printStackTrace();
+                map.put("result",0);
+                map.put("message","删除原文件失败！");
+                return map;
+            }
+        }
         try {
-            //返回图片路径
+            //返回文件路径
             path=fileService.saveFile(multipartFile,file);
         } catch (BusinessException e) {
             e.printStackTrace();
@@ -95,8 +142,49 @@ public class FileController {
             map.put("message","上传失败，文件格式错误！");
             return map;
         }
-        file.setPath(path); //保存图片路径
+        file.setPath(path); //保存文件路径
         fileRepository.save(file);
+        return map;
+    }
+
+    /**
+     * 删除文件
+     */
+    @RequestMapping("/delete")
+    @Transactional
+    public Map<String,Object> deleteFile(@RequestParam("id")Integer id){
+        Map<String,Object> map=new HashMap<>();
+
+        logger.info("删除文件：id="+id);
+
+        File file=null;
+        if(id != null && id>0){ //验证参数部分放在controller层，放在service层则删除项目文件、数据库记录分别需要一次验证，更复杂
+            //删除项目文件
+            file=fileRepository.findOne(id);
+            if(file==null){
+                map.put("result",0);
+                map.put("message","找不到该文件！");
+                return map;
+            }
+            try {
+                fileService.deleteFile(file.getPath());
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+                map.put("result",0);
+                map.put("message","找不到该文件！");
+                return map;
+            } catch (BusinessException e) {
+                e.printStackTrace();
+                map.put("result",0);
+                map.put("message",e.getMessage());
+                return map;
+            }
+            //删除数据库记录
+            fileRepository.delete(id);
+        }
+        logger.info("--删除文件"+file.getPath()+"成功--");
+        map.put("result",1);
+        map.put("message","删除成功！");
         return map;
     }
 
@@ -162,9 +250,9 @@ public class FileController {
     }
 
     /**
-     * 获取图片链接
+     * 获取文件链接
      **/
-    /*@RequestMapping("/getPath")
+    @RequestMapping("/getPath")
     public Map<String,Object> loadFile(@RequestParam("id")Integer id,HttpServletResponse response){
         Map<String,Object> map=new HashMap<>();
         logger.info("获取文件链接：id="+id);
@@ -175,25 +263,25 @@ public class FileController {
             return map;
         }
 
-        //获取图片
+        //获取文件
         File file=fileRepository.findOne(id);
         if(file==null){
             map.put("result",0);
             map.put("message","找不到文件！");
-        }else{ //获取图片输出流
+        }else{ //获取文件输出流
             try {
                 fileService.getOutputStream(file,response);
             } catch (FileNotFoundException e) {
                 map.put("result",0);
-                map.put("message","找不到该图片！");
+                map.put("message","找不到该文件！");
             } catch (IOException e) {
                 map.put("result",0);
                 map.put("message","格式错误！");
             }
             map.put("result",1);
-            map.put("message","成功获取图片！");
+            map.put("message","成功获取文件！");
         }
         return map;
-    }*/
+    }
 
 }

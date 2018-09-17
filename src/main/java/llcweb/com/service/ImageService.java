@@ -17,9 +17,6 @@ public interface ImageService {
      */
     public Page<Image> activeSearch(UsefulImage image, int pageNum, int pageSize);
 
-    public void update(Image image)throws BusinessException;
-    public void delete(Image image)throws BusinessException;
-
     /**
      * @Author haien
      * @Description 保存图片到项目

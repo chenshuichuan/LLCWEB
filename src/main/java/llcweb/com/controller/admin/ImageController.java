@@ -85,6 +85,7 @@ public class ImageController {
         Image image=null;
         if (null == id) {
             logger.info("添加图片：name=" + file.getOriginalFilename() + ",type=" + file.getContentType());
+            image=new Image();
         }
             //更新
         else if (id > 0) {
@@ -105,6 +106,11 @@ public class ImageController {
         String userName=user.getUsername();
         int userId=usersRepository.findByUsername(userName).getId();
         //保存数据
+        if(description ==null || description.length()>50){
+            map.put("result", 0);
+            map.put("message", "请填写50字内的图片描述！");
+            return map;
+        }
         image.setDescription(description);
         image.setDate(new Date());
         image.setAuthor(userName);
@@ -130,7 +136,7 @@ public class ImageController {
             } catch (BusinessException e) {
                 e.printStackTrace();
                 map.put("result",0);
-                map.put("message","替换原图片失败！");
+                map.put("message","删除原图片失败！");
                 return map;
             }
         }
@@ -156,9 +162,12 @@ public class ImageController {
     public Map<String,Object> deleteImage(@RequestParam("id")Integer id){
         Map<String,Object> map=new HashMap<>();
 
-        if(id != null && id>0){
+        logger.info("删除图片：id="+id);
+
+        Image image=null;
+        if(id != null && id>0){ //验证参数部分放在controller层，放在service层则删除项目文件、数据库记录分别需要一次验证，更复杂
             //删除项目文件
-            Image image=imageRepository.findOne(id);
+            image=imageRepository.findOne(id);
             if(image==null){
                 map.put("result",0);
                 map.put("message","找不到该图片！");
@@ -180,6 +189,7 @@ public class ImageController {
             //删除数据库记录
             imageRepository.delete(id);
         }
+        logger.info("--删除图片"+image.getPath()+"成功--");
         map.put("result",1);
         map.put("message","删除成功！");
         return map;

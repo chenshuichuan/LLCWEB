@@ -7,8 +7,6 @@ import java.util.Date;
  * @Description 封装搜索信息的文档类, 主要在搜索文档时封装搜索条件，考虑到搜索信息可能与文档类属性有出入，
  *              比如按照时间段搜索，那么应该增加一个时间段的属性
  * @Date 9:55 2018/8/24
- * @Param
- * @return
  **/
 public class UsefulDocument {
 
@@ -28,19 +26,6 @@ public class UsefulDocument {
 
     }
 
-<<<<<<< HEAD
-    /*
-     * 用于高级查询
-     */
-=======
-    public UsefulDocument(String author, String title, String model, String info) {
-        this.author = author;
-        this.title = title;
-        this.model = model;
-        this.info = info;
-    }
-
->>>>>>> 865d7198af56e8ca3b92780894b7072fe4a4f238
     public UsefulDocument(String author, String title, String model, String info, Date firstDate, Date lastDate) {
         this.author = author;
         this.title = title;

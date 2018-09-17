@@ -34,6 +34,13 @@ public class ImageServiceImpl implements ImageService {
     @Value("${image.location}")
     private String path;
 
+    /**
+     * @Author haien
+     * @Description 高级查询
+     * @Date 2018/9/17
+     * @Param [image, pageNum, pageSize]
+     * @return org.springframework.data.domain.Page<llcweb.com.domain.models.Image>
+     **/
     @Override
     public Page<Image> activeSearch(UsefulImage image, int pageNum,int pageSize) {
 
@@ -67,33 +74,6 @@ public class ImageServiceImpl implements ImageService {
         }, pageable);
 
         return imageList;
-    }
-
-    /**
-     * 更新image
-     */
-    @Override
-    public void update(Image image) throws BusinessException {
-
-        if(imageRepository.findOne(image.getId())!=null){
-            if(imageRepository.save(image)!=null){
-                return;
-            }
-        }
-        throw new BusinessException(ReturnCode.CODE_FAIL,"图片不存在！");
-    }
-
-    /**
-     * 删除image
-     */
-    @Override
-    public void delete(Image image) throws BusinessException {
-        if(imageRepository.findOne(image.getId())!=null){
-            if(imageRepository.save(image)!=null){
-                return;
-            }
-        }
-        throw new BusinessException(ReturnCode.CODE_FAIL,"图片不存在！");
     }
 
     /**

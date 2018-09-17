@@ -17,12 +17,12 @@ public interface DocumentService {
      */
     public Page<Document> activeSearch(UsefulDocument document, int pageNum, int pageSize);
 
-    public Page<Document> selectAll(Users user,int pageNum,int pageSize);
+    public Page<Document> selectByRole(Users user, int pageNum, int pageSize);
     public Map<String,Object> add(Document document);
     public Map<String,Object> delete(int id);
 
     /**
-     * 剔除文档内容
+     * 文档转换为省略内容的文档
      */
     List<DocumentInfo> documentsToDocumentInfos(List<Document> documentList);
 

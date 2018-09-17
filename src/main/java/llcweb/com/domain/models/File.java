@@ -105,4 +105,5 @@ public class File {
     public void setOriginalName(String originalName) {
         this.originalName = originalName;
     }
+
 }

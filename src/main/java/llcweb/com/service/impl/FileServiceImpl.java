@@ -1,10 +1,10 @@
 package llcweb.com.service.impl;
 
 import llcweb.com.dao.repository.FileRepository;
+import llcweb.com.domain.entity.BusinessException;
+import llcweb.com.domain.entity.ReturnCode;
 import llcweb.com.domain.entity.UsefulFile;
 import llcweb.com.domain.models.File;
-import llcweb.com.exception.BusinessException;
-import llcweb.com.exception.ReturnCode;
 import llcweb.com.service.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -83,12 +83,10 @@ public class FileServiceImpl implements FileService {
      * 删除file
      */
     @Override
-    public void delete(File file) throws BusinessException {
+    public void delete(int id) throws BusinessException {
 
-        if(fileRepository.findOne(file.getId())!=null){
-            if(fileRepository.save(file)!=null){
-                return;
-            }
+        if(fileRepository.findOne(id)!=null){
+            fileRepository.delete(id);
         }
         throw new BusinessException(ReturnCode.CODE_FAIL,"文件不存在！");
     }

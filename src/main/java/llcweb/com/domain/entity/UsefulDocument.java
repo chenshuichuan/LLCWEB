@@ -28,9 +28,19 @@ public class UsefulDocument {
 
     }
 
+<<<<<<< HEAD
     /*
      * 用于高级查询
      */
+=======
+    public UsefulDocument(String author, String title, String model, String info) {
+        this.author = author;
+        this.title = title;
+        this.model = model;
+        this.info = info;
+    }
+
+>>>>>>> 865d7198af56e8ca3b92780894b7072fe4a4f238
     public UsefulDocument(String author, String title, String model, String info, Date firstDate, Date lastDate) {
         this.author = author;
         this.title = title;

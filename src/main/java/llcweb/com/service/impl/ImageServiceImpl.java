@@ -1,10 +1,10 @@
 package llcweb.com.service.impl;
 
 import llcweb.com.dao.repository.ImageRepository;
-import llcweb.com.exception.BusinessException;
-import llcweb.com.exception.ReturnCode;
 import llcweb.com.domain.entity.UsefulImage;
 import llcweb.com.domain.models.Image;
+import llcweb.com.exception.BusinessException;
+import llcweb.com.exception.ReturnCode;
 import llcweb.com.service.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,6 +13,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -24,6 +25,8 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
+//@ConfigurationProperties(prefix="image")
 public class ImageServiceImpl implements ImageService {
 
     @Autowired
@@ -86,7 +89,6 @@ public class ImageServiceImpl implements ImageService {
      */
     @Override
     public void delete(Image image) throws BusinessException {
-
         if(imageRepository.findOne(image.getId())!=null){
             if(imageRepository.save(image)!=null){
                 return;
@@ -103,7 +105,7 @@ public class ImageServiceImpl implements ImageService {
      * @return java.lang.String
      **/
     @Override
-    public String saveImg(MultipartFile file,Image image) throws BusinessException {
+    public String saveImg(MultipartFile file, Image image) throws BusinessException {
         //拼接文件名
         String originalFileName=file.getOriginalFilename();
         String suffix=originalFileName.substring(originalFileName.lastIndexOf(".")+1);
@@ -128,13 +130,13 @@ public class ImageServiceImpl implements ImageService {
 
     @Override
     public void getOutputStream(Image image, HttpServletResponse response) throws IOException {
-        String fileName=image.getOriginalName();
-        byte[] buff=new byte[1024];
-        BufferedInputStream bis=new BufferedInputStream(new FileInputStream(image.getPath()));
-        OutputStream os=response.getOutputStream(); //服务器向浏览器发送字节输出流
-        int len=0;
-        while ((len=bis.read(buff))!=-1){
-            os.write(buff,0,len);
+        String fileName = image.getOriginalName();
+        byte[] buff = new byte[1024];
+        BufferedInputStream bis = new BufferedInputStream(new FileInputStream(image.getPath()));
+        OutputStream os = response.getOutputStream(); //服务器向浏览器发送字节输出流
+        int len = 0;
+        while ((len = bis.read(buff)) != -1) {
+            os.write(buff, 0, len);
         }
         os.flush();
         bis.close();

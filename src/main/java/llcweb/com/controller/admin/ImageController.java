@@ -2,7 +2,6 @@ package llcweb.com.controller.admin;
 
 import llcweb.com.dao.repository.ImageRepository;
 import llcweb.com.dao.repository.UsersRepository;
-import llcweb.com.domain.entity.BusinessException;
 import llcweb.com.domain.entity.UsefulImage;
 import llcweb.com.domain.models.Image;
 import llcweb.com.domain.models.Users;

@@ -1,4 +1,4 @@
-package llcweb.com.domain.entity;
+package llcweb.com.exception;
 
 /**
  * @Author haien

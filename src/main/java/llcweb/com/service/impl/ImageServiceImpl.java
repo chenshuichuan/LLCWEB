@@ -26,7 +26,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-//@ConfigurationProperties(prefix="image")
 public class ImageServiceImpl implements ImageService {
 
     @Autowired
@@ -111,8 +110,9 @@ public class ImageServiceImpl implements ImageService {
         String suffix=originalFileName.substring(originalFileName.lastIndexOf(".")+1);
         String fileName=image.getId()+image.getModel()+image.getAuthorId()+"."+suffix;
 
+        String filePath=path+ File.separator+fileName;
         try {
-            BufferedOutputStream bos=new BufferedOutputStream(new FileOutputStream(path+ File.separator+fileName));
+            BufferedOutputStream bos=new BufferedOutputStream(new FileOutputStream(filePath));
             //可以直接获取MultipartFile的字节数组，这样就省了先获取InputStream再用一个1024的字节数组去read出来的麻烦
             //重点是FileInputStream fis=(FileInputStream)file.getInputStream()抛异常：
             //java.lang.ClassCastException: java.io.ByteArrayInputStream cannot be cast to java.io.FileInputStream
@@ -125,9 +125,16 @@ public class ImageServiceImpl implements ImageService {
             e.printStackTrace();
             throw new BusinessException(ReturnCode.CODE_FAIL, "格式错误！");
         }
-        return path+fileName;
+        return filePath;
     }
 
+    /**
+     * @Author haien
+     * @Description 客户端获取图片输出流
+     * @Date 2018/9/17
+     * @Param [image, response]
+     * @return void
+     **/
     @Override
     public void getOutputStream(Image image, HttpServletResponse response) throws IOException {
         String fileName = image.getOriginalName();
@@ -140,5 +147,26 @@ public class ImageServiceImpl implements ImageService {
         }
         os.flush();
         bis.close();
+    }
+
+    /**
+     * @Author haien
+     * @Description 删除项目中指定图片
+     * @Date 2018/9/17
+     * @Param [path]
+     * @return void
+     **/
+    @Override
+    public void deleteImg(String path) throws FileNotFoundException, BusinessException {
+        File file=new File(path);
+        //路径为文件且不为空则删除
+        if(file.isFile()&&file.exists()){
+            file.delete();
+        }else if(!file.isFile()){
+            System.out.println(path);
+            throw new BusinessException(ReturnCode.CODE_FAIL,"路径非文件");
+        }else{
+            throw new FileNotFoundException();
+        }
     }
 }

@@ -34,12 +34,13 @@ public class File {
     public File() {
     }
 
-    public File(String introduction, Date date, String model,String author,int authorId) {
+    public File(String introduction, Date date, String model,String author,int authorId,String originalName) {
         this.introduction = introduction;
         this.date = date;
         this.model = model;
         this.author=author;
         this.authorId=authorId;
+        this.originalName=originalName;
     }
 
     public int getId() {

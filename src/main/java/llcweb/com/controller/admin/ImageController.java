@@ -5,6 +5,7 @@ import llcweb.com.dao.repository.UsersRepository;
 import llcweb.com.domain.entity.UsefulImage;
 import llcweb.com.domain.models.Image;
 import llcweb.com.domain.models.Users;
+import llcweb.com.exception.BusinessException;
 import llcweb.com.service.ImageService;
 import llcweb.com.service.UsersService;
 import llcweb.com.tools.ImageUtil;
@@ -17,10 +18,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -54,16 +52,17 @@ public class ImageController {
 
     /**
      * @Author haien
-     * @Description 图片上传
+     * @Description 更新/添加图片
      * @Date 2018/9/5
      * @Param [image]
      * @return java.util.Map<java.lang.String,java.lang.Object>
      **/
-    @RequestMapping("/upload")
+    @PostMapping("/save")
     @Transactional
-    public Map<String,Object> uploadImage(@RequestParam("file")MultipartFile file,
+    public Map<String,Object> saveImage(@RequestParam("file")MultipartFile file,
                                           @RequestParam("group")String group,
-                                          @RequestParam("description")String description){
+                                          @RequestParam("description")String description,
+                                          @RequestParam(value="id",required = false)Integer id){
         Map<String,Object> map=new HashMap<>();
 
         //验证文件是否为空
@@ -80,21 +79,61 @@ public class ImageController {
             return map;
         }
 
-        logger.info("上传图片：name="+file.getOriginalFilename()+",type="+file.getContentType());
-
         /*保存图片*/
         //保存到数据库
+            //添加
+        Image image=null;
+        if (null == id) {
+            logger.info("添加图片：name=" + file.getOriginalFilename() + ",type=" + file.getContentType());
+        }
+            //更新
+        else if (id > 0) {
+            logger.info("更新图片：id=" + id + "name=" + file.getOriginalFilename() + ",type=" + file.getContentType());
+            image=imageRepository.findOne(id);
+            if(image==null){
+                map.put("result", 0);
+                map.put("message", "找不到该图片！");
+                return map;
+            }
+        } else {
+            map.put("result", 0);
+            map.put("message", "参数错误！");
+            return map;
+        }
+        //获取当前用户
         Users user=usersService.getCurrentUser();
         String userName=user.getUsername();
         int userId=usersRepository.findByUsername(userName).getId();
-        Image image=new Image(description,new Date(),userName,userId,group,file.getOriginalFilename());
-        //获取数据库生成的id
+        //保存数据
+        image.setDescription(description);
+        image.setDate(new Date());
+        image.setAuthor(userName);
+        image.setAuthorId(userId);
+        image.setModel(group);
+        image.setOriginalName(file.getOriginalFilename());
+
+        //获取数据库生成的id，用于生成唯一命名
         image = imageRepository.save(image);
-        map.put("result",0);
-        map.put("message","上传失败，请确认图片是否已存在！");
 
         //保存到项目
         String path;
+            //更新操作应当先删除原有图片
+        if(id!=null&&id>0){
+            path=image.getPath();
+            //删除图片
+            try {
+                imageService.deleteImg(path);
+            } catch (FileNotFoundException e) {
+                map.put("result",0);
+                map.put("message","项目中不存在该图片！");
+                return map;
+            } catch (BusinessException e) {
+                e.printStackTrace();
+                map.put("result",0);
+                map.put("message","替换原图片失败！");
+                return map;
+            }
+        }
         try {
             //返回图片路径
             path=imageService.saveImg(file,image);
@@ -106,6 +145,43 @@ public class ImageController {
         }
         image.setPath(path); //保存图片路径
         imageRepository.save(image);
+        return map;
+    }
+
+    /**
+     * 删除图片
+     */
+    @RequestMapping("/delete")
+    @Transactional
+    public Map<String,Object> deleteImage(@RequestParam("id")Integer id){
+        Map<String,Object> map=new HashMap<>();
+
+        if(id != null && id>0){
+            //删除项目文件
+            Image image=imageRepository.findOne(id);
+            if(image==null){
+                map.put("result",0);
+                map.put("message","找不到该图片！");
+                return map;
+            }
+            try {
+                imageService.deleteImg(image.getPath());
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+                map.put("result",0);
+                map.put("message","找不到该图片！");
+                return map;
+            } catch (BusinessException e) {
+                e.printStackTrace();
+                map.put("result",0);
+                map.put("message",e.getMessage());
+                return map;
+            }
+            //删除数据库记录
+            imageRepository.delete(id);
+        }
+        map.put("result",1);
+        map.put("message","删除成功！");
         return map;
     }
 
@@ -195,10 +271,13 @@ public class ImageController {
             } catch (FileNotFoundException e) {
                 map.put("result",0);
                 map.put("message","找不到该图片！");
+                return map;
             } catch (IOException e) {
                 map.put("result",0);
                 map.put("message","格式错误！");
+                return map;
             }
+            logger.info("成功获取图片链接--项目地址:"+image.getPath());
             map.put("result",1);
             map.put("message","成功获取图片！");
         }

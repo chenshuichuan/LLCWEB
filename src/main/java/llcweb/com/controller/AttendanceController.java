@@ -96,13 +96,13 @@ public class AttendanceController {
             attendancePage = attendanceService.activeSearch(usefulAttendance,currentPage-1,size);
         }
 
-//        //剔除文档内容，传送轻便
-//        List<DocumentInfo> documentInfoList = documentService.documentsToDocumentInfos(documentPage.getContent());
+        List<Attendance> attendances = attendancePage.getContent();
         //总记录数
         long total = attendancePage.getTotalElements();
+
         logger.info("total="+total);
 
-//        map.put("pageData", documentInfoList);
+        map.put("pageData", attendances);
         map.put("total", total);
         map.put("draw", draw);
         map.put("result", 1);

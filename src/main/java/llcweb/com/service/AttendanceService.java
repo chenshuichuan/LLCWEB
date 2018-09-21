@@ -11,6 +11,14 @@ public interface AttendanceService {
 	public Map<String,Object> add(Attendance attendance);
 	public Map<String,Object> update(Attendance attendance);
 	public Map<String,Object> delete(int id);
-	public Page<Attendance> fuzzySearch(int i, int size, String searchValue);
-	public Page<Attendance> activeSearch(UsefulAttendance usefulAttendance, int i, int size);
+	
+	/**
+     * 模糊查询
+     */
+	public Page<Attendance> fuzzySearch(int pageNum, int pageSize,String key);
+	
+	/**
+     * 动态查找
+     */
+	public Page<Attendance> activeSearch(UsefulAttendance usefulAttendance, int pageNum, int pageSize);
 }

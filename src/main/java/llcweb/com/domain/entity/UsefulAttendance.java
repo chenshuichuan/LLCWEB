@@ -28,7 +28,13 @@ public class UsefulAttendance {
 		FirstDate = firstDate;
 		LastDate = lastDate;
 	}
-	
+
+	public UsefulAttendance(String peopleId ,String peopleName) {
+		// TODO Auto-generated constructor stub
+		peopleId = this.peopleId;
+		peopleName = this.peopleName;
+	}
+
 	public String getPeopleId() {
 		return peopleId;
 	}

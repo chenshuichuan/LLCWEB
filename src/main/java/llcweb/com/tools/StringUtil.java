@@ -17,9 +17,9 @@ public class StringUtil {
 	public static boolean isNull(String obj) {
 		if (obj == null){
 			return true;
-		}else if (obj.toString().trim().equals("")){
+		}else if (obj.trim().equals("")){ //String.tirm() 去除字符串首尾空格
 			return true;
-		}else if(obj.toString().trim().toLowerCase().equals("null")){
+		}else if(obj.trim().toLowerCase().equals("null")){
 			return true;
 		}
 		

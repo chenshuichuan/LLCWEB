@@ -2,9 +2,15 @@ package llcweb.com.domain.entity;
 
 import java.util.Date;
 
-public class UsefulFile {
+public class UsefulFile extends UsefulResource{
 
-    //文件简介
+    public UsefulFile() {
+    }
+    public UsefulFile(String author, String model, String introduction, Date firstDate, Date lastDate) {
+        super(author, null, model, null, null, introduction, firstDate, lastDate);
+    }
+
+    /*//文件简介
     private String introduction;
     //文件日期
     public Date FirstDate;
@@ -12,17 +18,17 @@ public class UsefulFile {
     //组别
     private String model;
     //文件上传者
-    private String owner;
+    private String author;
 
     public UsefulFile() {
     }
 
-    public UsefulFile(String introduction, Date firstDate, Date lastDate, String model, String owner) {
+    public UsefulFile(String introduction, Date firstDate, Date lastDate, String model, String author) {
         this.introduction = introduction;
         FirstDate = firstDate;
         LastDate = lastDate;
         this.model = model;
-        this.owner = owner;
+        this.author = author;
     }
 
     public String getIntroduction() {
@@ -41,12 +47,12 @@ public class UsefulFile {
         this.model = model;
     }
 
-    public String getOwner() {
-        return owner;
+    public String getAuthor() {
+        return author;
     }
 
-    public void setOwner(String owner) {
-        this.owner = owner;
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
     public Date getFirstDate() {
@@ -63,5 +69,5 @@ public class UsefulFile {
 
     public void setLastDate(Date lastDate) {
         LastDate = lastDate;
-    }
+    }*/
 }

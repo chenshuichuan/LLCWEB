@@ -17,7 +17,11 @@ public interface DocumentService {
      */
     public Page<Document> activeSearch(UsefulDocument document, int pageNum, int pageSize);
 
+    /**
+     * 根据用户权限查找
+     **/
     public Page<Document> selectByRole(Users user, int pageNum, int pageSize);
+
     public Map<String,Object> add(Document document);
     public Map<String,Object> delete(int id);
 

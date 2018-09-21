@@ -50,7 +50,7 @@ public class ImageRepositoryTest {
         image.setId(1);
         image.setAuthor("haien");
         image.setDescription("项目组第1次会议");
-        image.setDate(new Date());
+        image.setCreateDate(new Date());
         Assert.assertThat(imageRepository.save(image).getId(), is(1));
     }
 

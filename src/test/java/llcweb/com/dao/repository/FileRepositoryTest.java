@@ -31,7 +31,7 @@ public class FileRepositoryTest {
         File file=new File();
         file.setAuthor("haien");
         file.setIntroduction("项目组第1次会议");
-        file.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2018-08-25"));
+        file.setCreateDate(new SimpleDateFormat("yyyy-MM-dd").parse("2018-08-25"));
         Assert.assertThat(fileRepository.save(file).getId(),is(1));
     }
 
@@ -40,7 +40,7 @@ public class FileRepositoryTest {
         UsefulFile file=new UsefulFile();
         file.setFirstDate(new SimpleDateFormat("yyyy-MM-dd").parse("2018-08-22"));
         file.setLastDate(new SimpleDateFormat("yyyy-MM-dd").parse("2018-08-25"));
-        file.setOwner("haien");
+        file.setAuthor("haien");
         Page<File> files=fileService.activeSearch(file,0,3);
         Assert.assertThat(files.getTotalElements(),is(1L));
     }

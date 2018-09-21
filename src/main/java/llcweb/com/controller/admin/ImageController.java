@@ -6,7 +6,7 @@ import llcweb.com.domain.entity.UsefulImage;
 import llcweb.com.domain.models.Image;
 import llcweb.com.domain.models.Users;
 import llcweb.com.exception.BusinessException;
-import llcweb.com.service.ImageService;
+import llcweb.com.service.ResourceService;
 import llcweb.com.service.UsersService;
 import llcweb.com.tools.ImageUtil;
 import llcweb.com.tools.StringUtil;
@@ -45,10 +45,12 @@ public class ImageController {
     private UsersRepository usersRepository;
     @Autowired
     private UsersService usersService;
-    @Autowired
-    private ImageService imageService;
+    /*@Autowired
+    private ImageService imageService;*/
     @Autowired
     private ImageRepository imageRepository;
+    @Autowired
+    private ResourceService<Image> resourceService;
 
     /**
      * @Author haien
@@ -112,7 +114,7 @@ public class ImageController {
             return map;
         }
         image.setDescription(description);
-        image.setDate(new Date());
+        image.setCreateDate(new Date());
         image.setAuthor(userName);
         image.setAuthorId(userId);
         image.setModel(group);
@@ -128,7 +130,7 @@ public class ImageController {
             path=image.getPath();
             //删除图片
             try {
-                imageService.deleteImg(path);
+                resourceService.deleteResource(path);
             } catch (FileNotFoundException e) {
                 map.put("result",0);
                 map.put("message","项目中不存在该图片！");
@@ -142,7 +144,7 @@ public class ImageController {
         }
         try {
             //返回图片路径
-            path=imageService.saveImg(file,image);
+            path=resourceService.saveResource(file,image);
         } catch (BusinessException e) {
             e.printStackTrace();
             map.put("result",0);
@@ -174,7 +176,7 @@ public class ImageController {
                 return map;
             }
             try {
-                imageService.deleteImg(image.getPath());
+                resourceService.deleteResource(image.getPath());
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
                 map.put("result",0);
@@ -209,10 +211,17 @@ public class ImageController {
         //数据长度
         String pageSize = request.getParameter("pageSize");
         int size = Integer.parseInt(pageSize);
+        //模糊|高级查询标志
+        String fuzzy = request.getParameter("fuzzySearch");
+        if(draw==null||startIndex==null||pageSize==null||fuzzy==null){
+            map.put("result", 0);
+            map.put("message", "参数不完整！");
+            return map;
+        }
         //页码
         int currentPage = Integer.parseInt(startIndex)/size+1;
-        //关键词
-        String fuzzy = request.getParameter("fuzzySearch");
+        //当前用户
+        Users user=usersService.getCurrentUser();
 
         logger.info("size = "+size+",currentPage = "+currentPage);
 
@@ -220,8 +229,17 @@ public class ImageController {
         //模糊查找
         if("true".equals(fuzzy)){
             String searchValue=request.getParameter("fuzzy");
-            Pageable pageable=new PageRequest(currentPage-1,size, Sort.Direction.DESC,"date");
-            imagePage = imageRepository.fuzzySearch(searchValue,pageable);
+
+            //空搜
+            if(searchValue==null){
+                //imagePage=imageService.selectByRole(user,currentPage-1,size);
+                imagePage=resourceService.selectByRole(user,currentPage-1,size,imageRepository);
+            }
+
+            else {
+                Pageable pageable = new PageRequest(currentPage - 1, size, Sort.Direction.DESC, "createDate");
+                imagePage = imageRepository.fuzzySearch(searchValue, pageable);
+            }
         }
         //高级查找
         else{
@@ -234,14 +252,24 @@ public class ImageController {
             Date firstDate=null;
             Date lastDate=null;
             try {
-                firstDate=new SimpleDateFormat("yyyy-MM-dd").parse(firstDate1);
-                lastDate=new SimpleDateFormat("yyyy-MM-dd").parse(lastDate1);
+                if(StringUtil.isNull(firstDate1)){
+                    firstDate=new SimpleDateFormat("yyyy-MM-dd").parse(firstDate1);
+                }
+                if(StringUtil.isNull(lastDate1)) {
+                    lastDate = new SimpleDateFormat("yyyy-MM-dd").parse(lastDate1);
+                }
             } catch (ParseException e) {
                 e.printStackTrace();
             }
 
-            UsefulImage image=new UsefulImage(description,firstDate,lastDate,author,model);
-            imagePage = imageService.activeSearch(image,currentPage-1,size);
+            //空搜
+            if(StringUtil.isNull(author)&&StringUtil.isNull(description)&&StringUtil.isNull(model)&&StringUtil.isNull(firstDate1)&&StringUtil.isNull(lastDate1)){
+                //imagePage=resourceService.selectByRole(user,currentPage-1,size);
+                imagePage=resourceService.selectByRole(user,currentPage-1,size,imageRepository);
+            }
+
+            UsefulImage image=new UsefulImage(author, model, description, firstDate, lastDate);
+            imagePage = resourceService.activeSearch(image,currentPage-1,size,imageRepository);
         }
 
         //总记录数
@@ -277,7 +305,7 @@ public class ImageController {
             map.put("message","找不到该图片！");
         }else{ //获取图片输出流
             try {
-                imageService.getOutputStream(image,response);
+                resourceService.getOutputStream(image.getPath(),response);
             } catch (FileNotFoundException e) {
                 map.put("result",0);
                 map.put("message","找不到该图片！");

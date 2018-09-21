@@ -5,6 +5,7 @@ import llcweb.com.dao.repository.DocumentRepository;
 import llcweb.com.domain.entities.DocumentInfo;
 import llcweb.com.domain.entity.UsefulDocument;
 import llcweb.com.domain.models.Document;
+import llcweb.com.domain.models.Users;
 import llcweb.com.service.DocumentService;
 import llcweb.com.service.UsersService;
 import org.slf4j.Logger;
@@ -97,7 +98,9 @@ public class DocumnetController {
                 e.printStackTrace();
             }
 
-            UsefulDocument document=new UsefulDocument(author,title,model,infor,firstDate,lastDate);
+            //UsefulDocument document=new UsefulDocument(author,title,model,infor,firstDate,lastDate);
+            UsefulDocument document=new UsefulDocument(author, title, model, infor,
+                                            null, null, firstDate, lastDate);
             documentPage = documentService.activeSearch(document,currentPage-1,size);
         }
 
@@ -153,24 +156,40 @@ public class DocumnetController {
         String title = request.getParameter("title");
         String infor = request.getParameter("infor");
         String group = request.getParameter("group");
+        Users user=usersService.getCurrentUser();
+        String userName=user.getUsername();
+        int userId=user.getId();
+
         Document document;
         boolean flag = true;
 
         //更新文档
         if (id!=null&&!id.equals("")&&Integer.parseInt(id)>0){
+            logger.info("更新文档：id="+id+"model="+group+"title="+title);
             document = documentRepository.findOne(Integer.parseInt(id));
             if(document==null){
                 flag= false;
+            }else {
+                document.setModifyDate(new Date());
             }
         }
-        //新建文档 所以前端新建文档时，传的id要为空
-        else document = new Document();
+        //新建文档(所以前端新建文档时，传的id要为空)
+        else{
+            logger.info("新建文档：model="+group+"title="+title);
+            document = new Document();
+            document.setCreateDate(new Date());
+            //新建时要加一个修改时间吗？
+            document.setModifyDate(new Date());
+        }
 
         if(flag){
             document.setContent(content);
             document.setTitle(title);
             document.setInfor(infor);
             document.setModel(group);
+            document.setAuthor(userName);
+            document.setAuthorId(userId);
+
             documentRepository.save(document);
             map.put("result", 1);
             map.put("message", "成功保存文档！");
@@ -191,13 +210,18 @@ public class DocumnetController {
     @ResponseBody
     public Map<String,Object> delete(@RequestParam("id")Integer id){
         Map<String,Object> map=new HashMap<>();
+
+        logger.info("删除文档：id="+id);
+
         Document document=documentRepository.findOne(id);
         if (document == null) {
             map.put("result", 0);
+            logger.info("删除文档失败");
             map.put("message", "删除文档失败！");
             logger.error("删除文档失败！");
         }else{
             documentRepository.delete(id);
+            logger.info("删除文档成功");
             map.put("result", 1);
             map.put("message", "成功删除文档！");
             logger.info("成功删除文档！");

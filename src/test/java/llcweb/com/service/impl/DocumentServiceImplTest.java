@@ -50,7 +50,8 @@ public class DocumentServiceImplTest {
 
     @Test
     public void activeSearch() throws Exception{
-        UsefulDocument document=new UsefulDocument("haien",null,null,null,date1,date2);
+        //UsefulDocument document=new UsefulDocument("haien",null,null,null,date1,date2);
+        UsefulDocument document=new UsefulDocument("haien", null, null, null, null, null, date1, date1);
         Page<Document> documents=documentService.activeSearch(document,0,10);
         Assert.assertThat(documents.getTotalElements(),is(3L));
     }

@@ -3,6 +3,8 @@ package llcweb.com.service.impl;
 import llcweb.com.dao.repository.ImageRepository;
 import llcweb.com.domain.entity.UsefulImage;
 import llcweb.com.domain.models.Image;
+import llcweb.com.domain.models.Roles;
+import llcweb.com.domain.models.Users;
 import llcweb.com.exception.BusinessException;
 import llcweb.com.exception.ReturnCode;
 import llcweb.com.service.ImageService;
@@ -63,8 +65,8 @@ public class ImageServiceImpl implements ImageService {
                 if (image.getLastDate() != null) {
                     predicate.getExpressions().add(cd.lessThanOrEqualTo(root.get("date"), image.getLastDate()));
                 }
-                if (image.getOwner() != null) {
-                    predicate.getExpressions().add(cd.like(root.get("author"), "%" + image.getOwner() + "%"));
+                if (image.getAuthor() != null) {
+                    predicate.getExpressions().add(cd.like(root.get("author"), "%" + image.getAuthor() + "%"));
                 }
                 if (image.getModel() != null) {
                     predicate.getExpressions().add(cd.like(root.get("model"), "%" + image.getModel() + "%"));
@@ -106,6 +108,33 @@ public class ImageServiceImpl implements ImageService {
             throw new BusinessException(ReturnCode.CODE_FAIL, "格式错误！");
         }
         return filePath;
+    }
+
+    @Override
+    public Page<Image> selectByRole(Users user, int pageNum, int pageSize) {
+        Page<Image> images;
+        List<Roles> roles=user.getRoles();
+        Pageable page=new PageRequest(pageNum,pageSize, Sort.Direction.DESC,"date");
+
+        //管理员查看所有图片
+        for(Roles role:roles){
+            if(role.getrFlag().equals("ADMIN")){
+                images=imageRepository.findAll(page);
+                return images;
+            }
+        }
+
+        //组长查看本组图片
+        for(Roles role:roles){
+            if(role.getrFlag().equals("GROUP")){
+                images=imageRepository.findByModel("user.getModel()",page);
+                return images;
+            }
+        }
+
+        //普通用户查找编辑过的图片
+        images=imageRepository.findByAuthorId(user.getId(),page);
+        return images;
     }
 
     /**

@@ -49,8 +49,8 @@ public class FileServiceImpl implements FileService {
             @Override
             public Predicate toPredicate(Root<File> root, CriteriaQuery<?> query, CriteriaBuilder cd) {
                 Predicate predicate = cd.conjunction();
-                if (file.getOwner() != null) {
-                    predicate.getExpressions().add(cd.like(root.get("author"), "%" + file.getOwner() + "%"));
+                if (file.getAuthor() != null) {
+                    predicate.getExpressions().add(cd.like(root.get("author"), "%" + file.getAuthor() + "%"));
                 }
                 if (file.getFirstDate() != null) {
                     predicate.getExpressions().add(cd.greaterThanOrEqualTo(root.get("date"), file.getFirstDate()));
@@ -136,7 +136,6 @@ public class FileServiceImpl implements FileService {
         if(file.isFile()&&file.exists()){
             file.delete();
         }else if(!file.isFile()){
-            System.out.println(path);
             throw new BusinessException(ReturnCode.CODE_FAIL,"路径非文件");
         }else{
             throw new FileNotFoundException();

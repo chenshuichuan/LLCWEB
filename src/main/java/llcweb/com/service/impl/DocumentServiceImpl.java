@@ -103,9 +103,8 @@ public class DocumentServiceImpl implements DocumentService {
             }
         }
 
-        //组长查看本人编辑文档
+        //组长查看本组文档
         for(Roles role:roles){
-            //管理员查看所有文档
             if(role.getrFlag().equals("GROUP")){
                 documents=documentRepository.findByModel("user.getModel()",page);
                 return documents;

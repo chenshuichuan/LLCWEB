@@ -9,25 +9,32 @@ import java.util.Date;
  * @Param
  * @return
  **/
-public class UsefulImage {
+public class UsefulImage extends UsefulResource {
 
-    public String description;
+    public UsefulImage() {
+    }
+    public UsefulImage(String author, String model, String description,
+                       Date firstDate, Date lastDate) {
+        super(author, null, model, null, description, null, firstDate, lastDate);
+    }
+
+    /*public String description;
 
     //搜索时间段
     public Date firstDate;
     public Date lastDate;
 
-    public String owner;
+    public String author;
     public String model;
 
     public UsefulImage() {
     }
 
-    public UsefulImage(String description, Date firstDate, Date lastDate, String owner, String model) {
+    public UsefulImage(String description, Date firstDate, Date lastDate, String author, String model) {
         this.description = description;
         this.firstDate = firstDate;
         this.lastDate = lastDate;
-        this.owner = owner;
+        this.author = author;
         this.model = model;
     }
 
@@ -55,12 +62,12 @@ public class UsefulImage {
         this.lastDate = lastDate;
     }
 
-    public String getOwner() {
-        return owner;
+    public String getAuthor() {
+        return author;
     }
 
-    public void setOwner(String owner) {
-        this.owner = owner;
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
     public String getModel() {
@@ -69,5 +76,5 @@ public class UsefulImage {
 
     public void setModel(String model) {
         this.model = model;
-    }
+    }*/
 }

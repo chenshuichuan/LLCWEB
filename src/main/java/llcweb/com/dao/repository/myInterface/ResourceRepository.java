@@ -18,7 +18,7 @@ import java.io.Serializable;
 @NoRepositoryBean //不要暴露出来，数据库中没有表和这个接口匹配
 public interface ResourceRepository<T,ID extends Serializable> extends JpaRepository<T,ID> { //id序列化,传入id的类型
     /**
-     * 分页动态查询(只能叫findAll)
+     * 扩充findAll，实现动态查询
      **/
     Page<T> findAll(Specification<T> specification, Pageable pageable);
 

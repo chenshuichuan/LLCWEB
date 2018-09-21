@@ -8,17 +8,25 @@ import java.util.Date;
  *              比如按照时间段搜索，那么应该增加一个时间段的属性
  * @Date 9:55 2018/8/24
  **/
-public class UsefulDocument {
+public class UsefulDocument extends UsefulResource {
 
-    public String author;
+    public UsefulDocument() {
+
+    }
+    public UsefulDocument(String author, String title, String model, String info,
+                       String description,String introduction,Date firstDate, Date lastDate) {
+        super(author, title, model, info, description, introduction, firstDate, lastDate);
+    }
+
+    /*public String author;
     public String title;
     public String model;
     //或者content，反正哪个是简介用哪个
     public String info;
 
-    /**
+    *//**
      * 按以下时间段搜索
-     **/
+     **//*
     public Date FirstDate;
     public Date LastDate;
 
@@ -92,5 +100,5 @@ public class UsefulDocument {
                 ", FirstDate=" + FirstDate +
                 ", LastDate=" + LastDate +
                 '}';
-    }
+    }*/
 }

@@ -6,7 +6,7 @@ import llcweb.com.domain.entity.UsefulImage;
 import llcweb.com.domain.models.Image;
 import llcweb.com.domain.models.Users;
 import llcweb.com.exception.BusinessException;
-import llcweb.com.service.ResourceService;
+import llcweb.com.service.ImageService;
 import llcweb.com.service.UsersService;
 import llcweb.com.tools.ImageUtil;
 import llcweb.com.tools.StringUtil;
@@ -45,12 +45,10 @@ public class ImageController {
     private UsersRepository usersRepository;
     @Autowired
     private UsersService usersService;
-    /*@Autowired
-    private ImageService imageService;*/
+    @Autowired
+    private ImageService imageService;
     @Autowired
     private ImageRepository imageRepository;
-    @Autowired
-    private ResourceService<Image> resourceService;
 
     /**
      * @Author haien
@@ -130,7 +128,7 @@ public class ImageController {
             path=image.getPath();
             //删除图片
             try {
-                resourceService.deleteResource(path);
+                imageService.deleteResource(path);
             } catch (FileNotFoundException e) {
                 map.put("result",0);
                 map.put("message","项目中不存在该图片！");
@@ -144,7 +142,7 @@ public class ImageController {
         }
         try {
             //返回图片路径
-            path=resourceService.saveResource(file,image);
+            path=imageService.saveResource(file,image);
         } catch (BusinessException e) {
             e.printStackTrace();
             map.put("result",0);
@@ -176,7 +174,7 @@ public class ImageController {
                 return map;
             }
             try {
-                resourceService.deleteResource(image.getPath());
+                imageService.deleteResource(image.getPath());
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
                 map.put("result",0);
@@ -233,7 +231,7 @@ public class ImageController {
             //空搜
             if(searchValue==null){
                 //imagePage=imageService.selectByRole(user,currentPage-1,size);
-                imagePage=resourceService.selectByRole(user,currentPage-1,size,imageRepository);
+                imagePage=imageService.selectByRole(user,currentPage-1,size,imageRepository);
             }
 
             else {
@@ -264,12 +262,11 @@ public class ImageController {
 
             //空搜
             if(StringUtil.isNull(author)&&StringUtil.isNull(description)&&StringUtil.isNull(model)&&StringUtil.isNull(firstDate1)&&StringUtil.isNull(lastDate1)){
-                //imagePage=resourceService.selectByRole(user,currentPage-1,size);
-                imagePage=resourceService.selectByRole(user,currentPage-1,size,imageRepository);
+                imagePage=imageService.selectByRole(user,currentPage-1,size,imageRepository);
             }
 
             UsefulImage image=new UsefulImage(author, model, description, firstDate, lastDate);
-            imagePage = resourceService.activeSearch(image,currentPage-1,size,imageRepository);
+            imagePage = imageService.activeSearch(image,currentPage-1,size,imageRepository);
         }
 
         //总记录数
@@ -305,7 +302,7 @@ public class ImageController {
             map.put("message","找不到该图片！");
         }else{ //获取图片输出流
             try {
-                resourceService.getOutputStream(image.getPath(),response);
+                imageService.getOutputStream(image.getPath(),response);
             } catch (FileNotFoundException e) {
                 map.put("result",0);
                 map.put("message","找不到该图片！");

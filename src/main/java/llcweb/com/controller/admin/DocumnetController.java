@@ -8,6 +8,7 @@ import llcweb.com.domain.models.Document;
 import llcweb.com.domain.models.Users;
 import llcweb.com.service.DocumentService;
 import llcweb.com.service.UsersService;
+import llcweb.com.tools.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,15 +58,21 @@ public class DocumnetController {
 
         //直接返回前台
         String draw = request.getParameter("draw");
-        //当前数据的起始位置 ，如第10条
+        //当前数据的起始位置
         String startIndex = request.getParameter("startIndex");
         //数据长度
         String pageSize = request.getParameter("pageSize");
+        //模糊|高级查询标志
+        String fuzzy = request.getParameter("fuzzySearch");
+        if(draw==null||startIndex==null||pageSize==null){
+            map.put("result", 0);
+            map.put("message", "参数不完整！");
+            return map;
+        }
         int size = Integer.parseInt(pageSize);
         //页码
         int currentPage = Integer.parseInt(startIndex)/size+1;
-        //关键词
-        String fuzzy = request.getParameter("fuzzySearch");
+        Users user=usersService.getCurrentUser();
 
         logger.info("size = "+size+",currentPage = "+currentPage);
 
@@ -73,6 +80,12 @@ public class DocumnetController {
         //模糊查找
         if("true".equals(fuzzy)){
             String searchValue=request.getParameter("fuzzy");
+            //空搜
+            if(StringUtil.isNull(searchValue)){
+                //日志
+                logger.info("无关键词搜索--默认按权限获取文档");
+                documentPage=documentService.selectByRole(user,currentPage-1,size,documentRepository);
+            }
             //日志
             logger.info("模糊查询---关键词："+searchValue);
             Pageable pageable=new PageRequest(currentPage-1,size, Sort.Direction.DESC,"createDate");
@@ -92,16 +105,28 @@ public class DocumnetController {
             Date firstDate=null;
             Date lastDate=null;
             try {
-                firstDate=new SimpleDateFormat("yyyy-MM-dd").parse(firstDate1);
-                lastDate=new SimpleDateFormat("yyyy-MM-dd").parse(lastDate1);
+                if(StringUtil.isNull(firstDate1)){
+                    firstDate=new SimpleDateFormat("yyyy-MM-dd").parse(firstDate1);
+                }
+                if(StringUtil.isNull(lastDate1)) {
+                    lastDate = new SimpleDateFormat("yyyy-MM-dd").parse(lastDate1);
+                }
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-
-            //UsefulDocument document=new UsefulDocument(author,title,model,infor,firstDate,lastDate);
-            UsefulDocument document=new UsefulDocument(author, title, model, infor,
-                                            null, null, firstDate, lastDate);
-            documentPage = documentService.activeSearch(document,currentPage-1,size);
+            //空搜
+            if(StringUtil.isNull(author)&&StringUtil.isNull(infor)&&StringUtil.isNull(title)&&StringUtil.isNull(model)&&StringUtil.isNull(firstDate1)&&StringUtil.isNull(lastDate1)){
+                //日志
+                logger.info("无关键词搜索--默认按权限获取文档");
+                documentPage=documentService.selectByRole(user,currentPage-1,size,documentRepository);
+            }
+            else {
+                //日志
+                logger.info("---高级查询---");
+                UsefulDocument document = new UsefulDocument(author, title, model, infor,
+                        firstDate, lastDate);
+                documentPage = documentService.activeSearch(document, currentPage - 1, size,documentRepository);
+            }
         }
 
         //剔除文档内容，传送轻便
@@ -173,7 +198,7 @@ public class DocumnetController {
                 document.setModifyDate(new Date());
             }
         }
-        //新建文档(所以前端新建文档时，传的id要为空)
+        //新建文档(所以前端新建文档时，传的id要为空，即使id被有意篡改也不会覆盖到原有数据)
         else{
             logger.info("新建文档：model="+group+"title="+title);
             document = new Document();
@@ -196,7 +221,7 @@ public class DocumnetController {
             logger.info("成功保存文档！");
         }else{
             map.put("result", 0);
-            map.put("message", "保存文档失败！");
+            map.put("message", "文档更新失败,请确认文档是否存在！");
             logger.error("保存文档失败！");
         }
         map.put("data",document);

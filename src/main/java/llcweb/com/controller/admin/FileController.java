@@ -6,7 +6,7 @@ import llcweb.com.domain.entity.UsefulFile;
 import llcweb.com.domain.models.File;
 import llcweb.com.domain.models.Users;
 import llcweb.com.exception.BusinessException;
-import llcweb.com.service.ResourceService;
+import llcweb.com.service.FileService;
 import llcweb.com.service.UsersService;
 import llcweb.com.tools.StringUtil;
 import org.slf4j.Logger;
@@ -45,7 +45,7 @@ public class FileController {
     @Autowired
     private UsersService usersService;
     @Autowired
-    private ResourceService<File> resourceService;
+    private FileService fileService;
     @Autowired
     private FileRepository fileRepository;
 
@@ -121,7 +121,7 @@ public class FileController {
             path=file.getPath();
             //删除文件
             try {
-                resourceService.deleteResource(path);
+                fileService.deleteResource(path);
             } catch (FileNotFoundException e) {
                 map.put("result",0);
                 map.put("message","项目中不存在该文件！");
@@ -135,7 +135,7 @@ public class FileController {
         }
         try {
             //返回文件路径
-            path=resourceService.saveResource(multipartFile,file);
+            path=fileService.saveResource(multipartFile,file);
         } catch (BusinessException e) {
             e.printStackTrace();
             map.put("result",0);
@@ -167,7 +167,7 @@ public class FileController {
                 return map;
             }
             try {
-                resourceService.deleteResource(file.getPath());
+                fileService.deleteResource(file.getPath());
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
                 map.put("result",0);
@@ -221,9 +221,13 @@ public class FileController {
             String searchValue=request.getParameter("fuzzy");
             //空搜
             if(StringUtil.isNull(searchValue)){
-                filePage=resourceService.selectByRole(user,currentPage-1,size,fileRepository);
+                //日志
+                logger.info("无关键词搜索--默认按权限获取文档");
+                filePage=fileService.selectByRole(user,currentPage-1,size,fileRepository);
             }
             else {
+                //日志
+                logger.info("模糊查询---关键词："+searchValue);
                 Pageable pageable = new PageRequest(currentPage - 1, size, Sort.Direction.DESC, "date");
                 filePage = fileRepository.fuzzySearch(searchValue, pageable);
             }
@@ -251,12 +255,13 @@ public class FileController {
 
             //空搜
             if(StringUtil.isNull(author)&&StringUtil.isNull(introduction)&&StringUtil.isNull(model)&&StringUtil.isNull(firstDate1)&&StringUtil.isNull(lastDate1)){
-                //imagePage=resourceService.selectByRole(user,currentPage-1,size);
-                filePage=resourceService.selectByRole(user,currentPage-1,size,fileRepository);
+                filePage=fileService.selectByRole(user,currentPage-1,size,fileRepository);
             }
             else {
+                //日志
+                logger.info("---高级查询---");
                 UsefulFile file = new UsefulFile(author, model, introduction, firstDate, lastDate);
-                filePage = resourceService.activeSearch(file, currentPage - 1, size, fileRepository);
+                filePage = fileService.activeSearch(file, currentPage - 1, size, fileRepository);
             }
         }
 
@@ -293,7 +298,7 @@ public class FileController {
             map.put("message","找不到文件！");
         }else{ //获取文件输出流
             try {
-                resourceService.getOutputStream(file.getPath(),response);
+                fileService.getOutputStream(file.getPath(),response);
             } catch (FileNotFoundException e) {
                 map.put("result",0);
                 map.put("message","找不到该文件！");

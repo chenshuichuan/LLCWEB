@@ -11,6 +11,7 @@ import java.util.Date;
 @Entity
 @Table(name="image")
 public class Image extends Resource {
+
     //照片描述
     private String description;
     //照片地址

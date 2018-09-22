@@ -71,8 +71,18 @@ public class ResourceServiceImpl<T> implements ResourceService<T> {
                     Predicate like = cb.like(root.get("infor"),"%"+resource.getInfo()+"%");
                     predicates.add(like);
                 }
-                //？？？
-                return cb.and(predicates.toArray(new Predicate[0]));
+                if(StringUtil.isNull(resource.getDescription())){
+                    Predicate like = cb.like(root.get("description"),"%"+resource.getDescription()+"%");
+                    predicates.add(like);
+                }
+                if(StringUtil.isNull(resource.getIntroduction())){
+                    Predicate like = cb.like(root.get("introduction"),"%"+resource.getIntroduction()+"%");
+                    predicates.add(like);
+                }
+
+                //将List转换为数组
+                return cb.and(predicates.toArray(new Predicate[0])); // toArray(数组)：将调用方法的对象转换为数组，
+                                                                     // 并存储到传入的数组中；若数组空间不足则重新创造一个数组并返回
             }
 
         };

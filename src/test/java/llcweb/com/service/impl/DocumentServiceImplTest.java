@@ -1,5 +1,6 @@
 package llcweb.com.service.impl;
 
+import llcweb.com.dao.repository.DocumentRepository;
 import llcweb.com.dao.repository.UsersRepository;
 import llcweb.com.domain.entity.UsefulDocument;
 import llcweb.com.domain.models.Document;
@@ -33,6 +34,8 @@ public class DocumentServiceImplTest {
     @Autowired
     private DocumentService documentService;
     @Autowired
+    private DocumentRepository documentRepository;
+    @Autowired
     private UsersRepository usersRepository;
 
     private Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse("2018-08-21");
@@ -44,15 +47,15 @@ public class DocumentServiceImplTest {
     @Test
     public void selectAllTest() throws Exception{
         Users user=usersRepository.findByUsername("user1");
-        Page<Document> documents=documentService.selectByRole(user,0,10);
+        Page<Document> documents=documentService.selectByRole(user,0,10,documentRepository);
         Assert.assertThat(documents.getTotalElements(),is(2L));
     }
 
     @Test
     public void activeSearch() throws Exception{
         //UsefulDocument document=new UsefulDocument("haien",null,null,null,date1,date2);
-        UsefulDocument document=new UsefulDocument("haien", null, null, null, null, null, date1, date1);
-        Page<Document> documents=documentService.activeSearch(document,0,10);
+        UsefulDocument document=new UsefulDocument("haien", null, null, null, date1, date1);
+        Page<Document> documents=documentService.activeSearch(document,0,10,documentRepository);
         Assert.assertThat(documents.getTotalElements(),is(3L));
     }
 }

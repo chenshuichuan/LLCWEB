@@ -60,7 +60,7 @@ public class ImageRepositoryTest {
         image.setFirstDate(date1);
         image.setLastDate(date2);
         //document.setAuthor("haien2");
-        Page<Image> images= imageService.activeSearch(image,1,3);
+        Page<Image> images= imageService.activeSearch(image,1,3,imageRepository);
         Assert.assertThat(images.getTotalElements(),is(4L));
     }
 

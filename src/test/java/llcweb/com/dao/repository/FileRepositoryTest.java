@@ -41,7 +41,7 @@ public class FileRepositoryTest {
         file.setFirstDate(new SimpleDateFormat("yyyy-MM-dd").parse("2018-08-22"));
         file.setLastDate(new SimpleDateFormat("yyyy-MM-dd").parse("2018-08-25"));
         file.setAuthor("haien");
-        Page<File> files=fileService.activeSearch(file,0,3);
+        Page<File> files=fileService.activeSearch(file,0,3,fileRepository);
         Assert.assertThat(files.getTotalElements(),is(1L));
     }
 

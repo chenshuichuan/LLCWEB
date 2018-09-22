@@ -124,7 +124,7 @@ public class DocumnetController {
                 //日志
                 logger.info("---高级查询---");
                 UsefulDocument document = new UsefulDocument(author, title, model, infor,
-                        firstDate, lastDate);
+                                                            firstDate, lastDate);
                 documentPage = documentService.activeSearch(document, currentPage - 1, size,documentRepository);
             }
         }

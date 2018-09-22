@@ -25,7 +25,7 @@ public class ImageServiceImplTest {
     @Test
     public void deleteImg() throws FileNotFoundException, BusinessException {
         Image image=imageRepository.findOne(10);
-        imageService.deleteImg(image.getPath());
+        imageService.deleteResource(image.getPath());
     }
 
 }

@@ -13,7 +13,6 @@ import java.io.InputStream;
  * @Date 2018/9/6
  **/
 public class ImageUtil {
-
     /**
      * @Author haien
      * @Description 判断是否图片

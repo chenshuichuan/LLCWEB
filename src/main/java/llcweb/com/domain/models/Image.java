@@ -1,9 +1,6 @@
 package llcweb.com.domain.models;
-/***********************************************************************
- * Module:  Image.java
- * Author:  Ricardo
- * Purpose: Defines the Class Image
- ***********************************************************************/
+
+import llcweb.com.domain.entity.Resource;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -13,43 +10,22 @@ import java.util.Date;
  */
 @Entity
 @Table(name="image")
-public class Image {
-    //图片主键
-    @Id
-    @GeneratedValue
-    private int id;
-    //照片描述(相当于标题）
+public class Image extends Resource {
+
+    //照片描述
     private String description;
-    //照片日期
-    @Column(columnDefinition="DATE")
-    private Date date;
-    //照片拥有者、或是上传者id
-    private int ownerId;
-    //照片拥有者、或是上传者
-    private String owner;
     //照片地址
     private String path;
-    //组别
-    private String model;
-
+    //原文件名
+    private String originalName;
 
     public Image() {
     }
 
-    public Image(String description, Date date, String owner, int ownerId, String model) {
+    public Image(String description, Date createDate, String author, int authorId, String model,String originalName) {
+        super(createDate,model,author,authorId);
         this.description = description;
-        this.date = date;
-        this.owner = owner;
-        this.ownerId = ownerId;
-        this.model = model;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+        this.originalName = originalName;
     }
 
     public String getDescription() {
@@ -60,30 +36,6 @@ public class Image {
         this.description = description;
     }
 
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public int getOwnerId() {
-        return ownerId;
-    }
-
-    public void setOwnerId(int ownerId) {
-        this.ownerId = ownerId;
-    }
-
-    public String getOwner() {
-        return owner;
-    }
-
-    public void setOwner(String owner) {
-        this.owner = owner;
-    }
-
     public String getPath() {
         return path;
     }
@@ -92,23 +44,11 @@ public class Image {
         this.path = path;
     }
 
-    public String getModel() {
-        return model;
+    public String getOriginalName() {
+        return originalName;
     }
 
-    public void setModel(String model) {
-        this.model = model;
-    }
-
-    @Override
-    public String toString() {
-        return "Image{" +
-                "id=" + id +
-                ", description='" + description  +
-                ", date=" + date +
-                ", ownerId=" + ownerId +
-                ", owner='" + owner +
-                ", path='" + path +
-                '}';
+    public void setOriginalName(String originalName) {
+        this.originalName = originalName;
     }
 }

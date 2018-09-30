@@ -9,57 +9,12 @@ import java.util.Date;
  * @Param
  * @return
  **/
-public class UsefulImage {
-
-    public String description;
-
-    //搜索时间段
-    public Date firstDate;
-    public Date lastDate;
-
-    public String owner;
-    public String model;
+public class UsefulImage extends UsefulResource {
 
     public UsefulImage() {
     }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Date getFirstDate() {
-        return firstDate;
-    }
-
-    public void setFirstDate(Date firstDate) {
-        this.firstDate = firstDate;
-    }
-
-    public Date getLastDate() {
-        return lastDate;
-    }
-
-    public void setLastDate(Date lastDate) {
-        this.lastDate = lastDate;
-    }
-
-    public String getOwner() {
-        return owner;
-    }
-
-    public void setOwner(String owner) {
-        this.owner = owner;
-    }
-
-    public String getModel() {
-        return model;
-    }
-
-    public void setModel(String model) {
-        this.model = model;
+    public UsefulImage(String author, String model, String description,
+                       Date firstDate, Date lastDate) {
+        super(author, null, model, null, description, null, firstDate, lastDate);
     }
 }

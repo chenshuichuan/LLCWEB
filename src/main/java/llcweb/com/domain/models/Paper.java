@@ -1,12 +1,7 @@
 package llcweb.com.domain.models; 
 
-import java.util.*;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.Date;
 @Entity
 @Table(name="paper")
 public class Paper {
@@ -46,6 +41,8 @@ public class Paper {
 	    @Column(name = "periodical", length = 64)
 	    private String periodical;
 
+	public Paper() {
+	}
 
 	public Integer getId() {
 		return id;

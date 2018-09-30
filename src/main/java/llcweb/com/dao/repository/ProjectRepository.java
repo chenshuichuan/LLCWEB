@@ -27,17 +27,7 @@ public interface ProjectRepository extends JpaRepository<Project,Integer>{
 	
     Page<Project> findByTeam(String team,Pageable pageable);
     
-	
-<<<<<<< HEAD
-=======
-//	//模糊查询
-//	@Query("from Project p where p.responsiblePerson like %?1%"
-//			+ "or p.requireNum like %?1%"
-//			+ "or p.projectType like %?1%"
-//			+ "or p.projectName like %?1%")
-//	Page<Project> findByOneKey(String key, Pageable pageable);
 
->>>>>>> 5e07cb37f22ed182747bb81e718abb7e71e1b6ed
 }
 
 

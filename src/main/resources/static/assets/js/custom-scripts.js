@@ -50,5 +50,6 @@
     });
 
 	$(".dropdown-button").dropdown();
-	
+	//启用页面上的所有提示工具
+    $(function () { $("[data-toggle='tooltip']").tooltip(); });
 }(jQuery));

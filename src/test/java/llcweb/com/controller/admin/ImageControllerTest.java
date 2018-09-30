@@ -1,7 +1,6 @@
 package llcweb.com.controller.admin;
 
-import llcweb.com.exception.BusinessException;
-
+import llcweb.com.domain.entity.BusinessException;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -45,13 +44,13 @@ public class ImageControllerTest {
      **/
     @WithUserDetails(value="admin",userDetailsServiceBeanName = "loginServiceImpl")
     public void uploadImageTest() throws BusinessException{
-        File file=new File("./data/puchijun.jpg");
+        File file=new File("./data/001_商城的演示.avi");
         try {
             mvc.perform(
                     MockMvcRequestBuilders
                         .fileUpload("/image/upload?group=数据组&description=hello")
                         .file(
-                                new MockMultipartFile("file","puchijun.jpg",
+                                new MockMultipartFile("file","001_商城的演示.avi",
                                             "multipart/form-data",new FileInputStream(file))
                         )       //name:转换后的文件名（不知何故只能写file）originalFilename：原文件名称
                                 //contentType：转换后的文件类型 FileInputStream：文件输入流

@@ -1,12 +1,10 @@
 package llcweb.com.domain.entity;
 
-import java.util.Date;
-
 /**
  * 封装搜索信息的会议类
  */
-public class UsefulConference {
-
+public class UsefulConference extends Resource{
+   /*
     //会议名称
    private String title;
    //搜索日期
@@ -76,5 +74,5 @@ public class UsefulConference {
 
    public void setAuthor(String author) {
       this.author = author;
-   }
+   }*/
 }

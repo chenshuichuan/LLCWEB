@@ -1,11 +1,14 @@
 package llcweb.com.dao.repository;
 
-import llcweb.com.domain.models.Paper;
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+
+import llcweb.com.domain.models.Paper;
 
 /**
  * Created by:Tong

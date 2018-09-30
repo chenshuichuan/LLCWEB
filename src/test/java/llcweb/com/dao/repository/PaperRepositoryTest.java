@@ -1,22 +1,25 @@
 package llcweb.com.dao.repository;
 
-import llcweb.com.domain.entity.UsefulPaper;
-import llcweb.com.domain.models.Paper;
-import llcweb.com.service.PaperService;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.notNullValue;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Slice;
+import org.springframework.data.domain.Sort;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.notNullValue;
+import llcweb.com.domain.entity.UsefulPaper;
+import llcweb.com.domain.models.Paper;
+import llcweb.com.service.PaperService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -55,4 +58,10 @@ public class PaperRepositoryTest {
 	        Assert.assertThat(paperList.getTotalElements(),is(91L));
 	        System.out.println(((Slice<Paper>) paper).getSort());
 	    }
+/*	   
+	    @Test
+	    public void findByOneKey(){
+	        Page<Paper> paperList = paperRepository.findByOneKey("sci",new PageRequest(0,10, Sort.Direction.DESC,"date"));
+	        Assert.assertThat(paperList.getTotalElements(),is(12L));
+	    }*/
 }

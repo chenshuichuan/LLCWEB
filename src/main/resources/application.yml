@@ -3,4 +3,4 @@ image:
   location: ./images
 #文件保存路径
 file:
-  location: ./files
+  location:./files

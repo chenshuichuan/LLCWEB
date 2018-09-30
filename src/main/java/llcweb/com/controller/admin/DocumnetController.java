@@ -1,21 +1,15 @@
-
 package llcweb.com.controller.admin;
 
 import llcweb.com.dao.repository.DocumentRepository;
 import llcweb.com.domain.entities.DocumentInfo;
 import llcweb.com.domain.entity.UsefulDocument;
 import llcweb.com.domain.models.Document;
-import llcweb.com.domain.models.Users;
 import llcweb.com.service.DocumentService;
 import llcweb.com.service.UsersService;
-import llcweb.com.tools.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -58,21 +52,15 @@ public class DocumnetController {
 
         //直接返回前台
         String draw = request.getParameter("draw");
-        //当前数据的起始位置
+        //当前数据的起始位置 ，如第10条
         String startIndex = request.getParameter("startIndex");
         //数据长度
         String pageSize = request.getParameter("pageSize");
-        //模糊|高级查询标志
-        String fuzzy = request.getParameter("fuzzySearch");
-        if(draw==null||startIndex==null||pageSize==null){
-            map.put("result", 0);
-            map.put("message", "参数不完整！");
-            return map;
-        }
         int size = Integer.parseInt(pageSize);
         //页码
         int currentPage = Integer.parseInt(startIndex)/size+1;
-        Users user=usersService.getCurrentUser();
+        //关键词
+        String fuzzy = request.getParameter("fuzzySearch");
 
         logger.info("size = "+size+",currentPage = "+currentPage);
 
@@ -80,21 +68,10 @@ public class DocumnetController {
         //模糊查找
         if("true".equals(fuzzy)){
             String searchValue=request.getParameter("fuzzy");
-            //空搜
-            if(StringUtil.isNull(searchValue)){
-                //日志
-                logger.info("无关键词搜索--默认按权限获取文档");
-                documentPage=documentService.selectByRole(user,currentPage-1,size,documentRepository);
-            }
-            //日志
-            logger.info("模糊查询---关键词："+searchValue);
-            Pageable pageable=new PageRequest(currentPage-1,size, Sort.Direction.DESC,"createDate");
-            documentPage = documentRepository.fuzzySearch(searchValue,pageable);
+            documentPage = documentService.fuzzySearch(currentPage-1,size,searchValue);
         }
         //高级查找
         else{
-            //日志
-            logger.info("---高级查询---");
             String author=request.getParameter("author");
             String infor=request.getParameter("infor");
             String model=request.getParameter("model");
@@ -105,28 +82,14 @@ public class DocumnetController {
             Date firstDate=null;
             Date lastDate=null;
             try {
-                if(StringUtil.isNull(firstDate1)){
-                    firstDate=new SimpleDateFormat("yyyy-MM-dd").parse(firstDate1);
-                }
-                if(StringUtil.isNull(lastDate1)) {
-                    lastDate = new SimpleDateFormat("yyyy-MM-dd").parse(lastDate1);
-                }
+                firstDate=new SimpleDateFormat("yyyy-MM-dd").parse(firstDate1);
+                lastDate=new SimpleDateFormat("yyyy-MM-dd").parse(lastDate1);
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-            //空搜
-            if(StringUtil.isNull(author)&&StringUtil.isNull(infor)&&StringUtil.isNull(title)&&StringUtil.isNull(model)&&StringUtil.isNull(firstDate1)&&StringUtil.isNull(lastDate1)){
-                //日志
-                logger.info("无关键词搜索--默认按权限获取文档");
-                documentPage=documentService.selectByRole(user,currentPage-1,size,documentRepository);
-            }
-            else {
-                //日志
-                logger.info("---高级查询---");
-                UsefulDocument document = new UsefulDocument(author, title, model, infor,
-                                                            firstDate, lastDate);
-                documentPage = documentService.activeSearch(document, currentPage - 1, size,documentRepository);
-            }
+
+            UsefulDocument document=new UsefulDocument(author,title,model,infor,firstDate,lastDate);
+            documentPage = documentService.activeSearch(document,currentPage-1,size);
         }
 
         //剔除文档内容，传送轻便
@@ -149,10 +112,8 @@ public class DocumnetController {
     @RequestMapping(value = "/getDocumentById",method = RequestMethod.GET)
     @ResponseBody
     public Map<String,Object> getDocumById(HttpServletRequest request, HttpServletResponse response,
-                                           @RequestParam("id")Integer id){
+                                              @RequestParam("id")int id){
         Map<String,Object> map =new HashMap<String,Object>();
-
-        logger.info("---浏览文档：id="+id+"---");
 
         Document document = documentRepository.findOne(id);
         if(document!=null){
@@ -181,47 +142,31 @@ public class DocumnetController {
         String title = request.getParameter("title");
         String infor = request.getParameter("infor");
         String group = request.getParameter("group");
-        Users user=usersService.getCurrentUser();
-        String userName=user.getUsername();
-        int userId=user.getId();
-
         Document document;
         boolean flag = true;
 
         //更新文档
         if (id!=null&&!id.equals("")&&Integer.parseInt(id)>0){
-            logger.info("更新文档：id="+id+"model="+group+"title="+title);
-            document = documentRepository.findOne(Integer.parseInt(id));
+             document = documentRepository.findOne(Integer.parseInt(id));
             if(document==null){
                 flag= false;
-            }else {
-                document.setModifyDate(new Date());
             }
         }
-        //新建文档(所以前端新建文档时，传的id要为空，即使id被有意篡改也不会覆盖到原有数据)
-        else{
-            logger.info("新建文档：model="+group+"title="+title);
-            document = new Document();
-            document.setCreateDate(new Date());
-            //新建时要加一个修改时间吗？
-            document.setModifyDate(new Date());
-        }
+        //新建文档 所以前端新建文档时，传的id要为空
+        else document = new Document();
 
         if(flag){
             document.setContent(content);
             document.setTitle(title);
             document.setInfor(infor);
             document.setModel(group);
-            document.setAuthor(userName);
-            document.setAuthorId(userId);
-
             documentRepository.save(document);
             map.put("result", 1);
             map.put("message", "成功保存文档！");
             logger.info("成功保存文档！");
         }else{
             map.put("result", 0);
-            map.put("message", "文档更新失败,请确认文档是否存在！");
+            map.put("message", "保存文档失败！");
             logger.error("保存文档失败！");
         }
         map.put("data",document);
@@ -235,18 +180,13 @@ public class DocumnetController {
     @ResponseBody
     public Map<String,Object> delete(@RequestParam("id")Integer id){
         Map<String,Object> map=new HashMap<>();
-
-        logger.info("删除文档：id="+id);
-
         Document document=documentRepository.findOne(id);
         if (document == null) {
             map.put("result", 0);
-            logger.info("删除文档失败");
             map.put("message", "删除文档失败！");
             logger.error("删除文档失败！");
         }else{
             documentRepository.delete(id);
-            logger.info("删除文档成功");
             map.put("result", 1);
             map.put("message", "成功删除文档！");
             logger.info("成功删除文档！");

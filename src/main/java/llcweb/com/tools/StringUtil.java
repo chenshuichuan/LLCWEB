@@ -17,9 +17,9 @@ public class StringUtil {
 	public static boolean isNull(String obj) {
 		if (obj == null){
 			return true;
-		}else if (obj.trim().equals("")){ //String.tirm() 去除字符串首尾空格
+		}else if (obj.toString().trim().equals("")){
 			return true;
-		}else if(obj.trim().toLowerCase().equals("null")){
+		}else if(obj.toString().trim().toLowerCase().equals("null")){
 			return true;
 		}
 		
@@ -68,28 +68,5 @@ public class StringUtil {
 			return false;
 		}
 		return true;
-	}
-	/**
-	 * 正则验证用户名是否合格
-	 * @param userName
-	 * @return
-	 */
-	public static boolean isUserName(String userName) {
-		Pattern pattern = Pattern.compile("^[\\u4E00-\\u9FA5\\w]{1,}$");
-		Matcher match = pattern.matcher(userName);
-
-		return match.matches();
-	}
-
-	/**
-	 * 正则验证密码是否合格
-	 * @param password
-	 * @return
-	 */
-	public static boolean isPassword(String password) {
-		Pattern pattern = Pattern.compile("^\\w+$");
-		Matcher match = pattern.matcher(password);
-
-		return match.matches();
 	}
 }

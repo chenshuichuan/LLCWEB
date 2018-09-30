@@ -1,4 +1,8 @@
-package llcweb.com.domain.models;
+package llcweb.com.domain.models; /***********************************************************************
+ * Module:  Document.java
+ * Author:  Ricardo
+ * Purpose: Defines the Class Document
+ ***********************************************************************/
 
 import javax.persistence.*;
 import java.util.Date;
@@ -48,7 +52,6 @@ public  class Document {
    public Integer getId() {
       return id;
    }
-
    public void setId(Integer id) {
       this.id = id;
    }
@@ -117,4 +120,17 @@ public  class Document {
         this.model = model;
     }
 
+    @Override
+   public String toString() {
+      return "Document{" +
+              "id=" + id +
+              ", authorId=" + authorId +
+              ", author='" + author +
+              ", title='" + title +
+              ", content='" + content +
+              ", createDate=" + createDate +
+              ", modifyDate=" + modifyDate +
+              ", infor='" + infor +
+              '}';
+   }
 }

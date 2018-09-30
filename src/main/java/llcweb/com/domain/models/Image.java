@@ -1,6 +1,9 @@
 package llcweb.com.domain.models;
-
-import llcweb.com.domain.entity.Resource;
+/***********************************************************************
+ * Module:  Image.java
+ * Author:  Ricardo
+ * Purpose: Defines the Class Image
+ ***********************************************************************/
 
 import javax.persistence.*;
 import java.util.Date;
@@ -10,22 +13,43 @@ import java.util.Date;
  */
 @Entity
 @Table(name="image")
-public class Image extends Resource {
-
-    //照片描述
+public class Image {
+    //图片主键
+    @Id
+    @GeneratedValue
+    private int id;
+    //照片描述(相当于标题）
     private String description;
+    //照片日期
+    @Column(columnDefinition="DATE")
+    private Date date;
+    //照片拥有者、或是上传者id
+    private int ownerId;
+    //照片拥有者、或是上传者
+    private String owner;
     //照片地址
     private String path;
-    //原文件名
-    private String originalName;
+    //组别
+    private String model;
+
 
     public Image() {
     }
 
-    public Image(String description, Date createDate, String author, int authorId, String model,String originalName) {
-        super(createDate,model,author,authorId);
+    public Image(String description, Date date, String owner, int ownerId, String model) {
         this.description = description;
-        this.originalName = originalName;
+        this.date = date;
+        this.owner = owner;
+        this.ownerId = ownerId;
+        this.model = model;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getDescription() {
@@ -36,6 +60,30 @@ public class Image extends Resource {
         this.description = description;
     }
 
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public int getOwnerId() {
+        return ownerId;
+    }
+
+    public void setOwnerId(int ownerId) {
+        this.ownerId = ownerId;
+    }
+
+    public String getOwner() {
+        return owner;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
+    }
+
     public String getPath() {
         return path;
     }
@@ -44,11 +92,23 @@ public class Image extends Resource {
         this.path = path;
     }
 
-    public String getOriginalName() {
-        return originalName;
+    public String getModel() {
+        return model;
     }
 
-    public void setOriginalName(String originalName) {
-        this.originalName = originalName;
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    @Override
+    public String toString() {
+        return "Image{" +
+                "id=" + id +
+                ", description='" + description  +
+                ", date=" + date +
+                ", ownerId=" + ownerId +
+                ", owner='" + owner +
+                ", path='" + path +
+                '}';
     }
 }

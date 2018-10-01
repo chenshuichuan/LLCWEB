@@ -19,7 +19,7 @@
             th:herf="@{home/js/jquery-1.12.4.min.js}"></script>
     <!--<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
 <body>
-<div class="public-header">
+<div class="public-header" th:fragment="header_template">
     <div class="public-header-top">
         <div class="public-container">
             <div class="public-left">
@@ -99,5 +99,3 @@
 </div>
 </body>
 </html>
-
-

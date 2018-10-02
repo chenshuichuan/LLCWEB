@@ -1,6 +1,14 @@
+
 #图片保存路径
 image:
   location: ./images
 #文件保存路径
 file:
   location: ./files
+  url: McAf9AJmcH3c86M_b4FM_Z0RQg45vgaDmBBbI2u3
+#七牛云
+qiniu:
+  accessKey: McAf9AJmcH3c86M_b4FM_Z0RQg45vgaDmBBbI2u3
+  secretKey: j2AjkfuUscIwyIEJ1n6Yc4tsJTjPJIEPR0YyGF1P
+  bucket: llcweb
+  path: pfrai6t0h.bkt.clouddn.com

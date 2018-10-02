@@ -92,4 +92,5 @@ public class StringUtil {
 
 		return match.matches();
 	}
+
 }

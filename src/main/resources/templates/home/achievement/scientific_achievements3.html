@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head lang="en">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
@@ -23,88 +23,7 @@
     <script src="../../../static/home/Scripts/jquery.paginate.js" th:href="@{/Scripts/jquery.paginate.js}"></script>
 </head>
 <body>
-<div class="public-header">
-    <div class="public-header-top">
-        <div class="public-container">
-            <div class="public-left">
-                <p>欢迎访问广东省信息物理融合系统重点实验室官网</p>
-            </div>
-            <ul class="public-header-list">
-                <li><a href="#">登录</a></li>
-                <li><a href="../contact_us.html">联系我们</a></li>
-            </ul>
-        </div>
-    </div>
-    <div class="public-header-middle public-container clearfix">
-        <div class="public-left">
-            <div class="logo">
-                <a href=""></a>
-            </div>
-        </div>
-        <div class="public-middle">
 
-        </div>
-        <div class="public-right">
-            <div class="public-search" style="margin-right: 40px;">
-              <input type="text" class="public-input-text">
-              <input type="submit" class="public-input-btn" value>
-
-
-
-
-          </div>
-        </div>
-    </div>
-    <div class="public-nav">
-        <ul>
-            <li class="item">
-                <a href="../index.html" class="hon">首页</a>
-            </li>
-            <li class="item">
-                <a href="../Team_introduction.html" class="hon">实验室概况</a>
-                <ul class="subnav">
-                    <li><a href="../Team_introduction.html" class="hon1">团队简介</a></li>
-                    <li><a href="../Institutional_profile.html" class="hon1">机构简介</a></li>
-                    <li><a href="../project_brief.html" class="hon1">项目简介</a></li>
-
-                </ul>
-            </li>
-            <li class="item">
-                <a href="../Research_Team.html" class="hon">科研团队</a>
-                <ul class="subnav">
-                    <li><a href="../Professor.html" class="hon1">教授</a></li>
-                    <li><a href="../Associate_professor.html" class="hon1">副教授</a></li>
-                    <li><a href="../Lecturer.html" class="hon1">讲师</a></li>
-
-                </ul>
-            </li>
-            <li class="item">
-                <a href="../Research_Project.html" class="hon">科学研究</a>
-
-            </li>
-            <li class="item">
-                <a href="../Academic_communication.html" class="hon">学术交流</a>
-            </li>
-            <li class="item">
-                <a href="../scientific_achievements.html" class="hon">科研成果</a>
-            </li>
-            <li class="item">
-                <a href="../Talent_training.html" class="hon">人才培养</a>
-                <ul class="subnav" >
-                    <li><a href="../postdoctor.html" class="hon1">博士后</a></li>
-                    <li><a href="../doctor.html" class="hon1">博士</a></li>
-                    <li><a href="../graduate.html" class="hon1">研究生</a></li>
-                </ul>
-            </li>
-            <li class="item">
-                <a href="../Cultural_activity.html" class="hon">文化活动</a>
-            </li>
-            <li class="item">
-                <a href="../Talent_recruitment.html" class="hon">人才招聘</a>
-            </li>
-        </ul>
-    </div>
-</div>
 
 
 
@@ -118,74 +37,7 @@
 <div class="middle">
     <div class="container middle_container">
         <div class="middle_content">
-            <div class="middle_l" id="temlate_middle">
-                <!-- <h1><span>机构概况</span></h1> -->
-                <ul id='resultType' class="tmo_list2">
-                    <li class="ll first"><span>科研成果</span></li>
-                    <li class='ll'>
-                        <a href='../scientific_achievements.html' class='ll_ref'>
-                            <i></i>
-                            <span>曾获奖项</span>
-                        </a>
-                    </li>
-                    <li class='ll'>
-                        <a href='scientific_achievements1.html' class='ll_ref'>
-                            <i></i>
-                            <span>发表论文</span>
-                        </a>
-                    </li>
-                    <li class='ll'>
-                        <a href='scientific_achievements2.html' class='ll_ref'>
-                            <i></i>
-                            <span>发表专利</span>
-                        </a>
-                    </li>
-                    <li class='ll'>
-                        <a href='scientific_achievements3.html' class='ll_ref' style="background:#6ad;">
-                            <i></i>
-                            <span>软件著作权</span>
-                        </a>
-                    </li>
-                </ul>
 
-				 <ul style="margin-left: 30px;margin-top: 40px;">
-                    <li>
-                        <span>时间</span>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <span>2018以来</span><i style="margin-left: 70px;">(1013)</i>
-                        </a>
-                    </li>
-                    <li>
-                       <a href="#">
-                            <span>2017以来</span><i style="margin-left: 70px;">(990)</i>
-                        </a>
-                    </li>
-                    <li>
-                       <a href="#">
-                            <span>2016以来</span><i style="margin-left: 70px;">(890)</i>
-                        </a>
-                    </li>
-                    <!--<li><span>按时间段搜索</span></li>-->
-                    <form>
-                        <input data-nolog="1" pattern="[0-9]*" size="4" placeholder="年" maxlength="4" name="" value="" type="text">
-                        &nbsp;-&nbsp;
-                        <input data-nolog="1" pattern="[0-9]*" size="4" placeholder="年" maxlength="4" name="" value="" type="text">
-                        <span class="leftnav_year_para" data-type="" data-cate="" data-level=""></span>
-                        <span class="sc-btn leftnav_input_subspan" data-click="{'button_tp':'search_t'}">
-                        <input value="确认" class="leftnav_input_sub" type="submit"></span>
-                    </form>
-                    <!--<li class="ll">-->
-                        <!--<a>-->
-                            <!--<input type="text" id="end" size="14" style="height:20px;" placeholder="结束时间..."-->
-                                   <!--onkeydown='searchByEnter(event)'/>-->
-                        <!--</a>-->
-                    <!--</li>-->
-
-                </ul>
-
-            </div>
             <div class="middle_r">
                 <div class="crumb">
                     <ul id="crumbs">
@@ -251,11 +103,7 @@
         </p>
         </div>
     </div>-->
-<div class="public-footer">
-    <div class="public-text">电话：86-21-21678901&nbsp;&nbsp;&nbsp;邮箱：llcheng@gdut.edu.cn</div>
-    <div class="public-text">地址：广州市番禺区广州大学城外环西路100号&nbsp;&nbsp;&nbsp;邮政编码：51006</div>
-    <div class="public-text">Copyright © 1995-2018 信息物理融合系统广东省重点实验室版权所有&nbsp;&nbsp;&nbsp;备案序号：粤ICP备18032668号-2</div>
-</div>
+
 
 </body>
     <!--二级菜单栏-->

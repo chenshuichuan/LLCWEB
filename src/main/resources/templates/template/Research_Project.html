@@ -3,9 +3,10 @@
 <head lang="en">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
-    <!--<title>LLC实验室网站</title>-->
+    <title>科学研究——广东省信息物理融合系统重点实验室</title>
+
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="shortcut icon" href="../../static/home/images/bitbug_favicon.ico"
+    <link rel="shortcut icon" href="../static/home/images/bitbug_favicon.ico"
           th:href="@{/home/images/bitbug_favicon.ico}"/>
     <link href="../../static/home/css/reset.css" rel="stylesheet"
           th:href="@{/home/css/reset.css}">
@@ -27,54 +28,50 @@
           th:href="@{/home/css/meeting.css}"/>
     <link rel="stylesheet" href="../../static/home/css/style.css" type="text/css"
           th:href="@{/home/css/style.css}"/>
-    <link rel="stylesheet" href="../../static/home/css/papers.css" type="text/css"
-          th:href="@{/home/css/papers.css}"/>
 
 </head>
 <body>
-<div class="middle">
-    <div class="container middle_container">
-        <div class="middle_content">
+<div class="middle_l" id="temlate_middle">
+    <!-- <h1><span>机构概况</span></h1> -->
+    <ul id="lmenu" class="tmo_list2">
+        <li class="ll first"><span>科研项目</span></li>
+        <li class="ll" id="base">
+            <a href="Research_Project.html" class="ll_ref" style="margin-top: 23px; background:#6ad;">
 
-            <div class="middle_r">
-                <div class="crumb">
-                    <ul id="crumbs">
-                        <li><a href="index.html">首页</a></li>
-                        <li><span>&nbsp;/&nbsp;</span></li>
-                        <li><a href="Team_introduction.html">实验室概况</a></li>
-						<li><span>&nbsp;/&nbsp;</span></li>
-                        <li><a href="project_brief.html">项目简介</a></li>
-                    </ul>
-                </div>
+                <span>异构网络互联融合</span>
+            </a>
+        </li>
+        <li class="ll" id="network">
+            <a href="Research/Research_Project1.html" class="ll_ref" >
 
-				<div style="width: 300px;"><img src="../../static/home/images/3.png" th:src="@{home/images/3.png}" style="margin-top: 50px;width: 700px;"></div>
+                <span>工业过程大数据</span>
+            </a>
+        </li>
+        <li class=" ll" id="bigdata">
+            <a href="Research/Research_Project2.html" class="ll_ref">
 
+                <span>高性能计算</span>
+            </a>
+        </li>
+        <li class=" ll" id="machine">
+            <a href="Research/Research_Project3.html" class="ll_ref">
 
+                <span>智能制造与知识自动化</span>
+            </a>
+        </li>
+        <li class="ll" id="system">
+            <a href="Research/Research_Project4.html" class="ll_ref">
 
-            </div>
-        </div>
-    </div>
+                <span>智能装备与机器人系统</span>
+            </a>
+        </li>
+        <li class="ll" id="system">
+            <a href="Research/Research_Project5.html" class="ll_ref">
+
+                <span>工控系统安全</span>
+            </a>
+        </li>
+    </ul>
 </div>
-
-
-
-
-
-
-
-
 </body>
-    <!--二级菜单栏-->
-    <script>
-     $(function(){
-             $(".public-nav li:has(ul)").hover(function() {
-             $(this).find("a:first").css("background-color","#00428f");
-                 $(this).find(".subnav").css("display","block");
-
-         },function() {
-             $(this).find("a:first").css("background-color","#035ba6");
-             $(this).find(".subnav").css("display","none");
-         })
-     });
-    </script>
 </html>

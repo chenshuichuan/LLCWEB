@@ -151,13 +151,6 @@
             <scope>compile</scope>
         </dependency>
 
-        <!--搭建七牛云空间上传图片-->
-        <dependency>
-            <groupId>com.qiniu</groupId>
-            <artifactId>qiniu-java-sdk</artifactId>
-            <version>7.2.11</version>
-        </dependency>
-
     </dependencies>
 
     <build>

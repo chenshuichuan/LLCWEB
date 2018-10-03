@@ -7,20 +7,20 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.*;
 
-/** 用户表
- * 
+/**
+ * 用户表
  */
 @Entity
 @Table(name="users")
 public class Users implements Serializable,UserDetails {
-   /** user id
-    * 
+   /**
+    * user id
     */
    @Id
    @GeneratedValue
    private int id;
-   /** user name
-    * 
+   /**
+    * user name
     */
    private String username;
    //用户密码

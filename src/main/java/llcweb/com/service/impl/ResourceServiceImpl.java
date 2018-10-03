@@ -47,7 +47,7 @@ public class ResourceServiceImpl<T> implements ResourceService<T> {
                 //所有的断言
                 List<Predicate> predicates = new ArrayList<>();
                 //添加断言
-                if (StringUtil.isNull(resource.getAuthor())) {
+                if (!StringUtil.isNull(resource.getAuthor())) {
                     Predicate like = cb.like(root.get("author").as(String.class),"%"+resource.getAuthor()+"%");
                     predicates.add(like);
                 }
@@ -59,23 +59,23 @@ public class ResourceServiceImpl<T> implements ResourceService<T> {
                     Predicate lessThanOrEqualTo = cb.lessThanOrEqualTo(root.get("createDate"), resource.getLastDate());
                     predicates.add(lessThanOrEqualTo);
                 }
-                if (StringUtil.isNull(resource.getTitle())) {
+                if (!StringUtil.isNull(resource.getTitle())) {
                     Predicate like = cb.like(root.get("title"), "%" + resource.getTitle() + "%");
                     predicates.add(like);
                 }
-                if (StringUtil.isNull(resource.getModel())) {
+                if (!StringUtil.isNull(resource.getModel())) {
                     Predicate like = cb.like(root.get("model"), "%" + resource.getModel() + "%");
                     predicates.add(like);
                 }
-                if(StringUtil.isNull(resource.getInfo())){
+                if(!StringUtil.isNull(resource.getInfo())){
                     Predicate like = cb.like(root.get("infor"),"%"+resource.getInfo()+"%");
                     predicates.add(like);
                 }
-                if(StringUtil.isNull(resource.getDescription())){
+                if(!StringUtil.isNull(resource.getDescription())){
                     Predicate like = cb.like(root.get("description"),"%"+resource.getDescription()+"%");
                     predicates.add(like);
                 }
-                if(StringUtil.isNull(resource.getIntroduction())){
+                if(!StringUtil.isNull(resource.getIntroduction())){
                     Predicate like = cb.like(root.get("introduction"),"%"+resource.getIntroduction()+"%");
                     predicates.add(like);
                 }

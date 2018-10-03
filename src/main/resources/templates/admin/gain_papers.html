@@ -53,7 +53,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <!--view panel 展示论文对应的信息-->
-                            <div id="view-panel" class="panel panel-info" style="margin-top:50px;">
+                            <div id="view-panel" class="panel panel-info">
                                 <div class="panel-heading">
                                     <h3 class="panel-title">详细信息</h3>
                                 </div>
@@ -109,7 +109,7 @@
                                 </div>
                             </div>
                             <!--add panel  -->
-                            <div id="add-panel" class="panel panel-primary" style="display: none;margin-top: 50px; ">
+                            <div id="add-panel" class="panel panel-primary" style="display: none;">
                                 <div class="panel-heading">
                                     <h3 class="panel-title">添加论文记录</h3>
                                 </div>
@@ -183,10 +183,10 @@
                                                 <div class="form-group">
                                                     <div class="col-sm-2 ">
                                                     </div>
-                                                    <div class="col-sm-4 ">
+                                                    <div class="col-sm-2 ">
                                                         <button id="btn-add-save" type="button" class="btn btn-info">添加</button>
                                                     </div>
-                                                    <div class="col-sm-4">
+                                                    <div class="col-sm-2">
                                                         <button id="btn-add-cancel" type="button" class="btn btn-warning">取消</button>
                                                     </div>
                                                 </div>
@@ -196,56 +196,88 @@
                                 </div>
                             </div>
                             <!--edit panel-->
-                            <div id="edit-panel" class="panel panel-warning" style="display: none;margin-top: 50px; ">
+                            <div id="edit-panel" class="panel panel-warning" style="display: none;">
                                 <div class="panel-heading">
-                                    <h3 class="panel-title">更改用户</h3>
+                                    <h3 class="panel-title">更改论文信息</h3>
                                 </div>
                                 <div class="panel-body">
                                     <div class="row">
                                         <div class="col-md-12">
                                             <form class="form-horizontal" role="form">
                                                 <div class="form-group">
-                                                    <label class="col-sm-4 control-label">id：</label>
-                                                    <div class="col-sm-8">
-                                                        <input id="edit-id" type="text" class="form-control"  placeholder="id" readonly>
+                                                    <label class="col-sm-2 control-label">ID：</label>
+                                                    <div class="col-sm-1">
+                                                        <input id="edit-id" type="text" class="form-control" readonly>
+                                                    </div>
+                                                    <label class="col-sm-2 control-label">论文题目：</label>
+                                                    <div class="col-sm-7">
+                                                        <input id="edit-title" type="text" class="form-control"  placeholder="论文题目">
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label class="col-sm-4 control-label">用户名：</label>
-                                                    <div class="col-sm-8">
-                                                        <input id="edit-username" type="text" class="form-control"  placeholder="用户名">
+                                                    <label class="col-sm-2 control-label">作者：</label>
+                                                    <div class="col-sm-10">
+                                                        <input id="edit-author" type="text" class="form-control" placeholder="作者(';'符号分隔)">
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label class="col-sm-4 control-label">密码：</label>
-                                                    <div class="col-sm-8">
-                                                        <input id="edit-password" type="password" class="form-control" placeholder="请输入密码">
+                                                    <label class="col-sm-2 control-label">摘要：</label>
+                                                    <div class="col-sm-10">
+                                                        <textarea id="edit-introduction" class="form-control" rows="4"></textarea>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label class="col-sm-4 control-label">角色权限：</label>
-                                                    <div class="col-sm-8">
-                                                        <select id="edit-role" class="form-control large selectpicker" title="选择角色">
-                                                            <option value="0" data-content="<span class='label label-danger'>系统管理员</span>">系统管理员</option>
-                                                            <option value="1" data-content="<span class='label label-info'>项目组长</span>">项目组长</option>
-                                                            <option value="2" data-content="<span class='label label-success'>普通用户</span>">普通用户</option>
+                                                    <label class="col-sm-2 control-label">权限：</label>
+                                                    <div class="col-sm-2">
+                                                        <select id="edit-role" class="form-control large selectpicker" title="选择公开权限">
+                                                            <option value="0" data-content="<span class='label label-danger'>公开</span>">公开</option>
+                                                            <option value="1" data-content="<span class='label label-info'>小组</span>">小组</option>
+                                                            <option value="2" data-content="<span class='label label-success'>私有</span>">私有</option>
                                                         </select>
                                                     </div>
-
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-4 control-label">关联人员id：</label>
-                                                    <div class="col-sm-8">
-                                                        <input id="edit-people" type="password" class="form-control" placeholder="请输入关联人员id">
+                                                    <label class="col-sm-2 control-label">所属项目：</label>
+                                                    <div class="col-sm-6">
+                                                        <select id="edit-belong_project" class="form-control large selectpicker" title="选择所属项目">
+                                                            <option value="数据组项目" >数据组项目</option>
+                                                            <option value="网络组项目" >网络组项目</option>
+                                                            <option value="项目100" >项目100</option>
+                                                        </select>
                                                     </div>
                                                 </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label">原文链接：</label>
+                                                    <div class="col-sm-10">
+                                                        <input id="edit-original_link" type="text" class="form-control" placeholder="原文链接">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label">关联文件：</label>
+                                                    <div class="col-sm-10">
+                                                        <select id="edit-source_file" class="form-control large selectpicker" title="选择关联文件">
+                                                            <option value="0" >无</option>
+                                                            <option value="1" >文件1</option>
+                                                            <option value="2" >文件2</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label">发表期刊：</label>
+                                                    <div class="col-sm-5">
+                                                        <input id="edit-periodical" type="text" class="form-control" placeholder="发表期刊">
+                                                    </div>
+                                                    <label class="col-sm-2 control-label">当前状态：</label>
+                                                    <div class="col-sm-3">
+                                                        <input id="edit-state" type="text" class="form-control" placeholder="撰写、投稿、实审、发表等">
+                                                    </div>
+                                                </div>
+
                                                 <div class="form-group">
                                                     <div class="col-sm-2 ">
                                                     </div>
-                                                    <div class="col-sm-4 ">
-                                                        <button id="btn-edit-save" type="button" class="btn btn-info">保存</button>
+                                                    <div class="col-sm-2 ">
+                                                        <button id="btn-edit-save" type="button" class="btn btn-info">添加</button>
                                                     </div>
-                                                    <div class="col-sm-4">
+                                                    <div class="col-sm-2">
                                                         <button id="btn-edit-cancel" type="button" class="btn btn-warning">取消</button>
                                                     </div>
                                                 </div>
@@ -257,7 +289,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-7">
+                        <div class="col-md-10">
                             <form class="form-inline" role="form" style="float: right;">
                                 <div class="form-group">
                                     <label class="sr-only" for="search-name">输入关键词</label>
@@ -266,6 +298,9 @@
                                 </div>
                                 <div class="form-group" style="margin-left: 20px;">
                                     <button type="button" class="btn" id="btn-add-user"><i class="fa fa-plus-circle"></i> 添加论文</button>
+                                </div>
+                                <div class="form-group" style="margin-left: 20px;">
+                                    <button type="button" class="btn" id="btn-edit-bt" ><i class="fa fa-edit"></i> 编辑测试按钮</button>
                                 </div>
                             </form>
                         </div>
@@ -279,7 +314,7 @@
                                     <thead>
                                     <tr>
                                         <th>题目</th>
-                                        <th>摘要</th>
+                                        <th>状态</th>
                                         <th>作者</th>
                                         <th>权限</th>
                                         <th>上传时间</th>

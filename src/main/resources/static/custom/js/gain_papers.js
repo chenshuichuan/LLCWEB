@@ -145,8 +145,12 @@ $(document).ready(function () {
     $("#btn-advanced-search").click(function () {
         _table.draw();
     });
+
     $("#btn-add-user").click(function () {
         $("#add-panel").show().siblings(".panel").hide();
+    });
+    $("#btn-edit-bt").click(function () {
+        $("#edit-panel").show().siblings(".panel").hide();
     });
     $("#btn-add-save").click(function () {
         $.dialog.tips("保存添加测试")

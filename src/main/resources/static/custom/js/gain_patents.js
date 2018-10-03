@@ -1,15 +1,15 @@
 /*
 * 作者：ricardo
-* 描述：用户管理页面js
+* 描述：专利管理页面js
 * 编写结构说明：
 *     接口URL-->
 *     页面加载-->
 *     事件监听-->
 *
 **/
-//获取用户分页数据
-var urlGetPage="/users/page";
-//获取user对应的people的信息
+//获取专利分页数据
+var urlGetPage="/patent/page";
+//获取patent对应的详细的信息
 var urlGetPeopleById="";
 //添加user用户
 var urlAddUser="";
@@ -17,13 +17,13 @@ var urlAddUser="";
 var urlUpdateUserById="";
 
 //加载遮罩
-var $wrapper = $('#users-table');
+var $wrapper = $('#paper-table');
 
 $(document).ready(function () {
 
-    //users-table
-    var $usersTable = $('#users-table');
-    var  _table = $usersTable.dataTable(
+    //paper-table
+    var $paperTable = $('#paper-table');
+    var  _table = $paperTable.dataTable(
         $.extend(true, {}, CONSTANT.DATA_TABLES.DEFAULT_OPTION,
             {
                 ajax: function (data, callback, settings) {//ajax配置为function,手动调用异步查询
@@ -64,31 +64,30 @@ $(document).ready(function () {
                 },
                 columns: [
                     {
-                        data: "id",
+                        data: "title"
+                    },
+                    {
+                        data: "introduction",
+                        width: "200px",
+                        className: "ellipsis",	//文字过长时用省略号显示，CSS实现
+                        render: CONSTANT.DATA_TABLES.RENDER.ELLIPSIS//会显示省略号的列，需要用title属性实现划过时显示全部文本的效果
+                    },
+                    {
+                        data: "author",
+                        width: "100px",
+                        className: "ellipsis",
+                        render: CONSTANT.DATA_TABLES.RENDER.ELLIPSIS
+                    },
+                    {
+                        data: "profile",
                         width: "80px"
                     },
                     {
-                        data: "username",
-                        width: "150px"
-                    },
-                    {
-                        data: "password",
-                        width: "100px"
-                    },
-                    {
-                        data: "roles",
-                        width: "80px",
-                        render: function (data, type, row, meta) {
-                            return data?"<span style='color: #0ae113;'>是</span>":"<span style='color: #e1b611;'>否</span>";
-                        }
-                    },
-                    {
-                        data: "updateTime",
+                        data: "date",
                         width: "80px",
                         render: function (data, type, row, meta) {
                             return dateToString(data);
                         }
-
                     },
                     {
                         className: "td-operation",
@@ -110,16 +109,15 @@ $(document).ready(function () {
                     var $btnEdit = $('<button type="button" class="btn btn-small btn-warning btn-edit">修改</button>');
                     var $btnDelete = $('<button style="margin-left: 20px;"type="button" class="btn btn-small btn-danger btn-delete">删除</button>');
                     $('td', row).eq(5).append($btnEdit).append($btnDelete);
-
                 },
                 "drawCallback": function (settings) {
                     //默认选中第一行
-                    $("tbody tr", $usersTable).eq(0).click();
+                    $("tbody tr", $paperTable).eq(0).click();
                 }
             })).api();//此处需调用api()方法,否则返回的是JQuery对象而不是DataTables的API对象
 
     //行点击事件
-    $("tbody", $usersTable).on("click", "tr", function (event) {
+    $("tbody", $paperTable).on("click", "tr", function (event) {
         $(this).addClass("active").siblings().removeClass("active");//有空再试试
         //$(this).addClass("active").siblings("tr").removeClass("active");
         // $("table tr").css('background-color','white');
@@ -129,7 +127,7 @@ $(document).ready(function () {
         usersManage.currentItem = item;
         usersManage.showUser(item);
     });
-    $usersTable.on("click", ".btn-edit", function () {
+    $paperTable.on("click", ".btn-edit", function () {
         //编辑按钮
         var item = _table.row($(this).closest('tr')).data();
         $(this).closest('tr').addClass("active").siblings().removeClass("active");
@@ -147,8 +145,12 @@ $(document).ready(function () {
     $("#btn-advanced-search").click(function () {
         _table.draw();
     });
+
     $("#btn-add-user").click(function () {
         $("#add-panel").show().siblings(".panel").hide();
+    });
+    $("#btn-edit-bt").click(function () {
+        $("#edit-panel").show().siblings(".panel").hide();
     });
     $("#btn-add-save").click(function () {
         $.dialog.tips("保存添加测试")

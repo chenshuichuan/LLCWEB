@@ -48,7 +48,6 @@ $(document).ready(function () {
                             //调用DataTables提供的callback方法，代表数据已封装完成并传回DataTables进行渲染
                             //此时的数据需确保正确无误，异常判断应在执行此回调前自行处理完毕
                             callback(returnData);
-
                         },
                         error: function (XMLHttpRequest, textStatus, errorThrown) {
                             $.dialog.alert("查询失败");
@@ -70,14 +69,13 @@ $(document).ready(function () {
                         }
                     },
                     {
-
                         data: "description",
                         width: "150px",
                         className: "ellipsis",	//文字过长时用省略号显示，CSS实现
                         render: CONSTANT.DATA_TABLES.RENDER.ELLIPSIS//会显示省略号的列，需要用title属性实现划过时显示全部文本的效果
                     },
                     {
-                        data: "uploadDate",
+                        data: "createDate",
                         width: "80px",
                         render: function (data, type, row, meta) {
                             return dateToString(data);
@@ -110,7 +108,7 @@ $(document).ready(function () {
                 },
                 "drawCallback": function (settings) {
                     //默认选中第一行
-                    $("tbody tr", $documentTable).eq(0).click();
+                    $("tbody tr", $imagesTable).eq(0).click();
                 }
             })).api();//此处需调用api()方法,否则返回的是JQuery对象而不是DataTables的API对象
 

@@ -4,3 +4,7 @@ image:
 #文件保存路径
 file:
   location: ./files
+
+#配置访问图片路径
+resources:
+  static-location: classpath:/images/

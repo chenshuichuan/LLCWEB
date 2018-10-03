@@ -20,10 +20,11 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
+import java.net.URLEncoder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -310,6 +311,40 @@ public class FileController {
             map.put("message","成功获取文件！");
         }
         return map;
+    }
+
+
+    /**
+     * @Author haien
+     * @Description 前端请求下载Excel表格，返回一个输出流
+     * @Date 11:34 2018/7/22
+     * @Param [request, response]
+     * @return void
+     **/
+    @RequestMapping(value = "/getFileById")
+    @ResponseBody
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // TODO Auto-generated method stub
+        //获得请求文件名
+        String encoding = System.getProperty("file.encoding");
+        String filename = request.getParameter("fileName");
+        String enFileName = URLEncoder.encode(filename,"utf-8");
+        System.out.println("/getExcel1="+filename);
+
+        //设置Content-Disposition
+        response.setHeader("Content-Disposition", "attachment;filename="+enFileName);
+        //读取目标文件，通过response将目标文件写到客户端
+        //读取文件
+        String fileName = new String(filename.getBytes("UTF-8"),encoding);
+        InputStream in = new FileInputStream(fileName);
+        OutputStream out = response.getOutputStream();
+        //写文件
+        int b;
+        while((b=in.read())!= -1) {
+            out.write(b);
+        }
+        in.close();
+        out.close();
     }
 
 }

@@ -195,7 +195,10 @@ public class ResourceServiceImpl<T> implements ResourceService<T> {
      **/
     @Override
     public void deleteResource(String path) throws FileNotFoundException, BusinessException {
-        File file=new File(path);
+        if (path==null||path.isEmpty()){
+            return;
+        }
+        File file=new File(path);//路径为空直接报错了
         //路径为文件且不为空则删除
         if(file.isFile()&&file.exists()){
             file.delete();

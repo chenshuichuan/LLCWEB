@@ -9,12 +9,17 @@
 //获取图片分页数据
 var urlGetPage="/image/page";
 //获取图片
-var urlGetDocumentById="/image/getImageById";
-
+var urlGetImageById="/image/getImageById";
+var urlDelete = "/image/delete";
 //加载遮罩
 var $wrapper = $('#images-table');
+$(function(){
+    $('#lightBoxTest').Chocolat({
+        container      : '#lightBox',
+        imageSize     : 'cover',
+    });
+});
 $(document).ready(function () {
-
     //images-table
     var $imagesTable = $('#images-table');
     var  _table = $imagesTable.dataTable(
@@ -62,15 +67,16 @@ $(document).ready(function () {
                         width: "80px"
                     },
                     {
-                        data: "url",
-                        width: "200px",
+                        data: "path",
+                        width: "300px",
                         render: function (data, type, row, meta) {
-                            return (data===null||data==undefined)?'<i class="fa fa-file-image-o"></i>图片不存在':'<img src="'+data+'" class="table-img"/>';
+                            return (data===null||data==undefined)?'<i class="fa fa-file-image-o"></i>图片不存在':'<a class="chocolat-image" target="_blank"' +
+                                'href="/'+data+'"><img src="/'+data+'" class="table-img"/></a>';
                         }
                     },
                     {
                         data: "description",
-                        width: "150px",
+                        width: "200px",
                         className: "ellipsis",	//文字过长时用省略号显示，CSS实现
                         render: CONSTANT.DATA_TABLES.RENDER.ELLIPSIS//会显示省略号的列，需要用title属性实现划过时显示全部文本的效果
                     },
@@ -82,9 +88,9 @@ $(document).ready(function () {
                         }
                     },
                     {
-                        data: "url",
+                        data: "path",
                         render: function (data, type, row, meta) {
-                            return (data===null||data==undefined)?'<span class="text-danger">数据错误！</span>':'<a href="'+data+'"></a>';
+                            return (data===null||data==undefined)?'<span class="text-danger">数据错误！</span>':'<a href="/'+data+'">'+data+'</a>';
                         }
                     },
                     {
@@ -112,32 +118,25 @@ $(document).ready(function () {
                 }
             })).api();//此处需调用api()方法,否则返回的是JQuery对象而不是DataTables的API对象
 
-    //行点击事件//可以对图片进行预览
-    // $("tbody", $imagesTable).on("click", "tr", function (event) {
-    //     $(this).addClass("active").siblings().removeClass("active");
-    //     // $("table tr").css('background-color','white');
-    //     // $(this).css('background-color','blue');
-    //     //获取该行对应的数据
-    //     var item = _table.row($(this).closest('tr')).data();
-    //     documentManage.currentItem = item;
-    //     documentManage.showDocument(item);
-    // });
     $imagesTable.on("click", ".btn-copy", function () {
         //复制图片url
         var item = _table.row($(this).closest('tr')).data();
         $(this).closest('tr').addClass("active").siblings().removeClass("active");
-        documentManage.deleteDocument(item);
+        copyUrls("/"+item.path);
     }).on("click", ".btn-review", function () {
         //预览图片
         var item = _table.row($(this).closest('tr')).data();
         $(this).closest('tr').addClass("active").siblings().removeClass("active");
-        documentManage.deleteDocument(item);
+        document.getElementById("img-preview").src="/"+item.path;
+        document.getElementById("img-preview-a").href="/"+item.path;
     }).on("click", ".btn-edit", function () {
         //编辑图片信息
         var item = _table.row($(this).closest('tr')).data();
         $(this).closest('tr').addClass("active").siblings().removeClass("active");
-
         documentManage.editDocument(item);
+        //显示图片上传页面
+        $("#div-upload-image").slideToggle("fast");
+
     }).on("click", ".btn-delete", function () {
         //删除图片
         var item = _table.row($(this).closest('tr')).data();
@@ -188,31 +187,27 @@ var documentManage = {
         else $("#view-content").html("");
     },
     editDocument: function (item) {
-        //$.dialog.tips("edit test");
-        //转跳到文档编辑界面 ,新增文档传入id为0
-        window.location.href=urlEditDocumentById+"?id="+item.id;
+        $("#input-id").val(item.id);
+        //$("#btn-upload-image").val(item.originalName);
+        $("#input-description").val(item.description);
+        $("#input-group").val(item.model);
+        document.getElementById("img-upload-preview").href="/"+item.path;
     },
 
     deleteDocument: function (item) {
-        $.dialog.tips("delete test");
+        //$.dialog.tips("delete test");
+        //设置同步
+        $.ajax({
+            type : "get",
+            url : urlDelete,
+            data :"id=" + item.id,
+            async : false,
+            success : function(data){
+                if(data.result!==1){
+                    $.dialog.tips(data.message);
+                }
+            }
+        });
     }
 };
-//根据id获取document信息
-function getDocumentById(id) {
-    var document =null;
-    //设置同步
-    $.ajax({
-        type : "get",
-        url : urlGetDocumentById,
-        data :"id=" + id,
-        async : false,
-        success : function(data){
-            document = data.data;
-            if(data.result!==1){
-                $.dialog.tips(data.message);
-            }
-        }
-    });
-    return document;
-}
 

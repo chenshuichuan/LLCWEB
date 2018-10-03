@@ -26,14 +26,17 @@
           th:href="@{/custom/css/common.css}" rel="stylesheet"/>
     <link href="../../static/assets/plugins/selector/css/bootstrap-select.min.css"
           th:href="@{/assets/plugins/selector/css/bootstrap-select.min.css}" rel="stylesheet">
+    <link href="../../static/assets/plugins/chocolat/css/chocolat.css"
+          th:href="@{/assets/plugins/chocolat/css/chocolat.css}" rel="stylesheet">
 
     <style>
         .table-img{
-            max-width: 150px;
-            max-height: 120px;
+            max-width: 250px;
+            max-height: 150px;
         }
     </style>
 </head>
+
 
 <body>
 <div id="wrapper">
@@ -55,6 +58,7 @@
             </ol>
         </div>
 
+        
         <div id="page-inner">
             <div class="panel panel-default" style="margin-top: -30px;">
                 <div class="panel-body">
@@ -100,34 +104,51 @@
                     <!--上传图片 style="display:none;"-->
                     <div class="row" id="div-upload-image" style="display:none;">
                         <div class="col-md-12">
-                            <form class="col s12">
+                            <form class="col s12" action="/image/save" th:action="@{/image/save}" method="post" enctype="multipart/form-data">
                                 <div class="row">
                                     <div class="input-field col s3" style="text-align: center;">
-
-                                        <img style="max-height: 200px;max-width: 200px;" src="../../static/custom/images/img10.jpg"
-                                             th:src="@{/custom/images/img10.jpg}"/>
+                                        <img id="img-upload-preview" style="max-height: 200px;max-width: 200px;" src="#"/>
                                     </div>
                                     <div class="input-field col s3">
                                         <i class="fa fa-image prefix"></i>
-                                        <input id="btn-upload-image" type="file" class="validate">
+                                        <input id="btn-upload-image" onchange="imgChange(this,'img-upload-preview')" type="file" name="file" class="validate">
+                                        <!--<div>图片大小：<span id="file-size"></span></div>-->
                                     </div>
-                                    <div class="input-field col s3">
-                                        <i class="fa fa-info prefix"></i>
-                                        <input id="input-description" type="text" class="validate">
-                                        <label for="input-description">添加描述</label>
+                                    <div class="input-field col s6">
+                                        <div class="row">
+                                            <div class="input-field col s6">
+                                                <i class="fa fa-info prefix"></i>
+                                                <input id="input-description" name="description" type="text" class="validate">
+                                                <label for="input-description">描述</label>
+                                            </div>
+                                            <div class="input-field col s6">
+                                                <i class="fa fa-group prefix"></i>
+                                                <input id="input-group" name="group" type="text" class="validate">
+                                                <label for="input-group">组别</label>
+                                            </div>
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="input-field col s6">
+                                                <i class="fa fa-anchor prefix"></i>
+                                                <input id="input-id" name="id" type="text" class="validate">
+                                                <label for="input-id">id</label>
+                                            </div>
+                                            <div class="input-field col s3" style="text-align: center;">
+                                                <button type="submit" class="btn btn-default">
+                                                    <i class="fa fa-upload"></i>
+                                                    上传</button>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="input-field col s3">
-                                        <button class="btn btn-default">
-                                            <i class="fa fa-upload"></i>
-                                            上传</button>
-                                    </div>
+
                                 </div>
                             </form>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="table-responsive">
+                            <div class="table-responsive" >
                                 <table class="table table-striped table-bordered table-hover"
                                        id="images-table">
                                     <thead>
@@ -145,9 +166,13 @@
                                     <tbody id="tb-body">
                                     <tr>
                                         <td>1</td>
-                                        <td>
+                                        <td><a class="chocolat-image" target="_blank"
+                                               href="../../static/custom/images/img1.jpg"
+                                               th:href="@{/custom/images/img1.jpg}">
                                             <img src="../../static/custom/images/img1.jpg"
                                                  th:src="@{/custom/images/img1.jpg}" class="table-img"/>
+                                        </a>
+
                                         </td>
                                         <!--<td>上传者</td>-->
                                         <td>描述sdfasjdfasid sdfhasuids sd手机号多少的护发素爽肤水</td>
@@ -232,30 +257,6 @@
                                         <td>地址</td>
                                         <td>操作</td>
                                     </tr>
-                                    <tr>
-                                        <td>7</td>
-                                        <td>
-                                            <img src="../../static/custom/images/img7.jpg"
-                                                 th:src="@{/custom/images/img7.jpg}"class="table-img"/>
-                                        </td>
-                                        <!--<td>上传者</td>-->
-                                        <td>描述sdfasjdfasid sdfhasuids sd手机号多少的护发素爽肤水</td>
-                                        <td>上传日期</td>
-                                        <td>地址</td>
-                                        <td>操作</td>
-                                    </tr>
-                                    <tr>
-                                        <td>8</td>
-                                        <td>
-                                            <img src="../../static/custom/images/img8.jpg"
-                                                 th:src="@{/custom/images/img8.jpg}"class="table-img"/>
-                                        </td>
-                                        <!--<td>上传者</td>-->
-                                        <td>描述sdfasjdfasid sdfhasuids sd手机号多少的护发素爽肤水</td>
-                                        <td>上传日期</td>
-                                        <td>地址</td>
-                                        <td>操作</td>
-                                    </tr>
 
                                     </tbody>
                                 </table>
@@ -263,13 +264,31 @@
                         </div>
 
                     </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
+
+                    <div class="row" id="lightBox">
+                        <div class="col-md-12" id="lightBoxTest">
+                            <div>图片预览</div>
+                            <a id="img-preview-a" class="chocolat-image" target="_blank" href="#">
+                                <img id="img-preview" src="#" style="max-height: 800px;max-width: inherit;"/>
+                            </a>
+                            <!--<a class="chocolat-image" target="_blank"-->
+                               <!--href="../../static/custom/images/img1.jpg"-->
+                               <!--th:href="@{/custom/images/img1.jpg}">-->
+                                <!--<img src="../../static/custom/images/img1.jpg"-->
+                                     <!--th:src="@{/custom/images/img1.jpg}" class="table-img"/>-->
+                            <!--</a>-->
+                            <!--<a class="chocolat-image" target="_blank"-->
+                               <!--href="../../static/custom/images/img1.jpg"-->
+                               <!--th:href="@{/custom/images/img1.jpg}">-->
+                                <!--<img src="../../static/custom/images/img1.jpg"-->
+                                     <!--th:src="@{/custom/images/img1.jpg}" class="table-img"/>-->
+                            <!--</a>-->
+                        </div>
+                    </div>
 
                 </div>
             </div>
+
             <!-- /. ROW  -->
             <footer th:include="admin/template/footer_template :: admin_footer">
             </footer>
@@ -278,6 +297,7 @@
     </div>
     <!-- /. PAGE WRAPPER  -->
 </div>
+
 <!-- /. WRAPPER  -->
 <!-- JS Scripts-->
 <!-- jQuery Js -->
@@ -304,12 +324,13 @@
         th:src="@{/assets/plugins/spin-2.1.0/jquery.spin.merge.js}"></script>
 <script src="../../static/assets/plugins/selector/js/bootstrap-select.min.js"
         th:src="@{/assets/plugins/selector/js/bootstrap-select.min.js}"></script>
+<script src="../../static/assets/plugins/chocolat/js/jquery.chocolat.min.js"
+        th:src="@{/assets/plugins/chocolat/js/jquery.chocolat.min.js}"></script>
 
 <script src="../../static/custom/js/common.js"
         th:src="@{/custom/js/common.js}"></script>
 <script src="../../static/custom/js/resource_images.js"
         th:src="@{/custom/js/resource_images.js}"></script>
-
 
 </body>
 

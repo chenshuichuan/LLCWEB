@@ -252,17 +252,17 @@ public class WebPageController {
      * **/
     @RequestMapping({"/ResearchProject/associate_demo.html","/ResearchProject/associate_demo"})
     public ModelAndView associate_demo(){
-        ModelAndView modelAndView = new ModelAndView("/ResearchProject/associate_demo");
+        ModelAndView modelAndView = new ModelAndView("/home/ResearchProject/associate_demo");
         return modelAndView;
     }
     @RequestMapping({"/ResearchProject/lecturer_demo.html","/ResearchProject/lecturer_demo"})
     public ModelAndView lecturer_demo(){
-        ModelAndView modelAndView = new ModelAndView("/ResearchProject/lecturer_demo");
+        ModelAndView modelAndView = new ModelAndView("/home/ResearchProject/lecturer_demo");
         return modelAndView;
     }
     @RequestMapping({"/ResearchProject/professor_demo.html","/ResearchProject/professor_demo"})
     public ModelAndView professor_demo(){
-        ModelAndView modelAndView = new ModelAndView("/ResearchProject/professor_demo");
+        ModelAndView modelAndView = new ModelAndView("/home/ResearchProject/professor_demo");
         return modelAndView;
     }
 
@@ -271,17 +271,17 @@ public class WebPageController {
      * **/
     @RequestMapping({"/Talent/doctor_demo.html","/Talent/doctor_demo"})
     public ModelAndView doctor_demo(){
-        ModelAndView modelAndView = new ModelAndView("/Talent/doctor_demo");
+        ModelAndView modelAndView = new ModelAndView("/home/Talent/doctor_demo");
         return modelAndView;
     }
     @RequestMapping({"/Talent/graduate_demo.html","/Talent/graduate_demo"})
     public ModelAndView graduate_demo(){
-        ModelAndView modelAndView = new ModelAndView("/Talent/graduate_demo");
+        ModelAndView modelAndView = new ModelAndView("/home/Talent/graduate_demo");
         return modelAndView;
     }
     @RequestMapping({"/Talent/post_demo.html","/Talent/post_demo"})
     public ModelAndView post_demo(){
-        ModelAndView modelAndView = new ModelAndView("/Talent/post_demo");
+        ModelAndView modelAndView = new ModelAndView("/home/Talent/post_demo");
         return modelAndView;
     }
 }

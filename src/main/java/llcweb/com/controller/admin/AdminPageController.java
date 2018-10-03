@@ -63,11 +63,69 @@ public class AdminPageController {
         modelAndView.addObject("user", users);
         return modelAndView;
     }
+    @RequestMapping("/system_people.html")
+    public ModelAndView system_people(){
+
+        ModelAndView modelAndView = new ModelAndView("/admin/system_people");
+        Users users = usersService.getCurrentUser();
+        modelAndView.addObject("user", users);
+        return modelAndView;
+    }
+    @RequestMapping("/gain_projects.html")
+    public ModelAndView gain_projects(){
+
+        ModelAndView modelAndView = new ModelAndView("/admin/gain_projects");
+        Users users = usersService.getCurrentUser();
+        modelAndView.addObject("user", users);
+        return modelAndView;
+    }
+    @RequestMapping("/gain_papers.html")
+    public ModelAndView gain_papers(){
+
+        ModelAndView modelAndView = new ModelAndView("/admin/gain_papers");
+        Users users = usersService.getCurrentUser();
+        modelAndView.addObject("user", users);
+        return modelAndView;
+    }
+    @RequestMapping("/gain_patents.html")
+    public ModelAndView gain_patents(){
+
+        ModelAndView modelAndView = new ModelAndView("/admin/gain_patents");
+        Users users = usersService.getCurrentUser();
+        modelAndView.addObject("user", users);
+        return modelAndView;
+    }
+    @RequestMapping("/gain_softwares.html")
+    public ModelAndView gain_softwares(){
+
+        ModelAndView modelAndView = new ModelAndView("/admin/gain_softwares");
+        Users users = usersService.getCurrentUser();
+        modelAndView.addObject("user", users);
+        return modelAndView;
+    }
 
     /**
-     * 文档首页的控制器
+     * 文档管理的控制器
      * 未测试
      */
+    @RequestMapping("/resource_files.html")
+    public ModelAndView resource_files(){
+        ModelAndView modelAndView = new ModelAndView("/admin/resource_files");
+        Users users = usersService.getCurrentUser();
+        //根据用户权限查找文档,不需要在此查找数据
+        //Page<Document> documentList= documentService.selectByRole(users,0,10);
+        modelAndView.addObject("user", users);
+        return modelAndView;
+    }
+    @RequestMapping("/resource_images.html")
+    public ModelAndView resource_images(){
+        ModelAndView modelAndView = new ModelAndView("/admin/resource_images");
+        Users users = usersService.getCurrentUser();
+        //根据用户权限查找文档,不需要在此查找数据
+        //Page<Document> documentList= documentService.selectByRole(users,0,10);
+        modelAndView.addObject("user", users);
+        return modelAndView;
+    }
     @RequestMapping("/resource_document.html")
     public ModelAndView resource_document(){
         ModelAndView modelAndView = new ModelAndView("/admin/resource_document");

@@ -30,6 +30,11 @@ logging.level.org.hibernate=ERROR
 
 
 llcweb.com.resources.url=http://localhost:8080
+<<<<<<< HEAD
 llcweb.com.resources.image=/image/getImageById.do
 llcweb.com.resources.file=/file/getFileById
+
+=======
+llcweb.com.resources.image=/image/getImageById
 llcweb.com.resources.file=/file/getFileById
+>>>>>>> 439248acf202d874d07bcf46ff07bafeb4758999

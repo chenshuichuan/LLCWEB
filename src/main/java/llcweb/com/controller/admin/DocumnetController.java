@@ -39,7 +39,7 @@ import java.util.Map;
 @Controller
 @RequestMapping("/document")
 public class DocumnetController {
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
+    private static final Logger logger = LoggerFactory.getLogger(DocumnetController.class);
 
     @Autowired
     private DocumentRepository documentRepository;
@@ -135,11 +135,15 @@ public class DocumnetController {
         long total = documentPage.getTotalElements();
         logger.info("total="+total);
 
-        map.put("pageData", documentInfoList);
-        map.put("total", total);
         map.put("draw", draw);
         map.put("result", 1);
-        map.put("message", "成功获取分页数据！");
+        if(0==total){
+            map.put("message", "未查询到文档！");
+        }else {
+            map.put("total", total);
+            map.put("pageData", documentInfoList);
+            map.put("message", "成功获取分页数据！");
+        }
         return map;
     }
 

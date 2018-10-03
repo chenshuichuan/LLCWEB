@@ -22,14 +22,32 @@
     <link rel="stylesheet" href="../../../static/home/css/papers.css" type="text/css" th:href="@{/home/css/papers.css}"/>
     <link rel="stylesheet" href="../../../static/home/css/team.css" th:href="@{/home/css/team.css}">
     <script src="../../../static/home/Scripts/jquery.paginate.js" th:href="@{home/Scripts/jquery.paginate.js}"></script>
-    <!-- <script src="../../../static/home/Scripts/lightbox/js/lightbox.js" th:href="@{/home/Scripts/lightbox/js/lightbox.js}" type="text/javascript"></script>
-</head> -->
+    <!-- <script src="../../../static/home/Scripts/lightbox/js/lightbox.js" th:href="@{/home/Scripts/lightbox/js/lightbox.js}" type="text/javascript"></script> -->
+</head>
 <body>
-
+<div th:include="template/header_template :: header_template"></div>
 <div class="middle">
     <div class="container middle_container">
         <div class="middle_content">
+            <div class="middle_l" id="temlate_middle">
+                <!-- <h1><span>机构概况</span></h1> -->
+                <ul id='resultType' class="tmo_list2">
+                    <li class="ll first"><span>文化活动</span></li>
+                    <li class='ll'>
+                        <a href='../Cultural activity.html' class='ll_ref'>
+                            <i></i>
+                            <span>往届回访</span>
+                        </a>
+                    </li>
+                    <li class='ll'>
+                        <a href='../Cultural activity.html' class='ll_ref' style="background:#6ad;">
+                            <i></i>
+                            <span>部门聚会</span>
+                        </a>
+                    </li>
+                </ul>
 
+            </div>
             <div class="middle_r">
                 <div class="crumb">
                     <ul id="crumbs">
@@ -37,7 +55,7 @@
                         <li><span>&nbsp;/&nbsp;</span></li>
                         <li><a href="../Cultural_activity.html">文化活动</a></li>
                         <li><span>&nbsp;/&nbsp;</span></li>
-                        <li><a href="">外环步行活动</a></li>
+                        <li><a href="">往届师兄师姐回访</a></li>
                         <li style="float:right;">
                             <a href="../Cultural_activity.html" style="font-size:12px;color:#2c76c7;">«返回</a>
                         </li>
@@ -47,37 +65,32 @@
                     <div class="team_head">
                         <div class="team_circle"></div>
                         <div class="team_line" style="width:100px;"></div>
-                        <span>2017-9-8</span>
+                        <span>2017-7-10</span>
                         <div class="team_line" style="width:500px;"></div>
                     </div>
                     <ul class="picture_show">
                         <li>
-                            <a class="example2-2" href="../../../static/home/images/we2.jpg"
-                             th:href="@{/home/images/we2.jpg}" data-lightbox="newphoto" data-title=" ">
-                                <img alt="外环步行活动" src="../../../static/home/images/we2.jpg"
-                                 th:src="@{/home/images/we2.jpg}" width="220">
-                            </a>
-                        </li>
-                        <li>
-                            <a class="example2-2" href="../../../static/home/images/we2.jpg"
-                             th:src="@{/home/images/we2.jpg}" data-lightbox="newphoto" data-title=" ">
-                                <img alt="外环步行活动" src="../../../static/home/images/we2.jpg"
-                                 th:src="@{/home/images/we2.jpg}" width="220">
-                            </a>
-                        </li>
-                        <li>
-                            <a class="example2-2" href="../images/we2.jpg"
+                            <a class="example2-2" href="../../../static/home/images/labBrief.JPG" th:href="@{/home/images/labBrief.JPG}"
                                 data-lightbox="newphoto" data-title=" ">
-                                <img alt="外环步行活动" src="../../../static/home/images/we2.jpg"
-                                 th:src="@{/home/images/we2.jpg}" width="220">
+                                <img alt="往届师兄师姐回访" src="../../../static/home/images/labBrief.JPG" th:src="@{/home/images/labBrief.JPG}" width="220">
                             </a>
                         </li>
                         <li>
-                            <a class="example2-2" href="../../../static/home/images/we2.jpg"
-                             th:src="@{/home/images/we2.jpg}"
+                            <a class="example2-2" href="../../../static/home/images/labBrief.JPG" th:href="@{/home/images/labBrief.JPG}"
                                 data-lightbox="newphoto" data-title=" ">
-                                <img alt="外环步行活动" src="../../../static/home/images/we2.jpg"
-                                 th:src="@{/home/images/we2.jpg}" width="220">
+                                <img alt="往届师兄师姐回访" src="../../../static/home/images/labBrief.JPG" th:src="@{/home/images/labBrief.JPG}" width="220">
+                            </a>
+                        </li>
+                        <li>
+                            <a class="example2-2" href="../../../static/home/images/labBrief.JPG" th:href="@{/home/images/labBrief.JPG}"
+                                data-lightbox="newphoto" data-title=" ">
+                                <img alt="往届师兄师姐回访" src="../../../static/home/images/labBrief.JPG" th:src="@{/home/images/labBrief.JPG}" width="220">
+                            </a>
+                        </li>
+                        <li>
+                            <a class="example2-2" href="../../../static/home/images/labBrief.JPG" th:href="@{/home/images/labBrief.JPG}"
+                                data-lightbox="newphoto" data-title=" ">
+                                <img alt="往届师兄师姐回访" src="../../../static/home/images/labBrief.JPG" th:src="@{/home/images/labBrief.JPG}" width="220">
                             </a>
                         </li>
                     </ul>
@@ -89,6 +102,8 @@
     </div>
 </div>
 
+
+<div th:include="template/footer_template :: footer_template"></div>
 
 
 </body>

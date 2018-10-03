@@ -38,13 +38,31 @@
      th:href="@{/home/Scripts/jquery.paginate.js}"></script>
 </head>
 <body>
-<div class="public-header" th:include="template/header_template :: header_template">
 
-</div>
+<div th:include="template/header_template :: header_template"></div>
+
 <div class="middle">
     <div class="container middle_container">
         <div class="middle_content">
+            <div class="middle_l" id="temlate_middle">
+                <!-- <h1><span>机构概况</span></h1> -->
+                <ul id='resultType' class="tmo_list2">
+                    <li class="ll first"><span>文化活动</span></li>
+                    <li class='ll'>
+                        <a href='Cultural activity.html' class='ll_ref'>
+                            <i></i>
+                            <span>往届回访</span>
+                        </a>
+                    </li>
+                    <li class='ll'>
+                        <a href='Cultural activity.html' class='ll_ref'>
+                            <i></i>
+                            <span>部门聚会</span>
+                        </a>
+                    </li>
+                </ul>
 
+            </div>
             <div class="middle_r">
                 <div class="crumb">
                     <ul id="crumbs">
@@ -101,6 +119,7 @@
     </div>
 </div>
 
+<div th:include="template/footer_template :: footer_template"></div>
 
 
 

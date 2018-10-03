@@ -25,11 +25,13 @@
     <script src="../../../static/home/Scripts/jquery.paginate.js" th:href="@{/Scripts/jquery.paginate.js}"></script>
 </head>
 <body>
+<div class="public-header" th:include="template/header_template :: header_template">
+</div>
 
 <div class="middle">
     <div class="container middle_container">
         <div class="middle_content">
-
+            <div class="middle_l" id="temlate_middle" th:include="template/professor :: professor"></div>
             <div class="middle_r">
                 <div class="crumb">
                     <ul id="crumbs">
@@ -126,7 +128,9 @@
         </div>
     </div>
 </div>
+<div th:include="template/footer_template :: footer_template">
 
+</div>
 
 
 

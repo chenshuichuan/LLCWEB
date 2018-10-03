@@ -276,11 +276,15 @@ public class ImageController {
         long total = imagePage.getTotalElements();
         logger.info("total="+total);
 
-        map.put("pageData", imagePage.getContent());
-        map.put("total", total);
         map.put("draw", draw);
         map.put("result", 1);
-        map.put("message", "成功获取分页数据！");
+        if(0==total){
+            map.put("message", "未查询到图片！");
+        }else {
+            map.put("total", total);
+            map.put("pageData", imagePage.getContent());
+            map.put("message", "成功获取分页数据！");
+        }
         return map;
     }
 

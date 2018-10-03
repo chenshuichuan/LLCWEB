@@ -1,35 +1,21 @@
 package llcweb.com.domain.models;
 
-
-
-
 import javax.persistence.*;
-
-/***********************************************************************
- * Module:  People.java
- * Author:  Ricardo
- * Purpose: Defines the Class People
- ***********************************************************************/
 
 @Entity
 @Table(name = "people")
 public class People {
+    /**
+     * 人物id
+     **/
     @Id
     @GeneratedValue
-    /** 人物id
-     **/
     private int id;
 
     /**
      * 人物姓名
-     *
      */
     private String name;
-
-    /**
-     * 登录密码
-     */
-    private String passwd;
 
     /**
      * 人物头像路径
@@ -42,28 +28,32 @@ public class People {
     private String position;
 
     /**
+     * 个人简介（关联document表）
      */
-
     private int introduction;
+
+    /**
+     * 对于本科生、硕士生、博士生是届数；讲师，教授，等是加入年份
+     */
+    private int grade;
 
     public People() {
 
     }
 
-    public People(String name, String passwd, int portrait, String position, int introduction, String grade) {
+    public People(String name, String position, int grade) {
         this.name = name;
-        this.passwd = passwd;
+        this.position = position;
+        this.grade = grade;
+    }
+
+    public People(String name, int portrait, String position, int introduction, int grade) {
+        this.name = name;
         this.portrait = portrait;
         this.position = position;
         this.introduction = introduction;
         this.grade = grade;
     }
-
-    /**
-     * 对于本科生、硕士生博士生是届数，讲师，教授，等是加入年份
-     */
-
-    private String grade;
 
     public int getId() {
         return id;
@@ -71,10 +61,6 @@ public class People {
 
     public String getName() {
         return name;
-    }
-
-    public String getPasswd() {
-        return passwd;
     }
 
     public int getPortrait() {
@@ -89,7 +75,7 @@ public class People {
         return introduction;
     }
 
-    public String getGrade() {
+    public int getGrade() {
         return grade;
     }
 
@@ -99,10 +85,6 @@ public class People {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public void setPasswd(String passwd) {
-        this.passwd = passwd;
     }
 
     public void setPortrait(int portrait) {
@@ -117,7 +99,7 @@ public class People {
         this.introduction = introduction;
     }
 
-    public void setGrade(String grade) {
+    public void setGrade(int grade) {
         this.grade = grade;
     }
 }

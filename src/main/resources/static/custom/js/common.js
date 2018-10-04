@@ -25,8 +25,74 @@ function delCookie(name) {
     setCookie(name, null, -1);
 };
 
+/*复制UrlText内容到系统的剪切板*/
+function copyUrls(UrlText) {
+    if(UrlText===null||UrlText==undefined){
+        $.dialog.tips("数据无效！复制失败！");
+        return;
+    }
+    let textArea = document.createElement("textarea");
+    textArea.style.position = 'fixed';
+    textArea.style.top = 0;
+    textArea.style.left = 0;
+    textArea.style.width = '2em';
+    textArea.style.height = '2em';
+    textArea.style.padding = 0;
+    textArea.style.border = 'none';
+    textArea.style.outline = 'none';
+    textArea.style.boxShadow = 'none';
+    textArea.style.background = 'transparent';
+    textArea.value = UrlText;
+    document.body.appendChild(textArea);
+    textArea.select();
+    try {
+        document.execCommand('copy');
+        $.dialog.tips("复制成功");
+    } catch (err) {
+        this.throwError('不能使用这种方法复制内容'+err.toString());
+    }
+    document.body.removeChild(textArea)
+}
+/*图片上传预览图片*/
+function imgChange(obj,previewId) {
+    //判断浏览器是否支持FileReader接口
+    if (typeof FileReader == 'undefined') {
+        $.dialog.alert("当前浏览器不支持FileReader接口!");
+        return;
+        //使选择控件不可操作
+        // document.getElementById("xdaTanFileImg").setAttribute("disabled", "disabled");
+    }
+    var file = obj.files[0];
+    // console.log(obj);console.log(file);
+    // console.log("file.size = " + file.size);  //file.size 单位为byte
+    //var fileSize = file.size/1024.00;
+    //document.getElementById("file-size").text();
+    var reader = new FileReader();
 
-/*常量*/
+    //读取文件过程方法
+    reader.onloadstart = function (e) {
+        console.log("开始读取....");
+    };
+    reader.onprogress = function (e) {
+        console.log("正在读取中....");
+    };
+    reader.onabort = function (e) {
+        console.log("中断读取....");
+    };
+    reader.onerror = function (e) {
+        console.log("读取异常....");
+    };
+    reader.onload = function (e) {
+        console.log("成功读取....");
+
+        var img = document.getElementById(previewId);
+        img.src = e.target.result;
+        //或者 img.src = this.result;  //e.target == this
+    };
+
+    reader.readAsDataURL(file);
+}
+/*dataTable常量*/
 Date.prototype.toLocaleString = function() {
     return this.getFullYear() + "/" + (this.getMonth() + 1) + "/" + this.getDate();
 };

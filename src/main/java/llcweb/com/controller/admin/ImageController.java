@@ -326,18 +326,22 @@ public class ImageController {
         return map;
     }
 
-
-    //http://localhost:3388/images/getImageByName.do?modelName=model1&name=551
+    //未成功！改用配置静态资源的方式了
+    //http://localhost:8080/imag/getImageById.do?id=10
     @RequestMapping(value = "/getImageById")
     @ResponseBody
-    public String getImagesByName(HttpServletRequest request,
-                                  HttpServletResponse response, Model model
-            ,@RequestParam("modelName")String modelName,@RequestParam("name")String name) {
+    public String getImageById(HttpServletRequest request, HttpServletResponse response,Model model
+            ,@RequestParam("id")int id) {
+        Image image = imageRepository.findOne(id);
+        if(image==null){
+            return "error!";
+        }
+        String imgPath = image.getPath();
         FileInputStream fis = null;
         OutputStream os = null;
         try {
             //String path1 = System.getProperty("user.dir");
-            fis = new FileInputStream("./data/"+modelName+"/"+name+".png");
+            fis = new FileInputStream(imgPath);
             os = response.getOutputStream();
             response.setHeader("Content-type","image/png"); //设置响应内容类型(不管图片是什么格式都能正确显示)
             int count = 0;
@@ -348,12 +352,12 @@ public class ImageController {
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }
-        try {
+
+        }try {
             fis.close();
             os.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException e2) {
+            e2.printStackTrace();
         }
         return "ok";
     }

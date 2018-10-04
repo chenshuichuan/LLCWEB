@@ -1,31 +1,67 @@
 <!DOCTYPE html>
-<html><html xmlns:th="http://www.thymeleaf.org"><head lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
     <!--<title>LLC实验室网站</title>-->
-    <link rel="shortcut icon" href="../../static/home/images/bitbug_favicon .ico"
-    th:href="@{/home/images/bitbug_favicon .ico}"/>
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link href="../../static/home/css/reset.css" rel="stylesheet" th:href="@{/home/css/reset.css}">
-    <link href="../../static/home/css/public.css" rel="stylesheet" th:href="@{/home/css/public.css}">
-    <link href="../../static/home/css/index.css" rel="stylesheet" th:href="@{/home/css/index.css}">
-   <script type="text/javascript" src="../../static/home/js/jquery-1.12.4.min.js" th:href="@{/js/jquery-1.12.4.min.js}"></script>
-    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-     <meta name="description" content="jPaginate - jQuery Pagination Plugin"/>
+    <link rel="shortcut icon" href="../../static/home/images/bitbug_favicon.ico"
+          th:href="@{/home/images/bitbug_favicon.ico}"/>
+
+    <link rel="stylesheet" href="../../static/home/css/reset.css" type="text/css"
+          th:href="@{/home/css/reset.css}">
+    <link rel="stylesheet" href="../../static/home/css/public.css" type="text/css"
+          th:href="@{/home/css/public.css}">
+    <link rel="stylesheet" href="../../static/home/css/index.css" type="text/css"
+          th:href="@{/home/css/index.css}">
+    <script type="text/javascript" src="../../static/home/js/jquery-1.12.4.min.js"
+            th:src="@{home/js/jquery-1.12.4.min.js}"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"
+    ></script>
+    <meta name="description" content="jPaginate - jQuery Pagination Plugin"/>
     <meta name="keywords" content="jquery, plugin, pagination, fancy"/>
-    <title>人才培养——广东省信息物理融合系统重点实验室</title>
-    <link rel="stylesheet" href="../../static/home/css/header.css" type="text/css" th:href="@{/home/css/header.css}"/>
-    <link rel="stylesheet" href="../../static/home/css/sidebar.css" type="text/css" th:href="@{/home/css/sidebar.css}">
-    <link rel="stylesheet" href="../../static/home/css/meeting.css" type="text/css" th:href="@{/home/css/meeting.css}"/>
-    <link rel="stylesheet" href="../../static/home/css/style.css" type="text/css" th:href="@{/home/css/style.css}"/>
-    <script src="../../static/home/Scripts/jquery.paginate.js" th:href="@{/Scripts/jquery.paginate.js}"></script>
+    <title>人才招聘——广东省信息物理融合系统重点实验室</title>
+    <link rel="stylesheet" href="../../static/home/css/header.css" type="text/css"
+          th:href="@{/home/css/header.css}"/>
+    <link rel="stylesheet" href="../../static/home/css/sidebar.css" type="text/css"
+          th:href="@{/home/css/sidebar.css}"/>
+    <link rel="stylesheet" href="../../static/home/css/meeting.css" type="text/css"
+          th:href="@{/home/css/meeting.css}"/>
+    <link rel="stylesheet" href="../../static/home/css/style.css" type="text/css"
+          th:href="@{/home/css/style.css}"/>
+    <link rel="stylesheet" href="../../static/home/css/papers.css" type="text/css"
+          th:href="@{/home/css/papers.css}"/>
+
 </head>
 <body>
-
+<div class="public-header" th:include="template/header_template :: header_template"></div>
 <div class="meetingpage">
      <div class="container middle_container">
         <div class="middle_content" style="margin-bottom: 40px;">
-
+            <div class="middle_l" id="temlate_middle">
+                <!-- <h1><span>机构概况</span></h1> -->
+                <ul id="resultType" class="tmo_list2">
+                    <li class="ll first"><span>人才招聘</span></li>
+                    <li class="ll" id="base">
+                        <a href="Talent_recruitment.html" class="ll_ref" style="background:#6ad;">
+                            <i></i>
+                            <span>实验室助理</span>
+                        </a>
+                    </li>
+                    <li class="ll">
+                        <a href="Talent_recruitment1.html" class="ll_ref" >
+                            <i></i>
+                            <span>博士后</span>
+                        </a>
+                    </li>
+                    <li class=" ll">
+                        <a href="Talent_recruitment2.html" class="ll_ref">
+                            <i></i>
+                            <span>实验室助理</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
             <div class="middle_r">
                 <div class="crumb">
                     <ul id="crumbs">
@@ -174,7 +210,7 @@
         </p>
         </div>
     </div>-->
-
+<div class="public-footer" th:include="template/footer_template"></div>
 
 
 

@@ -18,7 +18,7 @@ public class People {
     private String name;
 
     /**
-     * 人物头像路径
+     * 人物头像路径(关联image表)
      */
     private int portrait;
 

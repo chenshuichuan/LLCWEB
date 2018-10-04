@@ -210,23 +210,23 @@ public class WebPageController {
         return modelAndView;
     }
     /**
-     * cultural activity
+     * cultural_activity
      * **/
-//    @RequestMapping({"/Untitled-1.html","/Untitled-1"})
-//    public ModelAndView Untitled_1(){
-//        ModelAndView modelAndView = new ModelAndView("/home/Untitled-1");
+//    @RequestMapping({"/Cultural_activity.html","/Cultural_activity"})
+//    public ModelAndView Cultural_activity(){
+//        ModelAndView modelAndView = new ModelAndView("/home/Cultural_activity.html");
 //        return modelAndView;
 //    }
-//    @RequestMapping({"/Untitled-1.html","/Untitled-1"})
-//    public ModelAndView Untitled_1(){
-//        ModelAndView modelAndView = new ModelAndView("/home/Untitled-1");
-//        return modelAndView;
-//    }
-//    @RequestMapping({"/Untitled-1.html","/Untitled-1"})
-//    public ModelAndView Untitled_1(){
-//        ModelAndView modelAndView = new ModelAndView("/home/Untitled-1");
-//        return modelAndView;
-//    }
+    @RequestMapping({"/Cultural_activity/revisit_demo.html","/Cultural_activity/revisit_demo"})
+    public ModelAndView revisit_demo(){
+        ModelAndView modelAndView = new ModelAndView("/home/Cultural_activity/revisit_demo.html");
+        return modelAndView;
+    }
+    @RequestMapping({"/Cultural_activity/play_demo.html","/Cultural_activity/play_demo"})
+    public ModelAndView play_demo(){
+        ModelAndView modelAndView = new ModelAndView("/home/Cultural_activity/play_demo.html");
+        return modelAndView;
+    }
     /**
      * research
      * **/
@@ -243,6 +243,16 @@ public class WebPageController {
     @RequestMapping({"/Research/Research_Project3.html","/Research/Research_Project3"})
     public ModelAndView Research_Project3(){
         ModelAndView modelAndView = new ModelAndView("/home/Research/Research_Project3");
+        return modelAndView;
+    }
+    @RequestMapping({"/Research/Research_Project4.html","/Research/Research_Project4"})
+    public ModelAndView Research_Project4(){
+        ModelAndView modelAndView = new ModelAndView("/home/Research/Research_Project4");
+        return modelAndView;
+    }
+    @RequestMapping({"/Research/Research_Project5.html","/Research/Research_Project5"})
+    public ModelAndView Research_Project5(){
+        ModelAndView modelAndView = new ModelAndView("/home/Research/Research_Project5");
         return modelAndView;
     }
     /**

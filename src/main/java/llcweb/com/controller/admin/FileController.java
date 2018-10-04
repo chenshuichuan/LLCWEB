@@ -75,7 +75,7 @@ public class FileController {
         //保存到数据库
             //添加
         File file=null;
-        if (null == id) {
+        if (null == id||id.equals("")||id<0) {
             logger.info("添加文件：name=" + multipartFile.getOriginalFilename() + ",type=" + multipartFile.getContentType());
             file=new File();
         }

@@ -5,11 +5,4 @@ image:
 #文件保存路径
 file:
   location: ./files
-<<<<<<< HEAD
-
-#配置访问图片路径
-resources:
-  static-location: classpath:/images/
-=======
   url: McAf9AJmcH3c86M_b4FM_Z0RQg45vgaDmBBbI2u3
->>>>>>> 439248acf202d874d07bcf46ff07bafeb4758999

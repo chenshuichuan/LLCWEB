@@ -1,5 +1,7 @@
 package llcweb.com.controller.admin;
 
+import llcweb.com.dao.repository.DocumentRepository;
+import llcweb.com.dao.repository.ImageRepository;
 import llcweb.com.dao.repository.PeopleRepository;
 import llcweb.com.domain.models.People;
 import llcweb.com.service.PeopleService;
@@ -35,6 +37,10 @@ public class PeopleController {
     private PeopleService peopleService;
     @Resource
     private PeopleRepository peopleRepository;
+    @Resource
+    private DocumentRepository documentRepository;
+    @Resource
+    private ImageRepository imageRepository;
 
     /**
      * @Author haien
@@ -165,6 +171,8 @@ public class PeopleController {
             map.put("message", "删除人员失败！");
         }else{
             peopleRepository.delete(id);
+            documentRepository.delete(people.getIntroduction());
+            imageRepository.delete(people.getPortrait());
             logger.info("成功删除人员");
             map.put("result", 1);
             map.put("message", "成功删除人员！");

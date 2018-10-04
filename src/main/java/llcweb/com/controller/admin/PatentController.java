@@ -103,12 +103,12 @@ public class PatentController {
 		}
 		
 		Page<Patent> patentPage = patentService.findAll(patent, currentPage-1, size);
-		List<UsefulPatent> usefulProjectList = patentService.patentsToUsefulpatent(patentPage.getContent());
+		//List<UsefulPatent> usefulProjectList = patentService.patentsToUsefulpatent(patentPage.getContent());
 		
 		//总记录条数
 		
 		long total = patentPage.getTotalElements();
-		map.put("pageData", usefulProjectList);
+		map.put("pageData", patentPage.getContent());
 		map.put("total", total);
 		map.put("draw", draw);
 		map.put("result", 1);

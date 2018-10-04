@@ -64,7 +64,9 @@ public class Patent {
 	   //申请人（一般为广东工业大学）
 	   @Column(name = "appli_people", length = 64)
 	   public String appliPeople;
-	   
+
+	   private  String state;
+
 	   public Patent() {
 		   
 	   }

@@ -9,7 +9,10 @@
 **/
 //获取专利分页数据
 var urlGetPage="/patent/page";
-
+//更改
+var urlSave="/patent/save";
+//删除
+var urlDelete="/patent/delete";
 
 //加载遮罩
 var $wrapper = $('#paper-table');
@@ -46,10 +49,7 @@ $(document).ready(function () {
                             returnData.data = result.pageData;
                             //关闭遮罩
                             $wrapper.spinModal(false);
-                            //调用DataTables提供的callback方法，代表数据已封装完成并传回DataTables进行渲染
-                            //此时的数据需确保正确无误，异常判断应在执行此回调前自行处理完毕
                             callback(returnData);
-
                         },
                         error: function (XMLHttpRequest, textStatus, errorThrown) {
                             $.dialog.alert("查询失败");
@@ -62,23 +62,24 @@ $(document).ready(function () {
                         data: "title"
                     },
                     {
-                        data: "introduction",
-                        width: "200px",
-                        className: "ellipsis",	//文字过长时用省略号显示，CSS实现
-                        render: CONSTANT.DATA_TABLES.RENDER.ELLIPSIS//会显示省略号的列，需要用title属性实现划过时显示全部文本的效果
+                        data: "state",
+                        width: "80px"
                     },
                     {
-                        data: "author",
-                        width: "100px",
+                        data: "authorList",
+                        width: "150px",
                         className: "ellipsis",
                         render: CONSTANT.DATA_TABLES.RENDER.ELLIPSIS
                     },
                     {
-                        data: "profile",
-                        width: "80px"
+                        data: null,
+                        width: "80px",
+                        render: function (data, type, row, meta) {
+                            return "公开";
+                        }
                     },
                     {
-                        data: "date",
+                        data: "appliDate",
                         width: "80px",
                         render: function (data, type, row, meta) {
                             return dateToString(data);
@@ -87,22 +88,16 @@ $(document).ready(function () {
                     {
                         className: "td-operation",
                         data: null,
-                        width: "80px",
+                        width: "120px",
                         defaultContent: "",
                         orderable: false
                     }
                 ],
                 "createdRow": function (row, data, index) {
-                    //行渲染回调,在这里可以对该行dom元素进行任何操作
-                    // //给当前行加样式
-                    // if (data.isTaoliao) {
-                    //     $(row).addClass("text-info");
-                    // }
-                    // //给当前行某列加样式
-                    // $('td', row).eq(9).addClass(classIsCutted(data.isCutted));
                     //不使用render，改用jquery文档操作呈现单元格
-                    var $btnEdit = $('<button type="button" class="btn btn-small btn-warning btn-edit">修改</button>');
-                    var $btnDelete = $('<button style="margin-left: 20px;"type="button" class="btn btn-small btn-danger btn-delete">删除</button>');
+                    var $btnEdit = $(' <button class="btn btn-warning btn-edit" type="button" data-toggle="tooltip"data-placement="bottom" title="编辑"> <i class="fa fa-edit"></i> </button>');
+                    var $btnDelete = $('<button class="btn btn-danger  btn-delete" type="button" data-toggle="tooltip"data-placement="bottom" title="删除"> <i class="fa fa-trash-o"></i> </button>');
+
                     $('td', row).eq(5).append($btnEdit).append($btnDelete);
                 },
                 "drawCallback": function (settings) {
@@ -113,7 +108,7 @@ $(document).ready(function () {
 
     //行点击事件
     $("tbody", $paperTable).on("click", "tr", function (event) {
-        $(this).addClass("active").siblings().removeClass("active");//有空再试试
+        $(this).addClass("active").siblings().removeClass("active");//有空再试试渲染选中行
         //$(this).addClass("active").siblings("tr").removeClass("active");
         // $("table tr").css('background-color','white');
         // $(this).css('background-color','blue');
@@ -188,47 +183,10 @@ var usersManage = {
         //更多
     },
     editSaveUser: function (item) {
-        // var workplace = getCookie("workplace");
-        // var workplaceId = getCookie("workplaceId");
-        // if(workplace===null||workplace===""){
-        //     $.dialog.tips('请先选择派工工位！');
-        //     return;
-        // }
-        // var message = "确定将批次:"+selectedItem.batchName+" 的单元:"+selectedItem.unitName+"派工给:"+workplace+"?";
-        // $.dialog.confirm(message, function () {
-        //     //$.dialog.tips("i am in!");
-        //     $.ajax({
-        //         type : "get",
-        //         url : urlArrangeUnitToWorkPlace,
-        //         data :"unitId=" + selectedItem.unitId+"&workplaceId="+workplaceId,
-        //         async : false,
-        //         success : function(data){
-        //             $.dialog.tips(data.message);
-        //         },
-        //         error: function (XMLHttpRequest, textStatus, errorThrown) {
-        //             $.dialog.alert("查询失败");
-        //             $wrapper.spinModal(false);
-        //         }
-        //     });
-        // });
+
     },
     deleteUser: function (item) {
 
     }
 };
-//根据idd获取departmentInfo信息
-function getDepartmentInfo(id) {
-    var department =null;
-    //设置同步
-    $.ajax({
-        type : "get",
-        url : urlGetDepartmentInfoById,
-        data :"id=" + id,
-        async : false,
-        success : function(data){
-            department = data.data;
-        }
-    });
-    return department;
-}
 

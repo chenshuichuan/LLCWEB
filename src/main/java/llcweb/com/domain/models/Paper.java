@@ -41,6 +41,16 @@ public class Paper {
 	    @Column(name = "periodical", length = 64)
 	    private String periodical;
 
+	    private String state;
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
 	public Paper() {
 	}
 

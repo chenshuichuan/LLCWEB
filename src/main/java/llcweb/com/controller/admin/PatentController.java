@@ -61,7 +61,7 @@ public class PatentController {
 	/*
 	 * 前台首页
 	 */
-	@RequestMapping(value = "/patent", method = RequestMethod.POST)
+	@RequestMapping(value = "/page", method = RequestMethod.GET)
 	@ResponseBody
 	public Map<String, Object> page(HttpServletRequest request, HttpServletResponse response){
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -78,7 +78,7 @@ public class PatentController {
         int currentPage = Integer.parseInt(startIndex)/size+1;
         
 		//获取排序字段
-		String orderColumn = request.getParameter("oderColunm");
+		String orderColumn = request.getParameter("orderColunm");
 		if(orderColumn == null) {
 			orderColumn = "date";
 		}
@@ -193,8 +193,6 @@ public class PatentController {
         	patent.setAppliPeople(appliPeople);
         	
         	patentRepository.save(patent);
-        	
-        	
             map.put("result", 1);
             map.put("message", "成功保存专利！");
             logger.info("成功保存专利！");
@@ -210,12 +208,11 @@ public class PatentController {
 	/*
 	 * 删除专利
 	 */
-    @RequestMapping(value = "delete", method = RequestMethod.POST)
+    @RequestMapping(value = "delete", method = RequestMethod.GET)
     @ResponseBody
     public Map<String, Object> delete(@RequestBody Integer id){
     	Map<String, Object> map = patentService.delete(id);
 		return map;
-    	
     }
     
     /*

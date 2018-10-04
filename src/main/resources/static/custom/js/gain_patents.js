@@ -9,12 +9,7 @@
 **/
 //获取专利分页数据
 var urlGetPage="/patent/page";
-//获取patent对应的详细的信息
-var urlGetPeopleById="";
-//添加user用户
-var urlAddUser="";
-//更改用户信息
-var urlUpdateUserById="";
+
 
 //加载遮罩
 var $wrapper = $('#paper-table');

@@ -23,18 +23,18 @@ public interface PatentRepository extends JpaRepository<Patent,Integer>{
 
 
 	Page<Patent> findByAuthorList(String userName, Pageable pageable);
-	/*
-	 * 模糊查询
-	 */
-	@Query(value = "SELECT p from Patent p where p.title like %?1%"
-				+ "or p.authorList like %?1%"
-				+ "or p.belongProject like %?1%"
-				+ "or p.appliNum like %?1%"
-				+ "or p.publicNum like %?1%"
-				+ "or p.agency like %?1%"
-				+ "or p.appliPeople like %?1%"
-				)
-	Page<Patent> findByOneKey(String key, Pageable pageable);
+//	/*
+//	 * 模糊查询
+//	 */
+//	@Query(value = "SELECT p from Patent p where p.title like %?1%"
+//				+ "or p.authorList like %?1%"
+//				+ "or p.belongProject like %?1%"
+//				+ "or p.appliNum like %?1%"
+//				+ "or p.publicNum like %?1%"
+//				+ "or p.agency like %?1%"
+//				+ "or p.appliPeople like %?1%"
+//				)
+//	Page<Patent> findByOneKey(String key, Pageable pageable);
 	
 	
 }

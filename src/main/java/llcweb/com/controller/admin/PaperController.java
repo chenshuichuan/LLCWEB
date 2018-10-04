@@ -60,7 +60,7 @@ public class PaperController {
 	/*
 	 * 前台首页
 	 */
-	@RequestMapping(value = "/paper", method = RequestMethod.POST)
+	@RequestMapping(value = "/page", method = RequestMethod.GET)
 	@ResponseBody
 	public Map<String, Object> page(HttpServletRequest request, HttpServletResponse response){
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -77,7 +77,7 @@ public class PaperController {
         int currentPage = Integer.parseInt(startIndex)/size+1;
         
 		//获取排序字段
-		String orderColumn = request.getParameter("oderColunm");
+		String orderColumn = request.getParameter("orderColunm");
 		if(orderColumn == null) {
 			orderColumn = "date";
 		}
@@ -101,12 +101,12 @@ public class PaperController {
 		}
 		
 		Page<Paper> paperPage = paperService.findAll(paper, currentPage-1, size);
-		List<UsefulPaper> usefulProjectList = paperService.papersToUsefulPaper(paperPage.getContent());
+		//List<UsefulPaper> usefulProjectList = paperService.papersToUsefulPaper(paperPage.getContent());
 		
 		//总记录条数
 		
 		long total = paperPage.getTotalElements();
-		map.put("pageData", usefulProjectList);
+		map.put("pageData", paperPage.getContent());
 		map.put("total", total);
 		map.put("draw", draw);
 		map.put("result", 1);
@@ -173,6 +173,7 @@ public class PaperController {
         
         if(flag) {
         	paper.setId(Integer.parseInt(id));
+        	paper.setAuthorList(authorList);
         	paper.setTitle(title);
         	paper.setDate(date2);
         	paper.setIntroduction(introduction);
@@ -180,10 +181,7 @@ public class PaperController {
         	paper.setSourceLink(sourceLink);
         	paper.setBelongProject(belongProject);
         	paper.setPeriodical(periodical);
-        	
         	paperRepository.save(paper);
-        	
-        	
             map.put("result", 1);
             map.put("message", "成功保存论文！");
             logger.info("成功保存论文！");
@@ -199,7 +197,7 @@ public class PaperController {
 	/*
 	 * 删除论文
 	 */
-    @RequestMapping(value = "delete", method = RequestMethod.POST)
+    @RequestMapping(value = "delete", method = RequestMethod.GET)
     @ResponseBody
     public Map<String, Object> delete(@RequestBody Integer id){
     	Map<String, Object> map = paperService.delete(id);

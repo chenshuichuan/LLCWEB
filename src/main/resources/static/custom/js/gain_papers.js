@@ -10,12 +10,13 @@
 //获取论文分页数据
 var urlGetPage="/paper/page";
 //获取paper对应的详细的信息
-var urlGetPeopleById="";
-//添加user用户
-var urlAddUser="";
-//更改用户信息
-var urlUpdateUserById="";
-
+var urlGetPaperById="";
+//添加
+var urlAdd="";
+//更改
+var urlSave="/paper/save";
+//删除
+var urlDelete="/paper/delete";
 //加载遮罩
 var $wrapper = $('#paper-table');
 
@@ -54,7 +55,6 @@ $(document).ready(function () {
                             //调用DataTables提供的callback方法，代表数据已封装完成并传回DataTables进行渲染
                             //此时的数据需确保正确无误，异常判断应在执行此回调前自行处理完毕
                             callback(returnData);
-
                         },
                         error: function (XMLHttpRequest, textStatus, errorThrown) {
                             $.dialog.alert("查询失败");
@@ -67,20 +67,21 @@ $(document).ready(function () {
                         data: "title"
                     },
                     {
-                        data: "introduction",
-                        width: "200px",
-                        className: "ellipsis",	//文字过长时用省略号显示，CSS实现
-                        render: CONSTANT.DATA_TABLES.RENDER.ELLIPSIS//会显示省略号的列，需要用title属性实现划过时显示全部文本的效果
+                        data: "date",
+                        width: "80px"
                     },
                     {
-                        data: "author",
-                        width: "100px",
+                        data: "authorList",
+                        width: "250px",
                         className: "ellipsis",
                         render: CONSTANT.DATA_TABLES.RENDER.ELLIPSIS
                     },
                     {
-                        data: "profile",
-                        width: "80px"
+                        data: null,
+                        width: "80px",
+                        render: function (data, type, row, meta) {
+                            return "公开";
+                        }
                     },
                     {
                         data: "date",
@@ -92,22 +93,17 @@ $(document).ready(function () {
                     {
                         className: "td-operation",
                         data: null,
-                        width: "80px",
+                        width: "120px",
                         defaultContent: "",
                         orderable: false
                     }
                 ],
                 "createdRow": function (row, data, index) {
-                    //行渲染回调,在这里可以对该行dom元素进行任何操作
-                    // //给当前行加样式
-                    // if (data.isTaoliao) {
-                    //     $(row).addClass("text-info");
-                    // }
-                    // //给当前行某列加样式
-                    // $('td', row).eq(9).addClass(classIsCutted(data.isCutted));
+
                     //不使用render，改用jquery文档操作呈现单元格
-                    var $btnEdit = $('<button type="button" class="btn btn-small btn-warning btn-edit">修改</button>');
-                    var $btnDelete = $('<button style="margin-left: 20px;"type="button" class="btn btn-small btn-danger btn-delete">删除</button>');
+                    var $btnEdit = $(' <button class="btn btn-warning btn-edit" type="button" data-toggle="tooltip"data-placement="bottom" title="编辑"> <i class="fa fa-edit"></i> </button>');
+                    var $btnDelete = $('<button class="btn btn-danger  btn-delete" type="button" data-toggle="tooltip"data-placement="bottom" title="删除"> <i class="fa fa-trash-o"></i> </button>');
+
                     $('td', row).eq(5).append($btnEdit).append($btnDelete);
                 },
                 "drawCallback": function (settings) {
@@ -119,13 +115,11 @@ $(document).ready(function () {
     //行点击事件
     $("tbody", $paperTable).on("click", "tr", function (event) {
         $(this).addClass("active").siblings().removeClass("active");//有空再试试
-        //$(this).addClass("active").siblings("tr").removeClass("active");
-        // $("table tr").css('background-color','white');
-        // $(this).css('background-color','blue');
         //获取该行对应的数据
         var item = _table.row($(this).closest('tr')).data();
         usersManage.currentItem = item;
         usersManage.showUser(item);
+        $("#view-panel").show().siblings(".panel").hide();
     });
     $paperTable.on("click", ".btn-edit", function () {
         //编辑按钮
@@ -139,6 +133,7 @@ $(document).ready(function () {
         var item = _table.row($(this).closest('tr')).data();
         $(this).closest('tr').addClass("active").siblings().removeClass("active");
         usersManage.deleteUser(item);
+        _table.draw();
     });
 
 
@@ -183,57 +178,47 @@ var usersManage = {
         return param;
     },
     showUser: function (item) {
-        $("#view-username").text(item.username);
+        $("#view-title").text(item.title);
+        $("#view-abstract").text(item.introduction);
+        $("#view-original_link").text(item.originalLink);
+        $("#view-source_file").text("/file/getPath?id="+item.sourceFile);
+        $("#view-belong_project").text(item.belongProject);
+        $("#view-periodical").text(item.periodical);
         //更多操作
     },
     editUser: function (item) {
-        $("#edit-id").val(item.id)
-        $("#edit-username").val(item.username);
-        $("#edit-password").val(item.password);
-        //更多
+        $("#edit-id").val(item.id);
+        $("#edit-title").val(item.title);
+        $("#edit-author").val(item.authorList);
+        $("#edit-abstract").val(item.introduction);
+        $("#edit-profile").val("公开");
+        $("#edit-belong_project").val(item.belongProject);
+        $("#edit-original_link").val(item.originalLink);
+        $("#edit-source_file").val(item.sourceFile);
+        $("#edit-periodical").val(item.periodical);
+        $("#edit-state").val(item.state);
+        $("#edit-date").val(dateToString(item.date));
     },
     editSaveUser: function (item) {
-        // var workplace = getCookie("workplace");
-        // var workplaceId = getCookie("workplaceId");
-        // if(workplace===null||workplace===""){
-        //     $.dialog.tips('请先选择派工工位！');
-        //     return;
-        // }
-        // var message = "确定将批次:"+selectedItem.batchName+" 的单元:"+selectedItem.unitName+"派工给:"+workplace+"?";
-        // $.dialog.confirm(message, function () {
-        //     //$.dialog.tips("i am in!");
-        //     $.ajax({
-        //         type : "get",
-        //         url : urlArrangeUnitToWorkPlace,
-        //         data :"unitId=" + selectedItem.unitId+"&workplaceId="+workplaceId,
-        //         async : false,
-        //         success : function(data){
-        //             $.dialog.tips(data.message);
-        //         },
-        //         error: function (XMLHttpRequest, textStatus, errorThrown) {
-        //             $.dialog.alert("查询失败");
-        //             $wrapper.spinModal(false);
-        //         }
-        //     });
-        // });
+        var paper = {};
+        paper.id = $("#edit-id").val();
+        paper.title = $("#edit-title").val();
+        paper.authorList = $("#edit-author").val();
+        paper.introduction = $("#edit-abstract").val();
+        paper.profile = $("#edit-profile").val();
+        paper.belongProject = $("#edit-belong_project").val();
+        paper.originalLink = $("#edit-original_link").val();
+        paper.sourceFile = $("#edit-source_file").val();
+        paper.sourceLink = $("#edit-source_file").val();
+        paper.periodical = $("#edit-periodical").val();
+        paper.state = $("#edit-state").val();
+        paper.date = $("#edit-date").val();
+        saveFun(urlSave,paper);
     },
     deleteUser: function (item) {
-
+        var message = "确定删除论文:"+item.title+"?";
+        deleteFun(message,urlDelete,item.id);
     }
 };
-//根据idd获取departmentInfo信息
-function getDepartmentInfo(id) {
-    var department =null;
-    //设置同步
-    $.ajax({
-        type : "get",
-        url : urlGetDepartmentInfoById,
-        data :"id=" + id,
-        async : false,
-        success : function(data){
-            department = data.data;
-        }
-    });
-    return department;
-}
+
 

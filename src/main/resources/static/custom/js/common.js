@@ -213,3 +213,18 @@ function deleteFun(message,urlDelete,id) {
         });
     });
 }
+//保存通用函数
+function saveFun(urlSave,myData) {
+    $.ajax({
+        type : "post",
+        url : urlSave,
+        data :myData,
+        async : false,
+        success : function(data){
+            $.dialog.tips(data.message);
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            $.dialog.alert("更新失败！");
+        }
+    });
+}

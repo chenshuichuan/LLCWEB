@@ -9,7 +9,9 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Slice;
+import org.springframework.data.domain.Sort;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.text.ParseException;
@@ -54,5 +56,14 @@ public class PaperRepositoryTest {
 	        Page<Paper> paperList=paperService.findAll(paper,1,3);
 	        Assert.assertThat(paperList.getTotalElements(),is(91L));
 	        System.out.println(((Slice<Paper>) paper).getSort());
+	    }
+	   
+	    /*
+	     * 模糊查询测试
+	     */
+	    @Test
+	    public void findByOneKey(){
+	        Page<Paper> paperList = paperRepository.findByOneKey("方法",new PageRequest(0,10, Sort.Direction.DESC,"id"));
+	        Assert.assertThat(paperList.getTotalElements(),is(12L));
 	    }
 }

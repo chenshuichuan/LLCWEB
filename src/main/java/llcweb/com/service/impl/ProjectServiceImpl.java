@@ -82,6 +82,7 @@ public class ProjectServiceImpl implements ProjectService {
 		return projectList;
 	}
 	
+	
     /**
      * 查找用户编辑过的项目
      */
@@ -149,7 +150,7 @@ public class ProjectServiceImpl implements ProjectService {
 	
 	/*
 	 * 修改项目
-	 * @see llcweb.com.service.ProjectService#update(llcweb.com.domain.models.Project)
+	 * 
 	 */
 
 	@Override
@@ -185,6 +186,11 @@ public class ProjectServiceImpl implements ProjectService {
         map.put("result", 0);
         map.put("msg", "删除失败，请确认项目是否存在！");
         return map;
+    }
+
+    @Override
+    public List<UsefulProject> projectsToUsefulProject(List<Project> projectList) {
+        return null;
     }
 
 /*	

@@ -86,7 +86,7 @@ public class ImageController {
         //保存到数据库
             //添加
         Image image=null;
-        if (null == id) {
+        if (null == id||id.equals("")||id<0) {
             logger.info("添加图片：name=" + file.getOriginalFilename() + ",type=" + file.getContentType());
             image=new Image();
         }
@@ -96,7 +96,7 @@ public class ImageController {
             image=imageRepository.findOne(id);
             if(image==null){
                 map.put("result", 0);
-                map.put("message", "找不到该图片！");
+                map.put("message", "更新失败，请确认图片是否存在！");
                 return map;
             }
         } else {
@@ -343,6 +343,7 @@ public class ImageController {
             //String path1 = System.getProperty("user.dir");
             fis = new FileInputStream(imgPath);
             os = response.getOutputStream();
+            response.setHeader("Content-type","image/png"); //设置响应内容类型(不管图片是什么格式都能正确显示)
             int count = 0;
             byte[] buffer = new byte[1024 * 8];
             while ((count = fis.read(buffer)) != -1) {

@@ -178,6 +178,7 @@ public class ResourceServiceImpl<T> implements ResourceService<T> {
         byte[] buff = new byte[1024];
         BufferedInputStream bis = new BufferedInputStream(new FileInputStream(path));
         OutputStream os = response.getOutputStream(); //服务器向浏览器发送字节输出流
+        response.setHeader("Content-type","image/png"); //设置响应内容类型(虽然设置的是png,但是连gif也可以正常显示)
         int len = 0;
         while ((len = bis.read(buff)) != -1) {
             os.write(buff, 0, len);

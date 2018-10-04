@@ -7,15 +7,18 @@
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="shortcut icon" href="../../static/home/images/bitbug_favicon.ico"
           th:href="@{/home/images/bitbug_favicon.ico}"/>
-    <link href="../../static/home/css/reset.css" rel="stylesheet"
+
+    <link rel="stylesheet" href="../../static/home/css/reset.css" type="text/css"
           th:href="@{/home/css/reset.css}">
+
     <link href="../../static/home/css/public.css" rel="stylesheet"
           th:href="@{/home/css/public.css}">
     <link href="../../static/home/css/index.css" rel="stylesheet"
           th:href="@{/home/css/index.css}">
     <script type="text/javascript" src="../../static/home/js/jquery-1.12.4.min.js"
-            th:href="@{home/js/jquery-1.12.4.min.js}"></script>
+            th:src="@{home/js/jquery-1.12.4.min.js}"></script>
     <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
     <meta name="description" content="jPaginate - jQuery Pagination Plugin"/>
     <meta name="keywords" content="jquery, plugin, pagination, fancy"/>
     <title>实验室概况——广东省信息物理融合系统重点实验室</title>
@@ -32,10 +35,35 @@
 
 </head>
 <body>
+<div class="public-header" th:include="template/header_template"></div>
 <div class="middle">
     <div class="container middle_container">
         <div class="middle_content">
+            <div class="middle_l" id="temlate_middle">
+                <!-- <h1><span>机构概况</span></h1> -->
+                <ul id='resultType' class="tmo_list2">
+                    <li class="ll first"><span>实验室概况</span></li>
+                    <li class='ll'>
+                        <a href='Team_introduction.html' class='ll_ref'>
+                            <i></i>
+                            <span>团队简介</span>
+                        </a>
+                    </li>
+                    <li class='ll'>
+                        <a href='Institutional_profile.html' class='ll_ref'>
+                            <i></i>
+                            <span>机构简介</span>
+                        </a>
+                    </li>
+                    <li class='ll'>
+                        <a href='project_brief.html' class='ll_ref' style="background:#6ad;">
+                            <i></i>
+                            <span>项目简介</span>
+                        </a>
+                    </li>
+                </ul>
 
+            </div>
             <div class="middle_r">
                 <div class="crumb">
                     <ul id="crumbs">
@@ -55,12 +83,7 @@
         </div>
     </div>
 </div>
-
-
-
-
-
-
+<div class="public-footer" th:include="template/footer_template"></div>
 
 
 </body>

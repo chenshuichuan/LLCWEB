@@ -185,6 +185,14 @@ public class DocumnetController {
         String title = request.getParameter("title");
         String infor = request.getParameter("infor");
         String group = request.getParameter("group");
+
+        if(StringUtil.isNull(content)||StringUtil.isNull(title)||
+                StringUtil.isNull(infor)||StringUtil.isNull(group)){
+            map.put("result", 0);
+            map.put("message", "文档保存失败,信息不完整！");
+            return map;
+        }
+
         Users user=usersService.getCurrentUser();
         String userName=user.getUsername();
         int userId=user.getId();
@@ -247,13 +255,11 @@ public class DocumnetController {
             map.put("result", 0);
             logger.info("删除文档失败");
             map.put("message", "删除文档失败！");
-            logger.error("删除文档失败！");
         }else{
             documentRepository.delete(id);
-            logger.info("删除文档成功");
+            logger.info("成功删除文档");
             map.put("result", 1);
             map.put("message", "成功删除文档！");
-            logger.info("成功删除文档！");
         }
         return map;
     }

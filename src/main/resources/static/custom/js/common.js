@@ -197,3 +197,19 @@ var CONSTANT = {
         }
     }
 };
+
+
+//删除通用函数
+function deleteFun(message,urlDelete,id) {
+    $.dialog.confirm(message, function () {
+        $.ajax({
+            type : "get",
+            url : urlDelete,
+            data :"id=" + id,
+            async : false,
+            success : function(data){
+                $.dialog.tips(data.message);
+            }
+        });
+    });
+}

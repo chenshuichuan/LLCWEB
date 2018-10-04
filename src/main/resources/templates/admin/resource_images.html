@@ -28,7 +28,6 @@
           th:href="@{/assets/plugins/selector/css/bootstrap-select.min.css}" rel="stylesheet">
     <link href="../../static/assets/plugins/chocolat/css/chocolat.css"
           th:href="@{/assets/plugins/chocolat/css/chocolat.css}" rel="stylesheet">
-
     <style>
         .table-img{
             max-width: 250px;
@@ -36,7 +35,6 @@
         }
     </style>
 </head>
-
 
 <body>
 <div id="wrapper">
@@ -57,8 +55,6 @@
                 <li class="active">图片文件</li>
             </ol>
         </div>
-
-        
         <div id="page-inner">
             <div class="panel panel-default" style="margin-top: -30px;">
                 <div class="panel-body">
@@ -79,32 +75,12 @@
                             </form>
                         </div>
                     </div>
-                    <!--&lt;!&ndash;高级筛选&ndash;&gt;-->
-                    <!--<div class="row" id="div-advanced-search" >-->
-                        <!--<div class="col-md-12">-->
-                            <!--<form class="col s12">-->
-                                <!--<div class="row">-->
-                                    <!--<div class="input-field col s4">-->
-                                        <!--<label for="icon_telephone">Telephone</label>-->
-                                        <!--<select id="sel-da" class="form-control large selectpicker" title="选择角色">-->
-                                            <!--<option value="0" data-content="<span class='label label-danger'>系统管理员</span>">系统管理员</option>-->
-                                            <!--<option value="1" data-content="<span class='label label-info'>项目组长</span>">项目组长</option>-->
-                                            <!--<option value="2" data-content="<span class='label label-success'>普通用户</span>">普通用户</option>-->
-                                        <!--</select>-->
-                                    <!--</div>-->
-                                    <!--<div class="input-field col s4">-->
-                                        <!--<i class="material-icons prefix">phone</i>-->
-                                        <!--<input id="icon_telephone" type="tel" class="validate">-->
-                                        <!--<label for="icon_telephone">Telephone</label>-->
-                                    <!--</div>-->
-                                <!--</div>-->
-                            <!--</form>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                    <!--上传图片 style="display:none;"-->
+                    <!--高级筛选待实现-->
+
+                    <!--上传图片 style="display:none;" action="/image/save" th:action="@{/image/save}"-->
                     <div class="row" id="div-upload-image" style="display:none;">
                         <div class="col-md-12">
-                            <form class="col s12" action="/image/save" th:action="@{/image/save}" method="post" enctype="multipart/form-data">
+                            <form class="col s12" method="post" enctype="multipart/form-data">
                                 <div class="row">
                                     <div class="input-field col s3" style="text-align: center;">
                                         <img id="img-upload-preview" style="max-height: 200px;max-width: 200px;" src="#"/>
@@ -126,16 +102,15 @@
                                                 <input id="input-group" name="group" type="text" class="validate">
                                                 <label for="input-group">组别</label>
                                             </div>
-
                                         </div>
                                         <div class="row">
-                                            <div class="input-field col s6">
+                                            <div class="input-field col s6" id="div-input-id">
                                                 <i class="fa fa-anchor prefix"></i>
                                                 <input id="input-id" name="id" type="text" class="validate">
                                                 <label for="input-id">id</label>
                                             </div>
                                             <div class="input-field col s3" style="text-align: center;">
-                                                <button type="submit" class="btn btn-default">
+                                                <button id="input-upload-summit" type="submit" class="btn btn-default">
                                                     <i class="fa fa-upload"></i>
                                                     上传</button>
                                             </div>

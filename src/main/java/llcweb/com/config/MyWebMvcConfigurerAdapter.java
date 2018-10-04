@@ -24,6 +24,8 @@ public class MyWebMvcConfigurerAdapter extends WebMvcConfigurerAdapter {
     //获取配置文件中图片的路径
     @Value("${image.location}")
     private String imgPath;
+    @Value("${file.location}")
+    private String filePath;
     //访问图片方法
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
@@ -39,6 +41,7 @@ public class MyWebMvcConfigurerAdapter extends WebMvcConfigurerAdapter {
         }
         logger.info("imagesPath="+imgPath);
         registry.addResourceHandler("/images/**").addResourceLocations("file:"+".\\images\\");
+        registry.addResourceHandler("/files/**").addResourceLocations("file:"+".\\files\\");
         super.addResourceHandlers(registry);
     }
 

@@ -179,7 +179,8 @@ public class PatentController {
         }
         
         if(flag) {
-        	patent.setId(Integer.parseInt(id));
+        	//id是自增的
+        	//patent.setId(Integer.parseInt(id));
         	patent.setTitle(title);
         	patent.setAppliDate(appliDate);
         	patent.setIntroduction(introduction);

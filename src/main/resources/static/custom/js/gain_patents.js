@@ -13,7 +13,7 @@ var urlGetPage="/patent/page";
 var urlSave="/patent/save";
 //删除
 var urlDelete="/patent/delete";
-
+var urlGetFileById="/file/getFileById";
 //加载遮罩
 var $wrapper = $('#paper-table');
 
@@ -115,7 +115,7 @@ $(document).ready(function () {
         //获取该行对应的数据
         var item = _table.row($(this).closest('tr')).data();
         usersManage.currentItem = item;
-        usersManage.showUser(item);
+        usersManage.show(item);
     });
     $paperTable.on("click", ".btn-edit", function () {
         //编辑按钮
@@ -123,12 +123,12 @@ $(document).ready(function () {
         $(this).closest('tr').addClass("active").siblings().removeClass("active");
         //切换panel
         $("#edit-panel").show().siblings(".panel").hide();
-        usersManage.editUser(item);
+        usersManage.edit(item);
     }).on("click", ".btn-delete", function () {
         //删除按钮
         var item = _table.row($(this).closest('tr')).data();
         $(this).closest('tr').addClass("active").siblings().removeClass("active");
-        usersManage.deleteUser(item);
+        usersManage.delete(item);
     });
 
 
@@ -137,16 +137,63 @@ $(document).ready(function () {
     });
 
     $("#btn-add-user").click(function () {
+        $("#add-title").val("");
+        $("#add-author").val("");
+
+        $("#add-abstract").val("");
+        $("#add-profile").val(0);//
+
+        $("#add-original_link").val("");
+        $("#add-source_file").val("");
+        $("#add-belong_project").val("");
+
+        $("#add-appli_num").val("");
+        $("#add-appli_date").val("");
+        $("#add-public_num").val("");
+        $("#add-public_date").val("");
+        $("#add-agency").val("");
+        $("#add-state").val("");
         $("#add-panel").show().siblings(".panel").hide();
     });
     $("#btn-edit-bt").click(function () {
         $("#edit-panel").show().siblings(".panel").hide();
     });
     $("#btn-add-save").click(function () {
-        $.dialog.tips("保存添加测试")
+        var patent={};
+        patent.title=$("#add-title").val();
+        patent.authorList=$("#add-author").val();
+        patent.introduction=$("#add-abstract").val();
+        patent.originalLink=$("#add-original_link").val();
+        patent.sourceFile=$("#add-source_file").val();
+        patent.belongProject= $("#add-belong_project").val();
+        patent.profile=$("#add-profile").val();
+        patent.appliNum=$("#add-appli_num").val();
+        patent.appliDate=$("#add-appli_date").val();
+        patent.publicNum=$("#add-public_num").val();
+        patent.publicDate=$("#add-public_date").val();
+        patent.agency=$("#add-agency").val();
+        patent.state= $("#add-state").val();
+        usersManage.save(patent);
+        _table.draw();
     });
     $("#btn-edit-save").click(function () {
-        $.dialog.tips("保存编辑测试")
+        var patent={};
+        patent.id=$("#edit-id").val();
+        patent.title=$("#edit-title").val();
+        patent.authorList=$("#edit-author").val();
+        patent.introduction=$("#edit-abstract").val();
+        patent.originalLink=$("#edit-original_link").val();
+        patent.sourceFile=$("#edit-source_file").val();
+        patent.belongProject= $("#edit-belong_project").val();
+        patent.profile=$("#edit-profile").val();
+        patent.appliNum=$("#edit-appli_num").val();
+        patent.appliDate=$("#edit-appli_date").val();
+        patent.publicNum=$("#edit-public_num").val();
+        patent.publicDate=$("#edit-public_date").val();
+        patent.agency=$("#edit-agency").val();
+        patent.state= $("#edit-state").val();
+        usersManage.save(patent);
+        _table.draw();
     });
     $("#btn-add-cancel").click(function () {
         $("#view-panel").show().siblings(".panel").hide();
@@ -172,21 +219,42 @@ var usersManage = {
         param.draw = data.draw;
         return param;
     },
-    showUser: function (item) {
-        $("#view-username").text(item.username);
-        //更多操作
+    show: function (item) {
+        $("#view-title").text(item.title);
+        $("#view-abstract").text(item.introduction);
+        $("#view-original_link").text(item.originalLink);
+        $("#view-source_file").text((item.id==null||item.id==undefined)?"":(urlGetFileById+"?id="+item.sourceFile));
+        $("#view-belong_project").text(item.belongProject);
+
+        $("#view-appli_num").text(item.appliNum);
+        $("#view-public_num").text(item.publicNum);
+        $("#view-public_date").text(dateToString(item.publicDate));
+        $("#view-agency").text(item.agency);
+        $("#view-state").text(item.state);
     },
-    editUser: function (item) {
-        $("#edit-id").val(item.id)
-        $("#edit-username").val(item.username);
-        $("#edit-password").val(item.password);
+    edit: function (item) {
+        $("#edit-id").val(item.id);
+        $("#edit-title").val(item.title);
+        $("#edit-author").val(item.authorList);
+        $("#edit-abstract").val(item.introduction);
+        $("#edit-original_link").val(item.originalLink);
+        $("#edit-source_file").val(item.sourceFile);
+        $("#edit-belong_project").val(item.belongProject);
+        $("#edit-profile").val(item.belongProject);
+        $("#edit-appli_num").val(item.appliNum);
+        $("#edit-appli_date").val(dateToString(item.appliDate));
+        $("#edit-public_num").val(item.publicNum);
+        $("#edit-public_date").val(dateToString(item.publicDate));
+        $("#edit-agency").val(item.agency);
+        $("#edit-state").val(item.state);
         //更多
     },
-    editSaveUser: function (item) {
-
+    save: function (patent) {
+        saveFun(urlSave,patent)
     },
-    deleteUser: function (item) {
-
+    delete: function (item) {
+        var message ="确定删除专利：“"+item.title+"”的信息?";
+        deleteFun(message,urlDelete,item.id);
     }
 };
 

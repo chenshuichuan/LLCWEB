@@ -1,24 +1,23 @@
 /*
 * 作者：ricardo
-* 描述：论文管理页面js
+* 描述：专利管理页面js
 * 编写结构说明：
 *     接口URL-->
 *     页面加载-->
 *     事件监听-->
 *
 **/
-//获取论文分页数据
-var urlGetPage="/paper/page";
-//获取paper对应的详细的信息
-var urlGetPaperById="";
-//添加
-var urlAdd="";
+//获取专利分页数据
+var urlGetPage="/project/page";
 //更改
-var urlSave="/paper/save";
+var urlSave="/project/save";
 //删除
-var urlDelete="/paper/delete";
-var urlGetFileById="/file/getFileById";
+var urlDelete="/project/delete";
+//获取document对应的内容信息
+var urlGetDocumentById="/document/getDocumentById";
 
+var urlGetFileById="/file/getFileById";
+var urlGetAllDocuments="/document/getAll";
 //加载遮罩
 var $wrapper = $('#paper-table');
 
@@ -54,8 +53,6 @@ $(document).ready(function () {
                             returnData.data = result.pageData;
                             //关闭遮罩
                             $wrapper.spinModal(false);
-                            //调用DataTables提供的callback方法，代表数据已封装完成并传回DataTables进行渲染
-                            //此时的数据需确保正确无误，异常判断应在执行此回调前自行处理完毕
                             callback(returnData);
                         },
                         error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -66,28 +63,25 @@ $(document).ready(function () {
                 },
                 columns: [
                     {
-                        data: "title"
+                        data: "projectName"
                     },
                     {
-                        data: "date",
+                        data: "status",
                         width: "80px"
                     },
                     {
-                        data: "authorList",
-                        width: "250px",
+                        data: "projectType",
+                        width: "150px",
                         className: "ellipsis",
                         render: CONSTANT.DATA_TABLES.RENDER.ELLIPSIS
                     },
                     {
-                        data: null,
-                        width: "80px",
-                        render: function (data, type, row, meta) {
-                            return "公开";
-                        }
+                        data: "responsiblePerson",
+                        width: "80px"
                     },
                     {
-                        data: "date",
-                        width: "80px",
+                        data: "startDate",
+                        width: "100px",
                         render: function (data, type, row, meta) {
                             return dateToString(data);
                         }
@@ -101,7 +95,6 @@ $(document).ready(function () {
                     }
                 ],
                 "createdRow": function (row, data, index) {
-
                     //不使用render，改用jquery文档操作呈现单元格
                     var $btnEdit = $(' <button class="btn btn-warning btn-edit" type="button" data-toggle="tooltip"data-placement="bottom" title="编辑"> <i class="fa fa-edit"></i> </button>');
                     var $btnDelete = $('<button class="btn btn-danger  btn-delete" type="button" data-toggle="tooltip"data-placement="bottom" title="删除"> <i class="fa fa-trash-o"></i> </button>');
@@ -116,26 +109,27 @@ $(document).ready(function () {
 
     //行点击事件
     $("tbody", $paperTable).on("click", "tr", function (event) {
-        $(this).addClass("active").siblings().removeClass("active");//有空再试试
+        $(this).addClass("active").siblings().removeClass("active");//有空再试试渲染选中行
+        //$(this).addClass("active").siblings("tr").removeClass("active");
+        // $("table tr").css('background-color','white');
+        // $(this).css('background-color','blue');
         //获取该行对应的数据
         var item = _table.row($(this).closest('tr')).data();
         usersManage.currentItem = item;
-        usersManage.showUser(item);
-        $("#view-panel").show().siblings(".panel").hide();
+        usersManage.show(item);
     });
     $paperTable.on("click", ".btn-edit", function () {
         //编辑按钮
         var item = _table.row($(this).closest('tr')).data();
         $(this).closest('tr').addClass("active").siblings().removeClass("active");
         //切换panel
-        $("#edit-panel").show().siblings(".panel").hide();
-        usersManage.editUser(item);
+        $("#add-panel").show().siblings(".panel").hide();
+        usersManage.edit(item);
     }).on("click", ".btn-delete", function () {
         //删除按钮
         var item = _table.row($(this).closest('tr')).data();
         $(this).closest('tr').addClass("active").siblings().removeClass("active");
-        usersManage.deleteUser(item);
-        _table.draw();
+        usersManage.delete(item);
     });
 
 
@@ -144,29 +138,66 @@ $(document).ready(function () {
     });
 
     $("#btn-add-user").click(function () {
+        $("#add-panel-title").text("添加项目记录");
+        $("#add-id").val('');
+        $("#add-project_name").val('');
+        $("#add-status").val('');
+        $("#add-project_type").val('');
+        $("#add-responsible_person").val('');
+        $("#add-start_date").val('');
+        $("#add-end_date").val('');
+        $("#add-require_num").val('');
+        $("#add-research_field").val('');
+        $("#add-members").val('');
+        $("#add-team").val('');
+        $("#add-host_unit").val('');
+        $("#add-co_unit").val('');
+        $("#add-undertake_unit").val('');
+        $("#add-introduction").val('');
         $("#add-panel").show().siblings(".panel").hide();
     });
-    $("#btn-edit-bt").click(function () {
-        $("#edit-panel").show().siblings(".panel").hide();
-    });
     $("#btn-add-save").click(function () {
-        $.dialog.tips("保存添加测试")
-    });
-    $("#btn-edit-save").click(function () {
-        $.dialog.tips("保存编辑测试")
+        usersManage.save();
+        _table.draw();
     });
     $("#btn-add-cancel").click(function () {
         $("#view-panel").show().siblings(".panel").hide();
     });
-    $("#btn-edit-cancel").click(function () {
-        $("#view-panel").show().siblings(".panel").hide();
+
+    $("#btn-refresh-selector").click(function () {
+        usersManage.initCompenets();
     });
+    $("#btn-edit-document").click(function () {
+        var id = $("#add-introduction").val();
+        if(id==null||id==undefined||id.length==0)
+            id = '0';
+        window.open('/admin/edit.html?id='+id);
+    });
+
+    usersManage.initCompenets();
 });
 
 
 var usersManage = {
     currentItem: null,
     fuzzySearch: true,
+    //渲染页面控件
+    initCompenets:function(){
+
+        //渲染document选择框
+        var documentList = getAllDocuments(urlGetAllDocuments);
+        var selector = $("#add-introduction");
+        selector.empty();
+        var options = "";
+        for (var i=0; i<documentList.length;i++){
+            //这里的是否空闲渲染存在问题
+            options+= "<option"+
+                " value='"+documentList[i].id+ "'>"+documentList[i].title
+                +"</option>";
+        }
+        selector.append(options);
+        selector.selectpicker('refresh');
+    },
     getQueryCondition: function (data) {
         var param = {};
         param.username = $("#search-name").val();
@@ -179,46 +210,67 @@ var usersManage = {
         param.draw = data.draw;
         return param;
     },
-    showUser: function (item) {
-        $("#view-title").text(item.title);
-        $("#view-abstract").text(item.introduction);
-        $("#view-original_link").text(item.originalLink);
-        $("#view-source_file").text((item.id==null||item.id==undefined)?"":(urlGetFileById+"?id="+item.sourceFile));
-        $("#view-belong_project").text(item.belongProject);
-        $("#view-periodical").text(item.periodical);
-        //更多操作
+    show: function (item) {
+        $("#view-project_name").text(item.projectName);
+        $("#view-require_num").text(item.requireNum);
+        $("#view-research_field").text(item.researchField);
+        $("#view-start_date").text(dateToString(item.startDate));
+        $("#view-end_date").text(dateToString(item.endDate));
+
+        $("#view-members").text(item.members);
+        $("#view-team").text(item.team);
+        $("#view-host_unit").text(item.hostUnit);
+        $("#view-co_unit").text(item.coUnit);
+        $("#view-undertake_unit").text(item.undertakeUnit);
+        var document = getDocumentById(item.introduction,urlGetDocumentById);
+        var introduction;
+        if(document===null||document==undefined||document.content==null||document.content==undefined)
+            introduction=item.projectName+"<span style='color: red;'>该项目没有简介！</span>";
+        $('#document-preview').html(introduction);
+
     },
-    editUser: function (item) {
-        $("#edit-id").val(item.id);
-        $("#edit-title").val(item.title);
-        $("#edit-author").val(item.authorList);
-        $("#edit-abstract").val(item.introduction);
-        $("#edit-profile").val("公开");
-        $("#edit-belong_project").val(item.belongProject);
-        $("#edit-original_link").val(item.originalLink);
-        $("#edit-source_file").val(item.sourceFile);
-        $("#edit-periodical").val(item.periodical);
-        $("#edit-state").val(item.state);
-        $("#edit-date").val(dateToString(item.date));
+    edit: function (item) {
+        $("#add-panel-title").text("编辑项目记录");
+        $("#add-id").val(item.id);
+
+        $("#add-project_name").val(item.projectName);
+        $("#add-status").val(item.status);
+        $("#add-project_type").val(item.projectType);
+        $("#add-responsible_person").val(item.responsiblePerson);
+        $("#add-start_date").val(dateToString(item.startDate));
+        $("#add-end_date").val(dateToString(item.endDate));
+        $("#add-require_num").val(item.requireNum);
+        $("#add-research_field").val(item.researchField);
+        $("#add-members").val(item.members);
+        $("#add-team").val(item.team);
+        $("#add-host_unit").val(item.hostUnit);
+        $("#add-co_unit").val(item.coUnit);
+        $("#add-undertake_unit").val(item.undertakeUnit);
+        $("#add-introduction").val(item.introduction);
+        //更多
     },
-    editSaveUser: function (item) {
-        var paper = {};
-        paper.id = $("#edit-id").val();
-        paper.title = $("#edit-title").val();
-        paper.authorList = $("#edit-author").val();
-        paper.introduction = $("#edit-abstract").val();
-        paper.profile = $("#edit-profile").val();
-        paper.belongProject = $("#edit-belong_project").val();
-        paper.originalLink = $("#edit-original_link").val();
-        paper.sourceFile = $("#edit-source_file").val();
-        paper.sourceLink = $("#edit-source_file").val();
-        paper.periodical = $("#edit-periodical").val();
-        paper.state = $("#edit-state").val();
-        paper.date = $("#edit-date").val();
-        saveFun(urlSave,paper);
+    save: function () {
+        var project={};
+        project.id=$("#add-id").val();
+        project.projectName=$("#add-project_name").val();
+        project.status=$("#add-status").val();
+        project.projectType=$("#add-project_type").val();
+        project.responsiblePerson=$("#add-responsible_person").val();
+        project.startDate=$("#add-start_date").val();
+        project.endDate= $("#add-end_date").val();
+        project.requireNum=$("#add-require_num").val();
+        project.researchField=$("#add-research_field").val();
+        project.members=$("#add-members").val();
+        project.team=$("#add-team").val();
+        project.team= $("#add-host_unit").val();
+        project.hostUnit=$("#add-co_unit").val();
+        project.undertakeUnit=$("#add-undertake_unit").val();
+        project.introduction=$("#add-introduction").val();
+        saveFun(urlSave,project)
     },
-    deleteUser: function (item) {
-        var message = "确定删除论文:"+item.title+"?";
+    delete: function (item) {
+        var message ="确定删除项目：“"+item.projectName+"”的信息?";
         deleteFun(message,urlDelete,item.id);
     }
 };
+

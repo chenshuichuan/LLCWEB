@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>LLCWEB管理平台</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          th:href="@{https://fonts.googleapis.com/icon?family=Material+Icons}" rel="stylesheet">
+    <link href="../../static/assets/materialize/css/materialize.min.css"
+          th:href="@{/assets/materialize/css/materialize.min.css}" media="screen,projection" rel="stylesheet"/>
+    <!-- Bootstrap Styles-->
+    <link href="../../static/assets/css/bootstrap.css"
+          th:href="@{/assets/css/bootstrap.css}" rel="stylesheet"/>
+    <!-- FontAwesome Styles-->
+    <link href="../../static/assets/font-awesome-4.7.0/css/font-awesome.css"
+          th:href="@{/assets/font-awesome-4.7.0/css/font-awesome.css}" rel="stylesheet"/>
+
+    <!-- Custom Styles-->
+    <link href="../../static/assets/css/custom-styles.css"
+          th:href="@{/assets/css/custom-styles.css}" rel="stylesheet"/>
+    <!--//Google Fonts-->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans'
+          th:href="@{http://fonts.googleapis.com/css?family=Open+Sans}" rel='stylesheet' type='text/css'/>
+    <link href="../../static/custom/css/common.css"
+          th:href="@{/custom/css/common.css}" rel="stylesheet"/>
+    <link href="../../static/assets/plugins/selector/css/bootstrap-select.min.css"
+          th:href="@{/assets/plugins/selector/css/bootstrap-select.min.css}" rel="stylesheet">
+</head>
+
+
+<body>
+<div id="wrapper">
+    <!-- top side start-->
+    <div th:include="admin/template/top_side_template :: admin_topside"></div>
+    <!-- top side end-->
+    <!-- left side start-->
+    <nav class="navbar-default navbar-side" role="navigation"
+         th:include="admin/template/left_side_template :: leftside"></nav>
+    <!-- left side end-->
+    <div id="page-wrapper">
+        <div id="header" class="header">
+            <!--<h3 class="page-header">-->
+            <!--Dashboard-->
+            <!--</h3>-->
+            <ol class="breadcrumb">
+                <li><a href="index.html">管理平台</a></li>
+                <li class="active">个人中心</li>
+            </ol>
+        </div>
+        <div id="page-inner">
+            <div class="panel panel-default" style="margin-top: -30px;">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /. ROW  -->
+            <footer th:include="admin/template/footer_template :: admin_footer">
+            </footer>
+        </div>
+        <!-- /. PAGE INNER  -->
+    </div>
+    <!-- /. PAGE WRAPPER  -->
+</div>
+<!-- /. WRAPPER  -->
+<!-- JS Scripts-->
+<!-- jQuery Js -->
+<script src="../../static/assets/js/jquery-1.10.2.js"
+        th:src="@{/assets/js/jquery-1.10.2.js}"></script>
+<!-- Bootstrap Js -->
+<script src="../../static/assets/js/bootstrap.min.js"
+        th:src="@{/assets/js/bootstrap.min.js}"></script>
+<script src="../../static/assets/materialize/js/materialize.min.js"
+        th:src="@{/assets/materialize/js/materialize.min.js}"></script>
+<!-- Metis Menu Js -->
+<script src="../../static/assets/js/jquery.metisMenu.js"
+        th:src="@{/assets/js/jquery.metisMenu.js}"></script>
+<!-- DATA TABLE SCRIPTS -->
+<script src="../../static/assets/js/dataTables/jquery.dataTables.js"
+        th:src="@{/assets/js/dataTables/jquery.dataTables.js}"></script>
+<script src="../../static/assets/js/dataTables/dataTables.bootstrap.js"
+        th:src="@{/assets/js/dataTables/dataTables.bootstrap.js}"></script>
+<!-- lhgdialog -->
+<script src="../../static/assets/plugins/lhgdialog/lhgdialog.min.js"
+        th:src="@{/assets/plugins/lhgdialog/lhgdialog.min.js}"></script>
+<!-- SpinJS-->
+<script src="../../static/assets/plugins/spin-2.1.0/jquery.spin.merge.js"
+        th:src="@{/assets/plugins/spin-2.1.0/jquery.spin.merge.js}"></script>
+<script src="../../static/assets/plugins/selector/js/bootstrap-select.min.js"
+        th:src="@{/assets/plugins/selector/js/bootstrap-select.min.js}"></script>
+<script src="../../static/custom/js/common.js"
+        th:src="@{/custom/js/common.js}"></script>
+<script src="../../static/custom/js/activity_records.js"
+        th:src="@{/custom/js/activity_records.js}"></script>
+</body>
+
+</html>

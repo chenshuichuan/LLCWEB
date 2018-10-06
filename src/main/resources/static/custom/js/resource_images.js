@@ -11,6 +11,7 @@ var urlGetPage="/image/page";
 //获取图片
 var urlGetImageById="/image/getImageById";
 var urlDelete = "/image/delete";
+var urlUpload="/image/save";
 //加载遮罩
 var $wrapper = $('#images-table');
 $(function(){

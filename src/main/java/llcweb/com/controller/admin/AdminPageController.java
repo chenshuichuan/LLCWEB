@@ -1,7 +1,11 @@
 package llcweb.com.controller.admin;
 
 import llcweb.com.dao.repository.DocumentRepository;
+import llcweb.com.dao.repository.ImageRepository;
+import llcweb.com.dao.repository.PeopleRepository;
 import llcweb.com.domain.models.Document;
+import llcweb.com.domain.models.Image;
+import llcweb.com.domain.models.People;
 import llcweb.com.domain.models.Users;
 import llcweb.com.service.DocumentService;
 import llcweb.com.service.UsersService;
@@ -32,6 +36,10 @@ public class AdminPageController {
     private UsersService usersService;
     @Autowired
     private DocumentService documentService;
+    @Autowired
+    private PeopleRepository peopleRepository;
+    @Autowired
+    private ImageRepository imageRepository;
 
     @RequestMapping("/test.html")
     public ModelAndView test(){
@@ -55,6 +63,16 @@ public class AdminPageController {
         return modelAndView;
     }
 
+    //活动管理
+    @RequestMapping("/activity_records.html")
+    public ModelAndView activity_records(){
+        ModelAndView modelAndView = new ModelAndView("/admin/activity_records");
+        Users users = usersService.getCurrentUser();
+        modelAndView.addObject("user", users);
+        return modelAndView;
+    }
+
+    //系统管理
     @RequestMapping("/system_users.html")
     public ModelAndView system_users(){
 
@@ -133,6 +151,32 @@ public class AdminPageController {
         //根据用户权限查找文档,不需要在此查找数据
         //Page<Document> documentList= documentService.selectByRole(users,0,10);
         modelAndView.addObject("user", users);
+        return modelAndView;
+    }
+
+    /**
+     * 个人中心
+     * */
+    @RequestMapping("/user_home.html")
+    public ModelAndView user_home(){
+        ModelAndView modelAndView = new ModelAndView("/admin/user_home");
+        Users users = usersService.getCurrentUser();
+        modelAndView.addObject("user", users);
+        People people = peopleRepository.findOne(users.getPeopleId());
+        if(people==null){
+            people =new People();
+            people.setName(users.getUsername());
+        }
+        modelAndView.addObject("person",people);
+        String imgPath = null;
+        if(people!=null){
+            Image image = imageRepository.findOne(people.getPortrait());
+            if(image!=null){
+                imgPath = "/"+image.getPath();
+                logger.info("find people's portrait="+imgPath);
+            }
+        }
+        modelAndView.addObject("imgPath",imgPath);
         return modelAndView;
     }
 

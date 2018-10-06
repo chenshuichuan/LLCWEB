@@ -17,6 +17,10 @@ public class People {
      */
     private String name;
 
+    private String phone;
+    private String email;
+    private String researchField;
+
     /**
      * 人物头像路径(关联image表)
      */
@@ -101,6 +105,29 @@ public class People {
 
     public void setGrade(int grade) {
         this.grade = grade;
+    }
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getResearchField() {
+        return researchField;
+    }
+
+    public void setResearchField(String researchField) {
+        this.researchField = researchField;
     }
 }
 

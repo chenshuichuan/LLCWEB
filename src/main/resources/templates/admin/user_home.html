@@ -27,8 +27,6 @@
     <link href="../../static/assets/plugins/selector/css/bootstrap-select.min.css"
           th:href="@{/assets/plugins/selector/css/bootstrap-select.min.css}" rel="stylesheet">
 </head>
-
-
 <body>
 <div id="wrapper">
     <!-- top side start-->
@@ -51,9 +49,98 @@
         <div id="page-inner">
             <div class="panel panel-default" style="margin-top: -30px;">
                 <div class="panel-body">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">个人资料</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <ul class="list-group">
+                                        <li class="list-group-item">
+                                            <span>账号：</span><span th:text="${user.username}">admin</span>
+                                            <button class="badge"><i class="fa fa-edit"></i></button>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <span>姓名：</span><span th:text="${person.name}">admin</span>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <span>职位：</span><span th:text="${person.position}">研究生</span>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <span>手机号：</span><span th:text="${person.phone}">1355478521</span>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <span>邮箱：</span><span th:text="${person.email}">admin@gdut.edu.cn</span>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <span>研究方向：</span><span th:text="${person.researchField}">大数据、人工智能、机器学习、数据挖掘、区块链</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-2">
+                                    <a href="#"><img src="../../static/custom/images/img10.jpg"
+                                                     th:src="@{${imgPath}!=null?${imgPath}:'/custom/images/person-img.jpg'}"
+                                                 style="width: 120px;height: 120px;"></a>
+                                </div>
+                                <div class="col-md-7">
+                                    <div class="panel panel-primary">
+                                        <div class="panel-body">
+                                            <div class="row" id="add-panel" style="display: none;">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <div class="col-sm-7">
+                                                            <select id="add-introduction" class="form-control selectpicker" title="选择个人简介文档">
+                                                                <option value="0" >无</option>
+                                                                <option value="1" >文档一对对对1</option>
+                                                                <option value="2" >文档一对对对1文件2</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-sm-1">
+                                                            <button id="btn-refresh-selector" class="btn btn-primary" type="button"
+                                                                    data-toggle="tooltip" data-placement="bottom" title="刷新选择框">
+                                                                <i class="fa fa-refresh"></i> </button>
+                                                        </div>
+                                                        <div class="col-sm-1">
+                                                            <button id="btn-edit-document" class="btn btn-warning" type="button"
+                                                                    data-toggle="tooltip" data-placement="bottom" title="编辑该文档">
+                                                                <i class="fa fa-edit"></i></button>
+                                                        </div>
+                                                        <div class="col-sm-1">
+                                                            <button id="btn-edit-save" class="btn btn-warning" type="button">
+                                                                <i class="fa fa-save"></i>保存</button>
+                                                        </div>
+                                                        <div class="col-sm-1">
+                                                            <button id="btn-edit-cancel" class="btn btn-warning" type="button">
+                                                                <i class="fa fa-edit"></i>取消</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <h4>个人简介 <button id="btn-edit-profile"  class="badge"><i class="fa fa-edit"></i></button></h4>
+                                                    <!--hr 样式怎么设置！！！！？？？？-->
+                                                    <hr>
+                                                    <div id="document-preview" style="max-width: 1100px;">
+                                                        sdfsdfsdgdt ndfgdfgertw;sf加的佛山的适得府君书do订房间OS递减法手动阀骄傲斯蒂芬sjdf
+                                                        ldo金佛山殴打就发哦哦的房间人类Joe圣诞节佛山可视对讲是
+                                                        sdfsdfsdgdt ndfgdfgertw;sf加的佛山的适得府君书do订房间OS递减法手动阀骄傲斯蒂芬sjdf
+                                                        ldo金佛山殴打就发哦哦的房间人类Joe圣诞节佛山可视对讲是
+                                                        sdfsdfsdgdt ndfgdfgertw;sf加的佛山的适得府君书do订房间OS递减法手动阀骄傲斯蒂芬sjdf
+                                                        ldo金佛山殴打就发哦哦的房间人类Joe圣诞节佛山可视对讲是
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-md-12">
-                           
+
                         </div>
                     </div>
                 </div>
@@ -94,8 +181,15 @@
         th:src="@{/assets/plugins/selector/js/bootstrap-select.min.js}"></script>
 <script src="../../static/custom/js/common.js"
         th:src="@{/custom/js/common.js}"></script>
-<script src="../../static/custom/js/activity_records.js"
-        th:src="@{/custom/js/activity_records.js}"></script>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    var person= /*[[${person}]]*/ 'Sebastian';
+
+    /*]]>*/
+</script>
+
+<script src="../../static/custom/js/user_home.js"
+        th:src="@{/custom/js/user_home.js}"></script>
 </body>
 
 </html>

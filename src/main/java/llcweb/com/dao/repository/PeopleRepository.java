@@ -7,6 +7,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
+
 public interface PeopleRepository extends JpaRepository<People,Integer>{
     /**
      * @Author haien
@@ -17,5 +19,6 @@ public interface PeopleRepository extends JpaRepository<People,Integer>{
      **/
     Page<People> findAll(Specification<People> spec, Pageable pageable);
 
+    List<People> findByPosition(String position);
 }
 

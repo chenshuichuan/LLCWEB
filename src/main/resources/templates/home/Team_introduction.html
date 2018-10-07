@@ -108,7 +108,7 @@
         var urlGetDocumentById="/document/getDocumentById";
         var document = getDocumentById(2,urlGetDocumentById);
         var content = document.content;
-        if(content==null||content==undefined)content="未获取到简介！请检查数据！"
+        if(content==null||content==undefined)content="未获取到简介！请检查数据！";
         $("#document-preview").html(document.content);
     });
 </script>

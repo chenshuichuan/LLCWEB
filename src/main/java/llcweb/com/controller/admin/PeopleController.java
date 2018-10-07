@@ -19,6 +19,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -178,6 +179,19 @@ public class PeopleController {
             map.put("message", "成功删除人员！");
         }
 
+        return map;
+    }
+
+    /**
+     * */
+    @RequestMapping("/getByPosition")
+    public Map<String,Object> getByPosition(@RequestParam("position")String position){
+        Map<String,Object> map=new HashMap<>();
+        logger.info("getByPosition：position="+position);
+        List<People> peopleList=peopleRepository.findByPosition(position);
+        map.put("data",peopleList);
+        map.put("result",1);
+        map.put("message","获取成功！");
         return map;
     }
 }

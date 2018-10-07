@@ -136,21 +136,15 @@
                         </ul>
                     </div>
                     <div class="demo">
-                        <div id="demo4" class="jPaginate" style="padding-left: 58px;">
-                            <div class="jPag-control-back">
-                                <a class="jPag-first" style="color: rgb(121, 181, 227);">First</a>
-                                <span class="jPag-sprevious">«</span>
-                            </div>
-                            <div style="overflow: hidden; width: 22px;">
-                                <ul class="jPag-pages" style="width: 20px;">
-                                    <li><span class="jPag-current" style="color: rgb(37, 115, 175);">1</span></li>
-                                </ul>
-                            </div>
-                            <div class="jPag-control-front" style="left: 84px;">
-                                <span class="jPag-snext">»</span>
-                                <a class="jPag-last" style="color: rgb(121, 181, 227);">Last</a>
-                            </div>
-                        </div>
+
+                        <ul class="pagination">
+                            <li><a href="#">&laquo;</a></li>
+                            <li><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">&raquo;</a></li>
+                        </ul>
+
                     </div>
                 </div>
             </div>
@@ -158,41 +152,97 @@
     </div>
 </div>
 
-
-
-
-
-
 <div th:include="template/footer_template :: footer_template"></div>
 
 
 <div class="clearfix"></div>
-<!--<div class="public-friendlinks">
-        <div class="public-container">
-        <p class="title">友情链接:</p>
-        <p class="links">
-            <a href="http://www.gdut.edu.cn/">广东工业大学</a>
-            <a href="http://www.gdut.edu.cn/">广东工业大学</a>
-        </p>
-        </div>
-    </div>-->
+<!--二级菜单栏-->
+<script>
+    $(function(){
+        $(".public-nav li:has(ul)").hover(function() {
+            $(this).find("a:first").css("background-color","#00428f");
+            $(this).find(".subnav").css("display","block");
 
+        },function() {
+            $(this).find("a:first").css("background-color","#035ba6");
+            $(this).find(".subnav").css("display","none");
+        })
+    });
+</script>
+<!--请求js-->
+<script>
+    $(document).ready(function () {
+        //获取对应的内容信息
+        var urlGetPage="/project/page";
+        var position = "教授";
+        initPeopleList(position,urlGetPeopleByPosition);
 
+        //监听请求更改
+        $("#btn-professor").click(function () {
+            position = "教授";
+            initPeopleList(position,urlGetPeopleByPosition);
+        });
+        $("#btn-Associate_professor").click(function () {
+            position = "副教授";
+            initPeopleList(position,urlGetPeopleByPosition);
+        });
+        $("#btn-lecturer").click(function () {
+            position = "讲师";
+            initPeopleList(position,urlGetPeopleByPosition);
+        });
+    });
 
+    var PageManager = {
+        getPage:function(){
+            var param = {};
+            param.fuzzy = ;
+            //组装分页参数
+            param.startIndex = data.start;
+            param.pageSize = data.length;
+            param.draw = data.draw;
+            return param;
+        }
+    };
+    function initPeopleList(position,urlGetPeopleByPosition) {
+        var peopleList = getPeopleByPosition(position,urlGetPeopleByPosition);
+        var htmlText= '';
+        for (var i=0;i<peopleList.length;i++){
+            var imgPath ='/custom/images/person-img.jpg';
+            if(peopleList[i].portrait!==undefined&&peopleList[i].portrait!==null&&peopleList[i].portrait!==0)
+                imgPath= '/image/getPath?id='+peopleList[i].portrait;
+
+            htmlText +='<li>' +
+                '<a href="/ResearchProject/professor_demo.html?id='+peopleList[i].id+'">' +
+                '   <img src="'+imgPath+
+                '" alt="'+peopleList[i].name+'" width="120"></a>' +
+                '<a href="/ResearchProject/professor_demo.html?id='+peopleList[i].id+
+                '" class="team_name"><h4>'+ peopleList[i].name+'</h4></a>' +
+                '</li>';
+        }
+        var root =$("#ul-people-list");
+        //清除内容
+        root.empty();
+        root.append(htmlText);
+    }
+    //根据id获取信息
+    function getPeopleByPosition(position,url) {
+        var document =null;
+        //设置同步
+        $.ajax({
+            type : "get",
+            url : url,
+            data :"position=" + position,
+            async : false,
+            success : function(data){
+                document = data.data;
+                if(data.result!==1){
+                    alert(data.message);
+                }
+            }
+        });
+        return document;
+    }
+</script>
 
 </body>
-    <!--二级菜单栏-->
-    <script>
-     $(function(){
-             $(".public-nav li:has(ul)").hover(function() {
-             $(this).find("a:first").css("background-color","#00428f");
-                 $(this).find(".subnav").css("display","block");
-
-         },function() {
-             $(this).find("a:first").css("background-color","#035ba6");
-             $(this).find(".subnav").css("display","none");
-         })
-     });
-    </script>
-
 </html>

@@ -105,16 +105,20 @@ public class DocumnetController {
             Date firstDate=null;
             Date lastDate=null;
             try {
-                if(StringUtil.isNull(firstDate1)){
+                if(!StringUtil.isNull(firstDate1)){
                     firstDate=new SimpleDateFormat("yyyy-MM-dd").parse(firstDate1);
                 }
-                if(StringUtil.isNull(lastDate1)) {
+                if(!StringUtil.isNull(lastDate1)) {
                     lastDate = new SimpleDateFormat("yyyy-MM-dd").parse(lastDate1);
                 }
-            } catch (ParseException e) {
+            } catch (ParseException e) { //不以“-”格式输入日期则无法正确转换
                 e.printStackTrace();
+                map.put("draw", draw);
+                map.put("result", 0);
+                map.put("message", "日期格式错误！");
+                return map;
             }
-            //空搜
+            //空搜(高级搜索如果空搜的话返回所有文档，包括不是本人编辑的，这不符合权限）
             if(StringUtil.isNull(author)&&StringUtil.isNull(infor)&&StringUtil.isNull(title)&&StringUtil.isNull(model)&&StringUtil.isNull(firstDate1)&&StringUtil.isNull(lastDate1)){
                 //日志
                 logger.info("无关键词搜索--默认按权限获取文档");

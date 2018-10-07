@@ -18,5 +18,5 @@ public interface FileRepository extends ResourceRepository<File,Integer> {
      * 模糊查询
      **/
     @Query("from File f where f.author like %?1% or f.introduction like %?1% or f.model like %?1%")
-    Page<File> fuzzySearch(String key, Pageable pageable);
+    Page<File> fuzzySearch(String key, Pageable pageable); //排序放在Pageable中做
 }

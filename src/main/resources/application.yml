@@ -7,4 +7,4 @@ file:
   location: ./files
 #配置访问图片路径
 resources:
-  static-location: classpath:/images/
+  static-location: classpath:/images/,classpath:/files/

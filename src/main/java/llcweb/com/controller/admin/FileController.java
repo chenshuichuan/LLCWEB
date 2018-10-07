@@ -280,7 +280,7 @@ public class FileController {
             map.put("message", "未查询到文件！");
         }else {
             map.put("total", total);
-            map.put("pageData", filePage);
+            map.put("pageData", filePage.getContent());
             map.put("message", "成功获取分页数据！");
         }
         return map;

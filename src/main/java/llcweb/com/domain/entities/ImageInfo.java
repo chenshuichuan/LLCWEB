@@ -6,7 +6,8 @@ import llcweb.com.domain.models.Image;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.util.Date;
-
+/**
+ * 打算用于封装信息给前端，目前未使用*/
 public class ImageInfo {
 
     //照片描述

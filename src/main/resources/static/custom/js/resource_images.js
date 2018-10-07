@@ -142,6 +142,7 @@ $(document).ready(function () {
         var item = _table.row($(this).closest('tr')).data();
         $(this).closest('tr').addClass("active").siblings().removeClass("active");
         documentManage.deleteDocument(item);
+        _table.draw();
     });
 
 
@@ -151,13 +152,20 @@ $(document).ready(function () {
     });
     $("#btn-advanced-search").click(function () {
          documentManage.fuzzySearch=  false;
-        //_table.draw();
+        _table.draw();
     });
     $("#btn-add-document").click(function () {
-       //显示图片上传页面
+       //显示上传页面
+        $("#div-input-id").hide();
+        $("#input-id").val("");
+        $("#input-description").val("");
+        $("#input-group").val("");
         $("#div-upload-image").slideToggle("fast");
     });
-
+    $("#input-upload-summit").click(function () {
+        documentManage.uploadFile();
+        _table.draw();
+    });
 });
 
 
@@ -177,37 +185,41 @@ var documentManage = {
         param.draw = data.draw;
         return param;
     },
-    showDocument: function (item) {
-        //$("#view-content").html("show content test<span style='color: #e12fab;'>span test"+item.id+"</span>");
-        if(item!=null||item !=undefined){
-            var document = getDocumentById(item.id);
-            if(document!==null) $("#view-content").html(document.content);
-            else $("#view-content").html("未找到文档内容！");
-        }
-        else $("#view-content").html("");
+    uploadFile: function () {
+        //手动控制遮罩
+        $wrapper.spinModal();
+        var formData = new FormData();
+        formData.append("file",$("#btn-upload-image")[0].files[0]);
+        formData.append("description",$("#input-description").val());
+        formData.append("group",$("#input-group").val());
+        formData.append("id",$("#input-id").val());
+
+        $.ajax({
+            url: urlUpload,
+            type: 'POST',
+            cache: false,
+            data: formData,
+            processData: false,
+            contentType: false
+        }).done(function(res) {
+        }).fail(function(res) {});
+        //关闭遮罩
+        $wrapper.spinModal(false);
     },
     editDocument: function (item) {
+        $("#div-input-id").hide();
         $("#input-id").val(item.id);
         //$("#btn-upload-image").val(item.originalName);
         $("#input-description").val(item.description);
         $("#input-group").val(item.model);
-        document.getElementById("img-upload-preview").href="/"+item.path;
     },
+    saveDocument: function (item) {
 
+    },
     deleteDocument: function (item) {
         //$.dialog.tips("delete test");
-        //设置同步
-        $.ajax({
-            type : "get",
-            url : urlDelete,
-            data :"id=" + item.id,
-            async : false,
-            success : function(data){
-                if(data.result!==1){
-                    $.dialog.tips(data.message);
-                }
-            }
-        });
+        var message = "确定删除:"+item.originalName+"?";
+        deleteFun(message,urlDelete,item.id);
     }
 };
 

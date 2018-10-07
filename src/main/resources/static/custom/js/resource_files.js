@@ -9,7 +9,8 @@
 //获取文件分页数据
 var urlGetPage="/file/page";
 //获取文件
-var urlGetFileById="/file/getFileById";
+var urlDelete="/file/delete";
+var urlUpload="/file/save";
 
 //加载遮罩
 var $wrapper = $('#files-table');
@@ -59,35 +60,37 @@ $(document).ready(function () {
                 //空值的column会引发dataTable 报warning ：DataTables warning: table id=document-table - Requested unknown parameter 'author' for row 3.
                 columns: [
                     {
-                        data: "name"
+                        //data: "originalName",
+                        data: null,
+                        defaultContent: ""
                     },
                     {
 
-                        data: "description",
+                        data: "introduction",
                         width: "200px",
                         className: "ellipsis",	//文字过长时用省略号显示，CSS实现
                         render: CONSTANT.DATA_TABLES.RENDER.ELLIPSIS//会显示省略号的列，需要用title属性实现划过时显示全部文本的效果
                     },
                     {
-                        data: "owner",
+                        data: "author",
                         width: "80px"
                     },
                     {
-                        data: "uploadDate",
+                        data: "createDate",
                         width: "80px",
                         render: function (data, type, row, meta) {
                             return dateToString(data);
                         }
                     },
                     {
-                        data: "authority",
+                        data: "model",
                         width: "80px"
                     },
                     {
-                        data: "url",
+                        data: "path",
                         width: "150px",
                         render: function (data, type, row, meta) {
-                            return (data===null||data==undefined)?'<span class="text-danger">数据错误！</span>':'<a href="'+data+'"></a>';
+                            return (data===null||data==undefined)?'<span class="text-danger">数据错误！</span>':'<a href="/'+data+'">/'+data+'</a>';
                         }
                     },
                     {
@@ -99,6 +102,11 @@ $(document).ready(function () {
                     }
                 ],
                 "createdRow": function (row, data, index) {
+                    var path =data.path;
+                    if(path==null||path==undefined||path.length<3)path="#";
+                    var $htmlText = $('<i class="fa fa-file"></i> &nbsp;&nbsp;'+
+                        '<a style="text-decoration:none;" target="_blank" href="/'+path+'">'+data.originalName+'</a>');
+                    $('td', row).eq(0).append($htmlText);
 
                     //不使用render，改用jquery文档操作呈现单元格
                     var $btnCopy = $('<button class="btn btn-info btn-copy" type="button" data-toggle="tooltip"data-placement="bottom" title="复制图片地址"> <i class="fa fa-copy"></i> </button>');
@@ -129,12 +137,12 @@ $(document).ready(function () {
         //复制图片url
         var item = _table.row($(this).closest('tr')).data();
         $(this).closest('tr').addClass("active").siblings().removeClass("active");
-        documentManage.deleteDocument(item);
+        copyUrls("/"+item.path);
     }).on("click", ".btn-download", function () {
-        //预览图片
+        //下载文件
         var item = _table.row($(this).closest('tr')).data();
         $(this).closest('tr').addClass("active").siblings().removeClass("active");
-        documentManage.deleteDocument(item);
+        documentManage.download(item);
     }).on("click", ".btn-edit", function () {
         //编辑图片信息
         var item = _table.row($(this).closest('tr')).data();
@@ -158,10 +166,17 @@ $(document).ready(function () {
         //_table.draw();
     });
     $("#btn-add-document").click(function () {
-       //显示图片上传页面
+       //上传/修改页面
+        $("#div-input-id").hide();
+        $("#input-id").val("");
+        $("#input-description").val("");
+        $("#input-group").val("");
         $("#div-upload-image").slideToggle("fast");
     });
-
+    $("#input-upload-summit").click(function () {
+        documentManage.uploadFile();
+        _table.draw();
+    });
 });
 
 
@@ -181,17 +196,43 @@ var documentManage = {
         param.draw = data.draw;
         return param;
     },
-    showDocument: function (item) {
-        $.dialog.tips("show test");
+    uploadFile: function () {
+        //手动控制遮罩
+        $wrapper.spinModal();
+        var formData = new FormData();
+        formData.append("file",$("#btn-upload-file")[0].files[0]);
+        formData.append("introduction",$("#input-description").val());
+        formData.append("group",$("#input-group").val());
+        formData.append("id",$("#input-id").val());
+
+        $.ajax({
+            url: urlUpload,
+            type: 'POST',
+            cache: false,
+            data: formData,
+            processData: false,
+            contentType: false
+        }).done(function(res) {
+        }).fail(function(res) {});
+        //关闭遮罩
+        $wrapper.spinModal(false);
+    },
+    download: function (item) {
+        window.open('/'+item.path);
     },
     editDocument: function (item) {
         //$.dialog.tips("edit test");
-        //转跳到文档编辑界面 ,新增文档传入id为0
-        window.location.href=urlEditDocumentById+"?id="+item.id;
-    },
 
+        $("#input-id").val(item.id);
+        //$("#btn-upload-image").val(item.originalName);
+        $("#input-description").val(item.introduction);
+        $("#input-group").val(item.model);
+        //显示上传页面
+        $("#div-upload-image").slideToggle("fast");
+    },
     deleteDocument: function (item) {
-        $.dialog.tips("delete test");
+        var message = "确定删除:"+item.originalName+"?";
+        deleteFun(message,urlDelete,item.id);
     }
 };
 

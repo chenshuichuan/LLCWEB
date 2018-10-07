@@ -12,7 +12,7 @@ import java.util.List;
 public interface PeopleRepository extends JpaRepository<People,Integer>{
     /**
      * @Author haien
-     * @Description 按照姓名、年级动态查询
+     * @Description 按照姓名、年级和职位动态查询
      * @Date 2018/10/2
      * @Param [spec, pageable]
      * @return org.springframework.data.domain.Page<llcweb.com.domain.models.People>

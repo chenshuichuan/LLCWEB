@@ -262,6 +262,10 @@ public class ImageController {
                 }
             } catch (ParseException e) {
                 e.printStackTrace();
+                map.put("draw", draw);
+                map.put("result", 0);
+                map.put("message", "日期格式错误！");
+                return map;
             }
 
             //空搜

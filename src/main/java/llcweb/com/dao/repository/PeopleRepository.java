@@ -19,7 +19,6 @@ public interface PeopleRepository extends JpaRepository<People,Integer>{
     Page<People> findAll(Specification<People> spec, Pageable pageable);
 
     List<People> findByPosition(String position);
-
     /**
      *根据id查询
      */
@@ -31,9 +30,12 @@ public interface PeopleRepository extends JpaRepository<People,Integer>{
     /**
      *根据年级查询
      */
-    People findByGrade(String grade);
+    People findByGrade(int grade);
     /**
      *根据加入年份查询
      */
     People findByIntroduction(int introduction);
 }
+}
+
+

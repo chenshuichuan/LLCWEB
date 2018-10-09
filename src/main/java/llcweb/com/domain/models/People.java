@@ -9,13 +9,21 @@ import javax.persistence.Table;
  * Module:  People.java
  * Author:  Ricardo
  * Purpose: Defines the Class People
- ***********************************************************************/@Entity
-@Table(name="people")public class People {
+ ***********************************************************************
+import javax.persistence.*;
 
+@Entity
+@Table(name = "people")
+public class People {
+    /**
+     * 人物id
+     **/
     @Id
     @GeneratedValue
     private int id;
-/**
+
+    /**
+
      * 人物姓名
      */
     private String name;
@@ -132,4 +140,4 @@ import javax.persistence.Table;
     public void setResearchField(String researchField) {
         this.researchField = researchField;
     }
-}
+

@@ -162,6 +162,14 @@
              <!--<version>RELEASE</version>--> <!--屏蔽最新版，否则测试抛异常-->
              <scope>compile</scope>
          </dependency>
+        <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>4.0.0</version>
+            <scope>provided</scope>
+        </dependency>
+
     </dependencies>
 
     <build>

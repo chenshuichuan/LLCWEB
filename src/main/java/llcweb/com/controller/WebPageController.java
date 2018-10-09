@@ -45,7 +45,7 @@ public class WebPageController {
     }
     @RequestMapping({"/","/index.html","/index","/main","/main.html"})
     public ModelAndView index(){
-        ModelAndView modelAndView = new ModelAndView("/home/index");
+        ModelAndView modelAndView = new ModelAndView("home/index");
         return modelAndView;
     }
     @ResponseBody
@@ -57,118 +57,118 @@ public class WebPageController {
     //页面映射函数
     @RequestMapping({"/Academic_communication.html","/Academic_communication"})
     public ModelAndView Academic_communication(){
-        ModelAndView modelAndView = new ModelAndView("/home/Academic_communication");
+        ModelAndView modelAndView = new ModelAndView("home/Academic_communication");
         return modelAndView;
     }
     @RequestMapping({"/Academic_conference.html","/Academic_conference"})
     public ModelAndView Academic_conference(){
-        ModelAndView modelAndView = new ModelAndView("/home/Academic_conference");
+        ModelAndView modelAndView = new ModelAndView("home/Academic_conference");
         return modelAndView;
     }
     @RequestMapping({"/Academic_cooperation.html","/Academic_cooperation"})
     public ModelAndView Academic_cooperation(){
-        ModelAndView modelAndView = new ModelAndView("/home/Academic_cooperation");
+        ModelAndView modelAndView = new ModelAndView("home/Academic_cooperation");
         return modelAndView;
     }
     @RequestMapping({"/Associate_professor.html","/Associate_professor"})
     public ModelAndView Associate_professor(){
-        ModelAndView modelAndView = new ModelAndView("/home/Associate_professor");
+        ModelAndView modelAndView = new ModelAndView("home/Associate_professor");
         return modelAndView;
     }
     @RequestMapping({"/contact_us.html","/contact_us"})
     public ModelAndView contact_us(){
-        ModelAndView modelAndView = new ModelAndView("/home/contact_us");
+        ModelAndView modelAndView = new ModelAndView("home/contact_us");
         return modelAndView;
     }
     @RequestMapping({"/Cultural_activity.html","/Cultural_activity"})
     public ModelAndView Cultural_activity(){
-        ModelAndView modelAndView = new ModelAndView("/home/Cultural_activity");
+        ModelAndView modelAndView = new ModelAndView("home/Cultural_activity");
         return modelAndView;
     }
     @RequestMapping({"/doctor.html","/doctor"})
     public ModelAndView doctor(){
-        ModelAndView modelAndView = new ModelAndView("/home/doctor");
+        ModelAndView modelAndView = new ModelAndView("home/doctor");
         return modelAndView;
     }
 
 
     @RequestMapping({"/graduate.html","/graduate"})
     public ModelAndView graduate(){
-        ModelAndView modelAndView = new ModelAndView("/home/graduate");
+        ModelAndView modelAndView = new ModelAndView("home/graduate");
         return modelAndView;
     }
     @RequestMapping({"/Institutional_profile.html","/Institutional_profile"})
     public ModelAndView Institutional_profile(){
-        ModelAndView modelAndView = new ModelAndView("/home/Institutional_profile");
+        ModelAndView modelAndView = new ModelAndView("home/Institutional_profile");
         return modelAndView;
     }
     @RequestMapping({"/Lecturer.html","/Lecturer"})
     public ModelAndView Lecturer(){
-        ModelAndView modelAndView = new ModelAndView("/home/Lecturer");
+        ModelAndView modelAndView = new ModelAndView("home/Lecturer");
         return modelAndView;
     }
     @RequestMapping({"/postdoctor.html","/postdoctor"})
     public ModelAndView postdoctor(){
-        ModelAndView modelAndView = new ModelAndView("/home/postdoctor");
+        ModelAndView modelAndView = new ModelAndView("home/postdoctor");
         return modelAndView;
     }
     @RequestMapping({"/Professor.html","/Professor"})
     public ModelAndView Professor(){
-        ModelAndView modelAndView = new ModelAndView("/home/Professor");
+        ModelAndView modelAndView = new ModelAndView("home/Professor");
         return modelAndView;
     }
 
 
     @RequestMapping({"/project_brief","/project_brief.html"})
     public ModelAndView project_brief(){
-        ModelAndView modelAndView = new ModelAndView("/home/project_brief");
+        ModelAndView modelAndView = new ModelAndView("home/project_brief");
         return modelAndView;
     }
     @RequestMapping({"/Research_Project.html","/Research_Project"})
     public ModelAndView Research_Project(){
-        ModelAndView modelAndView = new ModelAndView("/home/Research_Project");
+        ModelAndView modelAndView = new ModelAndView("home/Research_Project");
         return modelAndView;
     }
     @RequestMapping({"/Research_Team.html","/Research_Team"})
     public ModelAndView Research_Team(){
-        ModelAndView modelAndView = new ModelAndView("/home/Research_Team");
+        ModelAndView modelAndView = new ModelAndView("home/Research_Team");
         return modelAndView;
     }
     @RequestMapping({"/scientific_achievements.html","/scientific_achievements"})
     public ModelAndView scientific_achievements(){
-        ModelAndView modelAndView = new ModelAndView("/home/scientific_achievements");
+        ModelAndView modelAndView = new ModelAndView("home/scientific_achievements");
         return modelAndView;
     }
 
     //
     @RequestMapping({"/Talent_recruitment.html","/Talent_recruitment"})
     public ModelAndView Talent_recruitment(){
-        ModelAndView modelAndView = new ModelAndView("/home/Talent_recruitment");
+        ModelAndView modelAndView = new ModelAndView("home/Talent_recruitment");
         return modelAndView;
     }
     @RequestMapping({"/Talent_recruitment1.html","/Talent_recruitment1"})
     public ModelAndView Talent_recruitment1(){
-        ModelAndView modelAndView = new ModelAndView("/home/Talent_recruitment1");
+        ModelAndView modelAndView = new ModelAndView("home/Talent_recruitment1");
         return modelAndView;
     }
     @RequestMapping({"/Talent_recruitment2.html","/Talent_recruitment2"})
     public ModelAndView Talent_recruitment2(){
-        ModelAndView modelAndView = new ModelAndView("/home/Talent_recruitment2");
+        ModelAndView modelAndView = new ModelAndView("home/Talent_recruitment2");
         return modelAndView;
     }
     @RequestMapping({"/Talent_training.html","/Talent_training"})
     public ModelAndView Talent_training(){
-        ModelAndView modelAndView = new ModelAndView("/home/Talent_training");
+        ModelAndView modelAndView = new ModelAndView("home/Talent_training");
         return modelAndView;
     }
     @RequestMapping({"/Team_introduction.html","/Team_introduction"})
     public ModelAndView Team_introduction(){
-        ModelAndView modelAndView = new ModelAndView("/home/Team_introduction");
+        ModelAndView modelAndView = new ModelAndView("home/Team_introduction");
         return modelAndView;
     }
     @RequestMapping({"/Untitled-1.html","/Untitled-1"})
     public ModelAndView Untitled_1(){
-        ModelAndView modelAndView = new ModelAndView("/home/Untitled-1");
+        ModelAndView modelAndView = new ModelAndView("home/Untitled-1");
         return modelAndView;
     }
 
@@ -180,17 +180,17 @@ public class WebPageController {
      * **/
     @RequestMapping({"/achievement/scientific_achievements1.html","/achievement/scientific_achievements1"})
     public ModelAndView scientific_achievements1(){
-        ModelAndView modelAndView = new ModelAndView("/home/achievement/scientific_achievements1");
+        ModelAndView modelAndView = new ModelAndView("home/achievement/scientific_achievements1");
         return modelAndView;
     }
     @RequestMapping({"/achievement/scientific_achievements2.html","/achievement/scientific_achievements2"})
     public ModelAndView scientific_achievements2(){
-        ModelAndView modelAndView = new ModelAndView("/home/achievement/scientific_achievements2");
+        ModelAndView modelAndView = new ModelAndView("home/achievement/scientific_achievements2");
         return modelAndView;
     }
     @RequestMapping({"/achievement/scientific_achievements3.html","/achievement/scientific_achievements3"})
     public ModelAndView scientific_achievements3(){
-        ModelAndView modelAndView = new ModelAndView("/home/achievement/scientific_achievements3");
+        ModelAndView modelAndView = new ModelAndView("home/achievement/scientific_achievements3");
         return modelAndView;
     }
     /**
@@ -198,17 +198,17 @@ public class WebPageController {
      * **/
     @RequestMapping({"/communication/communicationIndexPage.html","/communication/communicationIndexPage"})
     public ModelAndView communicationIndexPage(){
-        ModelAndView modelAndView = new ModelAndView("/home/communication/communicationIndexPage");
+        ModelAndView modelAndView = new ModelAndView("home/communication/communicationIndexPage");
         return modelAndView;
     }
     @RequestMapping({"/communication/conferenceIndexPage.html","/communication/conferenceIndexPage"})
     public ModelAndView conferenceIndexPage(){
-        ModelAndView modelAndView = new ModelAndView("/home/communication/conferenceIndexPage");
+        ModelAndView modelAndView = new ModelAndView("home/communication/conferenceIndexPage");
         return modelAndView;
     }
     @RequestMapping({"/communication/cooperationIndexPage.html","/communication/cooperationIndexPage"})
     public ModelAndView cooperationIndexPage(){
-        ModelAndView modelAndView = new ModelAndView("/home/communication/cooperationIndexPage");
+        ModelAndView modelAndView = new ModelAndView("home/communication/cooperationIndexPage");
         return modelAndView;
     }
     /**
@@ -221,12 +221,12 @@ public class WebPageController {
 //    }
     @RequestMapping({"/Cultural_activity/revisit_demo.html","/Cultural_activity/revisit_demo"})
     public ModelAndView revisit_demo(){
-        ModelAndView modelAndView = new ModelAndView("/home/Cultural_activity/revisit_demo.html");
+        ModelAndView modelAndView = new ModelAndView("home/Cultural_activity/revisit_demo.html");
         return modelAndView;
     }
     @RequestMapping({"/Cultural_activity/play_demo.html","/Cultural_activity/play_demo"})
     public ModelAndView play_demo(){
-        ModelAndView modelAndView = new ModelAndView("/home/Cultural_activity/play_demo.html");
+        ModelAndView modelAndView = new ModelAndView("home/Cultural_activity/play_demo.html");
         return modelAndView;
     }
     /**
@@ -234,27 +234,27 @@ public class WebPageController {
      * **/
     @RequestMapping({"/Research/Research_Project1.html","/Research/Research_Project1"})
     public ModelAndView Research_Project1(){
-        ModelAndView modelAndView = new ModelAndView("/home/Research/Research_Project1");
+        ModelAndView modelAndView = new ModelAndView("home/Research/Research_Project1");
         return modelAndView;
     }
     @RequestMapping({"/Research/Research_Project2.html","/Research/Research_Project2"})
     public ModelAndView Research_Project2(){
-        ModelAndView modelAndView = new ModelAndView("/home/Research/Research_Project2");
+        ModelAndView modelAndView = new ModelAndView("home/Research/Research_Project2");
         return modelAndView;
     }
     @RequestMapping({"/Research/Research_Project3.html","/Research/Research_Project3"})
     public ModelAndView Research_Project3(){
-        ModelAndView modelAndView = new ModelAndView("/home/Research/Research_Project3");
+        ModelAndView modelAndView = new ModelAndView("home/Research/Research_Project3");
         return modelAndView;
     }
     @RequestMapping({"/Research/Research_Project4.html","/Research/Research_Project4"})
     public ModelAndView Research_Project4(){
-        ModelAndView modelAndView = new ModelAndView("/home/Research/Research_Project4");
+        ModelAndView modelAndView = new ModelAndView("home/Research/Research_Project4");
         return modelAndView;
     }
     @RequestMapping({"/Research/Research_Project5.html","/Research/Research_Project5"})
     public ModelAndView Research_Project5(){
-        ModelAndView modelAndView = new ModelAndView("/home/Research/Research_Project5");
+        ModelAndView modelAndView = new ModelAndView("home/Research/Research_Project5");
         return modelAndView;
     }
     /**
@@ -262,17 +262,17 @@ public class WebPageController {
      * **/
     @RequestMapping({"/ResearchProject/associate_demo.html","/ResearchProject/associate_demo"})
     public ModelAndView associate_demo(){
-        ModelAndView modelAndView = new ModelAndView("/home/ResearchProject/associate_demo");
+        ModelAndView modelAndView = new ModelAndView("home/ResearchProject/associate_demo");
         return modelAndView;
     }
     @RequestMapping({"/ResearchProject/lecturer_demo.html","/ResearchProject/lecturer_demo"})
     public ModelAndView lecturer_demo(){
-        ModelAndView modelAndView = new ModelAndView("/home/ResearchProject/lecturer_demo");
+        ModelAndView modelAndView = new ModelAndView("home/ResearchProject/lecturer_demo");
         return modelAndView;
     }
     @RequestMapping({"/ResearchProject/professor_demo.html","/ResearchProject/professor_demo"})
     public ModelAndView professor_demo(){
-        ModelAndView modelAndView = new ModelAndView("/home/ResearchProject/professor_demo");
+        ModelAndView modelAndView = new ModelAndView("home/ResearchProject/professor_demo");
         return modelAndView;
     }
 
@@ -281,17 +281,17 @@ public class WebPageController {
      * **/
     @RequestMapping({"/Talent/doctor_demo.html","/Talent/doctor_demo"})
     public ModelAndView doctor_demo(){
-        ModelAndView modelAndView = new ModelAndView("/home/Talent/doctor_demo");
+        ModelAndView modelAndView = new ModelAndView("home/Talent/doctor_demo");
         return modelAndView;
     }
     @RequestMapping({"/Talent/graduate_demo.html","/Talent/graduate_demo"})
     public ModelAndView graduate_demo(){
-        ModelAndView modelAndView = new ModelAndView("/home/Talent/graduate_demo");
+        ModelAndView modelAndView = new ModelAndView("home/Talent/graduate_demo");
         return modelAndView;
     }
     @RequestMapping({"/Talent/post_demo.html","/Talent/post_demo"})
     public ModelAndView post_demo(){
-        ModelAndView modelAndView = new ModelAndView("/home/Talent/post_demo");
+        ModelAndView modelAndView = new ModelAndView("home/Talent/post_demo");
         return modelAndView;
     }
 }

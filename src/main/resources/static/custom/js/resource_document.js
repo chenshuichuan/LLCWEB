@@ -201,7 +201,7 @@ var documentManage = {
     showDocument: function (item) {
         //$("#view-content").html("show content test<span style='color: #e12fab;'>span test"+item.id+"</span>");
         if(item!=null||item !=undefined){
-            var document = getDocumentById(item.id);
+            var document = getDocumentById(item.id,urlGetDocumentById);
             if(document!==null) $("#view-content").html(document.content);
             else $("#view-content").html("未找到文档内容！");
         }
@@ -217,22 +217,5 @@ var documentManage = {
         $.dialog.tips("delete test");
     }
 };
-//根据id获取document信息
-function getDocumentById(id) {
-    var document =null;
-    //设置同步
-    $.ajax({
-        type : "get",
-        url : urlGetDocumentById,
-        data :"id=" + id,
-        async : false,
-        success : function(data){
-            document = data.data;
-            if(data.result!==1){
-                $.dialog.tips(data.message);
-            }
-        }
-    });
-    return document;
-}
+
 

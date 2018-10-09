@@ -3,8 +3,13 @@ package llcweb.com.config;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
+import llcweb.com.controller.admin.ImageController;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
@@ -15,7 +20,30 @@ import java.util.List;
  */
 @Configuration
 public class MyWebMvcConfigurerAdapter extends WebMvcConfigurerAdapter {
-
+    private final static Logger logger=LoggerFactory.getLogger(ImageController.class);
+    //获取配置文件中图片的路径
+    @Value("${image.location}")
+    private String imgPath;
+    @Value("${file.location}")
+    private String filePath;
+    //访问图片方法
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        if(imgPath.equals("") || imgPath.equals("${image.location}")){
+            String imagesPath = MyWebMvcConfigurerAdapter.class.getClassLoader().getResource("").getPath();
+            if(imagesPath.indexOf(".jar")>0){
+                imagesPath = imagesPath.substring(0, imagesPath.indexOf(".jar"));
+            }else if(imagesPath.indexOf("classes")>0){
+                imagesPath = "file:"+imagesPath.substring(0, imagesPath.indexOf("classes"));
+            }
+            imagesPath = imagesPath.substring(0, imagesPath.lastIndexOf("/"))+"/images/";
+            imgPath = imagesPath;
+        }
+        logger.info("imagesPath="+imgPath);
+        registry.addResourceHandler("/images/**").addResourceLocations("file:"+"/root/LLCWEB/images/");
+        registry.addResourceHandler("/files/**").addResourceLocations("file:"+"/root/LLCWEB/files/");
+        super.addResourceHandlers(registry);
+    }
 
     /**
      * 配置静态访问资源
@@ -38,7 +66,7 @@ public class MyWebMvcConfigurerAdapter extends WebMvcConfigurerAdapter {
      */
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/login").setViewName("/admin/login");
+        registry.addViewController("/login").setViewName("admin/login");
         super.addViewControllers(registry);
     }
 

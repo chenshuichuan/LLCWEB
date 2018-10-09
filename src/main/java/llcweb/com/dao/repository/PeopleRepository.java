@@ -1,19 +1,25 @@
 package llcweb.com.dao.repository;
 
-import java.awt.print.Pageable;
-
+import llcweb.com.domain.models.People;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import llcweb.com.domain.models.People;
+import java.util.List;
 
 public interface PeopleRepository extends JpaRepository<People,Integer>{
-//    Page<People> findAll(Specification<People> spec, Pageable pageable);
     /**
-     *根据姓名和密码查询
-     */
-    People findByNameAndPasswd(String name, String passwd);
+     * @Author haien
+     * @Description 按照姓名、年级和职位动态查询
+     * @Date 2018/10/2
+     * @Param [spec, pageable]
+     * @return org.springframework.data.domain.Page<llcweb.com.domain.models.People>
+     **/
+    Page<People> findAll(Specification<People> spec, Pageable pageable);
+
+    List<People> findByPosition(String position);
+
     /**
      *根据id查询
      */
@@ -26,10 +32,6 @@ public interface PeopleRepository extends JpaRepository<People,Integer>{
      *根据年级查询
      */
     People findByGrade(String grade);
-    /**
-     *根据职位查询
-     */
-    People findByPosition(String position);
     /**
      *根据加入年份查询
      */

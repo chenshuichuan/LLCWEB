@@ -14,7 +14,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -39,13 +38,8 @@ public class AttendanceController {
     private AttendanceRepository attendanceRepository;
     @Autowired
     private PeopleRepository peopleRepository;
-    private Attendance attendance;
-    private String peopleId; //对应people表的id   
-    private String peopleName;//对应people表的名称
-    private Date attendanceDate;   //标记当天
-    private Date morning;   //早上签到时间
-    private Date afternoon;//下午签到时间
-    private Date evening;  //晚上签到时间
+
+
 
     
     /**
@@ -55,7 +49,8 @@ public class AttendanceController {
     @ResponseBody
     public Map<String,Object> page(HttpServletRequest request, HttpServletResponse response){
         Map<String,Object> map =new HashMap<String,Object>();
-
+        String peopleId; //对应people表的id   
+        String peopleName;//对应people表的名称
         //直接返回前台
         String draw = request.getParameter("draw");
         //当前数据的起始位置 ，如第10条
@@ -113,6 +108,13 @@ public class AttendanceController {
     @RequestMapping(value="/save")
     public Map<String,Object> save(HttpServletRequest request, HttpServletResponse response,String id){
         Map<String,Object> map =new HashMap<String,Object>();
+        Attendance attendance;
+        String peopleId; //对应people表的id   
+//        String peopleName;//对应people表的名称
+//        Date attendanceDate;   //标记当天
+//        Date morning;   //早上签到时间
+//        Date afternoon;//下午签到时间
+//        Date evening;  //晚上签到时间
         id = request.getParameter("id");
         SimpleDateFormat f = new SimpleDateFormat("HHmmss");	//判断时间段样板
         Date adDate=new Date();
@@ -147,12 +149,20 @@ public class AttendanceController {
 				}else flag = true;
 			}
         	
-        	map = attendanceService.update(attendance);
+        	if (attendanceService.update(attendance)) {
+        		map.put("result",1);
+        		map.put("message","打卡成功");
+			}else {
+				map.put("result",0);
+		        map.put("message","打卡失败，请联系管理员！");
+		        logger.error("打卡失败！");
+			}
         	if (flag) {
-        		map.put("result", 0);
-                map.put("msg", "请不要在同一时段重复打卡！");
+        		map.put("result",0);
+                map.put("message","请不要在同一时段重复打卡！");
+                logger.error("打卡失败！");
 			}        	
-            logger.error("打卡失败！");
+            
         }
         
         //新建打卡记录
@@ -175,76 +185,31 @@ public class AttendanceController {
         	if (180000<now&&now<=233000) {
             	attendance.setEvening(adDate);
 			}//晚上时段
-        	map = attendanceService.add(attendance);
+        	if (attendanceService.add(attendance)) {
+        		map.put("result",1);
+        		map.put("message","打卡成功");
+			}else {
+				map.put("result",0);
+		        map.put("message","打卡失败，请联系管理员！");
+			}
             logger.info("打卡成功！");            
         }
-        
-        map.put("data",attendance);
         return map;
     }
     
     @RequestMapping(value="/delete")
     public Map<String,Object> delete(@RequestParam("id")Integer id){
-    	Map<String,Object> map = attendanceService.delete(id);        
+    	Map<String,Object> map =new HashMap<String,Object>();
+    	if (attendanceService.delete(id)) {
+			map.put("result", 1);
+			map.put("message", "打卡记录已删除！");
+		}else {
+			map.put("result", 0);
+	        map.put("message", "删除失败，请确认打卡记录是否存在！");
+		}    	
         return map;
     }
     
-    
-	public Attendance getAttendance() {
-		return attendance;
-	}
 
-	public void setAttendance(Attendance attendance) {
-		this.attendance = attendance;
-	}
-
-	public String getPeopleId() {
-		return peopleId;
-	}
-
-	public void setPeopleId(String peopleId) {
-		this.peopleId = peopleId;
-	}
-
-	public String getPeopleName() {
-		return peopleName;
-	}
-
-	public void setPeopleName(String peopleName) {
-		this.peopleName = peopleName;
-	}
-
-	public Date getAttendanceDate() {
-		return attendanceDate;
-	}
-
-	public void setAttendanceDate(Date attendanceDate) {
-		this.attendanceDate = attendanceDate;
-	}
-
-	public Date getMorning() {
-		return morning;
-	}
-
-	public void setMorning(Date morning) {
-		this.morning = morning;
-	}
-
-	public Date getAfternoon() {
-		return afternoon;
-	}
-
-	public void setAfternoon(Date afternoon) {
-		this.afternoon = afternoon;
-	}
-
-	public Date getEvening() {
-		return evening;
-	}
-
-	public void setEvening(Date evening) {
-		this.evening = evening;
-	}
-   
 }
 

@@ -153,3 +153,22 @@ function picPreviewByEnter(event) {
         $('#preview img').attr('src', '../getPic?id=' + picCode);
     }
 }
+
+//根据id获取document信息
+function getDocumentById(id,urlGetDocumentById) {
+    var document =null;
+    //设置同步
+    $.ajax({
+        type : "get",
+        url : urlGetDocumentById,
+        data :"id=" + id,
+        async : false,
+        success : function(data){
+            document = data.data;
+            if(data.result!==1){
+                alert(data.message);
+            }
+        }
+    });
+    return document;
+}

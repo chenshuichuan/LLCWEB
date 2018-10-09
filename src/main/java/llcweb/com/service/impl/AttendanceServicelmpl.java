@@ -1,10 +1,7 @@
 package llcweb.com.service.impl;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
@@ -34,19 +31,13 @@ public class AttendanceServicelmpl implements AttendanceService{
 	 * @return 
      */
 	@Transactional
-    public Map<String, Object> add(Attendance attendance) {
-        Map<String,Object> map=new HashMap<>();
-
+    public boolean add(Attendance attendance) {
         if(attendanceRepository.findOne(attendance.getId())==null){
             if(attendanceRepository.save(attendance)!=null){
-                map.put("result",1);
-                map.put("msg","打卡成功！");
-                return map;
+                return true;
             }
         }
-        map.put("result",0);
-        map.put("msg","打卡失败，请联系管理员！");
-        return map;
+        return false;
     }
 
     /**
@@ -54,20 +45,13 @@ public class AttendanceServicelmpl implements AttendanceService{
      * @return 
      */
     @Transactional
-    public Map<String, Object> update(Attendance attendance) {
-
-        Map<String,Object> map=new HashMap<>();
-
+    public boolean update(Attendance attendance) {
         if(attendanceRepository.findOne(attendance.getId())!=null){
-            if(attendanceRepository.save(attendance)!=null){
-                map.put("result",1);
-                map.put("msg","打卡成功！");
-                return map;
+            if(attendanceRepository.save(attendance)!=null){   
+                return true;
             }
         }
-        map.put("result",0);
-        map.put("msg","打卡失败，请联系管理员！");
-        return map;
+        return false;
     }
 
     /**
@@ -75,19 +59,12 @@ public class AttendanceServicelmpl implements AttendanceService{
      * @return 
      */
     @Transactional
-    public Map<String, Object> delete(int id) {
-
-        Map<String, Object> map = new HashMap<>();
-
+    public boolean delete(int id) {
         if (attendanceRepository.findOne(id) != null) {
         	attendanceRepository.delete(id);;      	
-            map.put("result", 1);
-            map.put("msg", "打卡记录已删除！");
-            return map;
+            return true;
         }
-        map.put("result", 0);
-        map.put("msg", "删除失败，请确认打卡记录是否存在！");
-        return map;
+        return false;
     }
 
 	@Override

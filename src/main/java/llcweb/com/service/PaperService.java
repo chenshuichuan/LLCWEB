@@ -26,5 +26,8 @@ public interface PaperService {
 	 public Map<String, Object> update(Paper paper);
 	 public Map<String, Object> delete(int id);
 	 
-	// Page<Paper> getPage(int pageNum, int pageSize, Paper paper);
+
+
+	 List<UsefulPaper> papersToUsefulPaper(List<Paper> paperList);
+
 }

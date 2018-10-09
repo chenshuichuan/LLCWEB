@@ -1,79 +1,82 @@
 package llcweb.com.domain.entity;
 
+import javax.persistence.*;
 import java.util.Date;
 
 /**
  * 封装搜索信息的会议类
  */
+@MappedSuperclass
 public class Resource {
-   //会议名称
-   private String title;
-   //搜索日期
-   private Date firstDate;
-   private Date lastDate;
-   //会议类型
-   private String type;
-   //组别
-   private String model;
-   //上传者
-   private String author;
 
-   public Resource() {
-   }
-   public Resource(String title, Date firstDate, Date lastDate, String type, String model, String author) {
-        this.title = title;
-        this.firstDate = firstDate;
-        this.lastDate = lastDate;
-        this.type = type;
+    @Id
+    @GeneratedValue
+    private int id;
+    //创建日期
+    @Column(columnDefinition = "DATE")
+    private Date createDate;
+    //组别
+    private String model;
+    //上传者
+    @Column(length=20)
+    private String author;
+    //上传者id
+    private int authorId;
+
+
+    public Resource() {
+    }
+    public Resource(int id, Date createDate, String model, String author, int authorId) {
+        this.id = id;
+        this.createDate = createDate;
         this.model = model;
         this.author = author;
-   }
-
-   public String getTitle() {
-      return title;
-   }
-
-   public void setTitle(String title) {
-      this.title = title;
-   }
-
-   public Date getFirstDate() {
-        return firstDate;
+        this.authorId = authorId;
+    }
+    public Resource(Date createDate, String model, String author, int authorId) {
+        this.createDate = createDate;
+        this.model = model;
+        this.author = author;
+        this.authorId = authorId;
     }
 
-   public void setFirstDate(Date firstDate) {
-        this.firstDate = firstDate;
+    public Date getCreateDate() {
+        return createDate;
     }
 
-   public Date getLastDate() {
-        return lastDate;
-   }
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
 
-   public void setLastDate(Date lastDate) {
-        this.lastDate = lastDate;
-   }
+    public String getModel() {
+        return model;
+    }
 
-   public String getType() {
-      return type;
-   }
+    public void setModel(String model) {
+        this.model = model;
+    }
 
-   public void setType(String type) {
-      this.type = type;
-   }
+    public String getAuthor() {
+        return author;
+    }
 
-   public String getModel() {
-      return model;
-   }
+    public void setAuthor(String author) {
+        this.author = author;
+    }
 
-   public void setModel(String model) {
-      this.model = model;
-   }
+    public int getId() {
+        return id;
+    }
 
-   public String getAuthor() {
-      return author;
-   }
+    public void setId(int id) {
+        this.id = id;
+    }
 
-   public void setAuthor(String author) {
-      this.author = author;
-   }
+    public int getAuthorId() {
+        return authorId;
+    }
+
+    public void setAuthorId(int authorId) {
+        this.authorId = authorId;
+    }
 }

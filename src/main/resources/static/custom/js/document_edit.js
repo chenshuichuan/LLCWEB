@@ -11,7 +11,7 @@
 // //获取document对应的内容信息
 // var urlGetDocumentById="/document/getDocumentById";
 //保存document, 修改保存和新建保存， 新建保存时，因为文档id，没有，所以传到后台的id要<=0 !
-var urlSaveDocument = "/document/save";
+var urlSave = "/document/save";
 
 $(document).ready(function () {
     $('#summernote-div').summernote({
@@ -37,12 +37,27 @@ $(document).ready(function () {
     });
     //保存文档，
     $("#btn-save-document").click(function () {
-        $.dialog.tips("save test");
+        //检查参数
+        //保存
+        documentManage.save();
+    });
+    //保存文档，
+    $("#btn-new-document").click(function () {
+        window.open('/admin/edit.html');
     });
 });
 
 var documentManage = {
+    save: function () {
+        var document = {};
+        document.id= $("#edit-id").val();
+        document.content= $('#summernote-div').summernote('code');
+        document.title= $("#edit-title").val();
+        document.infor= $("#edit-infor").val();
+        document.group= $("#edit-group").val();
 
+        saveFun(urlSave,document);
+    },
     editDocument: function (item) {
         $.dialog.tips("edit test");
     },

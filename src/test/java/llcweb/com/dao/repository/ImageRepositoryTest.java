@@ -48,9 +48,9 @@ public class ImageRepositoryTest {
     public void add() {
         Image image = new Image();
         image.setId(1);
-        image.setOwner("haien");
+        image.setAuthor("haien");
         image.setDescription("项目组第1次会议");
-        image.setDate(new Date());
+        image.setCreateDate(new Date());
         Assert.assertThat(imageRepository.save(image).getId(), is(1));
     }
 
@@ -60,13 +60,13 @@ public class ImageRepositoryTest {
         image.setFirstDate(date1);
         image.setLastDate(date2);
         //document.setAuthor("haien2");
-        Page<Image> images= imageService.findAll(image,1,3);
+        Page<Image> images= imageService.activeSearch(image,1,3,imageRepository);
         Assert.assertThat(images.getTotalElements(),is(4L));
     }
 
     @Test
-    public void findByOneKey(){
-        Page<Image> imageList=imageRepository.findByOneKey("haien",new PageRequest(0,10, Sort.Direction.DESC,"date"));
+    public void fuzzySearch(){
+        Page<Image> imageList=imageRepository.fuzzySearch("haien",new PageRequest(0,10, Sort.Direction.DESC,"date"));
         Assert.assertThat(imageList.getTotalElements(),is(10L));
     }
 }

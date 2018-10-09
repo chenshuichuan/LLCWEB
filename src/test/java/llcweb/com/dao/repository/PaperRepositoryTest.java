@@ -1,11 +1,8 @@
 package llcweb.com.dao.repository;
 
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.notNullValue;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-
+import llcweb.com.domain.entity.UsefulPaper;
+import llcweb.com.domain.models.Paper;
+import llcweb.com.service.PaperService;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,9 +14,11 @@ import org.springframework.data.domain.Slice;
 import org.springframework.data.domain.Sort;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import llcweb.com.domain.entity.UsefulPaper;
-import llcweb.com.domain.models.Paper;
-import llcweb.com.service.PaperService;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.notNullValue;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -58,10 +57,13 @@ public class PaperRepositoryTest {
 	        Assert.assertThat(paperList.getTotalElements(),is(91L));
 	        System.out.println(((Slice<Paper>) paper).getSort());
 	    }
-/*	   
+	   
+	    /*
+	     * 模糊查询测试
+	     */
 	    @Test
 	    public void findByOneKey(){
-	        Page<Paper> paperList = paperRepository.findByOneKey("sci",new PageRequest(0,10, Sort.Direction.DESC,"date"));
+	        Page<Paper> paperList = paperRepository.findByOneKey("方法",new PageRequest(0,10, Sort.Direction.DESC,"id"));
 	        Assert.assertThat(paperList.getTotalElements(),is(12L));
-	    }*/
+	    }
 }

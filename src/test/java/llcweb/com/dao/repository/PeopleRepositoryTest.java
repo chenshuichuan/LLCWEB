@@ -1,6 +1,5 @@
 package llcweb.com.dao.repository;
 
-import llcweb.com.domain.models.People;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,24 +24,5 @@ public class PeopleRepositoryTest {
     public void findAll(){
         Assert.assertNotNull(peopleRepository.findAll());
     }
-    @Test
-    public void findByNameAndPassword(){
-        Assert.assertNotNull(peopleRepository.findByNameAndPasswd(new People().getName(),new People().getPasswd()));
-    }
-    @Test
-    public void findByName(){
-        Assert.assertNotNull(peopleRepository.findByName(new People().getName()));
-    }
-    @Test
-    public void findByGrade(){
-        Assert.assertNotNull(peopleRepository.findByGrade(new People().getGrade()));
-    }
-    @Test
-    public void findByPosition(){
-        Assert.assertNotNull(peopleRepository.findByPosition(new People().getPosition()));
-    }
-    @Test
-    public void findByIntroduction(){
-        Assert.assertNotNull(peopleRepository.findByIntroduction(new People().getIntroduction()));
-    }
+
 }

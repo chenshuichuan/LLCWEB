@@ -15,7 +15,8 @@ var urlGetPeopleById="";
 var urlAddUser="";
 //更改用户信息
 var urlUpdateUserById="";
-
+//删除user用户
+var urlDeleteUser="/users/delete";
 //加载遮罩
 var $wrapper = $('#users-table');
 
@@ -216,22 +217,8 @@ var usersManage = {
         // });
     },
     deleteUser: function (item) {
-
+        var message = "确定删除用户:"+item.username+"?";
+        deleteFun(message,urlDeleteUser,item.id);
     }
 };
-//根据idd获取departmentInfo信息
-function getDepartmentInfo(id) {
-    var department =null;
-    //设置同步
-    $.ajax({
-        type : "get",
-        url : urlGetDepartmentInfoById,
-        data :"id=" + id,
-        async : false,
-        success : function(data){
-            department = data.data;
-        }
-    });
-    return department;
-}
 

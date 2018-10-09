@@ -14,7 +14,7 @@
           th:href="@{/assets/css/bootstrap.css}" rel="stylesheet"/>
     <!-- FontAwesome Styles-->
     <link href="../../static/assets/font-awesome-4.7.0/css/font-awesome.css"
-          th:href="@{/assets/css/font-awesome.css}" rel="stylesheet"/>
+          th:href="@{/assets/font-awesome-4.7.0/css/font-awesome.css}" rel="stylesheet"/>
 
     <!-- Custom Styles-->
     <link href="../../static/assets/css/custom-styles.css"
@@ -31,6 +31,7 @@
           th:href="@{/assets/plugins/summernote/summernote.css}" rel="stylesheet"/>
 
 </head>
+
 
 <body>
 <div id="wrapper">
@@ -89,6 +90,11 @@
                                 <div class="form-group" style="margin-left: 20px;">
                                     <button type="button" class="btn btn-danger" id="btn-clear-document">
                                         <i class="fa fa-trash-o"></i> 清空内容
+                                    </button>
+                                </div>
+                                <div class="form-group" style="margin-left: 20px;">
+                                    <button type="button" class="btn btn-success" id="btn-new-document">
+                                        <i class="fa fa-plus"></i> 新建文档
                                     </button>
                                 </div>
                             </form>
@@ -178,6 +184,7 @@
 <script src="../../static/custom/js/common.js"
         th:src="@{/custom/js/common.js}"></script>
 <script th:inline="javascript">
+    //加载内容
     /*<![CDATA[*/
     var content = /*[[${document.content}]]*/ 2;
     /*]]>*/

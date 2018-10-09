@@ -29,9 +29,9 @@ public class FileRepositoryTest {
     @Test
     public void add() throws ParseException {
         File file=new File();
-        file.setOwner("haien");
+        file.setAuthor("haien");
         file.setIntroduction("项目组第1次会议");
-        file.setDate(new SimpleDateFormat("yyyy-MM-dd").parse("2018-08-25"));
+        file.setCreateDate(new SimpleDateFormat("yyyy-MM-dd").parse("2018-08-25"));
         Assert.assertThat(fileRepository.save(file).getId(),is(1));
     }
 
@@ -40,14 +40,14 @@ public class FileRepositoryTest {
         UsefulFile file=new UsefulFile();
         file.setFirstDate(new SimpleDateFormat("yyyy-MM-dd").parse("2018-08-22"));
         file.setLastDate(new SimpleDateFormat("yyyy-MM-dd").parse("2018-08-25"));
-        //document.setAuthor("haien2");
-        Page<File> files=fileService.findAll(file,0,3);
+        file.setAuthor("haien");
+        Page<File> files=fileService.activeSearch(file,0,3,fileRepository);
         Assert.assertThat(files.getTotalElements(),is(1L));
     }
 
     @Test
-    public void findByOneKey(){
-        Page<File> files=fileRepository.findByOneKey("项目",new PageRequest(0,10, Sort.Direction.DESC,"date"));
+    public void fuzzySearch(){
+        Page<File> files=fileRepository.fuzzySearch("项目",new PageRequest(0,10, Sort.Direction.DESC,"date"));
         Assert.assertThat(files.getTotalElements(),is(1L));
     }
 

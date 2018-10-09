@@ -15,6 +15,7 @@
 }
  .public-right{
     float:right;
+    margin-top:-80px;
 }
  .public-header-list{
      /*width:110px;*/
@@ -70,9 +71,9 @@
 	background-color: rgb(249,249,249);
 }
 .logo a{
-    width:640px;
+    width:100px;
     height:95px;
-    background: url("../images/e7d6bc6a3e5a46f30edbb1e7f128781.png");
+    background: url("../images/(22).png");
 }
 .public-header .public-search{
     position: relative;

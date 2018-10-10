@@ -1,7 +1,11 @@
 package llcweb.com.controller.admin;
 
 import llcweb.com.dao.repository.DocumentRepository;
+import llcweb.com.dao.repository.ImageRepository;
+import llcweb.com.dao.repository.PeopleRepository;
 import llcweb.com.domain.models.Document;
+import llcweb.com.domain.models.Image;
+import llcweb.com.domain.models.People;
 import llcweb.com.domain.models.Users;
 import llcweb.com.service.DocumentService;
 import llcweb.com.service.UsersService;
@@ -32,6 +36,10 @@ public class AdminPageController {
     private UsersService usersService;
     @Autowired
     private DocumentService documentService;
+    @Autowired
+    private PeopleRepository peopleRepository;
+    @Autowired
+    private ImageRepository imageRepository;
 
     @RequestMapping("/test.html")
     public ModelAndView test(){
@@ -39,7 +47,7 @@ public class AdminPageController {
         List<String> learnList =new ArrayList<>();
         learnList.add("hello1");
         learnList.add("hello2");
-        ModelAndView modelAndView = new ModelAndView("/admin/test");
+        ModelAndView modelAndView = new ModelAndView("admin/test");
         //添加当前登录用户
         Users users = usersService.getCurrentUser();
         modelAndView.addObject("user", users);
@@ -49,16 +57,26 @@ public class AdminPageController {
 
     @RequestMapping({"/","/index.html","/index","/main","/main.html"})
     public ModelAndView index(){
-        ModelAndView modelAndView = new ModelAndView("/admin/index");
+        ModelAndView modelAndView = new ModelAndView("admin/index");
         Users users = usersService.getCurrentUser();
         modelAndView.addObject("user", users);
         return modelAndView;
     }
 
+    //活动管理
+    @RequestMapping("/activity_records.html")
+    public ModelAndView activity_records(){
+        ModelAndView modelAndView = new ModelAndView("admin/activity_records");
+        Users users = usersService.getCurrentUser();
+        modelAndView.addObject("user", users);
+        return modelAndView;
+    }
+
+    //系统管理
     @RequestMapping("/system_users.html")
     public ModelAndView system_users(){
 
-        ModelAndView modelAndView = new ModelAndView("/admin/system_users");
+        ModelAndView modelAndView = new ModelAndView("admin/system_users");
         Users users = usersService.getCurrentUser();
         modelAndView.addObject("user", users);
         return modelAndView;
@@ -66,7 +84,7 @@ public class AdminPageController {
     @RequestMapping("/system_people.html")
     public ModelAndView system_people(){
 
-        ModelAndView modelAndView = new ModelAndView("/admin/system_people");
+        ModelAndView modelAndView = new ModelAndView("admin/system_people");
         Users users = usersService.getCurrentUser();
         modelAndView.addObject("user", users);
         return modelAndView;
@@ -74,7 +92,7 @@ public class AdminPageController {
     @RequestMapping("/gain_projects.html")
     public ModelAndView gain_projects(){
 
-        ModelAndView modelAndView = new ModelAndView("/admin/gain_projects");
+        ModelAndView modelAndView = new ModelAndView("admin/gain_projects");
         Users users = usersService.getCurrentUser();
         modelAndView.addObject("user", users);
         return modelAndView;
@@ -82,7 +100,7 @@ public class AdminPageController {
     @RequestMapping("/gain_papers.html")
     public ModelAndView gain_papers(){
 
-        ModelAndView modelAndView = new ModelAndView("/admin/gain_papers");
+        ModelAndView modelAndView = new ModelAndView("admin/gain_papers");
         Users users = usersService.getCurrentUser();
         modelAndView.addObject("user", users);
         return modelAndView;
@@ -90,7 +108,7 @@ public class AdminPageController {
     @RequestMapping("/gain_patents.html")
     public ModelAndView gain_patents(){
 
-        ModelAndView modelAndView = new ModelAndView("/admin/gain_patents");
+        ModelAndView modelAndView = new ModelAndView("admin/gain_patents");
         Users users = usersService.getCurrentUser();
         modelAndView.addObject("user", users);
         return modelAndView;
@@ -98,7 +116,7 @@ public class AdminPageController {
     @RequestMapping("/gain_softwares.html")
     public ModelAndView gain_softwares(){
 
-        ModelAndView modelAndView = new ModelAndView("/admin/gain_softwares");
+        ModelAndView modelAndView = new ModelAndView("admin/gain_softwares");
         Users users = usersService.getCurrentUser();
         modelAndView.addObject("user", users);
         return modelAndView;
@@ -110,7 +128,7 @@ public class AdminPageController {
      */
     @RequestMapping("/resource_files.html")
     public ModelAndView resource_files(){
-        ModelAndView modelAndView = new ModelAndView("/admin/resource_files");
+        ModelAndView modelAndView = new ModelAndView("admin/resource_files");
         Users users = usersService.getCurrentUser();
         //根据用户权限查找文档,不需要在此查找数据
         //Page<Document> documentList= documentService.selectByRole(users,0,10);
@@ -119,7 +137,7 @@ public class AdminPageController {
     }
     @RequestMapping("/resource_images.html")
     public ModelAndView resource_images(){
-        ModelAndView modelAndView = new ModelAndView("/admin/resource_images");
+        ModelAndView modelAndView = new ModelAndView("admin/resource_images");
         Users users = usersService.getCurrentUser();
         //根据用户权限查找文档,不需要在此查找数据
         //Page<Document> documentList= documentService.selectByRole(users,0,10);
@@ -128,11 +146,37 @@ public class AdminPageController {
     }
     @RequestMapping("/resource_document.html")
     public ModelAndView resource_document(){
-        ModelAndView modelAndView = new ModelAndView("/admin/resource_document");
+        ModelAndView modelAndView = new ModelAndView("admin/resource_document");
         Users users = usersService.getCurrentUser();
         //根据用户权限查找文档,不需要在此查找数据
         //Page<Document> documentList= documentService.selectByRole(users,0,10);
         modelAndView.addObject("user", users);
+        return modelAndView;
+    }
+
+    /**
+     * 个人中心
+     * */
+    @RequestMapping("/user_home.html")
+    public ModelAndView user_home(){
+        ModelAndView modelAndView = new ModelAndView("admin/user_home");
+        Users users = usersService.getCurrentUser();
+        modelAndView.addObject("user", users);
+        People people = peopleRepository.findOne(users.getPeopleId());
+        if(people==null){
+            people =new People();
+            people.setName(users.getUsername());
+        }
+        modelAndView.addObject("person",people);
+        String imgPath = null;
+        if(people!=null){
+            Image image = imageRepository.findOne(people.getPortrait());
+            if(image!=null){
+                imgPath = "/"+image.getPath();
+                logger.info("find people's portrait="+imgPath);
+            }
+        }
+        modelAndView.addObject("imgPath",imgPath);
         return modelAndView;
     }
 
@@ -142,7 +186,7 @@ public class AdminPageController {
     @RequestMapping("/edit.html")
     public ModelAndView edit(@RequestParam(value="id",required=false)Integer id){ //required:不是必须传入的参数，未传入用null填充，故用integer类型不易出错
 
-        ModelAndView modelAndView = new ModelAndView("/admin/document_edit");
+        ModelAndView modelAndView = new ModelAndView("admin/document_edit");
         Document document;
 		//新建
         if(id==null){

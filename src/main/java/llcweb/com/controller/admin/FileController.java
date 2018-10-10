@@ -331,28 +331,36 @@ public class FileController {
      **/
     @RequestMapping(value = "/getFileById")
     @ResponseBody
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, BusinessException {
         // TODO Auto-generated method stub
         //获得请求文件名
         String encoding = System.getProperty("file.encoding");
-        String filename = request.getParameter("fileName");
-        String enFileName = URLEncoder.encode(filename,"utf-8");
-        System.out.println("/getExcel1="+filename);
-
-        //设置Content-Disposition
-        response.setHeader("Content-Disposition", "attachment;filename="+enFileName);
-        //读取目标文件，通过response将目标文件写到客户端
-        //读取文件
-        String fileName = new String(filename.getBytes("UTF-8"),encoding);
-        InputStream in = new FileInputStream(fileName);
-        OutputStream out = response.getOutputStream();
-        //写文件
-        int b;
-        while((b=in.read())!= -1) {
-            out.write(b);
+        String idStr = request.getParameter("id");
+        if(idStr==null||idStr.isEmpty()){
+            throw new BusinessException(404,"file not find!");
         }
-        in.close();
-        out.close();
+        //String enFileName = URLEncoder.encode(filename,"utf-8");
+        System.out.println("/getFileById id="+idStr);
+        int id = Integer.parseInt(idStr);
+        File file =  fileRepository.findOne(id);
+        if(file!=null&&file.getPath()!=null){
+            //设置Content-Disposition
+            response.setHeader("Content-Disposition", "attachment;filename="+file.getOriginalName());
+            //读取目标文件，通过response将目标文件写到客户端
+            //读取文件
+            String fileName = new String(file.getPath().getBytes("UTF-8"),encoding);
+            InputStream in = new FileInputStream(fileName);
+            OutputStream out = response.getOutputStream();
+            //写文件
+            int b;
+            while((b=in.read())!= -1) {
+                out.write(b);
+            }
+            in.close();
+            out.close();
+        }
+
+
     }
 
 }

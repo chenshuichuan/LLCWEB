@@ -14,10 +14,7 @@
           th:href="@{/home/css/public.css}">
     <link href="../../static/home/css/index.css" rel="stylesheet"
           th:href="@{/home/css/index.css}">
-    <script type="text/javascript" src="../../static/home/js/jquery-1.12.4.min.js"
-            th:src="@{home/js/jquery-1.12.4.min.js}"></script>
-    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-     <meta name="description" content="jPaginate - jQuery Pagination Plugin"/>
+    <meta name="description" content="jPaginate - jQuery Pagination Plugin"/>
     <meta name="keywords" content="jquery, plugin, pagination, fancy"/>
     <title>实验室概况——广东省信息物理融合系统重点实验室</title>
     <link rel="stylesheet" href="../../static/home/css/header.css" type="text/css"
@@ -70,51 +67,52 @@
                     <ul id="crumbs">
                         <li><a href="index.html">首页</a></li>
                         <li><span>&nbsp;/&nbsp;</span></li>
-                        <li><a href="Team introduction.html">实验室概况</a></li>
-						<li><span>&nbsp;/&nbsp;</span></li>
-                        <li><a href="Team introduction.html">团队简介</a></li>
+                        <li><a href="./Team_introduction.html">实验室概况</a></li>
+                        <li><span>&nbsp;/&nbsp;</span></li>
+                        <li><a href="./Team_introduction.html">团队简介</a></li>
                     </ul>
                 </div>
-               <div><b style="font-size: 13px;">团队负责人</b></div>
-				<div>程良伦教授，博士 ，二级教授岗位，博士研究生导师</div>
-				<div><b style="font-size: 13px;">团队成员</b></div>
-				<div>副教授4人，讲师8人（青年百人5人），博士后研究人员5人，博士研究生4人，硕士研究生20-30人。</div>
-				<div><b style="font-size: 13px;">主要研究领域：信息物理融合系统</b></div>
-				<div>异构网络互联融合</div>
-				<div>工业过程大数据</div>
-				<div>高性能计算</div>
-				<div>智能制造与知识自动化</div>
-				<div>智能装备与机器人系统</div>
-				<div>工控系统安全</div>
-				<div><b style="font-size: 13px;">获得奖项</b></div>
-				<div>“面向节能降耗的复杂工业关键工艺过程效能优化控制”，2010年获广东省科技进步一等奖，排名第一</div>
-				<div>“高性能传感器网络及其信息物理融合系统”，2013年获广东省科技进步二等奖，排名第一。</div>
-				<span><img src="../../static/home/images/1%20.png" th:src="@{/home/images/1%20.png}"style="width: 230px;"></span>
-				<span><img src="../../static/home/images/2%20.png" th:src="@{/home/images/2%20.png}"style="width: 230px;"></span>
-
-
-
+                <!--实验室简介-->
+                <div id="document-preview" style="max-width: 800px;"></div>
 
             </div>
         </div>
     </div>
 </div>
-<div class="public-footer" th:include="template/footer_template :: footer_template">
-
-</div>
-
+<div class="public-footer" th:include="template/footer_template :: footer_template"></div>
+<script type="text/javascript" src="../../static/home/js/jquery-1.12.4.min.js"
+        th:src="@{/home/js/jquery-1.12.4.min.js}"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        th:src="@{https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
+<script type="text/javascript" src="../../static/home/js/common.js"
+        th:src="@{/home/js/common.js}"></script>
 </body>
-    <!--二级菜单栏-->
-    <script>
-     $(function(){
-             $(".public-nav li:has(ul)").hover(function() {
-             $(this).find("a:first").css("background-color","#00428f");
-                 $(this).find(".subnav").css("display","block");
+<!--二级菜单栏-->
+<script>
+    $(function () {
+        $(".public-nav li:has(ul)").hover(function () {
+            $(this).find("a:first").css("background-color", "#00428f");
+            $(this).find(".subnav").css("display", "block");
 
-         },function() {
-             $(this).find("a:first").css("background-color","#035ba6");
-             $(this).find(".subnav").css("display","none");
-         })
-     });
-    </script>
+        }, function () {
+            $(this).find("a:first").css("background-color", "#035ba6");
+            $(this).find(".subnav").css("display", "none");
+        })
+    });
+</script>
+
+<!--请求js-->
+<script>
+    $(document).ready(function () {
+        //获取document对应的内容信息
+        var urlGetDocumentById="/document/getDocumentById";
+        var document = getDocumentById(2,urlGetDocumentById);
+        var content = document.content;
+        if(content==null||content==undefined)content="未获取到简介！请检查数据！";
+        $("#document-preview").html(document.content);
+    });
+</script>
+
+
+
 </html>

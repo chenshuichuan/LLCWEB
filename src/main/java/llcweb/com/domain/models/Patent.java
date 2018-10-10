@@ -9,7 +9,7 @@ import java.util.Date;
  * 专利的实体类
  */
 @Entity
-@Table(name="patent")
+@Table(name = "patent")
 public class Patent {
 	   @Id
 	   @GeneratedValue
@@ -166,6 +166,4 @@ public class Patent {
 				+ ", appliNum=" + appliNum + ", publicNum=" + publicNum + ", publicDate=" + publicDate + ", agency="
 				+ agency + ", appliPeople=" + appliPeople + "]";
 	}
-	   
-	   
 }

@@ -267,4 +267,30 @@ public class DocumnetController {
         }
         return map;
     }
+
+    /**
+     * 获取所有的文档标题和id等信息
+     **/
+    @RequestMapping(value="/getAll",method = RequestMethod.GET)
+    @ResponseBody
+    public Map<String,Object> getAll(){
+        Map<String,Object> map=new HashMap<>();
+        logger.info("获取所有的文档标题和id等信息");
+
+        List<Document> documentList=documentRepository.findAll();
+
+        if (documentList == null||documentList.size()==0) {
+            map.put("documentInfoList",null);
+            map.put("result", 0);
+            logger.info("不存在文档！");
+            map.put("message", "不存在文档！");
+        }else{
+            //剔除文档内容，传送轻便
+            List<DocumentInfo> documentInfoList = documentService.documentsToDocumentInfos(documentList);
+            map.put("documentInfoList",documentInfoList);
+            map.put("result", 1);
+            map.put("message", "成功获取文档！");
+        }
+        return map;
+    }
 }

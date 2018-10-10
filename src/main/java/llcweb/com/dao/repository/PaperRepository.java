@@ -28,6 +28,16 @@ public interface PaperRepository extends JpaRepository<Paper,Integer>{
 	Page<Paper> findByOneKey(String key, Pageable pageable);*/
 
 	Page<Paper> findByAuthorList(String userName, Pageable pageable);
+	
+	/*
+	 * 模糊查询
+	 */
+		@Query(value = "SELECT p from Paper p where p.title like %?1% "
+				+ "or p.authorList like %?1% "
+				+ "or p.belongProject like %?1% "
+				+ "or p.periodical like %?1% ")
+		Page<Paper> findByOneKey(String key, Pageable pageable);
+
 
 	//Page<Paper> findByTeam(String string, Pageable pageable);
 

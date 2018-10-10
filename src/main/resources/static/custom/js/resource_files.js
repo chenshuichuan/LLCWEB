@@ -228,7 +228,9 @@ var documentManage = {
         $("#input-description").val(item.introduction);
         $("#input-group").val(item.model);
         //显示上传页面
-        $("#div-upload-image").slideToggle("fast");
+        //$("#div-upload-image").slideToggle("fast");
+        //切换panel
+        $("#div-upload-image").show().siblings(".panel").hide();
     },
     deleteDocument: function (item) {
         var message = "确定删除:"+item.originalName+"?";

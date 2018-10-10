@@ -160,6 +160,7 @@ public class ImageController {
     /**
      * 删除图片
      */
+    /**存在问题：当删除不存在路径的图片记录时，无法成功删除记录*/
     @RequestMapping("/delete")
     @Transactional
     public Map<String,Object> deleteImage(@RequestParam("id")Integer id){

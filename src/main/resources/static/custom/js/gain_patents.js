@@ -9,13 +9,11 @@
 **/
 //获取专利分页数据
 var urlGetPage="/patent/page";
-//获取patent对应的详细的信息
-var urlGetPeopleById="";
-//添加user用户
-var urlAddUser="";
-//更改用户信息
-var urlUpdateUserById="";
-
+//更改
+var urlSave="/patent/save";
+//删除
+var urlDelete="/patent/delete";
+var urlGetFileById="/file/getFileById";
 //加载遮罩
 var $wrapper = $('#paper-table');
 
@@ -51,10 +49,7 @@ $(document).ready(function () {
                             returnData.data = result.pageData;
                             //关闭遮罩
                             $wrapper.spinModal(false);
-                            //调用DataTables提供的callback方法，代表数据已封装完成并传回DataTables进行渲染
-                            //此时的数据需确保正确无误，异常判断应在执行此回调前自行处理完毕
                             callback(returnData);
-
                         },
                         error: function (XMLHttpRequest, textStatus, errorThrown) {
                             $.dialog.alert("查询失败");
@@ -67,23 +62,24 @@ $(document).ready(function () {
                         data: "title"
                     },
                     {
-                        data: "introduction",
-                        width: "200px",
-                        className: "ellipsis",	//文字过长时用省略号显示，CSS实现
-                        render: CONSTANT.DATA_TABLES.RENDER.ELLIPSIS//会显示省略号的列，需要用title属性实现划过时显示全部文本的效果
+                        data: "state",
+                        width: "80px"
                     },
                     {
-                        data: "author",
-                        width: "100px",
+                        data: "authorList",
+                        width: "150px",
                         className: "ellipsis",
                         render: CONSTANT.DATA_TABLES.RENDER.ELLIPSIS
                     },
                     {
-                        data: "profile",
-                        width: "80px"
+                        data: null,
+                        width: "80px",
+                        render: function (data, type, row, meta) {
+                            return "公开";
+                        }
                     },
                     {
-                        data: "date",
+                        data: "appliDate",
                         width: "80px",
                         render: function (data, type, row, meta) {
                             return dateToString(data);
@@ -92,22 +88,16 @@ $(document).ready(function () {
                     {
                         className: "td-operation",
                         data: null,
-                        width: "80px",
+                        width: "120px",
                         defaultContent: "",
                         orderable: false
                     }
                 ],
                 "createdRow": function (row, data, index) {
-                    //行渲染回调,在这里可以对该行dom元素进行任何操作
-                    // //给当前行加样式
-                    // if (data.isTaoliao) {
-                    //     $(row).addClass("text-info");
-                    // }
-                    // //给当前行某列加样式
-                    // $('td', row).eq(9).addClass(classIsCutted(data.isCutted));
                     //不使用render，改用jquery文档操作呈现单元格
-                    var $btnEdit = $('<button type="button" class="btn btn-small btn-warning btn-edit">修改</button>');
-                    var $btnDelete = $('<button style="margin-left: 20px;"type="button" class="btn btn-small btn-danger btn-delete">删除</button>');
+                    var $btnEdit = $(' <button class="btn btn-warning btn-edit" type="button" data-toggle="tooltip"data-placement="bottom" title="编辑"> <i class="fa fa-edit"></i> </button>');
+                    var $btnDelete = $('<button class="btn btn-danger  btn-delete" type="button" data-toggle="tooltip"data-placement="bottom" title="删除"> <i class="fa fa-trash-o"></i> </button>');
+
                     $('td', row).eq(5).append($btnEdit).append($btnDelete);
                 },
                 "drawCallback": function (settings) {
@@ -118,14 +108,14 @@ $(document).ready(function () {
 
     //行点击事件
     $("tbody", $paperTable).on("click", "tr", function (event) {
-        $(this).addClass("active").siblings().removeClass("active");//有空再试试
+        $(this).addClass("active").siblings().removeClass("active");//有空再试试渲染选中行
         //$(this).addClass("active").siblings("tr").removeClass("active");
         // $("table tr").css('background-color','white');
         // $(this).css('background-color','blue');
         //获取该行对应的数据
         var item = _table.row($(this).closest('tr')).data();
         usersManage.currentItem = item;
-        usersManage.showUser(item);
+        usersManage.show(item);
     });
     $paperTable.on("click", ".btn-edit", function () {
         //编辑按钮
@@ -133,12 +123,12 @@ $(document).ready(function () {
         $(this).closest('tr').addClass("active").siblings().removeClass("active");
         //切换panel
         $("#edit-panel").show().siblings(".panel").hide();
-        usersManage.editUser(item);
+        usersManage.edit(item);
     }).on("click", ".btn-delete", function () {
         //删除按钮
         var item = _table.row($(this).closest('tr')).data();
         $(this).closest('tr').addClass("active").siblings().removeClass("active");
-        usersManage.deleteUser(item);
+        usersManage.delete(item);
     });
 
 
@@ -147,16 +137,63 @@ $(document).ready(function () {
     });
 
     $("#btn-add-user").click(function () {
+        $("#add-title").val("");
+        $("#add-author").val("");
+
+        $("#add-abstract").val("");
+        $("#add-profile").val(0);//
+
+        $("#add-original_link").val("");
+        $("#add-source_file").val("");
+        $("#add-belong_project").val("");
+
+        $("#add-appli_num").val("");
+        $("#add-appli_date").val("");
+        $("#add-public_num").val("");
+        $("#add-public_date").val("");
+        $("#add-agency").val("");
+        $("#add-state").val("");
         $("#add-panel").show().siblings(".panel").hide();
     });
     $("#btn-edit-bt").click(function () {
         $("#edit-panel").show().siblings(".panel").hide();
     });
     $("#btn-add-save").click(function () {
-        $.dialog.tips("保存添加测试")
+        var patent={};
+        patent.title=$("#add-title").val();
+        patent.authorList=$("#add-author").val();
+        patent.introduction=$("#add-abstract").val();
+        patent.originalLink=$("#add-original_link").val();
+        patent.sourceFile=$("#add-source_file").val();
+        patent.belongProject= $("#add-belong_project").val();
+        patent.profile=$("#add-profile").val();
+        patent.appliNum=$("#add-appli_num").val();
+        patent.appliDate=$("#add-appli_date").val();
+        patent.publicNum=$("#add-public_num").val();
+        patent.publicDate=$("#add-public_date").val();
+        patent.agency=$("#add-agency").val();
+        patent.state= $("#add-state").val();
+        usersManage.save(patent);
+        _table.draw();
     });
     $("#btn-edit-save").click(function () {
-        $.dialog.tips("保存编辑测试")
+        var patent={};
+        patent.id=$("#edit-id").val();
+        patent.title=$("#edit-title").val();
+        patent.authorList=$("#edit-author").val();
+        patent.introduction=$("#edit-abstract").val();
+        patent.originalLink=$("#edit-original_link").val();
+        patent.sourceFile=$("#edit-source_file").val();
+        patent.belongProject= $("#edit-belong_project").val();
+        patent.profile=$("#edit-profile").val();
+        patent.appliNum=$("#edit-appli_num").val();
+        patent.appliDate=$("#edit-appli_date").val();
+        patent.publicNum=$("#edit-public_num").val();
+        patent.publicDate=$("#edit-public_date").val();
+        patent.agency=$("#edit-agency").val();
+        patent.state= $("#edit-state").val();
+        usersManage.save(patent);
+        _table.draw();
     });
     $("#btn-add-cancel").click(function () {
         $("#view-panel").show().siblings(".panel").hide();
@@ -182,58 +219,42 @@ var usersManage = {
         param.draw = data.draw;
         return param;
     },
-    showUser: function (item) {
-        $("#view-username").text(item.username);
-        //更多操作
+    show: function (item) {
+        $("#view-title").text(item.title);
+        $("#view-abstract").text(item.introduction);
+        $("#view-original_link").text(item.originalLink);
+        $("#view-source_file").text((item.id==null||item.id==undefined)?"":(urlGetFileById+"?id="+item.sourceFile));
+        $("#view-belong_project").text(item.belongProject);
+
+        $("#view-appli_num").text(item.appliNum);
+        $("#view-public_num").text(item.publicNum);
+        $("#view-public_date").text(dateToString(item.publicDate));
+        $("#view-agency").text(item.agency);
+        $("#view-state").text(item.state);
     },
-    editUser: function (item) {
-        $("#edit-id").val(item.id)
-        $("#edit-username").val(item.username);
-        $("#edit-password").val(item.password);
+    edit: function (item) {
+        $("#edit-id").val(item.id);
+        $("#edit-title").val(item.title);
+        $("#edit-author").val(item.authorList);
+        $("#edit-abstract").val(item.introduction);
+        $("#edit-original_link").val(item.originalLink);
+        $("#edit-source_file").val(item.sourceFile);
+        $("#edit-belong_project").val(item.belongProject);
+        $("#edit-profile").val(item.belongProject);
+        $("#edit-appli_num").val(item.appliNum);
+        $("#edit-appli_date").val(dateToString(item.appliDate));
+        $("#edit-public_num").val(item.publicNum);
+        $("#edit-public_date").val(dateToString(item.publicDate));
+        $("#edit-agency").val(item.agency);
+        $("#edit-state").val(item.state);
         //更多
     },
-    editSaveUser: function (item) {
-        // var workplace = getCookie("workplace");
-        // var workplaceId = getCookie("workplaceId");
-        // if(workplace===null||workplace===""){
-        //     $.dialog.tips('请先选择派工工位！');
-        //     return;
-        // }
-        // var message = "确定将批次:"+selectedItem.batchName+" 的单元:"+selectedItem.unitName+"派工给:"+workplace+"?";
-        // $.dialog.confirm(message, function () {
-        //     //$.dialog.tips("i am in!");
-        //     $.ajax({
-        //         type : "get",
-        //         url : urlArrangeUnitToWorkPlace,
-        //         data :"unitId=" + selectedItem.unitId+"&workplaceId="+workplaceId,
-        //         async : false,
-        //         success : function(data){
-        //             $.dialog.tips(data.message);
-        //         },
-        //         error: function (XMLHttpRequest, textStatus, errorThrown) {
-        //             $.dialog.alert("查询失败");
-        //             $wrapper.spinModal(false);
-        //         }
-        //     });
-        // });
+    save: function (patent) {
+        saveFun(urlSave,patent)
     },
-    deleteUser: function (item) {
-
+    delete: function (item) {
+        var message ="确定删除专利：“"+item.title+"”的信息?";
+        deleteFun(message,urlDelete,item.id);
     }
 };
-//根据idd获取departmentInfo信息
-function getDepartmentInfo(id) {
-    var department =null;
-    //设置同步
-    $.ajax({
-        type : "get",
-        url : urlGetDepartmentInfoById,
-        data :"id=" + id,
-        async : false,
-        success : function(data){
-            department = data.data;
-        }
-    });
-    return department;
-}
 

@@ -7,6 +7,7 @@ import llcweb.com.domain.models.People;
 import llcweb.com.service.PeopleService;
 import llcweb.com.service.UsersService;
 import llcweb.com.tools.StringUtil;
+import llcweb.com.tools.ValidatorUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -27,7 +28,7 @@ import java.util.Map;
  * @Date 2018/10/2
  **/
 @RestController
-@RequestMapping("people")
+@RequestMapping("/people")
 public class PeopleController {
     private static final Logger logger=LoggerFactory.getLogger(PeopleController.class);
 
@@ -114,12 +115,37 @@ public class PeopleController {
         String position=request.getParameter("position");
         String introduction1=request.getParameter("introduction");
         String grade1=request.getParameter("grade");
+        String phone=request.getParameter("phone");
+        String email=request.getParameter("email");
+        String sex=request.getParameter("sex");
+        String adminPosition=request.getParameter("adminPosition");
+        String highestDegree=request.getParameter("highestDegree");
+        String researchField=request.getParameter("researchField");
+        String academicTitle=request.getParameter("academicTitle");
 
         if(StringUtil.isNull(name)||StringUtil.isNull(portrait1)||
                 StringUtil.isNull(position)||StringUtil.isNull(introduction1)||
-                StringUtil.isNull(grade1)){
+                StringUtil.isNull(grade1)||StringUtil.isNull(phone)||
+                StringUtil.isNull(email)||StringUtil.isNull(sex)||
+                StringUtil.isNull(adminPosition)||StringUtil.isNull(highestDegree)||
+                StringUtil.isNull(researchField)||StringUtil.isNull(academicTitle)){
             map.put("result", 0);
             map.put("message", "人员保存失败,信息不完整！");
+            return map;
+        }
+        if(!ValidatorUtil.isMobile(phone)){
+            map.put("result", 0);
+            map.put("message", "手机号格式不正确！");
+            return map;
+        }
+        if(!ValidatorUtil.isEmail(email)){
+            map.put("result", 0);
+            map.put("message", "邮箱格式不正确！");
+            return map;
+        }
+        if(!sex.equals("男")||!sex.equals("女")){
+            map.put("result", 0);
+            map.put("message", "性别请选择男或女！");
             return map;
         }
 
@@ -149,6 +175,13 @@ public class PeopleController {
         people.setPosition(position);
         people.setGrade(grade);
         people.setIntroduction(introduction);
+        people.setPhone(phone);
+        people.setEmail(email);
+        people.setSex(sex);
+        people.setAdminPosition(adminPosition);
+        people.setHighestDegree(highestDegree);
+        people.setResearchField(researchField);
+        people.setAcademicTitle(academicTitle);
         peopleRepository.save(people);
 
         map.put("result", 1);

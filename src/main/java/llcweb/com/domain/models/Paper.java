@@ -2,6 +2,12 @@ package llcweb.com.domain.models;
 
 import javax.persistence.*;
 import java.util.Date;
+
+/**
+ * @Author haien
+ * @Description 论文类
+ * @Date 2018/10/7
+ **/
 @Entity
 @Table(name="paper")
 public class Paper {

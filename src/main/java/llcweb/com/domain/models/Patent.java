@@ -1,18 +1,12 @@
 package llcweb.com.domain.models;
 
-import java.util.*;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.Date;
 
 
 /**
  * @author tong
  * 专利的实体类
- *
  */
 @Entity
 @Table(name="patent")
@@ -26,35 +20,35 @@ public class Patent {
 	   public String title;
 	   
 	   //申请日期
-	   @Column(name = "application_date")
+	   @Column(columnDefinition = "date")
 	   public Date appliDate;
 	   
 	   //文章简介
-	   @Column(name = "introduction", length = 255)
+	   @Column(length = 255)
 	   public String introduction;
 	   
 	   //发明人，作者姓名列表，对应people表的姓名，也可以是外面合作人员
-	   @Column(name = "author_list", length = 128)
+	   @Column(length = 128)
 	   public String authorList;
 	   
 	   //原文链接
-	   @Column(name = "original_link", length = 64)
+	   @Column(length = 64)
 	   public String originalLink;
 	   
 	   //所属项目id
-	   @Column(name = "belong_project", length = 11)
+	   @Column(length = 11)
 	   public String belongProject;
 	   
 	   //专利申请号
-	   @Column(name = "appli_num", length = 11)
+	   @Column(length = 11)
 	   public String appliNum;
 	   
 	   //专利公开号
-	   @Column(name = "public_num", length = 11)
+	   @Column(length = 11)
 	   public String publicNum;
 	   
 	   //公开日期
-	   @Column(name = "public_date")
+	   @Column(columnDefinition = "date")
 	   public Date publicDate;
 	   
 	   //代理机构

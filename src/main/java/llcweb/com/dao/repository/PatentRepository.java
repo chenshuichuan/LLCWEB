@@ -5,6 +5,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import java.util.List;
 
 /**
  * Created by:Tong
@@ -26,4 +29,14 @@ public interface PatentRepository extends JpaRepository<Patent,Integer>{
 			+ "or p.appliPeople like %?1% ")
 	Page<Patent> findByOneKey(String string, PageRequest pageRequest);*/
 	Page<Patent> findByAuthorList(String userName, Pageable pageable);
+
+	/**
+	 * @Author haien
+	 * @Description 获取最新的专利记录
+	 * @Date 2018/10/7
+	 * @Param [count]
+	 * @return java.util.List<llcweb.com.domain.models.Patent>
+	 **/
+	@Query(value="select * from patent where state='发表' or state='受权' order by public_date desc limit ?1",nativeQuery=true)
+	List<Patent> getLatest(int count);
 }

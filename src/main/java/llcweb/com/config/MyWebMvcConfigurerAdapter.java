@@ -40,8 +40,8 @@ public class MyWebMvcConfigurerAdapter extends WebMvcConfigurerAdapter {
             imgPath = imagesPath;
         }
         logger.info("imagesPath="+imgPath);
-        registry.addResourceHandler("/images/**").addResourceLocations("file:"+".\\images\\");
-        registry.addResourceHandler("/files/**").addResourceLocations("file:"+".\\files\\");
+        registry.addResourceHandler("/images/**").addResourceLocations("file:"+"/root/LLCWEB/images/");
+        registry.addResourceHandler("/files/**").addResourceLocations("file:"+"/root/LLCWEB/files/");
         super.addResourceHandlers(registry);
     }
 
@@ -66,7 +66,7 @@ public class MyWebMvcConfigurerAdapter extends WebMvcConfigurerAdapter {
      */
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/login").setViewName("/admin/login");
+        registry.addViewController("/login").setViewName("admin/login");
         super.addViewControllers(registry);
     }
 

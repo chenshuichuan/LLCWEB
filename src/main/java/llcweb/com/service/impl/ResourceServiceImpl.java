@@ -10,6 +10,7 @@ import llcweb.com.exception.BusinessException;
 import llcweb.com.exception.ReturnCode;
 import llcweb.com.service.ResourceService;
 import llcweb.com.tools.StringUtil;
+import llcweb.com.tools.UUIDUtil;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -140,15 +141,14 @@ public class ResourceServiceImpl<T> implements ResourceService<T> {
     public String saveResource(MultipartFile multipartFile, Resource resource) throws BusinessException {
 
         String originalFileName=multipartFile.getOriginalFilename();
-        String suffix=originalFileName.substring(originalFileName.lastIndexOf(".")+1);
-        String fileName=resource.getId()+resource.getModel()+resource.getAuthorId()+"."+suffix;
+        String suffix=originalFileName.substring(originalFileName.lastIndexOf("."));
         //选择路径
         String path=filePath;
         if(resource instanceof Image){
             path=imagePath;
         }
         //拼接文件名
-        String filePath=path+ File.separator+fileName;
+        String filePath=path+"/"+UUIDUtil.getUUID()+suffix;
         try {
             BufferedOutputStream bos=new BufferedOutputStream(new FileOutputStream(filePath));
             //可以直接获取MultipartFile的字节数组，这样就省了先获取InputStream再用一个1024的字节数组去read出来的麻烦

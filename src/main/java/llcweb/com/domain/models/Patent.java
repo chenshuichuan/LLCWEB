@@ -1,12 +1,7 @@
 package llcweb.com.domain.models;
 
-import java.util.*;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.Date;
 
 
 /**
@@ -16,179 +11,159 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "patent")
 public class Patent {
-    @Id
-    @GeneratedValue
-    public Integer id;
+	   @Id
+	   @GeneratedValue
+	   public Integer id;
+	   
+	   //专利标题
+	   @Column(name = "title", length = 64)
+	   public String title;
+	   
+	   //申请日期
+	   @Column(columnDefinition = "date")
+	   public Date appliDate;
+	   
+	   //文章简介
+	   @Column(length = 255)
+	   public String introduction;
+	   
+	   //发明人，作者姓名列表，对应people表的姓名，也可以是外面合作人员
+	   @Column(length = 128)
+	   public String authorList;
+	   
+	   //原文链接
+	   @Column(length = 64)
+	   public String originalLink;
+	   
+	   //所属项目id
+	   @Column(length = 11)
+	   public String belongProject;
+	   
+	   //专利申请号
+	   @Column(length = 11)
+	   public String appliNum;
+	   
+	   //专利公开号
+	   @Column(length = 11)
+	   public String publicNum;
+	   
+	   //公开日期
+	   @Column(columnDefinition = "date")
+	   public Date publicDate;
+	   
+	   //代理机构
+	   @Column(name = "agency", length = 128)
+	   public String agency;
+	   
+	   //申请人（一般为广东工业大学）
+	   @Column(name = "appli_people", length = 64)
+	   public String appliPeople;
+	   
+	   public Patent() {
+		   
+	   }
 
-    //专利标题
-    @Column(name = "title", length = 64)
-    public String title;
+	public Integer getId() {
+		return id;
+	}
 
-    //申请日期
-    @Column(name = "application_date")
-    public Date appliDate;
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    //文章简介
-    @Column(name = "introduction", length = 255)
-    public String introduction;
+	public String getTitle() {
+		return title;
+	}
 
-    //发明人，作者姓名列表，对应people表的姓名，也可以是外面合作人员
-    @Column(name = "author_list", length = 128)
-    public String authorList;
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
-    //原文链接
-    @Column(name = "original_link", length = 64)
-    public String originalLink;
+	public Date getAppliDate() {
+		return appliDate;
+	}
 
-    //所属项目id
-    @Column(name = "belong_project", length = 11)
-    public String belongProject;
+	public void setAppliDate(Date appliDate) {
+		this.appliDate = appliDate;
+	}
 
-    //专利申请号
-    @Column(name = "appli_num", length = 11)
-    public String appliNum;
+	public String getIntroduction() {
+		return introduction;
+	}
 
-    //专利公开号
-    @Column(name = "public_num", length = 11)
-    public String publicNum;
+	public void setIntroduction(String introduction) {
+		this.introduction = introduction;
+	}
 
-    //公开日期
-    @Column(name = "public_date")
-    public Date publicDate;
+	public String getAuthorList() {
+		return authorList;
+	}
 
-    //代理机构
-    @Column(name = "agency", length = 128)
-    public String agency;
+	public void setAuthorList(String authorList) {
+		this.authorList = authorList;
+	}
 
-    //申请人（一般为广东工业大学）
-    @Column(name = "appli_people", length = 64)
-    public String appliPeople;
+	public String getOriginalLink() {
+		return originalLink;
+	}
 
-    private String state;
-    private int sourceFile;
+	public void setOriginalLink(String originalLink) {
+		this.originalLink = originalLink;
+	}
 
-    public Patent() {
+	public String getBelongProject() {
+		return belongProject;
+	}
 
-    }
+	public void setBelongProject(String belongProject) {
+		this.belongProject = belongProject;
+	}
 
-    public Integer getId() {
-        return id;
-    }
+	public String getAppliNum() {
+		return appliNum;
+	}
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public void setAppliNum(String appliNum) {
+		this.appliNum = appliNum;
+	}
 
-    public String getTitle() {
-        return title;
-    }
+	public String getPublicNum() {
+		return publicNum;
+	}
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+	public void setPublicNum(String publicNum) {
+		this.publicNum = publicNum;
+	}
 
-    public Date getAppliDate() {
-        return appliDate;
-    }
+	public Date getPublicDate() {
+		return publicDate;
+	}
 
-    public void setAppliDate(Date appliDate) {
-        this.appliDate = appliDate;
-    }
+	public void setPublicDate(Date publicDate) {
+		this.publicDate = publicDate;
+	}
 
-    public String getIntroduction() {
-        return introduction;
-    }
+	public String getAgency() {
+		return agency;
+	}
 
-    public void setIntroduction(String introduction) {
-        this.introduction = introduction;
-    }
+	public void setAgency(String agency) {
+		this.agency = agency;
+	}
 
-    public String getAuthorList() {
-        return authorList;
-    }
+	public String getAppliPeople() {
+		return appliPeople;
+	}
 
-    public void setAuthorList(String authorList) {
-        this.authorList = authorList;
-    }
+	public void setAppliPeople(String appliPeople) {
+		this.appliPeople = appliPeople;
+	}
 
-    public String getOriginalLink() {
-        return originalLink;
-    }
-
-    public void setOriginalLink(String originalLink) {
-        this.originalLink = originalLink;
-    }
-
-    public String getBelongProject() {
-        return belongProject;
-    }
-
-    public void setBelongProject(String belongProject) {
-        this.belongProject = belongProject;
-    }
-
-    public String getAppliNum() {
-        return appliNum;
-    }
-
-    public void setAppliNum(String appliNum) {
-        this.appliNum = appliNum;
-    }
-
-    public String getPublicNum() {
-        return publicNum;
-    }
-
-    public void setPublicNum(String publicNum) {
-        this.publicNum = publicNum;
-    }
-
-    public Date getPublicDate() {
-        return publicDate;
-    }
-
-    public void setPublicDate(Date publicDate) {
-        this.publicDate = publicDate;
-    }
-
-    public String getAgency() {
-        return agency;
-    }
-
-    public void setAgency(String agency) {
-        this.agency = agency;
-    }
-
-    public String getAppliPeople() {
-        return appliPeople;
-    }
-
-    public void setAppliPeople(String appliPeople) {
-        this.appliPeople = appliPeople;
-    }
-    public int getSourceFile() {
-        return sourceFile;
-    }
-
-    public void setSourceFile(int sourceFile) {
-        this.sourceFile = sourceFile;
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = state;
-    }
-
-    @Override
-    public String toString() {
-        return "Patent [id=" + id + ", title=" + title + ", appliDate=" + appliDate + ", introduction=" + introduction
-                + ", authorList=" + authorList + ", originalLink=" + originalLink + ", belongProject=" + belongProject
-                + ", appliNum=" + appliNum + ", publicNum=" + publicNum + ", publicDate=" + publicDate + ", agency="
-                + agency + ", appliPeople=" + appliPeople + "]";
-    }
-
-
+	@Override
+	public String toString() {
+		return "Patent [id=" + id + ", title=" + title + ", appliDate=" + appliDate + ", introduction=" + introduction
+				+ ", authorList=" + authorList + ", originalLink=" + originalLink + ", belongProject=" + belongProject
+				+ ", appliNum=" + appliNum + ", publicNum=" + publicNum + ", publicDate=" + publicDate + ", agency="
+				+ agency + ", appliPeople=" + appliPeople + "]";
+	}
 }

@@ -1,34 +1,25 @@
 package llcweb.com.controller.admin;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
+import llcweb.com.dao.repository.PaperRepository;
+import llcweb.com.domain.entity.UsefulPaper;
+import llcweb.com.domain.models.Paper;
+import llcweb.com.service.PaperService;
+import llcweb.com.service.UsersService;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
-import llcweb.com.dao.repository.PaperRepository;
-import llcweb.com.domain.entity.UsefulPaper;
-import llcweb.com.domain.models.Paper;
-import llcweb.com.domain.models.Project;
-import llcweb.com.service.PaperService;
-import llcweb.com.service.UsersService;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author tong
@@ -56,7 +47,28 @@ public class PaperController {
 	    binder.registerCustomEditor(Date.class, new CustomDateEditor(
 	            dateFormat, false));
 	}
-	
+
+	/**
+	 * @Author haien
+	 * @Description 首页“专利”模块
+	 * @Date 2018/10/7
+	 * @Param [count]
+	 * @return java.util.Map<java.lang.String,java.lang.Object>
+	 **/
+	@RequestMapping("/getLatest")
+	public Map<String,Object> getLatest(@RequestParam("count")Integer count){
+		Map<String,Object> map=new HashMap<>();
+		if(count==null||count.equals("")||count<=0){
+			map.put("result", 0);
+			map.put("message", "请正确指定读取数目！");
+		}else{
+			paperRepository.getLatest(count);
+			map.put("result", 1);
+			map.put("message", "获取记录成功！");
+		}
+		return map;
+	}
+
 	/*
 	 * 前台首页
 	 */

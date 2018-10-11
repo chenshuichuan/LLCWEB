@@ -172,3 +172,62 @@ function getDocumentById(id,urlGetDocumentById) {
     });
     return document;
 }
+
+/*********************************************关于cookie********************************************/
+//设置cookie
+function setCookie(name, value, day) {
+    var date = new Date();
+    date.setDate(date.getDate() + day);
+    document.cookie = name + '=' + value + ';expires=' + date;
+};
+
+//获取cookie
+function getCookie(name) {
+    var reg = RegExp(name + '=([^;]+)');
+    var arr = document.cookie.match(reg);
+    if (arr) {
+        return arr[1];
+    } else {
+        return '';
+    }
+};
+
+//删除cookie
+function delCookie(name) {
+    setCookie(name, null, -1);
+};
+
+//加载实验室页面内容
+function initTeamList(index){
+    var urlGetDocumentById="/document/getDocumentById";
+    var document = getDocumentById(index+1,urlGetDocumentById);
+    var content = document.content;
+    var crumbsSpan = '';
+    var crumbsCon = '';
+    if(content==null||content==undefined)content="未获取到简介！请检查数据！";
+    $("#document-preview").html(document.content);
+    //改变上方链接指示
+    $("#crumbs").find('li').eq(3).html("");
+    crumbsSpan+='<span>&nbsp;/&nbsp;</span>';
+    $("#crumbs").find('li').eq(3).append(crumbsSpan);
+    $("#crumbs").find('li').eq(4).html("");
+    crumbsCon+='<a href="#'+index+'">'+$('#resultType').find('span').eq(index).html()+'</a>';
+    $("#crumbs").find('li').eq(4).append(crumbsCon);
+    // $("#crumbs").append(crumbsCon);
+    //改变左侧高亮提示
+    $('#resultType').find('a.ll_ref').eq(index-1).css('background', '#6ad').parent().siblings().find("a").css('background', '#f3f2f2');
+}
+//监听请求更改--顶部导航栏
+function clickFn(index){
+    delCookie("Team_introduction");
+    initTeamList(index);
+};
+//导航栏二级
+$(".public-nav li:has(ul)").hover(function () {
+    $(this).find("a:first").css("background-color", "#00428f");
+    $(this).find(".subnav").css("display", "block");
+
+}, function () {
+    $(this).find("a:first").css("background-color", "#035ba6");
+    $(this).find(".subnav").css("display", "none");
+});

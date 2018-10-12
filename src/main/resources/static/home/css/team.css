@@ -99,6 +99,11 @@
     float:right;
 }
 
+.middle_r>ul>li .record_r>table td>span{
+    font-weight:normal;
+    margin-left:5px;
+}
+
 .middle_r>ul>li .record_b{
     width:90%;
     min-height:150px;

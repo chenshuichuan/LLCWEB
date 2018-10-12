@@ -26,7 +26,6 @@ public interface PatentRepository extends JpaRepository<Patent,Integer>{
 
 
 	Page<Patent> findByAuthorList(String userName, Pageable pageable);
-<<<<<<< HEAD
 
 	/**
 	 * @Author haien
@@ -37,20 +36,5 @@ public interface PatentRepository extends JpaRepository<Patent,Integer>{
 	 **/
 	@Query(value="select * from patent where state='发表' or state='受权' order by public_date desc limit ?1",nativeQuery=true)
 	List<Patent> getLatest(int count);
-=======
-//	/*
-//	 * 模糊查询
-//	 */
-//	@Query(value = "SELECT p from Patent p where p.title like %?1%"
-//				+ "or p.authorList like %?1%"
-//				+ "or p.belongProject like %?1%"
-//				+ "or p.appliNum like %?1%"
-//				+ "or p.publicNum like %?1%"
-//				+ "or p.agency like %?1%"
-//				+ "or p.appliPeople like %?1%"
-//				)
-//	Page<Patent> findByOneKey(String key, Pageable pageable);
-	
-	
->>>>>>> 27c001663a380f2415d64fa52bb7ab8317923ac5
+
 }

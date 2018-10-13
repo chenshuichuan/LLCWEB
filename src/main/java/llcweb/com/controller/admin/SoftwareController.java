@@ -1,11 +1,10 @@
 package llcweb.com.controller.admin;
 
-import llcweb.com.dao.repository.ActivityRepository;
-import llcweb.com.dao.repository.DocumentRepository;
-import llcweb.com.domain.models.Activity;
+import llcweb.com.dao.repository.SoftwareRepository;
+import llcweb.com.domain.models.Software;
 import llcweb.com.domain.models.Users;
-import llcweb.com.service.ActivityService;
 import llcweb.com.service.UsersService;
+import llcweb.com.service.SoftwareService;
 import llcweb.com.tools.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,22 +26,20 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/activity")
-public class ActivityController {
-    private static final Logger logger=LoggerFactory.getLogger(ActivityController.class);
+@RequestMapping("/software")
+public class SoftwareController {
+    private static final Logger logger=LoggerFactory.getLogger(SoftwareController.class);
 
     @Resource
-    private ActivityRepository activityRepository;
+    private SoftwareRepository softwareRepository;
     @Resource
-    private ActivityService activityService;
+    private SoftwareService softwareService;
     @Resource
     private UsersService usersService;
-    @Resource
-    private DocumentRepository documentRepository;
 
     /**
      * @Author haien
-     * @Description 搜索活动记录
+     * @Description 搜索软著
      * @Date 2018/10/6
      * @Param [request]
      * @return java.util.Map<java.lang.String,java.lang.Object>
@@ -71,41 +68,41 @@ public class ActivityController {
 
         logger.info("size = "+size+",currentPage = "+currentPage);
 
-        Page<Activity> activityPage = null;
-        Pageable pageable=new PageRequest(currentPage-1,size, Sort.Direction.DESC,"startDate");
+        Page<Software> softwarePage = null;
+        Pageable pageable=new PageRequest(currentPage-1,size, Sort.Direction.DESC,"publicDate");
         //模糊查找
         if("true".equals(fuzzy)){
             String searchValue=request.getParameter("fuzzy");
             //空搜
             if(StringUtil.isNull(searchValue)){
                 //日志
-                logger.info("无关键词搜索--默认获取全部活动记录");
-                activityPage=activityRepository.findAll(pageable);
+                logger.info("无关键词搜索--默认获取全部软著记录");
+                softwarePage=softwareRepository.findAll(pageable);
             }
             //日志
             logger.info("模糊查询---关键词："+searchValue);
-            activityPage = activityRepository.fuzzySearch(searchValue,pageable);
+            softwarePage = softwareRepository.fuzzySearch(searchValue,pageable);
         }
         //高级查找（空搜也使用高级搜索）
         else{
             //日志
             logger.info("---高级查询---");
             String title=request.getParameter("title");
-            String author=request.getParameter("author");
-            String peopleList=request.getParameter("peopleList");
-            String group=request.getParameter("group");
-            String activityType=request.getParameter("activityType");
-            String startDate1=request.getParameter("startDate");
-            String endDate1=request.getParameter("endDate");
+            String introduction=request.getParameter("introduction");
+            String authorList=request.getParameter("authorList");
+            String appliNum=request.getParameter("appliNum");
+            String publicNum=request.getParameter("publicNum");
+            String appliDate1=request.getParameter("appliDate");
+            String publicDate1=request.getParameter("publicDate");
             //字符串对象转为日期对象
-            Date startDate=null;
-            Date endDate=null;
+            Date appliDate=null;
+            Date publicDate=null;
             try {
-                if(!StringUtil.isNull(startDate1)){
-                    startDate=new SimpleDateFormat("yyyy-MM-dd").parse(startDate1);
+                if(!StringUtil.isNull(appliDate1)){
+                    appliDate=new SimpleDateFormat("yyyy-MM-dd").parse(appliDate1);
                 }
-                if(!StringUtil.isNull(endDate1)) {
-                    endDate = new SimpleDateFormat("yyyy-MM-dd").parse(endDate1);
+                if(!StringUtil.isNull(publicDate1)) {
+                    publicDate = new SimpleDateFormat("yyyy-MM-dd").parse(publicDate1);
                 }
             } catch (ParseException e) { //不以“-”格式输入日期则无法正确转换
                 e.printStackTrace();
@@ -116,12 +113,12 @@ public class ActivityController {
             }
             //日志
             logger.info("---高级查询---");
-            Activity activity=new Activity( title,  author,  peopleList,  startDate,  endDate,  group,  activityType);
-            activityPage = activityService.activeSearch(activity, currentPage - 1, size);
+            Software software=new Software(title,appliDate,introduction,authorList,appliNum,publicNum,publicDate);
+            softwarePage = softwareService.activeSearch(software, currentPage - 1, size);
         }
 
         //总记录数
-        long total = activityPage.getTotalElements();
+        long total = softwarePage.getTotalElements();
         logger.info("total="+total);
 
         map.put("draw", draw);
@@ -130,7 +127,7 @@ public class ActivityController {
             map.put("message", "未查询到记录！");
         }else {
             map.put("total", total);
-            map.put("pageData", activityPage);
+            map.put("pageData", softwarePage);
             map.put("message", "成功获取分页数据！");
         }
         return map;
@@ -138,7 +135,7 @@ public class ActivityController {
 
     /**
      * @Author haien
-     * @Description 保存活动记录
+     * @Description 保存软著
      * @Date 2018/10/6
      * @Param [request, response]
      * @return java.util.Map<java.lang.String,java.lang.Object>
@@ -149,35 +146,41 @@ public class ActivityController {
 
         String id=request.getParameter("id");
         String title=request.getParameter("title");
-        String author=request.getParameter("author");
-        String peopleList=request.getParameter("peopleList");
-        String startDate1=request.getParameter("startDate");
-        String endDate1=request.getParameter("endDate");
-        String introduction1=request.getParameter("introduction");
-        String group=request.getParameter("group");
-        String activityType=request.getParameter("activityType");
-        String isPublish1=request.getParameter("isPublish");
+        String appliDate1=request.getParameter("appliDate");
+        String introduction=request.getParameter("introduction");
+        String authorList=request.getParameter("authorList");
+        String originalLink=request.getParameter("originalLink");
+        String sourceFile1=request.getParameter("sourceFile");
+        String belongProject1=request.getParameter("belongProject");
+        String appliNum=request.getParameter("appliNum");
+        String publicNum=request.getParameter("publicNum");
+        String agency=request.getParameter("agency");
+        String appliPeople=request.getParameter("appliPeople");
+        String state=request.getParameter("state");
+        String publicDate1=request.getParameter("publicDate");
 
-        if(StringUtil.isNull(title)||StringUtil.isNull(author)||
-                StringUtil.isNull(peopleList)||StringUtil.isNull(startDate1)||
-                StringUtil.isNull(endDate1)||StringUtil.isNull(introduction1)||
-                StringUtil.isNull(group)||StringUtil.isNull(activityType)||
-                StringUtil.isNull(activityType)||StringUtil.isNull(isPublish1)){
+        if(StringUtil.isNull(title)||StringUtil.isNull(appliDate1)||
+                StringUtil.isNull(introduction)||StringUtil.isNull(authorList)||
+                StringUtil.isNull(originalLink)||StringUtil.isNull(sourceFile1)||
+                StringUtil.isNull(belongProject1)||StringUtil.isNull(appliNum)||
+                StringUtil.isNull(publicNum)||StringUtil.isNull(agency)||
+                StringUtil.isNull(appliPeople)||StringUtil.isNull(state)||
+                StringUtil.isNull(publicDate1)){
             map.put("result", 0);
             map.put("message", "保存失败,信息不完整！");
             return map;
         }
 
-        int introduction=Integer.parseInt(introduction1);
-        int isPublish=Integer.parseInt(isPublish1);
-        Date startDate=null;
-        Date endDate=null;
+        int sourceFile=Integer.parseInt(sourceFile1);
+        int belongProject=Integer.parseInt(belongProject1);
+        Date appliDate=null;
+        Date publicDate=null;
         try {
-            if(!StringUtil.isNull(startDate1)){
-                startDate=new SimpleDateFormat("yyyy-MM-dd").parse(startDate1);
+            if(!StringUtil.isNull(appliDate1)){
+                appliDate=new SimpleDateFormat("yyyy-MM-dd").parse(appliDate1);
             }
-            if(!StringUtil.isNull(endDate1)) {
-                endDate = new SimpleDateFormat("yyyy-MM-dd").parse(endDate1);
+            if(!StringUtil.isNull(publicDate1)) {
+                publicDate = new SimpleDateFormat("yyyy-MM-dd").parse(publicDate1);
             }
         } catch (ParseException e) { //不以“-”格式输入日期则无法正确转换
             e.printStackTrace();
@@ -186,12 +189,12 @@ public class ActivityController {
             return map;
         }
 
-        Activity activity=null;
+        Software software=null;
         //更新
         if(!StringUtil.isNull(id)&&Integer.parseInt(id)>0){
-            logger.info("更新记录--id="+id+"title="+title+"author="+author);
-            activity = activityRepository.findOne(Integer.parseInt(id));
-            if(activity==null){
+            logger.info("更新记录--id="+id+"title="+title+"appliPeople="+appliPeople);
+            software = softwareRepository.findOne(Integer.parseInt(id));
+            if(software==null){
                 map.put("result", 0);
                 map.put("message", "查无记录！");
                 return map;
@@ -199,20 +202,24 @@ public class ActivityController {
         }
         //添加
         else {
-            logger.info("新增记录--id="+id+"title="+title+"author="+author);
-            activity = new Activity();
+            logger.info("新增记录--id="+id+"title="+title+"appliPeople="+appliPeople);
+            software = new Software();
         }
 
-        activity.setAuthor(author);
-        activity.setPeopleList(peopleList);
-        activity.setTitle(title);
-        activity.setStartDate(startDate);
-        activity.setEndDate(endDate);
-        activity.setIntroduction(introduction);
-        activity.setActivityType(activityType);
-        activity.setModel(group);
-        activity.setIsPublish(isPublish);
-        activityRepository.save(activity);
+        software.setTitle(title);
+        software.setAppliDate(appliDate);
+        software.setIntroduction(introduction);
+        software.setAuthorList(authorList);
+        software.setOriginalLink(originalLink);
+        software.setSourceFile(sourceFile);
+        software.setBelongProject(belongProject);
+        software.setAppliNum(appliNum);
+        software.setPublicNum(publicNum);
+        software.setAgency(agency);
+        software.setAppliPeople(appliPeople);
+        software.setState(state);
+        software.setPublicDate(publicDate);
+        softwareRepository.save(software);
 
         map.put("result", 1);
         map.put("message", "成功保存记录！");
@@ -227,14 +234,13 @@ public class ActivityController {
 
         logger.info("删除记录：id="+id);
 
-        Activity activity=activityRepository.findOne(id);
-        if (activity == null) {
+        Software software=softwareRepository.findOne(id);
+        if (software == null) {
             map.put("result", 0);
             logger.info("删除记录失败");
             map.put("message", "删除记录失败！");
         }else{
-            activityRepository.delete(id);
-            documentRepository.delete(activity.getIntroduction());
+            softwareRepository.delete(id);
             logger.info("成功删除记录");
             map.put("result", 1);
             map.put("message", "成功删除记录！");
@@ -245,45 +251,20 @@ public class ActivityController {
 
     /**
      * @Author haien
-     * @Description 首页“中心动态”模块
-     * @Date 2018/10/7
-     * @Param [count]
-     * @return java.util.Map<java.lang.String,java.lang.Object>
-     **/
-    @RequestMapping("/coreDynamics")
-    public Map<String,Object> getLatest(@RequestParam("count")Integer count){
-        Map<String,Object> map=new HashMap<>();
-        if(count==null||count.equals("")||count<=0){
-            map.put("result", 0);
-            map.put("message", "请正确指定读取数目！");
-        }else{
-            activityRepository.getLatest(count);
-            map.put("result", 1);
-            map.put("message", "获取记录成功！");
-        }
-        return map;
-    }
-
-    /**
-     * @Author haien
-     * @Description 获取具体的活动类
+     * @Description 获取最新的软著记录
      * @Date 2018/10/9
      * @Param [activityType, count]
      * @return java.util.Map<java.lang.String,java.lang.Object>
      **/
-    @RequestMapping("/getActivities")
-    public Map<String,Object> getActivities(@RequestParam("activityType")String activityType,@RequestParam("count")Integer count){
+    @RequestMapping("/getSoftwares")
+    public Map<String,Object> getSoftwares(@RequestParam("count")Integer count){
         Map<String,Object> map=new HashMap<>();
-        if(StringUtil.isNull(activityType)||(!activityType.equals("活动")&&!activityType.equals("活动")
-        &&!activityType.equals("活动")&&!activityType.equals("活动"))){
-            map.put("result", 0);
-            map.put("message", "请正确指定活动类型！");
-        }
+
         if(count==null||count.equals("")||count<=0){
             map.put("result", 0);
             map.put("message", "请正确指定读取数目！");
         }else{
-            activityRepository.getActivities(activityType,count);
+            softwareRepository.getSoftwares(count);
             map.put("result", 1);
             map.put("message", "获取记录成功！");
         }

@@ -28,17 +28,13 @@ public class People {
      */
     private String name;
 
-    private String phone;
-    private String email;
-    private String researchField;
-
     /**
      * 人物头像路径(关联image表)
      */
     private int portrait;
 
     /**
-     * 职位，教授、副教授、讲师、博士后、博士、硕士，本科生
+     * 职称，教授、副教授、讲师、博士后、博士、硕士，本科生
      */
     private String position;
 
@@ -51,6 +47,43 @@ public class People {
      * 对于本科生、硕士生、博士生是届数；讲师，教授，等是加入年份
      */
     private int grade;
+
+    /**
+     * 手机
+     */
+    @Column(length = 11)
+    private String phone;
+
+    /**
+     * 邮箱
+     */
+    @Column(length = 30)
+    private String email;
+
+    /**
+     * 性别
+     */
+    private String sex;
+
+    /**
+     * 行政职务
+     */
+    private String adminPosition;
+
+    /**
+     * 最高学历
+     */
+    private String highestDegree;
+
+    /**
+     * 研究领域
+     */
+    private String researchField;
+
+    /**
+     * 学术头衔
+     */
+    private String academicTitle;
 
     public People() {
 
@@ -117,6 +150,7 @@ public class People {
     public void setGrade(int grade) {
         this.grade = grade;
     }
+
     public String getPhone() {
         return phone;
     }
@@ -133,6 +167,30 @@ public class People {
         this.email = email;
     }
 
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public String getAdminPosition() {
+        return adminPosition;
+    }
+
+    public void setAdminPosition(String adminPosition) {
+        this.adminPosition = adminPosition;
+    }
+
+    public String getHighestDegree() {
+        return highestDegree;
+    }
+
+    public void setHighestDegree(String highestDegree) {
+        this.highestDegree = highestDegree;
+    }
+
     public String getResearchField() {
         return researchField;
     }
@@ -140,4 +198,14 @@ public class People {
     public void setResearchField(String researchField) {
         this.researchField = researchField;
     }
+
+    public String getAcademicTitle() {
+        return academicTitle;
+    }
+
+    public void setAcademicTitle(String academicTitle) {
+        this.academicTitle = academicTitle;
+    }
+}
+
 

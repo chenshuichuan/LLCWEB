@@ -9,7 +9,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.data.domain.Page;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,7 +28,7 @@ import java.util.Map;
  *
  */
 
-@Controller
+@RestController
 @RequestMapping("/paper")
 public class PaperController {
 	private org.slf4j.Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -51,12 +50,13 @@ public class PaperController {
 
 	/**
 	 * @Author haien
-	 * @Description 首页“专利”模块
+	 * @Description 首页“论文”模块
 	 * @Date 2018/10/7
 	 * @Param [count]
 	 * @return java.util.Map<java.lang.String,java.lang.Object>
 	 **/
 	@RequestMapping("/getLatest")
+	@ResponseBody
 	public Map<String,Object> getLatest(@RequestParam("count")Integer count){
 		Map<String,Object> map=new HashMap<>();
 		if(count==null||count.equals("")||count<=0){

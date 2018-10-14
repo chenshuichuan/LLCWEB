@@ -41,19 +41,19 @@
                 <ul id='resultType' class="tmo_list2">
                     <li class="ll first"><span>科研团队</span></li>
                     <li class='ll'>
-                        <a href='Professor.html' class='ll_ref'>
+                        <a href='Professor#1.html' class='ll_ref'>
                             <i></i>
                             <span>教授</span>
                         </a>
                     </li>
                     <li class='ll'>
-                        <a href='Associate_professor.html' class='ll_ref'>
+                        <a href='Professor#2.html' class='ll_ref'>
                             <i></i>
                             <span>副教授</span>
                         </a>
                     </li>
                     <li class='ll'>
-                        <a href='Lecturer.html' class='ll_ref'>
+                        <a href='Professor#3.html' class='ll_ref'>
                             <i></i>
                             <span>讲师</span>
                         </a>
@@ -79,10 +79,10 @@
                     </div>
                     <!--图片、老师名称、链接需要改变 -->
                     <ul class="team_content" style="overflow:hidden;">
-                        <li>
+<!--                         <li>
                             <a href="Professor.html"><img src="../../static/home/images/yicun.jpg" th:src="@{/home/images/yicun.jpg}" alt="教授A" width="120"></a>
                             <a href="Professor.html" class="team_name"><h4>教授A</h4></a>
-                        </li>
+                        </li> -->
                     </ul>
                 </div>
 
@@ -95,7 +95,7 @@
                     </div>
                     <!--图片、老师名称、链接需要改变 -->
                     <ul class="team_content" style="overflow:hidden;">
-                        <li>
+<!--                         <li>
                             <a href="Associate_professor.html"><img src="../../static/home/images/yicun.jpg" th:src="@{/home/images/yicun.jpg}" alt="副教授A" width="120"></a>
                             <a href="Associate_professor.html" class="team_name"><h4>副教授A</h4></a>
                         </li>
@@ -106,7 +106,7 @@
                         <li>
                             <a href="Associate_professor.html"><img src="../../static/home/images/yicun.jpg" th:src="@{/home/images/yicun.jpg}" alt="副教授C" width="120"></a>
                             <a href="Associate_professor.html" class="team_name"><h4>副教授C</h4></a>
-                        </li>
+                        </li> -->
                     </ul>
                 </div>
 
@@ -119,7 +119,7 @@
                     </div>
                     <!--图片、老师名称、链接需要改变 -->
                     <ul class="team_content" style="overflow:hidden;">
-                        <li>
+<!--                         <li>
                             <a href="Lecturer.html"><img src="../../static/home/images/yicun.jpg" th:src="@{/home/images/yicun.jpg}" alt="讲师A" width="120"></a>
                             <a href="Lecturer.html" class="team_name"><h4>讲师A</h4></a>
                         </li>
@@ -158,7 +158,7 @@
                         <li>
                             <a href="Lecturer.html"><img src="../../static/home/images/yicun.jpg" th:src="@{/home/images/yicun.jpg}" alt="讲师J" width="120"></a>
                             <a href="Lecturer.html" class="team_name"><h4>讲师J</h4></a>
-                        </li>
+                        </li> -->
                     </ul>
                 </div>
 
@@ -174,6 +174,38 @@
 <script src="../../static/home/Scripts/jquery.paginate.js" th:src="@{home/Scripts/jquery.paginate.js}"></script>
 <script type="text/javascript" src="../../static/home/js/common.js"
     th:src="@{/home/js/common.js}"></script>
+<script>
+$(function(){
+    var professor = getPeopleByPosition("教授","/people/getByPosition");
+    console.log(professor);
+    drawPeople(professor.length,professor,'#professor');
+    var associate_pro = getPeopleByPosition("副教授","/people/getByPosition");
+    console.log(associate_pro);
+    drawPeople(associate_pro.length,associate_pro,'#associate_pro');
+    var lecturer = getPeopleByPosition("讲师","/people/getByPosition");
+    console.log(lecturer);
+    drawPeople(lecturer.length,lecturer,'#lecturer');
+});
+//渲染人物
+function drawPeople(num,data,id){
+    var imgPath = '/custom/images/person-img.jpg';
+    $(id).find('ul.team_content').eq(0).empty();
+    for(var i = 0; i < num; i++){
+        var htmlText = '';
 
+        if(data[i].portrait!=undefined&&data[i].portrait!=null&&data[i].portrait!=0)
+            imgPath= '/image/getPath?id='+data[i].portrait;
+
+        htmlText += '<li>' +
+                '<a href="/ResearchProject/professor_demo.html?id='+data[i].id+'">' +
+                '   <img src="'+imgPath+
+                '" alt="'+data[i].name+'" width="120"></a>' +
+                '<a href="/Talent/post_demo.html?id='+data[i].id+'" class="team_name"><h4>'+data[i].name+'</h4></a>' +
+                '</li>';
+
+        $(id).find('ul.team_content').eq(0).append(htmlText);
+    }
+}
+</script>
 </body>
 </html>

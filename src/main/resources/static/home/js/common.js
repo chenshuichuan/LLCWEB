@@ -196,8 +196,7 @@ function getCookie(name) {
 function delCookie(name) {
     setCookie(name, null, -1);
 };
-
-//加载实验室页面内容
+//加载实验室概况页面内容
 function initTeamList(index){
     var urlGetDocumentById="/document/getDocumentById";
     var document = getDocumentById(index+1,urlGetDocumentById);
@@ -216,6 +215,66 @@ function initTeamList(index){
     // $("#crumbs").append(crumbsCon);
     //改变左侧高亮提示
     $('#resultType').find('a.ll_ref').eq(index-1).css('background', '#6ad').parent().siblings().find("a").css('background', '#f3f2f2');
+}
+//根据id获取信息(教授团队和人才)
+function getPeopleByPosition(position,url){
+    var document =null;
+    //设置同步
+    $.ajax({
+        type : "get",
+        url : url,
+        data :"position=" + position,
+        async : false,
+        success : function(data){
+            document = data.data;
+            if(data.result!==1){
+                alert(data.message);
+            }
+        }
+    });
+    return document;
+}
+//加载人才培养页面内容
+function initPeopleList(position,urlGetPeopleByPosition,demoUrl) {
+    var peopleList = getPeopleByPosition(position,urlGetPeopleByPosition);
+    console.log(position);
+    console.log(urlGetPeopleByPosition);
+    console.log(peopleList);
+    var htmlText= '';
+    var crumbsSpan = '';
+    var crumbsCon = '';
+    //左侧悬浮框高亮提示
+    for(var i = 1; i < $("#resultType>li").length; i++ ){
+        if($('#resultType').find('span').eq(i).text() == position){
+            $('#resultType').find('a.ll_ref').eq(i-1).css('background', '#6ad').parent().siblings().find("a").css('background', '#f3f2f2');
+            break;
+        }
+    }
+    //中间指引链接
+    $("#crumbs").find('li').eq(3).html("");
+    crumbsSpan+='<span>&nbsp;/&nbsp;</span>';
+    $("#crumbs").find('li').eq(3).append(crumbsSpan);
+    $("#crumbs").find('li').eq(4).html("");
+    crumbsCon+='<a href="#'+i+'">'+position+'</a>';
+    $("#crumbs").find('li').eq(4).append(crumbsCon);
+    //加载内容
+    for (var i=0;i<peopleList.length;i++){
+        var imgPath ='/custom/images/person-img.jpg';
+        if(peopleList[i].portrait!==undefined&&peopleList[i].portrait!==null&&peopleList[i].portrait!==0)
+            imgPath= '/image/getPath?id='+peopleList[i].portrait;
+// /ResearchProject/professor_demo.html?id=
+        htmlText +='<li>' +
+            '<a href="'+demoUrl+'?id='+peopleList[i].id+'">' +
+            '   <img src="'+imgPath+
+            '" alt="'+peopleList[i].name+'" width="120"></a>' +
+            '<a href="'+demoUrl+peopleList[i].id+'" class="team_name"><h4>'+peopleList[i].name+'</h4></a>' +
+            '</li>';
+    }
+    var root = $("ul.team_content");
+    //清除内容
+    root.empty();
+    root.append(htmlText);
+    console.log(htmlText);
 }
 //监听请求更改--顶部导航栏
 function clickFn(index){

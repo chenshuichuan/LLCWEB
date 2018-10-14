@@ -30,19 +30,19 @@
                 <ul id='resultType' class="tmo_list2">
                     <li class="ll first"><span>人才培养</span></li>
                     <li class='ll'>
-                        <a href='../postdoctor.html' class='ll_ref' style="background:#6ad;">
+                        <a href='../postdoctor#1.html' class='ll_ref'>
                             <i></i>
                             <span>博士后</span>
                         </a>
                     </li>
                     <li class='ll'>
-                        <a href='../doctor.html' class='ll_ref'>
+                        <a href='../postdoctor#2.html' class='ll_ref'>
                             <i></i>
                             <span>博士</span>
                         </a>
                     </li>
                     <li class='ll'>
-                        <a href='../graduate.html' class='ll_ref'>
+                        <a href='../postdoctor#3.html' class='ll_ref'>
                             <i></i>
                             <span>研究生</span>
                         </a>
@@ -57,11 +57,11 @@
                         <li><span>&nbsp;/&nbsp;</span></li>
                         <li><a href="../Talent_training.html">人才培养</a></li>
                         <li><span>&nbsp;/&nbsp;</span></li>
-                        <li><a href="../postdoctor.html">博士后</a></li>
+                        <li><!-- <a href="../postdoctor#1.html">博士后</a> --></li>
                         <li><span>&nbsp;/&nbsp;</span></li>
                         <li><a href="">履历</a></li>
                         <li style="float:right;">
-                            <a href="../postdoctor.html" style="font-size:12px;color:#2c76c7;">«返回</a>
+                            <!-- <a href="../postdoctor#1.html" style="font-size:12px;color:#2c76c7;">«返回</a> -->
                         </li>
                     </ul>
                 </div>
@@ -69,31 +69,35 @@
                     <li id="id_1">
                         <div class="record_t">
                             <div class="record_l">
-                                <img src="../../../static/home/images/rencai.jpg" th:src="@{/home/images/rencai.jpg}" alt="博士后A" width="150">
+<!--                                 <img src="../../../static/home/images/rencai.jpg" th:src="@{/home/images/rencai.jpg}" alt="博士后A" width="150"> -->
                             </div>
                             <div class="record_r">
-                                <table style="table-layout:fixed;">
-                                    <tbody>
-                                        <tr>
-                                            <td>姓名(Name):<span>XXX</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>性别(Sex):<span>XXX</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>年级(Grade):<span>XXX</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>实验室职务(Laboratory duty):<span>XXX</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>研究方向(Research direction):<span>XXX</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Email地址(E-mail address):<span>XXX</span></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                <ul>
+                                    <li>
+                                        姓名(Name):
+                                        <span>13</span>
+                                    </li>
+                                    <li>
+                                        性别(Sex):
+                                        <span></span>
+                                    </li>
+                                    <li>
+                                        年级(Grade):
+                                        <span></span>
+                                    </li>
+                                    <li>
+                                        实验室职务(Laboratory duty):
+                                        <span></span>
+                                    </li>
+                                    <li>
+                                        研究方向(Research direction):
+                                        <span></span>
+                                    </li>
+                                    <li>
+                                        Email地址(E-mail address):
+                                        <span></span>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                         <div class="record_b">
@@ -104,7 +108,7 @@
                                 <div class="team_line" style="width:350px;"></div>
                             </div>
 
-                            <p>暂无描述</p>
+                            <p></p>
 
                         </div>
                     </li>
@@ -118,5 +122,70 @@
 <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="../../../static/home/Scripts/jquery.paginate.js" th:src="@{../home/Scripts/jquery.paginate.js}"></script>
 <script src="../../../static/home/js/common.js" th:src="@{../home/js/common.js}"></script>
+<script>
+$(function(){
+    var url = location.href;
+    url = url.split("?");
+    var url1 = url[1].split("=");
+    var index = parseInt(url1[1]);
+    var data = [];
+    var posAll = ['博士后','博士','研究生'];
+    for(var i = 0; i < 3; i++){
+        var dataL = getPeopleByPosition(posAll[i],"/people/getByPosition");
+        for(var j = 0; j < dataL.length; j++){
+            data.push(dataL[j]);
+        }
+        dataL = '';
+    }
+    console.log(data);
+    for(var i =0; i < data.length; i++){
+        if(index == data[i].id)     break;
+    }
+    var crumbsCon = '';
+    var crumbsBack = '';
+    if(data[i].position == '博士后'){
+        crumbsCon += '<a href="../postdoctor#1.html">博士后</a>';
+        crumbsBack += '<a href="../postdoctor#1.html" style="font-size:12px;color:#2c76c7;">«返回</a>';
+    }
+    else if(data[i].position == '博士'){
+        crumbsCon += '<a href="../postdoctor#2.html">博士</a>';
+        crumbsBack += '<a href="../postdoctor#2.html" style="font-size:12px;color:#2c76c7;">«返回</a>';
+    }
+    else if(data[i].position == '研究生'){
+        crumbsCon += '<a href="../postdoctor#3.html">研究生</a>';
+        crumbsBack += '<a href="../postdoctor#3.html" style="font-size:12px;color:#2c76c7;">«返回</a>';
+    }
+    $("#crumbs").find("li").eq(4).html(crumbsCon);
+    $("#crumbs").find("li").eq(7).html(crumbsBack);
+
+    var imgPath ='/custom/images/person-img.jpg';
+    if(data[i].portrait!==undefined&&data[i].portrait!==null&&data[i].portrait!==0)
+        imgPath= '/image/getPath?id='+data[i].portrait;
+    $("div.record_l").html("");
+    var imgVal = '';
+    imgVal += '<img src="'+imgPath+'" alt="'+data[i].position+'" width="150">';
+    $("div.record_l").append(imgVal);
+    $("div.record_r").find("span").eq(0).html(data[i].name);
+    $("div.record_r").find("span").eq(1).html(data[i].sex);
+    $("div.record_r").find("span").eq(2).html(data[i].grade);
+    $("div.record_r").find("span").eq(3).html(data[i].duty);
+    $("div.record_r").find("span").eq(4).html(data[i].researchField);
+    $("div.record_r").find("span").eq(5).html(data[i].email);
+    for(var x = 0; x < 6; x++){
+        if($("div.record_r").find("span").eq(x).html() == "" || $("div.record_r").find("span").eq(x).html() == " " || $("div.record_r").find("span").eq(x).html() == null || $("div.record_r").find("span").eq(x).html() == undefined || $("div.record_r").find("span").eq(x).html() == 0)
+            $("div.record_r").find("span").eq(x).parent().css('display', 'none');
+    }
+    if(data[i].portrait!==undefined&&data[i].portrait!==null&&data[i].portrait!==0)
+        $("div.record_b").find("p").eq(0).html(data[i].introduction);
+    else    $("div.record_b").find("p").eq(0).html("暂无描述");
+
+    for(var k = 1; k < $("#resultType>li").length; k++ ){
+        if($('#resultType').find('span').eq(k).text() == data[i].position){
+            $('#resultType').find('a.ll_ref').eq(k-1).css('background', '#6ad').parent().siblings().find("a").css('background', '#f3f2f2');
+            break;
+        }
+    }
+});
+</script>
 </body>
 </html>

@@ -19,6 +19,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -62,9 +63,10 @@ public class ProjectController {
             map.put("result", 0);
             map.put("message", "请正确指定读取数目！");
         }else{
-            projectRepository.getProjects(count);
+            List<Project> projects=projectRepository.getProjects(count);
             map.put("result", 1);
             map.put("message", "获取记录成功！");
+            map.put("data",projects);
         }
         return map;
     }

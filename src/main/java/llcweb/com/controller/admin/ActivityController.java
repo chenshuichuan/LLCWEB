@@ -24,6 +24,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -257,9 +258,10 @@ public class ActivityController {
             map.put("result", 0);
             map.put("message", "请正确指定读取数目！");
         }else{
-            activityRepository.getLatest(count);
+            List<Activity> activities=activityRepository.getLatest(count);
             map.put("result", 1);
             map.put("message", "获取记录成功！");
+            map.put("data",activities);
         }
         return map;
     }

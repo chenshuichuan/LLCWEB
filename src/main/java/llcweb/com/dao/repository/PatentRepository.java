@@ -1,6 +1,5 @@
 package llcweb.com.dao.repository;
 
-import java.util.List;
 import llcweb.com.domain.models.Patent;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -9,9 +8,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
-
-import llcweb.com.domain.models.Patent;
-import org.springframework.data.jpa.repository.Query;
 
 /**
  * Created by:Tong
@@ -26,7 +22,6 @@ public interface PatentRepository extends JpaRepository<Patent,Integer>{
 
 
 	Page<Patent> findByAuthorList(String userName, Pageable pageable);
-<<<<<<< HEAD
 
 	/**
 	 * @Author haien
@@ -37,7 +32,6 @@ public interface PatentRepository extends JpaRepository<Patent,Integer>{
 	 **/
 	@Query(value="select * from patent where state='发表' or state='受权' order by public_date desc limit ?1",nativeQuery=true)
 	List<Patent> getLatest(int count);
-=======
 //	/*
 //	 * 模糊查询
 //	 */
@@ -50,7 +44,5 @@ public interface PatentRepository extends JpaRepository<Patent,Integer>{
 //				+ "or p.appliPeople like %?1%"
 //				)
 //	Page<Patent> findByOneKey(String key, Pageable pageable);
-	
-	
->>>>>>> 27c001663a380f2415d64fa52bb7ab8317923ac5
+
 }

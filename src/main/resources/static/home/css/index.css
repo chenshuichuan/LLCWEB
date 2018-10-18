@@ -236,8 +236,14 @@
     padding-left:10px;
     position:relative;
 }
-.index-col-3 .list1 .item i{
-    background:url("../images/list-icon-1.png");
+#paper i{
+    background:url("../images/list-icon-3.png");
+}
+#patent i{
+    background:url("../images/list-icon-4.png");
+}
+#copyright i{
+    background:url("../images/list-icon-5.png");
 }
 .index-col-3 .index-col-list .item a{
     display:inline-block;
@@ -645,4 +651,9 @@ line-height: 1.42857143;
 text-align: center;
 border: 1px solid transparent;
 border-radius: 3px;
+}
+
+.item1{
+    text-decoration:none;
+    min-width:1px;
 }

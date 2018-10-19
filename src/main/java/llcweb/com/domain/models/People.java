@@ -1,5 +1,15 @@
 package llcweb.com.domain.models;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+/***********************************************************************
+ * Module:  People.java
+ * Author:  Ricardo
+ * Purpose: Defines the Class People
+ ***********************************************************************
 import javax.persistence.*;
 
 @Entity
@@ -13,6 +23,7 @@ public class People {
     private int id;
 
     /**
+
      * 人物姓名
      */
     private String name;
@@ -196,8 +207,5 @@ public class People {
         this.academicTitle = academicTitle;
     }
 }
-
-
-
 
 

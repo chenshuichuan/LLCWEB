@@ -1,6 +1,5 @@
 package llcweb.com.dao.repository;
 
-
 import llcweb.com.domain.models.People;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,5 +19,23 @@ public interface PeopleRepository extends JpaRepository<People,Integer>{
     Page<People> findAll(Specification<People> spec, Pageable pageable);
 
     List<People> findByPosition(String position);
+    /**
+     *根据id查询
+     */
+    People findById(int id);
+    /**
+     *根据姓名查询
+     */
+    People findByName(String name);
+    /**
+     *根据年级查询
+     */
+    People findByGrade(int grade);
+    /**
+     *根据加入年份查询
+     */
+    People findByIntroduction(int introduction);
 }
+}
+
 

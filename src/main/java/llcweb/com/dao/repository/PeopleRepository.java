@@ -35,7 +35,7 @@ public interface PeopleRepository extends JpaRepository<People,Integer>{
      *根据加入年份查询
      */
     People findByIntroduction(int introduction);
-}
+
 }
 
 

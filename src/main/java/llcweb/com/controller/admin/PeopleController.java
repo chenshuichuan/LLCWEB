@@ -89,13 +89,9 @@ public class PeopleController {
 
         map.put("draw", draw);
         map.put("result", 1);
-        if(0==total){
-            map.put("message", "未查询到相关人员！");
-        }else {
-            map.put("total", total);
-            map.put("pageData", peoplePage);
-            map.put("message", "成功获取分页数据！");
-        }
+        map.put("total", total);
+        map.put("pageData", peoplePage.getContent());
+        map.put("message", "成功获取分页数据！");
         return map;
     }
 
@@ -119,36 +115,37 @@ public class PeopleController {
         String phone=request.getParameter("phone");
         String email=request.getParameter("email");
         String sex=request.getParameter("sex");
-        String adminPosition=request.getParameter("adminPosition");
-        String highestDegree=request.getParameter("highestDegree");
+//        String adminPosition=request.getParameter("adminPosition");
+//        String highestDegree=request.getParameter("highestDegree");
+//        String academicTitle=request.getParameter("academicTitle");
         String researchField=request.getParameter("researchField");
-        String academicTitle=request.getParameter("academicTitle");
 
-        if(StringUtil.isNull(name)||StringUtil.isNull(portrait1)||
-                StringUtil.isNull(position)||StringUtil.isNull(introduction1)||
-                StringUtil.isNull(grade1)||StringUtil.isNull(phone)||
-                StringUtil.isNull(email)||StringUtil.isNull(sex)||
-                StringUtil.isNull(adminPosition)||StringUtil.isNull(highestDegree)||
-                StringUtil.isNull(researchField)||StringUtil.isNull(academicTitle)){
-            map.put("result", 0);
-            map.put("message", "人员保存失败,信息不完整！");
-            return map;
-        }
-        if(!ValidatorUtil.isMobile(phone)){
-            map.put("result", 0);
-            map.put("message", "手机号格式不正确！");
-            return map;
-        }
-        if(!ValidatorUtil.isEmail(email)){
-            map.put("result", 0);
-            map.put("message", "邮箱格式不正确！");
-            return map;
-        }
-        if(!sex.equals("男")||!sex.equals("女")){
-            map.put("result", 0);
-            map.put("message", "性别请选择男或女！");
-            return map;
-        }
+//        if(StringUtil.isNull(name)||StringUtil.isNull(portrait1)||
+//                StringUtil.isNull(position)||StringUtil.isNull(introduction1)||
+//                StringUtil.isNull(grade1)||StringUtil.isNull(phone)||
+//                StringUtil.isNull(email)||StringUtil.isNull(sex)||
+//                StringUtil.isNull(adminPosition)||StringUtil.isNull(highestDegree)||
+//                StringUtil.isNull(researchField)||StringUtil.isNull(academicTitle)){
+//            map.put("result", 0);
+//            map.put("message", "人员保存失败,信息不完整！");
+//            return map;
+//        }
+
+//        if(!ValidatorUtil.isMobile(phone)){
+//            map.put("result", 0);
+//            map.put("message", "手机号格式不正确！");
+//            return map;
+//        }
+//        if(!ValidatorUtil.isEmail(email)){
+//            map.put("result", 0);
+//            map.put("message", "邮箱格式不正确！");
+//            return map;
+//        }
+//        if(!sex.equals("男")||!sex.equals("女")){
+//            map.put("result", 0);
+//            map.put("message", "性别请选择男或女！");
+//            return map;
+//        }
 
         int portrait=Integer.parseInt(portrait1);
         int introduction=Integer.parseInt(introduction1);
@@ -179,12 +176,11 @@ public class PeopleController {
         people.setPhone(phone);
         people.setEmail(email);
         people.setSex(sex);
-        people.setAdminPosition(adminPosition);
-        people.setHighestDegree(highestDegree);
         people.setResearchField(researchField);
-        people.setAcademicTitle(academicTitle);
+//        people.setAdminPosition(adminPosition);
+//        people.setHighestDegree(highestDegree);
+//        people.setAcademicTitle(academicTitle);
         peopleRepository.save(people);
-
         map.put("result", 1);
         map.put("message", "成功保存人员！");
         logger.info("成功保存人员！");

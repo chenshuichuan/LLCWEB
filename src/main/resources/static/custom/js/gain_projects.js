@@ -16,7 +16,6 @@ var urlDelete = "/project/delete";
 //获取document对应的内容信息
 var urlGetDocumentById = "/document/getDocumentById";
 
-var urlGetFileById = "/file/getFileById";
 var urlGetAllDocuments = "/document/getAll";
 //加载遮罩
 var $wrapper = $('#paper-table');

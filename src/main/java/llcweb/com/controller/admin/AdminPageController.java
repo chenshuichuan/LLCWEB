@@ -189,7 +189,7 @@ public class AdminPageController {
         ModelAndView modelAndView = new ModelAndView("admin/document_edit");
         Document document;
 		//新建
-        if(id==null){
+        if(id==null||id<=0){
             //用于前端读取数据
             document = new Document();
             document.setTitle("新建文档");

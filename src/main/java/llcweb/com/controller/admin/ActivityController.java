@@ -128,10 +128,12 @@ public class ActivityController {
         map.put("draw", draw);
         map.put("result", 1);
         if(0==total){
+            map.put("total", total);
+            map.put("pageData", activityPage.getContent());
             map.put("message", "未查询到记录！");
         }else {
             map.put("total", total);
-            map.put("pageData", activityPage);
+            map.put("pageData", activityPage.getContent());
             map.put("message", "成功获取分页数据！");
         }
         return map;
@@ -150,16 +152,18 @@ public class ActivityController {
 
         String id=request.getParameter("id");
         String title=request.getParameter("title");
-        String author=request.getParameter("author");
+
+        //作者、时间。直接从后台获取不用传输
+        //String author=request.getParameter("author");
         String peopleList=request.getParameter("peopleList");
         String startDate1=request.getParameter("startDate");
         String endDate1=request.getParameter("endDate");
         String introduction1=request.getParameter("introduction");
-        String group=request.getParameter("group");
+        String group=request.getParameter("model");
         String activityType=request.getParameter("activityType");
         String isPublish1=request.getParameter("isPublish");
-
-        if(StringUtil.isNull(title)||StringUtil.isNull(author)||
+        //StringUtil.isNull(author)||
+        if(StringUtil.isNull(title)||
                 StringUtil.isNull(peopleList)||StringUtil.isNull(startDate1)||
                 StringUtil.isNull(endDate1)||StringUtil.isNull(introduction1)||
                 StringUtil.isNull(group)||StringUtil.isNull(activityType)||
@@ -190,7 +194,7 @@ public class ActivityController {
         Activity activity=null;
         //更新
         if(!StringUtil.isNull(id)&&Integer.parseInt(id)>0){
-            logger.info("更新记录--id="+id+"title="+title+"author="+author);
+            logger.info("更新记录--id="+id+"title="+title+"author=+author");
             activity = activityRepository.findOne(Integer.parseInt(id));
             if(activity==null){
                 map.put("result", 0);
@@ -200,11 +204,11 @@ public class ActivityController {
         }
         //添加
         else {
-            logger.info("新增记录--id="+id+"title="+title+"author="+author);
+            logger.info("新增记录--id="+id+"title="+title);
             activity = new Activity();
         }
 
-        activity.setAuthor(author);
+        activity.setAuthor(usersService.getCurrentUser().getUsername());
         activity.setPeopleList(peopleList);
         activity.setTitle(title);
         activity.setStartDate(startDate);

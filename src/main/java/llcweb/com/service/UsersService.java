@@ -41,4 +41,7 @@ public interface UsersService {
     Users getCurrentUser();
 
     Page<Users> findAll(UsefulUsers document, int pageNum, int pageSize);
+
+    //判断用户是否包含某个权限(大写英文 roles的flag)
+    boolean hasRole(String strRole);
 }

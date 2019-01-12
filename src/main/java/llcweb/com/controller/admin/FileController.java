@@ -265,7 +265,7 @@ public class FileController {
             else {
                 //日志
                 logger.info("---高级查询---");
-                UsefulFile file = new UsefulFile(author, model, introduction, firstDate, lastDate);
+                UsefulFile file = new UsefulFile(user.getUsername(), model, introduction, firstDate, lastDate);
                 filePage = fileService.activeSearch(file, currentPage - 1, size, fileRepository);
             }
         }

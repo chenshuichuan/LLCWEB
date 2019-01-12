@@ -49,7 +49,7 @@ public class ResourceServiceImpl<T> implements ResourceService<T> {
                 List<Predicate> predicates = new ArrayList<>();
                 //添加断言
                 if (!StringUtil.isNull(resource.getAuthor())) {
-                    Predicate like = cb.like(root.get("author").as(String.class),"%"+resource.getAuthor()+"%");
+                    Predicate like = cb.equal(root.get("author").as(String.class),resource.getAuthor());
                     predicates.add(like);
                 }
                 if (resource.getFirstDate() != null) {

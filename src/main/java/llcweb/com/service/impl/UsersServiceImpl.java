@@ -3,6 +3,7 @@ package llcweb.com.service.impl;
 
 import llcweb.com.dao.repository.UsersRepository;
 import llcweb.com.domain.entity.UsefulUsers;
+import llcweb.com.domain.models.Roles;
 import llcweb.com.domain.models.Users;
 import llcweb.com.service.UsersService;
 import llcweb.com.tools.PageParam;
@@ -100,5 +101,16 @@ public class UsersServiceImpl implements UsersService {
         return null;
     }
 
-
+    @Override
+    public boolean hasRole(String strRole) {
+        Users users = getCurrentUser();
+        System.out.println("role = "+strRole);
+        for (Roles role : users.getRoles()){
+            System.out.println(role.getrFlag()+",");
+            if(role.getrFlag().equals(strRole)){
+                return true;
+            }
+        }
+        return  false;
+    }
 }

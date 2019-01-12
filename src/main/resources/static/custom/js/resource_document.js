@@ -93,7 +93,7 @@ $(document).ready(function () {
                         data: "model",
                         width: "80px",
                         render: function (data, type, row, meta) {
-                            return data===null?"":data;
+                            return data===null?"":drawModel(data);
                         }
                     },
                     {

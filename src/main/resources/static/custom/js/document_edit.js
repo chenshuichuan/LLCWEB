@@ -56,7 +56,7 @@ var documentManage = {
         document.infor= $("#edit-infor").val();
         document.group= $("#edit-group").val();
 
-        saveFun(urlSave,document);
+        saveDocument(urlSave,document);
     },
     editDocument: function (item) {
         $.dialog.tips("edit test");
@@ -66,3 +66,20 @@ var documentManage = {
         $.dialog.tips("delete test");
     }
 };
+
+//保存通用函数
+function saveDocument(urlSave, myData) {
+    $.ajax({
+        type: "post",
+        url: urlSave,
+        data: myData,
+        async: false,
+        success: function (data) {
+            $.dialog.tips(data.message);
+            if(data.result===1)window.location.href='/admin/edit.html?id='+data.data.id;
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            $.dialog.alert("保存失败！");
+        }
+    });
+}

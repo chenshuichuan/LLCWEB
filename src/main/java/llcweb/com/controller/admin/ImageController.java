@@ -273,7 +273,7 @@ public class ImageController {
                 imagePage=imageService.selectByRole(user,currentPage-1,size,imageRepository);
             }
 
-            UsefulImage image=new UsefulImage(author, model, description, firstDate, lastDate);
+            UsefulImage image=new UsefulImage(user.getUsername(), model, description, firstDate, lastDate);
             imagePage = imageService.activeSearch(image,currentPage-1,size,imageRepository);
         }
 

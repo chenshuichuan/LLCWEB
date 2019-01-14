@@ -86,10 +86,12 @@ public class DocumnetController {
                 logger.info("无关键词搜索--默认按权限获取文档");
                 documentPage=documentService.selectByRole(user,currentPage-1,size,documentRepository);
             }
-            //日志
-            logger.info("模糊查询---关键词："+searchValue);
-            Pageable pageable=new PageRequest(currentPage-1,size, Sort.Direction.DESC,"createDate");
-            documentPage = documentRepository.fuzzySearch(searchValue,user.getUsername(),pageable);
+            else{
+                //日志
+                logger.info("模糊查询---关键词："+searchValue);
+                Pageable pageable=new PageRequest(currentPage-1,size, Sort.Direction.DESC,"createDate");
+                documentPage = documentRepository.fuzzySearch(searchValue,user.getUsername(),pageable);
+            }
         }
         //高级查找
         else{

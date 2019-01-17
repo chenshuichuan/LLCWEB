@@ -119,41 +119,9 @@
                     </div>
                     <!--图片、老师名称、链接需要改变 -->
                     <ul class="team_content" style="overflow:hidden;">
-<!--                         <li>
+                    <!--<li>
                             <a href="Lecturer.html"><img src="../../static/home/images/yicun.jpg" th:src="@{/home/images/yicun.jpg}" alt="讲师A" width="120"></a>
                             <a href="Lecturer.html" class="team_name"><h4>讲师A</h4></a>
-                        </li>
-                        <li>
-                            <a href="Lecturer.html"><img src="../../static/home/images/yicun.jpg" th:src="@{/home/images/yicun.jpg}" alt="讲师B" width="120"></a>
-                            <a href="Lecturer.html" class="team_name"><h4>讲师B</h4></a>
-                        </li>
-                        <li>
-                            <a href="Lecturer.html"><img src="../../static/home/images/yicun.jpg" th:src="@{/home/images/yicun.jpg}" alt="讲师C" width="120"></a>
-                            <a href="Lecturer.html" class="team_name"><h4>讲师C</h4></a>
-                        </li>
-                        <li>
-                            <a href="Lecturer.html"><img src="../../static/home/images/yicun.jpg" th:src="@{/home/images/yicun.jpg}" alt="讲师D" width="120"></a>
-                            <a href="Lecturer.html" class="team_name"><h4>讲师D</h4></a>
-                        </li>
-                        <li>
-                            <a href="Lecturer.html"><img src="../../static/home/images/yicun.jpg" th:src="@{/home/images/yicun.jpg}" alt="讲师E" width="120"></a>
-                            <a href="Lecturer.html" class="team_name"><h4>讲师E</h4></a>
-                        </li>
-                        <li>
-                            <a href="Lecturer.html"><img src="../../static/home/images/yicun.jpg" th:src="@{/home/images/yicun.jpg}" alt="讲师F" width="120"></a>
-                            <a href="Lecturer.html" class="team_name"><h4>讲师F</h4></a>
-                        </li>
-                        <li>
-                            <a href="Lecturer.html"><img src="../../static/home/images/yicun.jpg" th:src="@{/home/images/yicun.jpg}" alt="讲师G" width="120"></a>
-                            <a href="Lecturer.html" class="team_name"><h4>讲师G</h4></a>
-                        </li>
-                        <li>
-                            <a href="Lecturer.html"><img src="../../static/home/images/yicun.jpg" th:src="@{/home/images/yicun.jpg}" alt="讲师H" width="120"></a>
-                            <a href="Lecturer.html" class="team_name"><h4>讲师H</h4></a>
-                        </li>
-                        <li>
-                            <a href="Lecturer.html"><img src="../../static/home/images/yicun.jpg" th:src="@{/home/images/yicun.jpg}" alt="讲师I" width="120"></a>
-                            <a href="Lecturer.html" class="team_name"><h4>讲师I</h4></a>
                         </li>
                         <li>
                             <a href="Lecturer.html"><img src="../../static/home/images/yicun.jpg" th:src="@{/home/images/yicun.jpg}" alt="讲师J" width="120"></a>
@@ -188,9 +156,10 @@ $(function(){
 });
 //渲染人物
 function drawPeople(num,data,id){
-    var imgPath = '/custom/images/person-img.jpg';
+
     $(id).find('ul.team_content').eq(0).empty();
     for(var i = 0; i < num; i++){
+        var imgPath = '/custom/images/person-img.jpg';
         var htmlText = '';
 
         if(data[i].portrait!=undefined&&data[i].portrait!=null&&data[i].portrait!=0)
@@ -198,9 +167,9 @@ function drawPeople(num,data,id){
 
         htmlText += '<li>' +
                 '<a href="/ResearchProject/professor_demo.html?id='+data[i].id+'">' +
-                '   <img src="'+imgPath+
+                '   <img style="width: 120px;height: 100px;" src="'+imgPath+
                 '" alt="'+data[i].name+'" width="120"></a>' +
-                '<a href="/Talent/post_demo.html?id='+data[i].id+'" class="team_name"><h4>'+data[i].name+'</h4></a>' +
+                '<a href="/ResearchProject/professor_demo.html?id='+data[i].id+'" class="team_name"><h4>'+data[i].name+'</h4></a>' +
                 '</li>';
 
         $(id).find('ul.team_content').eq(0).append(htmlText);

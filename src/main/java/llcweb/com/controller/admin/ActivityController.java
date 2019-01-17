@@ -7,6 +7,7 @@ import llcweb.com.domain.models.Users;
 import llcweb.com.service.ActivityService;
 import llcweb.com.service.UsersService;
 import llcweb.com.tools.StringUtil;
+import llcweb.com.tools.UsefulTools;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -265,7 +266,7 @@ public class ActivityController {
             List<Activity> activities=activityRepository.getLatest(count);
             map.put("result", 1);
             map.put("message", "获取记录成功！");
-            map.put("data",activities);
+            map.put("data",UsefulTools.activityToProductInfo(activities));
         }
         return map;
     }

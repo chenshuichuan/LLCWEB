@@ -203,8 +203,9 @@ function initTeamList(index){
     var content = document.content;
     var crumbsSpan = '';
     var crumbsCon = '';
-    if(content==null||content==undefined)content="未获取到简介！请检查数据！";
+    if(content==null||content==undefined)alert("未获取到简介！请检查数据！");
     $("#document-preview").html(document.content);
+
     //改变上方链接指示
     $("#crumbs").find('li').eq(3).html("");
     crumbsSpan+='<span>&nbsp;/&nbsp;</span>';
@@ -234,6 +235,25 @@ function getPeopleByPosition(position,url){
     });
     return document;
 }
+//根据id获取信息(教授团队和人才)
+function getPeopleById(id,url){
+    var document =null;
+    //设置同步
+    $.ajax({
+        type : "get",
+        url : url,
+        data :"id=" + id,
+        async : false,
+        success : function(data){
+            document = data.data;
+            if(data.result!==1){
+                alert(data.message);
+            }
+        }
+    });
+    return document;
+}
+
 //加载人才培养页面内容
 function initPeopleList(position,urlGetPeopleByPosition,demoUrl) {
     var peopleList = getPeopleByPosition(position,urlGetPeopleByPosition);

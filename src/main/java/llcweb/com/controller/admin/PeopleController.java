@@ -223,4 +223,16 @@ public class PeopleController {
         map.put("message","获取成功！");
         return map;
     }
+    /**
+     * */
+    @RequestMapping("/getById")
+    public Map<String,Object> getById(@RequestParam("id")Integer id){
+        Map<String,Object> map=new HashMap<>();
+        logger.info("getById：id="+id);
+        People peopleList=peopleRepository.findById(id);
+        map.put("data",peopleList);
+        map.put("result",1);
+        map.put("message","获取成功！");
+        return map;
+    }
 }

@@ -6,6 +6,7 @@ import llcweb.com.domain.models.Users;
 import llcweb.com.service.UsersService;
 import llcweb.com.service.SoftwareService;
 import llcweb.com.tools.StringUtil;
+import llcweb.com.tools.UsefulTools;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -257,7 +258,7 @@ public class SoftwareController {
      * @Param [activityType, count]
      * @return java.util.Map<java.lang.String,java.lang.Object>
      **/
-    @RequestMapping("/getSoftwares")
+    @RequestMapping("/getLatest")
     public Map<String,Object> getSoftwares(@RequestParam("count")Integer count){
         Map<String,Object> map=new HashMap<>();
 
@@ -265,10 +266,10 @@ public class SoftwareController {
             map.put("result", 0);
             map.put("message", "请正确指定读取数目！");
         }else{
-            List<Software> softwares=softwareRepository.getSoftwares(count);
+            List<Software> softwares=softwareRepository.getLatest(count);
             map.put("result", 1);
             map.put("message", "获取记录成功！");
-            map.put("data",softwares);
+            map.put("data",UsefulTools.softwareToProductInfo(softwares));
         }
         return map;
     }

@@ -5,6 +5,7 @@ import llcweb.com.domain.entity.UsefulPatent;
 import llcweb.com.domain.models.Patent;
 import llcweb.com.service.PatentService;
 import llcweb.com.service.UsersService;
+import llcweb.com.tools.UsefulTools;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -64,9 +65,10 @@ public class PatentController {
 			map.put("message", "请正确指定读取数目！");
 		}else{
 			List<Patent> patents=patentRepository.getLatest(count);
+
 			map.put("result", 1);
 			map.put("message", "获取记录成功！");
-			map.put("data",patents);
+			map.put("data",UsefulTools.patentToProductInfo(patents));
 		}
 		return map;
 	}

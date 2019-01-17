@@ -30,7 +30,7 @@ public interface PatentRepository extends JpaRepository<Patent,Integer>{
 	 * @Param [count]
 	 * @return java.util.List<llcweb.com.domain.models.Patent>
 	 **/
-	@Query(value="select * from patent where state='发表' or state='受权' order by public_date desc limit ?1",nativeQuery=true)
+	@Query(value="select * from patent where state='授权' order by public_date desc limit ?1",nativeQuery=true)
 	List<Patent> getLatest(int count);
 //	/*
 //	 * 模糊查询

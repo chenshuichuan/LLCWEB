@@ -6,10 +6,7 @@ package llcweb.com.tools;/**
  */
 
 import llcweb.com.domain.entities.ProductInfo;
-import llcweb.com.domain.models.Activity;
-import llcweb.com.domain.models.Patent;
-import llcweb.com.domain.models.Project;
-import llcweb.com.domain.models.Software;
+import llcweb.com.domain.models.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +19,15 @@ import java.util.List;
  **/
 public class UsefulTools {
 
+    static public List<ProductInfo> paperToProductInfo(List<Paper> patentList){
+        List<ProductInfo>productInfoList = new ArrayList<>();
+
+        for (Paper patent:patentList){
+            productInfoList.add(new ProductInfo(patent.getId(),patent.getTitle(),patent.getDate(),
+                    patent.getIntroduction(),patent.getAuthorList(),patent.getState()));
+        }
+        return productInfoList;
+    }
    static public List<ProductInfo> patentToProductInfo(List<Patent> patentList){
        List<ProductInfo>productInfoList = new ArrayList<>();
 

@@ -1,7 +1,9 @@
 package llcweb.com.controller;
 
 import llcweb.com.dao.repository.DocumentRepository;
+import llcweb.com.dao.repository.ProjectRepository;
 import llcweb.com.dao.repository.UsersRepository;
+import llcweb.com.domain.models.Project;
 import llcweb.com.domain.models.Users;
 import llcweb.com.service.UsersService;
 import org.slf4j.Logger;
@@ -9,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -27,9 +30,12 @@ public class WebPageController {
 
     @Autowired
     private UsersRepository usersRepository;
+    @Autowired
     private DocumentRepository documentRepository;
     @Autowired
     private UsersService usersService;
+    @Autowired
+    private ProjectRepository projectRepository;
 
     //测试页面
     @RequestMapping("/test.html")
@@ -120,8 +126,10 @@ public class WebPageController {
 
 
     @RequestMapping({"/project_brief","/project_brief.html"})
-    public ModelAndView project_brief(){
+    public ModelAndView project_brief(@RequestParam("id")int projectId){
         ModelAndView modelAndView = new ModelAndView("home/project_brief");
+        Project project = projectRepository.findOne(projectId);
+        modelAndView.addObject("project", project);
         return modelAndView;
     }
     @RequestMapping({"/Research_Project.html","/Research_Project"})

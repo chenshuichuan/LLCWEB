@@ -10,6 +10,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+import llcweb.com.tools.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -191,6 +192,20 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public List<UsefulProject> projectsToUsefulProject(List<Project> projectList) {
         return null;
+    }
+
+    @Override
+    public Page<Project> getPage(String team, int pageNum, int pageSize) {
+        //按时间排序
+        Pageable pageable=new PageRequest(pageNum,pageSize, Sort.Direction.DESC,"startDate");
+        Page<Project> projectPage=null;
+
+        if(StringUtil.isNull(team) ||"all".equals(team)){
+            projectPage = projectRepository.findAll(pageable);
+        }else{
+            projectPage = projectRepository.findByTeam(team,pageable);
+        }
+        return projectPage;
     }
 
 /*	

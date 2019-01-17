@@ -17,6 +17,15 @@ public class ProductInfo {
 	private String introduction;
 	private String authorList;
 	private String state;
+	private int totalPages;
+
+	public int getTotalPages() {
+		return totalPages;
+	}
+
+	public void setTotalPages(int totalPages) {
+		this.totalPages = totalPages;
+	}
 
 	public ProductInfo(Integer id, String title, Date date, String introduction, String authorList, String state) {
 		this.id = id;

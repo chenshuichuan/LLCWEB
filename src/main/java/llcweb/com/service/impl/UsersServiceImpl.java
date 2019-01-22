@@ -5,6 +5,7 @@ import llcweb.com.dao.repository.UsersRepository;
 import llcweb.com.domain.entity.UsefulUsers;
 import llcweb.com.domain.models.Roles;
 import llcweb.com.domain.models.Users;
+import llcweb.com.domain.models.UsersRoles;
 import llcweb.com.service.UsersService;
 import llcweb.com.tools.PageParam;
 import org.apache.commons.lang3.StringUtils;
@@ -18,6 +19,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -40,14 +42,33 @@ public class UsersServiceImpl implements UsersService {
     private  final  Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private UsersRepository usersRepository;
+//    @Autowired
+//    private UsersRolesRepository usersRolesRepository;
 
-    @Transactional
+
     @Override
-    public void add() {
-        logger.info("service add");
+    public void add(Users user,List<Roles> roles) {
+
+        String username = user.getUsername();
+        encryptPassword(user);
+
+        usersRepository.save(user);
+        UsersRoles usersRoles = new UsersRoles();
+        usersRoles.setUrUserId(user.getId());
+//
+        user.setRoles(roles);
     }
 
-    @Transactional
+    /**
+     * 加密密码
+     */
+    private void encryptPassword(Users userEntity){
+        String password = userEntity.getPassword();
+        password = new BCryptPasswordEncoder().encode(password);
+        userEntity.setPassword(password);
+    }
+
+
     @Override
     public void updateById(int id) {
         logger.info("service updateById id="+id);
@@ -92,7 +113,9 @@ public class UsersServiceImpl implements UsersService {
         logger.info("username = "+userDetails.getUsername());
         //logger.info("username = "+userDetails.getPassword());
         Users users = usersRepository.findByUsernameAndPassword(userDetails.getUsername(),userDetails.getPassword());
-        if(users!=null)logger.info("users id = "+users.getId()+",worker's id="+users.getPeopleId());
+        if(users!=null){
+            logger.info("users id = "+users.getId()+",worker's id="+users.getPeopleId());
+        }
         return users;
     }
 

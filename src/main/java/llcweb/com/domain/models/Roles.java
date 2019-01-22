@@ -21,6 +21,13 @@ public class Roles implements Serializable {
    private String rName;
    private String rFlag;
 
+   public Roles(int rId, String rName, String rFlag) {
+      this.rId = rId;
+      this.rName = rName;
+      this.rFlag = rFlag;
+   }
+   public Roles() {
+   }
    public int getrId() {
       return rId;
    }

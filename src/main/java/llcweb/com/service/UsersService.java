@@ -2,9 +2,12 @@ package llcweb.com.service;
 
 
 import llcweb.com.domain.entity.UsefulUsers;
+import llcweb.com.domain.models.Roles;
 import llcweb.com.domain.models.Users;
 import llcweb.com.tools.PageParam;
 import org.springframework.data.domain.Page;
+
+import java.util.List;
 
 /**
  * Created by:Ricardo
@@ -18,7 +21,7 @@ public interface UsersService {
     /*
      *添加信息
      */
-    void add();
+    void add(Users user,List<Roles> roles);
     /*
      *更新信息
      */

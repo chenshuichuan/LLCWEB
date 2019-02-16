@@ -70,8 +70,13 @@ public class UsersServiceImpl implements UsersService {
 
 
     @Override
-    public void updateById(int id) {
-        logger.info("service updateById id="+id);
+    public void updateById(Users user) {
+
+        logger.info("service updateById id="+user.getId());
+        encryptPassword(user);
+
+        usersRepository.save(user);
+
     }
 
     @Override

@@ -52,4 +52,23 @@ public class UsersServiceImplTest {
         usersService.add(users,rolesList);
 
     }
+
+    @Test
+    public void update() throws Exception {
+
+//        Users users = usersRepository.findByUsername("admin");
+//        users.setUsername("admin");
+//        users.setPassword("admin");
+//        usersService.updateById(users);
+
+
+        String strs[] = {"数据组","网络组","机器人组","太赫兹组","高分高性能组","图像组"};
+        for (String str:strs){
+            Users users1 = usersRepository.findByUsername(str);
+            users1.setUsername(str);
+            users1.setPassword("888888");
+            usersService.updateById(users1);
+        }
+
+    }
 }

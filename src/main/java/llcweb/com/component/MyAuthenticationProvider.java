@@ -14,7 +14,7 @@ import java.util.Collection;
 
 /**
  * Created by:Ricardo
- * Description:
+ * Description: 可能废弃的类
  * Date: 2019/1/18
  * Time: 14:16
  */

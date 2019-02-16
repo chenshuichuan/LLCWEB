@@ -17,7 +17,7 @@ $(document).ready(function () {
 
     //科学研究
     var projects = getTopMes("/project/getLatest",7);
-    fillTheModel("#ul-project", projects,"/project?id=");
+    fillTheModel("#ul-project", projects,"/project_brief.html?id=");
     //学术交流
     var academicData = getTopMes("/activity/coreDynamics",6);
     fillTheModel("#ul-academic-exchange", academicData,"/activity?id=");

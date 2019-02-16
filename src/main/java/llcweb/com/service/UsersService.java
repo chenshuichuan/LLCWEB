@@ -25,7 +25,7 @@ public interface UsersService {
     /*
      *更新信息
      */
-    void updateById(int id);
+    void updateById(Users user);
     /*
      *根据id查找
      */

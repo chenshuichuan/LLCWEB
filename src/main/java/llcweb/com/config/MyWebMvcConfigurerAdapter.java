@@ -40,8 +40,12 @@ public class MyWebMvcConfigurerAdapter extends WebMvcConfigurerAdapter {
             imgPath = imagesPath;
         }
         logger.info("imagesPath="+imgPath);
-        registry.addResourceHandler("/images/**").addResourceLocations("file:"+"/root/LLCWEB/images/");
-        registry.addResourceHandler("/files/**").addResourceLocations("file:"+"/root/LLCWEB/files/");
+        //linux 下
+        //registry.addResourceHandler("/images/**").addResourceLocations("file:"+"/root/LLCWEB/images/");
+        //registry.addResourceHandler("/files/**").addResourceLocations("file:"+"/root/LLCWEB/files/");
+        //windows下  C:\Users\Ricardo\IdeaProjects\LLCWEB\files\
+        registry.addResourceHandler("/images/**").addResourceLocations("file:"+"E:\\LLCWEB\\images\\");
+        registry.addResourceHandler("/files/**").addResourceLocations("file:"+"E:\\LLCWEB\\files\\");
         super.addResourceHandlers(registry);
     }
 

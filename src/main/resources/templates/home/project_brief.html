@@ -33,10 +33,35 @@
         <div class="middle_content">
             <div style="text-align: center;">
                 <h1 th:text="${project.projectName}"></h1>
-                <h3>项目编号：<span th:text="${project.requireNum}"></span></h3>
-                <h3>开始时间：<sapn th:text="${project.startDate}"></sapn></h3>
-                <h3 >结束时间：<sapn th:text="${project.endDate}"></sapn></h3>
-                <h3 >研究领域：<span th:text="${project.researchField}"></span></h3>
+                <div align="center">
+                    <table >
+                        <thead>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td><h3>项目编号：</h3></td>
+                            <td><span th:text="${project.requireNum}"></span></td>
+                        </tr>
+                        <tr>
+                            <td><h3>开始时间：</h3></td>
+                            <td><sapn th:text="${project.startDate}"></sapn></td>
+                        </tr>
+                        <tr>
+                            <td><h3 >结束时间：</h3></td>
+                            <td><sapn th:text="${project.endDate}"></sapn></td>
+                        </tr>
+                        <tr>
+                            <td><h3 >研究领域：</h3></td>
+                            <td><span th:text="${project.researchField}"></span></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!--<h3>项目编号：<span th:text="${project.requireNum}"></span></h3>-->
+                <!--<h3>开始时间：<sapn th:text="${project.startDate}"></sapn></h3>-->
+                <!--<h3 >结束时间：<sapn th:text="${project.endDate}"></sapn></h3>-->
+                <!--<h3 >研究领域：<span th:text="${project.researchField}"></span></h3>-->
             </div>
             <!--项目简介-->
             <div id="document-preview" style="max-width: 900px;margin-left: 100px;"></div>

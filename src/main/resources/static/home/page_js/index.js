@@ -24,13 +24,13 @@ $(document).ready(function () {
 
     //论文
     var paperMes = getTopMes("/paper/getLatest",5);
-    fillTheProduct("#div-first-paper", "#ul-paper", paperMes,"/paper?id=");
+    fillTheProduct("#div-first-paper", "#ul-paper", paperMes,"/achievement/scientific_achievements1.html?id=");
     //专利
     paperMes = getTopMes("/patent/getLatest",5);
-    fillTheProduct("#div-first-patent", "#ul-patent", paperMes,"/patent?id=");
+    fillTheProduct("#div-first-patent", "#ul-patent", paperMes,"/achievement/scientific_achievements2.html?id=");
     //软著
     paperMes = getTopMes("/software/getLatest",5);
-    fillTheProduct("#div-first-software", "#ul-software", paperMes,"/software?id=");
+    fillTheProduct("#div-first-software", "#ul-software", paperMes,"/achievement/scientific_achievements3.html?id=");
 
     // console.log(paperMes);
     // pushMes('#paper',paperMes);
@@ -129,13 +129,19 @@ function fillTheProduct(first_id, id, data,pre_url) {
     var first = $(first_id);
     first.empty();
     var date = new Date(data[0].date);
-    console.log(date);
+    //console.log(date);
+    var firstTitle = data[0].title;
+    var lastTitle=firstTitle;
+    for(var j=firstTitle.length;j<45;j++){
+        lastTitle+="&nbsp;";
+    }
+
     var str1 = " <div class=\"lately-date fl\">\n" +
-        "                    <span class=\"date-day\">"+date.getDate()+"</span>\n" +
+        "                    <p class=\"date-day\">"+date.getDate()+"</p>\n" +
         "                    <span class=\"date-other\">"+date.getFullYear()+"-"+(date.getMonth()+1)+"</span>\n" +
         "                </div>\n" +
         "                <div class=\"lately-cont item1\">\n" +
-        "                    <p class=\"lately-title\"><a>"+data[0].title+"</a></p>\n" +
+        "                    <p class=\"lately-title\"><a href=\""+pre_url+data[0].id+"\">"+lastTitle+"</a></p>\n" +
         //"                    <span class=\"lately-des\">"+data[0].authorList+"</span>\n" +
         "                </div>";
     first.append(str1);

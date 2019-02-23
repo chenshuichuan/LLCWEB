@@ -1,9 +1,9 @@
 package llcweb.com.controller;
 
-import llcweb.com.dao.repository.DocumentRepository;
-import llcweb.com.dao.repository.ProjectRepository;
-import llcweb.com.dao.repository.UsersRepository;
+import llcweb.com.dao.repository.*;
+import llcweb.com.domain.models.Patent;
 import llcweb.com.domain.models.Project;
+import llcweb.com.domain.models.Software;
 import llcweb.com.domain.models.Users;
 import llcweb.com.service.UsersService;
 import llcweb.com.tools.RandomValidateCodeUtil;
@@ -42,6 +42,15 @@ public class WebPageController {
     private UsersService usersService;
     @Autowired
     private ProjectRepository projectRepository;
+
+    @Autowired
+    private PaperRepository paperRepository;
+    @Autowired
+    private PatentRepository patentRepository;
+    @Autowired
+    private SoftwareRepository softwareRepository;
+    @Autowired
+    private ImageRepository imageRepository;
 
     /**
      * 生成验证码
@@ -231,21 +240,30 @@ public class WebPageController {
 
     //以下为子文件夹的页面映射函数
     /**
-     * achievement
+     * achievement 论文专利软著等展示页面，根据id展示
      * **/
     @RequestMapping({"/achievement/scientific_achievements1.html","/achievement/scientific_achievements1"})
-    public ModelAndView scientific_achievements1(){
+    public ModelAndView scientific_achievements1(@RequestParam("id")int id){
         ModelAndView modelAndView = new ModelAndView("home/achievement/scientific_achievements1");
+
+        modelAndView.addObject("paper", paperRepository.findOne(id));
         return modelAndView;
     }
     @RequestMapping({"/achievement/scientific_achievements2.html","/achievement/scientific_achievements2"})
-    public ModelAndView scientific_achievements2(){
+    public ModelAndView scientific_achievements2(@RequestParam("id")int id){
         ModelAndView modelAndView = new ModelAndView("home/achievement/scientific_achievements2");
+
+        Patent patent = patentRepository.findOne(id);
+        modelAndView.addObject("image",imageRepository.findOne(patent.getSourceFile()));
+        modelAndView.addObject("patent", patent);
         return modelAndView;
     }
     @RequestMapping({"/achievement/scientific_achievements3.html","/achievement/scientific_achievements3"})
-    public ModelAndView scientific_achievements3(){
+    public ModelAndView scientific_achievements3(@RequestParam("id")int id){
         ModelAndView modelAndView = new ModelAndView("home/achievement/scientific_achievements3");
+        Software software = softwareRepository.findOne(id);
+        modelAndView.addObject("image",imageRepository.findOne(software.getSourceFile()));
+        modelAndView.addObject("software", software);
         return modelAndView;
     }
     /**

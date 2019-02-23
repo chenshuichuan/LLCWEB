@@ -297,8 +297,7 @@ function loadActivity(id) {
             pagemode: "thumbs",
             navpanes: 0,
             toolbar: 0,
-            statusbar: 0,
-            view: "FitV"
+            statusbar: 0
         }
     };
     var urlGetActivitiesById="/activity/getActivitiesById";
@@ -335,3 +334,27 @@ function getFileById(id,urlGetFileById) {
     });
     return file;
 }
+
+
+//设置cookie
+function setCookie(name, value, day) {
+    var date = new Date();
+    date.setDate(date.getDate() + day);
+    document.cookie = name + '=' + value + ';expires=' + date;
+};
+
+//获取cookie
+function getCookie(name) {
+    var reg = RegExp(name + '=([^;]+)');
+    var arr = document.cookie.match(reg);
+    if (arr) {
+        return arr[1];
+    } else {
+        return '';
+    }
+};
+
+//删除cookie
+function delCookie(name) {
+    setCookie(name, null, -1);
+};

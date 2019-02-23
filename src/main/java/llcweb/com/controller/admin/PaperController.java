@@ -261,7 +261,7 @@ public class PaperController {
 
 		Page<Paper> projectPage = paperService.getPage(pageNum-1,pageSize);
 		PageInfo pageInfo = new PageInfo(0,UsefulTools.paperToProductInfo(projectPage.getContent()),projectPage.getNumberOfElements());
-
+		pageInfo.setTotalPages(projectPage.getTotalPages());
 		map.put("result", 1);
 		map.put("message", "获取记录成功！");
 		map.put("data",pageInfo);

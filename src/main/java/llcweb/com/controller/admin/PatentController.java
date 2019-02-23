@@ -169,7 +169,8 @@ public class PatentController {
     	Date appliDate = new SimpleDateFormat("yyyy-MM-dd").parse(aDate);
     	String pDate = request.getParameter("publicDate");
     	Date publicDate = new SimpleDateFormat("yyyy-MM-dd").parse(pDate);
-        String introduction = request.getParameter("introduction");
+        String introd = request.getParameter("introduction");
+        int introduction = Integer.parseInt(introd);
         String authorList = request.getParameter("authorList");
         String originalLink = request.getParameter("originalLink");
         String belongProject = request.getParameter("belongProject");
@@ -199,7 +200,7 @@ public class PatentController {
         	//patent.setId(Integer.parseInt(id));
         	patent.setTitle(title);
         	patent.setAppliDate(appliDate);
-        	patent.setIntroduction(introduction);
+        	patent.setIntroduction(introd);
         	patent.setAuthorList(authorList);
         	patent.setOriginalLink(originalLink);
         	patent.setBelongProject(belongProject);
@@ -271,6 +272,7 @@ public class PatentController {
 
 		Page<Patent> projectPage = patentService.getPage(pageNum-1,pageSize);
 		PageInfo pageInfo = new PageInfo(0,UsefulTools.patentToProductInfo(projectPage.getContent()),projectPage.getNumberOfElements());
+		pageInfo.setTotalPages(projectPage.getTotalPages());
 
 		map.put("result", 1);
 		map.put("message", "获取记录成功！");

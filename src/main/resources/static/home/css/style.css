@@ -108,3 +108,17 @@ span.jPag-snext-img{
 .active-left{
     background:#6ad;
 }
+.td-first{
+    text-align: right;
+    color: #685c18;
+}
+.td-last{
+    padding-left: 20px;
+    margin-left: 10px;
+    text-align: left;
+    font-size: 20px;
+    color: #010101;
+}
+.li-page-index{
+
+}

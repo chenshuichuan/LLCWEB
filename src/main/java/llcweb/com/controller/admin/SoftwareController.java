@@ -288,6 +288,7 @@ public class SoftwareController {
 
         Page<Software> projectPage = softwareService.getPage(pageNum-1,pageSize);
         PageInfo pageInfo = new PageInfo(0,UsefulTools.softwareToProductInfo(projectPage.getContent()),projectPage.getNumberOfElements());
+        pageInfo.setTotalPages(projectPage.getTotalPages());
 
         map.put("result", 1);
         map.put("message", "获取记录成功！");

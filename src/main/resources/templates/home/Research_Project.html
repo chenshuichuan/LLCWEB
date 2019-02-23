@@ -30,7 +30,7 @@
 <div th:include="template/header_template :: header_template"></div>
 <div class="meetingpage">
      <div class="container middle_container">
-        <div class="middle_content">
+         <div class="middle_content">
             <div class="middle_l" id="temlate_middle">
                 <!-- <h1><span>机构概况</span></h1> -->
                 <ul id="lmenu" class="tmo_list2">
@@ -60,11 +60,6 @@
                     <li class=" ll" id="li-high-compute">
                         <a href="#" class="ll_ref">
                             <span>高性能计算</span>
-                        </a>
-                    </li>
-                    <li class=" ll" id="li-knowledge">
-                        <a href="#" class="ll_ref">
-                            <span>智能制造与知识自动化</span>
                         </a>
                     </li>
                     <li class="ll" id="li-robot">
@@ -119,9 +114,12 @@
                 </div>
             </div>
         </div>
+
+         <div style="margin-top: 100px;">
+             <hr style="height:1px;border:0px;background-color:#D5D5D5;color:#b7b7b7;"/>
+         </div>
     </div>
 </div>
-
 
 <div th:include="template/footer_template :: footer_template"></div>
 <div class="clearfix"></div>
@@ -143,11 +141,14 @@
         fillPages("#ul-pages",pages.totalPages);
 
         listenFun("#all-project", "all");
-        listenFun("#li-taihezi", "太赫兹组");
-        listenFun("#li-knowledge", "数据组");
-        listenFun("#li-high-compute", "高分组");
-        listenFun("#li-deeplearning", "图像组");
-        listenFun("#li-robot", "机器人组");
+        listenFun("#li-taihezi", "太赫兹安全技术");
+        listenFun("#li-ind-bigdata", "工业大数据");
+        listenFun("#li-high-compute", "高性能计算");
+        listenFun("#li-deeplearning", "图像计算与处理");
+        listenFun("#li-robot", "智能装备与机器人系统");
+
+        listenFun("#li-info-sys", "信息物理融合系统");
+        listenFun("#li-ai-auto", "人工智能与知识自动化");
 
         // 监听请求更改--左侧导航栏
         $("a.li_page").click(function(){

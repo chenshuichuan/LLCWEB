@@ -19,6 +19,14 @@ public class ProductInfo {
 	private String state;
 	private int totalPages;
 
+	public String getIntroduction() {
+		return introduction;
+	}
+
+	public void setIntroduction(String introduction) {
+		this.introduction = introduction;
+	}
+
 	public int getTotalPages() {
 		return totalPages;
 	}
@@ -60,13 +68,7 @@ public class ProductInfo {
 		this.date = date;
 	}
 
-	public String getIntroduction() {
-		return introduction;
-	}
 
-	public void setIntroduction(String introduction) {
-		this.introduction = introduction;
-	}
 
 	public String getAuthorList() {
 		return authorList;

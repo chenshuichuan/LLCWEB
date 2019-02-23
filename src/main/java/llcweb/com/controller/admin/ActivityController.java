@@ -296,4 +296,34 @@ public class ActivityController {
         }
         return map;
     }
+    /**
+     * @Author ricardo
+     * @Description 获取具体的活动类
+     * @Date 2019/2/22
+     * @Param [activityType, count]
+     * @return java.util.Map<java.lang.String,java.lang.Object>
+     **/
+    @RequestMapping("/getActivitiesById")
+    public Map<String,Object> getActivitiesById(@RequestParam("id")Integer id){
+        Map<String,Object> map=new HashMap<>();
+        logger.info("获取文件信息：id="+id);
+
+        if(null==id||id<=0){
+            map.put("result",0);
+            map.put("message","参数错误！");
+            return map;
+        }
+
+        //获取活动
+        Activity activity=activityRepository.findOne(id);
+        if(activity==null){
+            map.put("result",0);
+            map.put("message","找不到信息！");
+        }else{ //
+            map.put("data",activity);
+            map.put("result",1);
+            map.put("message","成功获取文件！");
+        }
+        return map;
+    }
 }

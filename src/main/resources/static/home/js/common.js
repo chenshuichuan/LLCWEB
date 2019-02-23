@@ -196,27 +196,6 @@ function getCookie(name) {
 function delCookie(name) {
     setCookie(name, null, -1);
 };
-//加载实验室概况页面内容
-function initTeamList(index){
-    var urlGetDocumentById="/document/getDocumentById";
-    var document = getDocumentById(index+1,urlGetDocumentById);
-    var content = document.content;
-    var crumbsSpan = '';
-    var crumbsCon = '';
-    if(content==null||content==undefined)alert("未获取到简介！请检查数据！");
-    $("#document-preview").html(document.content);
-
-    //改变上方链接指示
-    $("#crumbs").find('li').eq(3).html("");
-    crumbsSpan+='<span>&nbsp;/&nbsp;</span>';
-    $("#crumbs").find('li').eq(3).append(crumbsSpan);
-    $("#crumbs").find('li').eq(4).html("");
-    crumbsCon+='<a href="#'+index+'">'+$('#resultType').find('span').eq(index).html()+'</a>';
-    $("#crumbs").find('li').eq(4).append(crumbsCon);
-    // $("#crumbs").append(crumbsCon);
-    //改变左侧高亮提示
-    $('#resultType').find('a.ll_ref').eq(index-1).css('background', '#6ad').parent().siblings().find("a").css('background', '#f3f2f2');
-}
 //根据id获取信息(教授团队和人才)
 function getPeopleByPosition(position,url){
     var document =null;
@@ -287,7 +266,7 @@ function initPeopleList(position,urlGetPeopleByPosition,demoUrl) {
             '<a href="'+demoUrl+'?id='+peopleList[i].id+'">' +
             '   <img src="'+imgPath+
             '" alt="'+peopleList[i].name+'" width="120"></a>' +
-            '<a href="'+demoUrl+peopleList[i].id+'" class="team_name"><h4>'+peopleList[i].name+'</h4></a>' +
+            '<a href="'+demoUrl+'?id='+peopleList[i].id+'" class="team_name"><h4>'+peopleList[i].name+'</h4></a>' +
             '</li>';
     }
     var root = $("ul.team_content");
@@ -310,3 +289,49 @@ $(".public-nav li:has(ul)").hover(function () {
     $(this).find("a:first").css("background-color", "#035ba6");
     $(this).find(".subnav").css("display", "none");
 });
+
+//加载招聘页面的pdf
+function loadActivity(id) {
+    var options = {
+        pdfOpenParams: {
+            pagemode: "thumbs",
+            navpanes: 0,
+            toolbar: 0,
+            statusbar: 0,
+            view: "FitV"
+        }
+    };
+    var urlGetActivitiesById="/activity/getActivitiesById";
+    var activity = getFileById(id,urlGetActivitiesById);
+
+    var pdffile = "/home/pdf-error.pdf";
+    var urlGetDocumentById="/file/getFile";
+    var file = getFileById(activity.introduction,urlGetDocumentById);
+    var path = file.path;
+    if(path==null||path==undefined||path.length<1)alert("未获取到简介！请检查数据！");
+    else pdffile = path;
+    //PDFObject.embed(pdffile, "#example1");
+
+    var myPDF = PDFObject.embed(pdffile, "#example1",options);
+    var el = document.querySelector("#div-title");
+    el.setAttribute("class", (myPDF) ? "success" : "fail");
+    el.innerHTML = (myPDF) ? "<h1>"+activity.title+"</h1>" : "文档加载失败！";
+}
+//根据id获取document信息
+function getFileById(id,urlGetFileById) {
+    var file =null;
+    //设置同步
+    $.ajax({
+        type : "get",
+        url : urlGetFileById,
+        data :"id=" + id,
+        async : false,
+        success : function(data){
+            file = data.data;
+            if(data.result!==1){
+                alert(data.message);
+            }
+        }
+    });
+    return file;
+}

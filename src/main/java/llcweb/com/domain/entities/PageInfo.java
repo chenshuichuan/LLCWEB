@@ -15,6 +15,16 @@ public class PageInfo {
 	private List<ProductInfo> tPage;
 	private int totalElements;
 
+	private int totalPages;
+
+	public int getTotalPages() {
+		return totalPages;
+	}
+
+	public void setTotalPages(int totalPages) {
+		this.totalPages = totalPages;
+	}
+
 	public PageInfo(Integer id, List<ProductInfo> tPage, int totalElements) {
 		this.id = id;
 		this.tPage = tPage;

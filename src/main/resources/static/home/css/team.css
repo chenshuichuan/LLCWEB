@@ -81,11 +81,12 @@
     width:89%;
     min-height:180px;
     margin:0 25px;
+    margin-left: 20px;
 }
 
 .middle_r>ul>li{
     font-size:12px;
-    padding-left:5px;
+    padding-left:20px;
     word-wrap:break-word;
     font-weight:bold;
     float:left;

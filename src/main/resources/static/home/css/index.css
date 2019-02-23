@@ -437,14 +437,14 @@
     /*padding: 5px;*/
 }
 .index-col-3 .lately-date{
-    width: 60px;
-    height: 60px;
+    width: 80px;
+    height: 50px;
     margin-top: 10px;
     margin-left:7px;
     border-right: 2px solid #bc0e05;
 }
 .index-col-3 .lately-date .date-day{
-    font-size: 40px;
+    font-size: 30px;
     font-weight: bold;
     color: #bc0e05;
 }
@@ -453,7 +453,7 @@
     color: #bc0e05;
 }
 .index-col-3 .lately-cont{
-    margin-left: 85px;
+    margin-left: 88px;
     margin-top: 10px;
 }
 .index-col-3 .lately-title{

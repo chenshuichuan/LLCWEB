@@ -363,4 +363,31 @@ public class FileController {
 
     }
 
+
+    /**
+     * 获取Files 对象信息
+     **/
+    @RequestMapping("/getFile")
+    public Map<String,Object> getFile(@RequestParam("id")Integer id,HttpServletResponse response){
+        Map<String,Object> map=new HashMap<>();
+        logger.info("获取文件信息：id="+id);
+
+        if(null==id||id<=0){
+            map.put("result",0);
+            map.put("message","参数错误！");
+            return map;
+        }
+
+        //获取文件
+        File file=fileRepository.findOne(id);
+        if(file==null){
+            map.put("result",0);
+            map.put("message","找不到文件！");
+        }else{ //获取文件输出流
+            map.put("data",file);
+            map.put("result",1);
+            map.put("message","成功获取文件！");
+        }
+        return map;
+    }
 }

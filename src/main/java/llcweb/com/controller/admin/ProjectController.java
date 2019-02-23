@@ -125,6 +125,7 @@ public class ProjectController {
         //总记录条数
         long total = projectPage.getTotalElements();
         map.put("pageData", projectPage.getContent());
+        map.put("pages", projectPage.getTotalPages());
         map.put("total", total);
         map.put("draw", draw);
         map.put("result", 1);
@@ -284,7 +285,7 @@ public class ProjectController {
 
         Page<Project> projectPage = projectService.getPage(team,pageNum-1,pageSize);
         PageInfo pageInfo = new PageInfo(0,UsefulTools.projectToProductInfo(projectPage.getContent()),projectPage.getNumberOfElements());
-
+        pageInfo.setTotalPages(projectPage.getTotalPages());
         map.put("result", 1);
         map.put("message", "获取记录成功！");
         map.put("data",pageInfo);

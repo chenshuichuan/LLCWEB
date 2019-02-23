@@ -105,4 +105,6 @@ span.jPag-snext-img{
     background:transparent url(../images/snext.png) no-repeat center left;
             }
 
-
+.active-left{
+    background:#6ad;
+}

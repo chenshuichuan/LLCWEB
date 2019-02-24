@@ -17,10 +17,10 @@ $(document).ready(function () {
     $('#summernote-div').summernote({
         lang: 'zh-CN',
         height: 500,                 // set editor height
-        width: 800,
+        width: 1100,
         //minHeight: 100,             // set minimum height of editor
         maxHeight: 800,             // set maximum height of editor
-        maxWidth: 805,
+        maxWidth: 1105,
         focus: true                  // set focus to editable area after initializing summernote
     });
     $('#summernote-div').summernote('code', content);

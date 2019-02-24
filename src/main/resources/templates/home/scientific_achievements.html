@@ -154,7 +154,7 @@
             var date = new Date(data[i].date);
             var str = "<li>\n" +
                 "      <a target=\"_blank\" href=\"/achievement/"+nextPage1+data[i].id+"\">"+data[i].title+"</a>\n" +
-                "      <span>["+date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()+"]</span>\n" +
+                "      <span>["+date.getFullYear()+"-"+date.getMonth()+"-"+date.getDate()+"]</span>\n" +
                 "      </li>";
             father.append(str);
         }

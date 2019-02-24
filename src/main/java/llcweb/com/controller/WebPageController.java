@@ -1,7 +1,10 @@
 package llcweb.com.controller;
 
 import llcweb.com.dao.repository.*;
-import llcweb.com.domain.models.*;
+import llcweb.com.domain.models.Patent;
+import llcweb.com.domain.models.Project;
+import llcweb.com.domain.models.Software;
+import llcweb.com.domain.models.Users;
 import llcweb.com.service.UsersService;
 import llcweb.com.tools.RandomValidateCodeUtil;
 import org.slf4j.Logger;
@@ -48,9 +51,6 @@ public class WebPageController {
     private SoftwareRepository softwareRepository;
     @Autowired
     private ImageRepository imageRepository;
-
-    @Autowired
-    private PeopleRepository peopleRepository;
 
     /**
      * 生成验证码
@@ -206,7 +206,7 @@ public class WebPageController {
         return modelAndView;
     }
 
-    //招聘
+    //
     @RequestMapping({"/Talent_recruitment.html","/Talent_recruitment"})
     public ModelAndView Talent_recruitment(){
         ModelAndView modelAndView = new ModelAndView("home/Talent_recruitment");
@@ -222,7 +222,6 @@ public class WebPageController {
         ModelAndView modelAndView = new ModelAndView("home/Talent_recruitment2");
         return modelAndView;
     }
-    //人才培养
     @RequestMapping({"/Talent_training.html","/Talent_training"})
     public ModelAndView Talent_training(){
         ModelAndView modelAndView = new ModelAndView("home/Talent_training");
@@ -233,7 +232,11 @@ public class WebPageController {
         ModelAndView modelAndView = new ModelAndView("home/Team_introduction");
         return modelAndView;
     }
-
+    @RequestMapping({"/Untitled-1.html","/Untitled-1"})
+    public ModelAndView Untitled_1(){
+        ModelAndView modelAndView = new ModelAndView("home/Untitled-1");
+        return modelAndView;
+    }
 
     //以下为子文件夹的页面映射函数
     /**
@@ -341,14 +344,8 @@ public class WebPageController {
         return modelAndView;
     }
     @RequestMapping({"/ResearchProject/professor_demo.html","/ResearchProject/professor_demo"})
-    public ModelAndView professor_demo(@RequestParam("id")int id){
+    public ModelAndView professor_demo(){
         ModelAndView modelAndView = new ModelAndView("home/ResearchProject/professor_demo");
-
-        People people = peopleRepository.findOne(id);
-        Image image = imageRepository.findOne(people.getPortrait());
-        modelAndView.addObject("people",people);
-        modelAndView.addObject("image",image);
-
         return modelAndView;
     }
 

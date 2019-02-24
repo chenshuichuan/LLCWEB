@@ -2,7 +2,9 @@ package llcweb.com.controller.admin;
 
 import llcweb.com.dao.repository.ActivityRepository;
 import llcweb.com.dao.repository.DocumentRepository;
+import llcweb.com.domain.entities.PageInfo;
 import llcweb.com.domain.models.Activity;
+import llcweb.com.domain.models.Project;
 import llcweb.com.domain.models.Users;
 import llcweb.com.service.ActivityService;
 import llcweb.com.service.UsersService;
@@ -14,10 +16,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -326,6 +325,29 @@ public class ActivityController {
             map.put("result",1);
             map.put("message","成功获取文件！");
         }
+        return map;
+    }
+
+
+    /**
+     * @Author ricardo
+     * @Description 分组获取项目
+     * @Date 2018/10/10
+     * @Param [count]
+     * @return java.util.Map<java.lang.String,java.lang.Object>
+     **/
+    @RequestMapping("/getPage")
+    @ResponseBody
+    public Map<String,Object> getPage(@RequestParam("activityType")String activityType,@RequestParam("pageNum")int pageNum,@RequestParam("pageSize")int pageSize){
+        Map<String,Object> map=new HashMap<>();
+        logger.info("activityType="+activityType+",pageNum="+pageNum+",pageSize="+pageSize);
+
+        Page<Activity> activityPage = activityService.getPage(activityType,pageNum-1,pageSize);
+        PageInfo pageInfo = new PageInfo(0,UsefulTools.activityToProductInfo(activityPage.getContent()),activityPage.getNumberOfElements());
+        pageInfo.setTotalPages(activityPage.getTotalPages());
+        map.put("result", 1);
+        map.put("message", "获取记录成功！");
+        map.put("data",pageInfo);
         return map;
     }
 }

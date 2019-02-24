@@ -19,7 +19,7 @@ $(document).ready(function () {
     fillTheModel("#ul-project", projects,"/project_brief.html?id=");
     //学术交流
     var academicData = getActivities("/activity/getActivities","activityType=开放会议&count=6");
-    fillTheModel("#ul-academic-exchange", academicData,"/activity?id=");
+    fillTheModel("#ul-academic-exchange", academicData,"/achievement/activity.html?id=");
 
     //论文
     var paperMes = getTopMes("/paper/getLatest",5);
@@ -36,7 +36,7 @@ $(document).ready(function () {
     fillTheModel("#ul-activity", dynamicMes,"#");
     //文体活动
     dynamicMes = getActivities("/activity/getActivities","activityType=团队建设&count=6");
-    fillTheModel("#ul-activity2", dynamicMes,"/admin/activity/");
+    fillTheModel("#ul-activity2", dynamicMes,"/achievement/activity.html?id=");
 
     //开放课题
     var openPro = getTopMes("/project/getLatest",6);

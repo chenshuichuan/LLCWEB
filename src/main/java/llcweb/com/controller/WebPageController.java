@@ -52,6 +52,9 @@ public class WebPageController {
     @Autowired
     private PeopleRepository peopleRepository;
 
+    @Autowired
+    private ActivityRepository activityRepository;
+
     /**
      * 生成验证码
      */
@@ -124,6 +127,14 @@ public class WebPageController {
         ModelAndView modelAndView = new ModelAndView("home/Academic_communication");
         return modelAndView;
     }
+    @RequestMapping({"/achievement/activity.html","/achievement/activity"})
+    public ModelAndView activity(@RequestParam("id")int id){
+        ModelAndView modelAndView = new ModelAndView("home/achievement/activity");
+
+        modelAndView.addObject("activity", activityRepository.findOne(id));
+        return modelAndView;
+    }
+
     @RequestMapping({"/Academic_conference.html","/Academic_conference"})
     public ModelAndView Academic_conference(){
         ModelAndView modelAndView = new ModelAndView("home/Academic_conference");

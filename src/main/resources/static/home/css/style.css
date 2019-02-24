@@ -134,3 +134,21 @@ span.jPag-snext-img{
 .li-page-index{
 
 }
+
+/*人才培养页面列表样式*/
+.main-student{
+    display: block;
+    width: 810px;
+}
+.main-student ul li {
+    text-align: center;
+    display: block;
+    margin-top:6px;
+    width: 256px;
+    float: left;
+    position: relative;
+}
+.main-student ul li img {
+    margin-left: 23px;
+    width: 200px;
+}

@@ -131,29 +131,37 @@
     var myModel = "all";
     $(document).ready(function () {
         //获取对应的内容信息
-        var model = "all";
-        var pages = getProjectByModel(model,1,10,urlGetPage);
-        console.log(pages);
+        var pages = getProjectByModel(myModel,1,10,urlGetPage);
+        //console.log(pages);
         fillPage("#ul-projects",pages.tPage);
         fillPages("#ul-pages",pages.totalPages);
 
-        listenFun("#all-project", "all");
-        listenFun("#li-taihezi", "太赫兹安全技术");
-        listenFun("#li-ind-bigdata", "工业大数据");
-        listenFun("#li-high-compute", "高性能计算");
-        listenFun("#li-deeplearning", "图像计算与处理");
-        listenFun("#li-robot", "智能装备与机器人系统");
+        //监听请求更改
+        $("#all-project").click(function () {
+            listenFun("all",1);
+        });
+        $("#li-taihezi").click(function () {
+            listenFun("太赫兹安全技术",1);
+        });
+        $("#li-ind-bigdata").click(function () {
+            listenFun("工业大数据",1);
+        });
+        $("#li-high-compute").click(function () {
+            listenFun("高性能计算",1);
+        });
+        $("#li-deeplearning").click(function () {
+            listenFun("图像计算与处理",1);
+        });
+        $("#li-robot").click(function () {
+            listenFun("智能装备与机器人系统",1);
+        });
+        $("#li-info-sys").click(function () {
+            listenFun("信息物理融合系统",1);
+        });
+        $("#li-ai-auto").click(function () {
+            listenFun("人工智能与知识自动化",1);
+        });
 
-        listenFun("#li-info-sys", "信息物理融合系统");
-        listenFun("#li-ai-auto", "人工智能与知识自动化");
-
-//        // 监听请求更改--左侧导航栏
-//        $("a.li_page").click(function(){
-//            var index = $(this).parent().index();//获取li的索引
-//            //alert(index);
-//            //加载对应页面
-//            linstenPages(index);
-//        });
     });
 
     function fillPages(ul_id,totalPages) {
@@ -163,27 +171,31 @@
         father.append(str);
 
         for (var i = 1;i<=totalPages;i++){
-            str = "<li><a class='li_page' href=\"#"+i+"\">"+i+"</a></li>";
+            str = "<li><a id='btn-a-"+i+"' class='li_page' href=\"#"+i+"\">"+i+"</a></li>";
             father.append(str);
+
+            //
+            var pid = "#btn-a-"+i;
+            $(pid).click(function(){
+                var id=$(this).attr("id");
+                var strId = id.split("-");
+                var pageIndex = parseInt(strId[2]);
+                var proType = getCookie("project-type");
+                //alert(proType+pageIndex);
+                var pages = getProjectByModel(myModel,pageIndex,10,urlGetPage);
+                fillPage("#ul-projects",pages.tPage);
+            });
         }
         str = "<li><a href=\"#\">&raquo;</a></li>";
         father.append(str);
     }
 
-    function linstenPages(index) {
-        var pages = getProjectByModel(model,index,10,urlGetPage);
+    function listenFun(proType,pageIndex) {
+        myModel = proType;
+        setCookie("project-type",proType);
+        var pages = getProjectByModel(proType,pageIndex,10,urlGetPage);
         fillPage("#ul-projects",pages.tPage);
         fillPages("#ul-pages",pages.totalPages);
-    }
-
-    function listenFun(id, model) {
-        setCookie("project-type",model);
-        //监听请求更改
-        $(id).click(function () {
-            var pages = getProjectByModel(getCookie("project-type"),1,10,urlGetPage);
-            fillPage("#ul-projects",pages.tPage);
-            fillPages("#ul-pages",pages.totalPages);
-        });
     }
 
     function fillPage(id,data) {
@@ -192,19 +204,10 @@
         for(var i = 0 ; i < data.length; i++){
             var date = new Date(data[i].date);
             var str = "<li>\n" +
-                "      <a id='btn-a-"+i+"' target=\"_blank\" href=\"/project_brief.html?id="+data[i].id+"\">"+data[i].title+"</a>\n" +
+                "      <a target=\"_blank\" href=\"/project_brief.html?id="+data[i].id+"\">"+data[i].title+"</a>\n" +
                 "      <span>["+date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()+"]</span>\n" +
                 "      </li>";
             father.append(str);
-
-            var pid = "#btn-a-"+i;
-            $(pid).click(function(){
-                var id=$(this).attr("id");
-                var strId = id.split("-");
-                var pages = getProjectByModel(getCookie("project-type"),parseInt(strId[2]),10,urlGetPage);
-                fillPage("#ul-projects",pages.tPage,nextPage);
-            });
-
         }
     }
     //根据分组获取信息

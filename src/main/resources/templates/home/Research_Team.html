@@ -148,13 +148,13 @@
 <script>
 $(function(){
     var professor = getPeopleByPosition("教授","/people/getByPosition");
-    console.log(professor);
+    //console.log(professor);
     drawPeople(professor.length,professor,'#professor');
     var associate_pro = getPeopleByPosition("副教授","/people/getByPosition");
-    console.log(associate_pro);
+    //console.log(associate_pro);
     drawPeople(associate_pro.length,associate_pro,'#associate_pro');
     var lecturer = getPeopleByPosition("讲师","/people/getByPosition");
-    console.log(lecturer);
+    //console.log(lecturer);
     drawPeople(lecturer.length,lecturer,'#lecturer');
 });
 //渲染人物

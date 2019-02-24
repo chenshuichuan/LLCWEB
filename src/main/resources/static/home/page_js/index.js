@@ -10,16 +10,15 @@
 
 $(document).ready(function () {
 
-
     //公告通知
-    var infor = getTopMes("/activity/coreDynamics",6);
-    fillTheInfo("#con1", infor,"/activity?id=");
+    var infor = getActivities("/activity/getActivities","activityType=会议纪要&count=6");
+    fillTheInfo("#con1", infor,"/admin/activity/");
 
     //科学研究
     var projects = getTopMes("/project/getLatest",7);
     fillTheModel("#ul-project", projects,"/project_brief.html?id=");
     //学术交流
-    var academicData = getTopMes("/activity/coreDynamics",6);
+    var academicData = getActivities("/activity/getActivities","activityType=开放会议&count=6");
     fillTheModel("#ul-academic-exchange", academicData,"/activity?id=");
 
     //论文
@@ -32,32 +31,42 @@ $(document).ready(function () {
     paperMes = getTopMes("/software/getLatest",5);
     fillTheProduct("#div-first-software", "#ul-software", paperMes,"/achievement/scientific_achievements3.html?id=");
 
-    // console.log(paperMes);
-    // pushMes('#paper',paperMes);
-    // //专利
-    // var patentMes = getTopMes("/patent/getLatest",5);
-    // console.log(patentMes);
-    // pushMes('#patent',patentMes);
-    // //软件著作权
-    // var softwareMes = getTopMes("/software/getSoftwares",5);
-    // console.log(softwareMes);
-    // pushMes('#copyright',softwareMes);
-
     //中心动态
-    var dynamicMes = getTopMes("/activity/coreDynamics",6);
-    fillTheModel("#ul-activity", dynamicMes,"/activity?id=");
+    var dynamicMes = getActivities("/activity/getActivities","activityType=会议纪要&count=6");
+    fillTheModel("#ul-activity", dynamicMes,"#");
     //文体活动
-    dynamicMes = getTopMes("/activity/coreDynamics",6);
-    fillTheModel("#ul-activity2", dynamicMes,"/activity?id=");
+    dynamicMes = getActivities("/activity/getActivities","activityType=团队建设&count=6");
+    fillTheModel("#ul-activity2", dynamicMes,"/admin/activity/");
 
     //开放课题
     var openPro = getTopMes("/project/getLatest",6);
-    fillTheModel("#ul-open-project", openPro,"/activity?id=");
+    fillTheModel("#ul-open-project", openPro,"/project_brief.html?id=");
 
 });
 $(function(){
 
 });
+//getActivities
+
+//activity消息
+function getActivities(url,param){
+    var message =null;
+    //设置同步
+    $.ajax({
+        type : "get",
+        url : url,
+        data : param,
+        async : false,
+        success : function(data){
+            if(data.result!=1){
+                //alert(data.message);
+            }
+            else{message = data.data;}
+        }
+    });
+    return message;
+}
+
 //获取首页推送消息
 function getTopMes(url,num){
     var message =null;
@@ -69,7 +78,7 @@ function getTopMes(url,num){
         async : false,
         success : function(data){
             if(data.result!=1){
-                alert(data.message);
+                //alert(data.message);
             }
             else{
                 message = data.data;
@@ -94,14 +103,11 @@ function pushMes(id,message){
     }
 }
 
-
-
 //填充滚动通知栏数据
 function fillTheInfo(id, data,pre_url) {
     var father = $(id);
     father.empty();
     for(var i = 0 ; i < data.length; i++){
-        var date = new Date(data[i].date);
         var str = "<li>\n" +
             "       <a href=\""+pre_url+data[i].id+"\">"+data[i].title+"</a>\n" +
             "     </li>";
@@ -116,13 +122,13 @@ function fillTheModel(id, data,pre_url) {
         var date = new Date(data[i].date);
         var str = "<li class=\"item item1\">" +
             "        <i></i>" +
-            "        <a href=\""+pre_url+data[i].id+"\">"+data[i].title+"</a>" +
-            "        <span class=\"item-time\">"+date.getFullYear()+"/"+date.getMonth()+"/"+date.getDate()+"</span>\n" +
+            "        <a target='_blank' href=\""+pre_url+data[i].id+"\">"+data[i].title+"</a>" +
+            "        <span class=\"item-time\">"+date.getFullYear()+"/"+(date.getMonth()+1)+"/"+date.getDate()+"</span>\n" +
             "        </li>";
         father.append(str);
     }
 }
-//根据传入的首页模块id以及数据，填充模块内容，根据pre_url设置跳转链接
+//根据传入的首页模块id以及数据，填充模块内容，根据pre_url设置跳转链接 //论文专利软著模块
 function fillTheProduct(first_id, id, data,pre_url) {
     if(data.length<1)return;
     //填充第一篇
@@ -141,7 +147,7 @@ function fillTheProduct(first_id, id, data,pre_url) {
         "                    <span class=\"date-other\">"+date.getFullYear()+"-"+(date.getMonth()+1)+"</span>\n" +
         "                </div>\n" +
         "                <div class=\"lately-cont item1\">\n" +
-        "                    <p class=\"lately-title\"><a href=\""+pre_url+data[0].id+"\">"+lastTitle+"</a></p>\n" +
+        "                    <p class=\"lately-title\"><a  target='_blank' href=\""+pre_url+data[0].id+"\">"+lastTitle+"</a></p>\n" +
         //"                    <span class=\"lately-des\">"+data[0].authorList+"</span>\n" +
         "                </div>";
     first.append(str1);
@@ -153,8 +159,8 @@ function fillTheProduct(first_id, id, data,pre_url) {
         date = new Date(data[i].date);
         var str = "<li class=\"item item1\">" +
             "        <i></i>" +
-            "        <a href=\""+pre_url+data[i].id+"\">"+data[i].title+"</a>" +
-            "        <span class=\"item-time\">"+date.getFullYear()+"/"+date.getMonth()+"/"+date.getDate()+"</span>\n" +
+            "        <a  target='_blank' href=\""+pre_url+data[i].id+"\">"+data[i].title+"</a>" +
+            "        <span class=\"item-time\">"+date.getFullYear()+"/"+(date.getMonth()+1)+"/"+date.getDate()+"</span>\n" +
             "        </li>";
         father.append(str);
     }

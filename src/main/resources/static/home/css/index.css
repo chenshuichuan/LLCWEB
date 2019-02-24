@@ -245,12 +245,13 @@
 #copyright i{
     background:url("../images/list-icon-5.png");
 }
+/*影响li列表中的标题显示字符数量*/
 .index-col-3 .index-col-list .item a{
     display:inline-block;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
-	width: 55%
+	width: 70%
 }
 .index-col-3 .index-col-list .item .item-time{
     position:absolute;

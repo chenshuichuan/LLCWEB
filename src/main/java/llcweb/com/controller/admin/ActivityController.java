@@ -281,16 +281,18 @@ public class ActivityController {
     @RequestMapping("/getActivities")
     public Map<String,Object> getActivities(@RequestParam("activityType")String activityType,@RequestParam("count")Integer count){
         Map<String,Object> map=new HashMap<>();
-        if(StringUtil.isNull(activityType)||(!activityType.equals("活动")&&!activityType.equals("活动")
-        &&!activityType.equals("活动")&&!activityType.equals("活动"))){
+        System.out.println("activityType="+activityType+"  count="+count);
+        if(StringUtil.isNull(activityType)){
             map.put("result", 0);
             map.put("message", "请正确指定活动类型！");
         }
-        if(count==null||count.equals("")||count<=0){
+        if(count==null||count<=0){
             map.put("result", 0);
             map.put("message", "请正确指定读取数目！");
         }else{
-            activityRepository.getActivities(activityType,count);
+            List<Activity> activityList =  activityRepository.getActivities(activityType,count);
+            System.out.println("activity size = "+activityList.size());
+            map.put("data",UsefulTools.activityToProductInfo(activityList));
             map.put("result", 1);
             map.put("message", "获取记录成功！");
         }

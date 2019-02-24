@@ -224,8 +224,18 @@ public class WebPageController {
     }
     //人才培养
     @RequestMapping({"/Talent_training.html","/Talent_training"})
-    public ModelAndView Talent_training(){
+    public ModelAndView Talent_training(@RequestParam("position") String position, @RequestParam("grade") int grade){
         ModelAndView modelAndView = new ModelAndView("home/Talent_training");
+        logger.info("getByPosition：position=" + position+"  grade="+grade);
+        List<People> peopleList;
+        if(grade>0) {
+            peopleList = peopleRepository.findByPositionAndGrade(position,grade);
+        }else {
+            peopleList = peopleRepository.findByPosition(position);
+        }
+        modelAndView.addObject("peopleList",peopleList);
+        modelAndView.addObject("position",position);
+        modelAndView.addObject("grade",grade);
         return modelAndView;
     }
     @RequestMapping({"/Team_introduction.html","/Team_introduction"})
@@ -360,9 +370,15 @@ public class WebPageController {
         ModelAndView modelAndView = new ModelAndView("home/Talent/doctor_demo");
         return modelAndView;
     }
+
+    //研究生个人介绍页面
     @RequestMapping({"/Talent/graduate_demo.html","/Talent/graduate_demo"})
-    public ModelAndView graduate_demo(){
+    public ModelAndView graduate_demo(@RequestParam("id")int id){
         ModelAndView modelAndView = new ModelAndView("home/Talent/graduate_demo");
+        People people = peopleRepository.findOne(id);
+        Image image = imageRepository.findOne(people.getPortrait());
+        modelAndView.addObject("people",people);
+        modelAndView.addObject("image",image);
         return modelAndView;
     }
     @RequestMapping({"/Talent/post_demo.html","/Talent/post_demo"})

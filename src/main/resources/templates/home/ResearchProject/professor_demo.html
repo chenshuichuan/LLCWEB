@@ -22,8 +22,9 @@
     <link rel="stylesheet" href="../../../static/home/css/article.css" th:href="@{/home/css/article.css}">
 </head>
 <body>
-<div class="public-header" th:include="template/header_templateS :: header_templateS">
+<div class="public-header" th:include="template/header_template :: header_template">
 </div>
+
 
 <div class="middle">
     <div class="container middle_container">
@@ -68,46 +69,52 @@
                         </li>
                     </ul>
                 </div>
+
                 <div class="crumb">
-
-                    <ul id="professor_mes">
-                        <li id="id_1">
-
-                            <div class="record_t">
-                                <div class="record_l">
-                                    <!--                                 <img src="../../../static/home/images/yicun.jpg" th:src="@{/home/images/yicun.jpg}" alt="教授A" width="150"> -->
-                                </div>
-                                <div class="record_r">
-                                    <ul style="padding-left: 10px;">
-                                        <li>
-                                            姓名(Name):<span></span>
-                                        </li>
-                                        <li>
-                                            性别(Sex):<span></span>
-                                        </li>
-                                        <li>
-                                            职称(Title):<span></span>
-                                        </li>
-                                        <li>
-                                            行政职务(Administrative post):<span></span>
-                                        </li>
-                                        <li>
-                                            最高学历(Highest degree):<span></span>
-                                        </li>
-                                        <li>
-                                            研究领域(Research field):<span></span>
-                                        </li>
-                                        <li>
-                                            Email地址(E-mail address):<span></span>
-                                        </li>
-                                    </ul>
-                                </div>
+                    <div class="container">
+                        <div class="row" >
+                            <div class="col-md-2" style="text-align: center;" th:if="${image != null}">
+                                <img th:if="${image.path != null}" src="/custom/images/person-img.jpg"
+                                     th:src="${'/'+image.path}" alt="头像" width="175" style="margin-left: 5px;margin-top: 5px;"/>
                             </div>
 
-                        </li>
-                    </ul>
+                            <div class="col-md-6" style="text-align: left;">
+                                <table class="table table-striped" style="padding-left: 10px;">
+                                    <tbody>
+                                    <tr>
+                                        <td class="td-people-first">姓名(Name):</td>
+                                        <td class="td-people-last" th:text="${people.name}">name</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="td-people-first">性别(Sex):</td>
+                                        <td class="td-people-last" th:text="${people.sex}">sex</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="td-people-first">职称(Title):</td>
+                                        <td class="td-people-last" th:text="${people.position}">sex</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="td-people-first">学历(Degree):</td>
+                                        <td class="td-people-last" th:text="${people.highestDegree}">Degree</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="td-people-first">研究领域(Research):</td>
+                                        <td class="td-people-last" th:text="${people.researchField}">Research</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="td-people-first">邮箱(Email):</td>
+                                        <td class="td-people-last" th:text="${people.email}">email</td>
+                                    </tr>
+                                    <tr th:if="${not #strings.isEmpty(people.adminPosition)}">
+                                        <td class="td-people-first">职位(Position):</td>
+                                        <td class="td-people-last" th:text="${people.adminPosition}">email</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
                 <!--个人简介-->
                 <div id="document-preview" style="max-width: 800px; border-style: groove;"></div>
             </div>
@@ -131,20 +138,6 @@ $(function(){
     var data = getPeopleById(index,"/people/getById");
     console.log(data);
 
-
-
-//    var posAll = ['教授','副教授','讲师'];
-//    for(var i = 0; i < 3; i++){
-//        var dataL = getPeopleByPosition(posAll[i],"/people/getByPosition");
-//        for(var j = 0; j < dataL.length; j++){
-//            data.push(dataL[j]);
-//        }
-//        dataL = '';
-//    }
-//    console.log(data);
-//    for(var i =0; i < data.length; i++){
-//        if(index == data[i].id)     break;
-//    }
     var crumbsCon = '';
     var crumbsBack = '';
     if(data.position == '教授'){
@@ -161,35 +154,6 @@ $(function(){
     }
     $("#crumbs").find("li").eq(4).html(crumbsCon);
     $("#crumbs").find("li").eq(7).html(crumbsBack);
-
-    var imgPath ='/custom/images/person-img.jpg';
-    if(data.portrait!==undefined&&data.portrait!==null&&data.portrait!==0)
-        imgPath= '/image/getPath?id='+data.portrait;
-    $("div.record_l").html("");
-    var imgVal = '';
-    imgVal += '<img src="'+imgPath+'" alt="'+data.posotion+'" width="150">';
-    $("div.record_l").append(imgVal);
-    $("div.record_r").find("span").eq(0).html(data.name);
-    $("div.record_r").find("span").eq(1).html(data.sex);
-    $("div.record_r").find("span").eq(2).html(data.title);
-    $("div.record_r").find("span").eq(3).html(data.adminPosition);
-    $("div.record_r").find("span").eq(4).html(data.highestDegree);
-    $("div.record_r").find("span").eq(5).html(data.researchField);
-    $("div.record_r").find("span").eq(5).html(data.email);
-    for(var x = 0; x < 8; x++){
-        if($("div.record_r").find("span").eq(x).html() == "" || $("div.record_r").find("span").eq(x).html() == " " || $("div.record_r").find("span").eq(x).html() == null || $("div.record_r").find("span").eq(x).html() == undefined || $("div.record_r").find("span").eq(x).html() == 0)
-            $("div.record_r").find("span").eq(x).parent().css('display', 'none');
-    }
-    // if(data[i].portrait!==undefined&&data[i].portrait!==null&&data[i].portrait!==0)
-    //     $("div.record_b").find("p").eq(0).html(data[i].introduction);
-    // else    $("div.record_b").find("p").eq(0).html("暂无描述");
-//
-//    for(var k = 1; k < $("#resultType>li").length; k++ ){
-//        if($('#resultType').find('span').eq(k).text() == data[i].position){
-//            $('#resultType').find('a.ll_ref').eq(k-1).css('background', '#6ad').parent().siblings().find("a").css('background', '#f3f2f2');
-//            break;
-//        }
-//    }
 
 
     //获得简介内容

@@ -147,13 +147,13 @@
         listenFun("#li-info-sys", "信息物理融合系统");
         listenFun("#li-ai-auto", "人工智能与知识自动化");
 
-        // 监听请求更改--左侧导航栏
-        $("a.li_page").click(function(){
-            var index = $(this).parent().index();//获取li的索引
-            //alert(index);
-            //加载对应页面
-            linstenPages(index);
-        });
+//        // 监听请求更改--左侧导航栏
+//        $("a.li_page").click(function(){
+//            var index = $(this).parent().index();//获取li的索引
+//            //alert(index);
+//            //加载对应页面
+//            linstenPages(index);
+//        });
     });
 
     function fillPages(ul_id,totalPages) {
@@ -177,10 +177,10 @@
     }
 
     function listenFun(id, model) {
-        myModel = model;
+        setCookie("project-type",model);
         //监听请求更改
         $(id).click(function () {
-            var pages = getProjectByModel(model,1,10,urlGetPage);
+            var pages = getProjectByModel(getCookie("project-type"),1,10,urlGetPage);
             fillPage("#ul-projects",pages.tPage);
             fillPages("#ul-pages",pages.totalPages);
         });
@@ -192,10 +192,19 @@
         for(var i = 0 ; i < data.length; i++){
             var date = new Date(data[i].date);
             var str = "<li>\n" +
-                "      <a target=\"_blank\" href=\"/project_brief.html?id="+data[i].id+"\">"+data[i].title+"</a>\n" +
-                "      <span>["+date.getFullYear()+"-"+date.getMonth()+"-"+date.getDate()+"]</span>\n" +
+                "      <a id='btn-a-"+i+"' target=\"_blank\" href=\"/project_brief.html?id="+data[i].id+"\">"+data[i].title+"</a>\n" +
+                "      <span>["+date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()+"]</span>\n" +
                 "      </li>";
             father.append(str);
+
+            var pid = "#btn-a-"+i;
+            $(pid).click(function(){
+                var id=$(this).attr("id");
+                var strId = id.split("-");
+                var pages = getProjectByModel(getCookie("project-type"),parseInt(strId[2]),10,urlGetPage);
+                fillPage("#ul-projects",pages.tPage,nextPage);
+            });
+
         }
     }
     //根据分组获取信息

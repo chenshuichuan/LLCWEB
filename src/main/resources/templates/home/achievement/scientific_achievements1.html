@@ -27,7 +27,7 @@
     <div class="container middle_container">
         <div class="middle_content">
 
-            <div  style="margin-left: 35px;margin-top:20px;">
+            <div  style="margin-left: 35px;margin-top:20px;border-style: groove;">
                 <div style="text-align: center;">
                     <h3 th:text="${paper.title}">无线传感网络自适应目标跟踪节点调度算法</h3>
                     <table style="margin-left: 30%;margin-top: 10px;">
@@ -51,12 +51,16 @@
                     </table>
                 </div>
                 <div class="div-introduction">论文简介：</div>
-                <div id="div-introduction" style="border-style: groove;">
-                    论文简介
+                <div style="padding-left: 5px;padding-right: 5px;">
+                    <div id="div-introduction">
+                        专利简介
+                    </div>
                 </div>
-                <div style="margin-top: 50px;"><hr style="height:1px;border:0px;background-color:#D5D5D5;color:#b7b7b7;"/></div>
+
             </div>
         </div>
+        &nbsp;
+        <div style="margin-top: 50px;"><hr style="height:1px;border:0px;background-color:#D5D5D5;color:#b7b7b7;"/></div>
     </div>
 </div>
 <div  th:include="template/footer_template :: footer_template"></div>

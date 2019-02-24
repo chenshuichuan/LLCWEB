@@ -26,15 +26,14 @@
 <div class="middle">
     <div class="container middle_container">
         <div class="middle_content">
-
-            <div  style="margin-left: 35px;margin-top:20px;">
+            <div  style="margin-left: 35px;margin-top:20px;border-style: groove;">
                 <div style="text-align: center;">
                     <h3 th:text="${software.title}">无线传感网络自适应目标跟踪节点调度算法</h3>
                     <table style="margin-left: 30%;margin-top: 10px;">
                         <tbody>
                         <tr>
                             <td class="td-first">申请人:</td>
-                            <td class="td-last" th:text="${software.authorList}">作者(author)</td>
+                            <td class="td-last" th:text="${software.appliPeople}">作者(author)</td>
                         </tr>
                         <tr>
                             <td class="td-first">申请日期:</td>
@@ -60,15 +59,15 @@
                         </tbody>
                     </table>
                 </div>
-
-                <div th:if="${image}" id="div-introduction" style="border-style: groove; text-align: center;">
-                    <div class="div-introduction">软著授权书：</div>
-                    <img style="max-width: 1000px;" th:src="${'/'+image.path}">
-                </div>
-                <div style="margin-top: 50px;">
-                    <hr style="height:1px;border:0px;background-color:#D5D5D5;color:#b7b7b7;"/>
-                </div>
             </div>
+            <div th:if="${image}" align="center" style="width:1000px;margin-left: 260px;margin-top: 10px;">
+                <div style="text-align: left;">软著授权书：</div>
+                <img style="max-width: 800px;max-height: 800px;" th:src="${'/'+image.path}">
+            </div>
+        </div>
+
+        <div style="margin-top: 50px;">
+            <hr style="height:1px;border:0px;background-color:#D5D5D5;color:#b7b7b7;"/>
         </div>
     </div>
 </div>

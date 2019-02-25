@@ -397,4 +397,12 @@ public class WebPageController {
         ModelAndView modelAndView = new ModelAndView("home/Talent/post_demo");
         return modelAndView;
     }
+
+    //搜索页面
+    @RequestMapping({"/Globalsearch.html","/Globalsearch"})
+    public ModelAndView Globalsearch(@RequestParam(value="keyWord",required = false)String keyWord){
+        ModelAndView modelAndView = new ModelAndView("home/Globalsearch");
+        logger.info("keyWord = "+keyWord);
+        return modelAndView;
+    }
 }

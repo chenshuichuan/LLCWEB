@@ -358,3 +358,11 @@ function getCookie(name) {
 function delCookie(name) {
     setCookie(name, null, -1);
 };
+
+$(document).ready(function () {
+    $("#btn-global-search").click(function () {
+        var keyWord = $("#btn-global-search-input").val();
+        window.open("/Globalsearch.html?keyWord="+keyWord);
+        //alert(keyWord);
+    });
+});

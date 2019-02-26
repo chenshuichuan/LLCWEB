@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
     <!--<title>LLC实验室网站</title>-->
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="shortcut icon" href="../../static/home/images/bitbug_favicon.ico"
-          th:href="@{/home/images/bitbug_favicon.ico}"/>
+    <link rel="shortcut icon" href="../../static/home/images/favicon.ico"
+          th:href="@{/home/images/favicon.ico}"/>
     <link href="../../static/home/css/reset.css" rel="stylesheet"
           th:href="@{/home/css/reset.css}">
     <link href="../../static/home/css/public.css" rel="stylesheet"
@@ -62,14 +62,10 @@
 					</div>
 					<img src="../../static/home/images/images.png" th:src="@{/home/images/images.png}" style="width: 70px;margin-left: 519px;margin-top: -53px;">
 				</div>
-
-
-				<div style="margin-bottom: 60px;">
-					<div style="margin-top: 80px;margin-left: 230px;">留言板</div>
-					<textarea style="resize:none;width: 645px;height: 114px;" id="message" type="text"></textarea><br/>
-        			<div id="display_area"></div>
-        			<input value="提交" type="button" id="btn" />
-
+                <div style="margin-bottom: 60px;">
+                    <div style="margin-top: 80px;margin-left: 230px;">访客留言：</div>
+                    <textarea style="resize:none;width: 645px;height: 114px;" id="message" type="text"></textarea><br/>
+                    <input value="提交" type="button" id="btn" data-toggle="modal" data-target="#myModal" />
                 </div>
             </div>
         </div>

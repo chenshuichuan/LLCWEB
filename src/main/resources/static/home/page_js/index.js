@@ -23,13 +23,13 @@ $(document).ready(function () {
 
     //论文
     var paperMes = getTopMes("/paper/getLatest",5);
-    fillTheProduct("#div-first-paper", "#ul-paper", paperMes,"/achievement/scientific_achievements1.html?id=");
+    fillTheProduct("#div-first-paper", "#ul-paper", paperMes,"/achievement/scientific_achievements1.html?id=","#bc0e05");
     //专利
     paperMes = getTopMes("/patent/getLatest",5);
-    fillTheProduct("#div-first-patent", "#ul-patent", paperMes,"/achievement/scientific_achievements2.html?id=");
+    fillTheProduct("#div-first-patent", "#ul-patent", paperMes,"/achievement/scientific_achievements2.html?id=","#fd7e02");
     //软著
     paperMes = getTopMes("/software/getLatest",5);
-    fillTheProduct("#div-first-software", "#ul-software", paperMes,"/achievement/scientific_achievements3.html?id=");
+    fillTheProduct("#div-first-software", "#ul-software", paperMes,"/achievement/scientific_achievements3.html?id=","#f8b551");
 
     //中心动态
     var dynamicMes = getActivities("/activity/getActivities","activityType=会议纪要&count=6");
@@ -129,7 +129,7 @@ function fillTheModel(id, data,pre_url) {
     }
 }
 //根据传入的首页模块id以及数据，填充模块内容，根据pre_url设置跳转链接 //论文专利软著模块
-function fillTheProduct(first_id, id, data,pre_url) {
+function fillTheProduct(first_id, id, data,pre_url,backgroundColor) {
     if(data.length<1)return;
     //填充第一篇
     var first = $(first_id);
@@ -142,9 +142,9 @@ function fillTheProduct(first_id, id, data,pre_url) {
         lastTitle+="&nbsp;";
     }
 
-    var str1 = " <div class=\"lately-date fl\">\n" +
-        "                    <p class=\"date-day\">"+date.getDate()+"</p>\n" +
-        "                    <span class=\"date-other\">"+date.getFullYear()+"-"+(date.getMonth()+1)+"</span>\n" +
+    var str1 = " <div style='text-align:center;background-color: "+backgroundColor+";' class=\"lately-date fl\">\n" +
+        "                    <p style='padding-top: 3px;' class=\"date-day\">"+date.getDate()+"</p>\n" +
+        "                    <span  class=\"date-other\">"+date.getFullYear()+"-"+(date.getMonth()+1)+"</span>\n" +
         "                </div>\n" +
         "                <div class=\"lately-cont item1\">\n" +
         "                    <p class=\"lately-title\"><a  target='_blank' href=\""+pre_url+data[0].id+"\">"+lastTitle+"</a></p>\n" +

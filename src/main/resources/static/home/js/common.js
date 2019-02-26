@@ -365,4 +365,11 @@ $(document).ready(function () {
         window.open("/Globalsearch.html?keyWord="+keyWord);
         //alert(keyWord);
     });
+
+    $("#btn-global-search-input").keypress(function (e) {
+        if (e.which == 13) {
+            var keyWord = $("#btn-global-search-input").val();
+            window.open("/Globalsearch.html?keyWord="+keyWord);
+        }
+    });
 });

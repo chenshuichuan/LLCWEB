@@ -21,6 +21,7 @@
 </head>
 <body>
 
+
 <div th:include="template/header_template :: header_template"></div>
 <div class="index-main">
     <div class="index-notice">
@@ -63,10 +64,17 @@
         </div>
         <div class="index-col-3 m115 border">
             <div class="index-col-title">
-                <div class="title-left"><span>科学研究</span></div>
+
+                <div class="title-left">
+                    <i style="border-left: 2px solid #bc0e05; height:20px;"></i>
+                    <span style="font-size: 16px;margin-left: 5px;color: #010101;"><b>科学研究</b></span>
+
+                </div>
+
                 <div class="title-right">
-                    <a target="_blank"  th:href="@{/Research_Project.html}">
-                        <img src="../../static/home/images/arrow-red-right.png" th:src="@{/home/images/arrow-red-right.png}">
+                    <a  target="_blank"  th:href="@{/Research_Project.html}">
+                        <span style="font-size: 12px;">更多&gt;&gt;</span>
+                        <!--<img src="../../static/home/images/arrow-red-right.png" th:src="@{/home/images/arrow-red-right.png}">-->
                     </a>
                 </div>
             </div>
@@ -135,40 +143,50 @@
 <!--二级菜单栏-->
 <div class="clearfix"></div>
 
-
-
 <div class="index-fun mt10">
-    <div class="index-menu border">
-        <ul>
-            <li class="item item1"><i class="people"></i><a href="/Research_Team.html"
-                                                            th:href="@{/Research_Team.html}">导师风采</a></li>
-            <li class="item item1"><i class="file"></i><a href="/login"
-                                                          th:href="@{/login}">文件管理中心</a></li>
-            <li class="item item1"><i class="char"></i><a href="/Research_Team.html"
-                                                          th:href="@{/login}">研究资料中心</a></li>
-            <li class="item item1"><i class="cg"></i><a href="/Research_Project.html"
-                                                        th:href="@{/Research_Project.html}">项目平台展示</a></li>
+    <div class="index-menu border" style="border-top: 3px solid #bc0e05;border-radius: 5px;">
+        <ul style="margin-top: 15px;">
+
+            <li onclick="fourOnClick('/Research_Team.html')" style="cursor:pointer;background-color: #13cfbd;" class="item item1">
+                <i class="people"></i>
+                <a href="/Research_Team.html" th:href="@{/Research_Team.html}">导师风采</a>
+            </li>
+            <li onclick="fourOnClick('/login')"  style="cursor:pointer;background-color: #ff8838;" class="item item1">
+                <i class="file"></i><a href="/login" th:href="@{/login}">文件管理中心</a>
+            </li>
+            <li onclick="fourOnClick('/login')"  style="cursor:pointer;background-color: #ff7a59;" class="item item1">
+                <i class="char"></i><a href="/Research_Team.html" th:href="@{/login}">研究资料中心</a>
+            </li>
+            <li onclick="fourOnClick('/Research_Project.html')"  style="cursor:pointer;background-color: #035ba6;" class="item item1">
+                <i class="cg"></i><a href="/Research_Project.html" th:href="@{/Research_Project.html}">项目平台展示</a>
+            </li>
         </ul>
         <div class="index-contact">
             <i></i>
             <div class="contact-text">
-                <p>电子邮箱：llcheng@gdut.edu.cn</p>
-                <p>联系电话：+86-21-51630210</p>
+                <p style="color: #035ba6;">电子邮箱：llcheng@gdut.edu.cn</p>
+                <p style="color: #035ba6;">联系电话：+86-21-51630210</p>
             </div>
         </div>
     </div>
-    <div class="index-fun-article border m110">
-        <div class="fun-article-title">
-            <!--这里的更多图标存在问题需要修改-->
+
+    <div class="index-fun-article border m110" style="border-radius: 5px;">
+        <div class="fun-article-title" style="background-color:rgba(153,153,153,0.08);">
             <div class="title-left">
-                <span style="font-size: 20px;margin-left: -33px;">学术交流</span>
+                <!--<div align="left" style="padding-bottom: 5px;margin-top:9px; height:20px;border-left: 2px solid #bc0e05;">-->
+                    <!--<b style="font-size: 16px;">学术交流</b>-->
+                <!--</div>-->
+
+                <i style="border-left: 2px solid #bc0e05; height:20px;"></i>
+                <span style="font-size: 16px;margin-left: 10px;color: #010101;"><b>学术交流</b></span>
                 <!--<i style="margin: 1px 610px;"></i>-->
-                <div class="title-bg"></div>
+                <!--<div class="title-bg"></div>-->
             </div>
-            
-            <div class="title-right">
-                <a style="display:inline-block;margin-left: 615px;" target="_blank"  th:href="@{/Academic_communication.html}">
-                    <img src="../../static/home/images/arrow-red-right.png" th:src="@{/home/images/arrow-red-right.png}">
+
+            <div class="title-right" >
+                <a  style="display:inline-block;margin-left: 600px;" target="_blank"  th:href="@{/Academic_communication.html}">
+                    <span style="font-size: 12px;">更多&gt;&gt;</span>
+                    <!--<img src="../../static/home/images/arrow-red-right.png" th:src="@{/home/images/arrow-red-right.png}">-->
                 </a>
             </div>
         </div>
@@ -176,7 +194,7 @@
             <img style="height: 200px;width: 320px;" src="../../static/home/images/zuhui.jpg" alt title
                  th:src="@{/home/images/zuhui.jpg}">
         </div>
-        <ul id="ul-academic-exchange" class="index-fun-list fr">
+        <ul id="ul-academic-exchange" class="index-fun-list fr index-col-list">
             <li class="item item1">
                 <i></i>
                 <a href>科研交流促进项目开发</a>
@@ -188,14 +206,17 @@
 </div>
 <!--<div class="clearfix"></div>-->
 
+
 <div class="index-category-new mt15">
-    <div id="paper" class="index-col-3 border m110">
+    <div id="paper" class="index-col-3 border m110 products" >
         <div class="col-title">
             <span class="title-text fl">论文</span>
             <div class="col-more fr">
                 <a target="_blank"  th:href="@{/scientific_achievements.html}">
-                    <img src="../../static/home/images/arrow-red-right.png" th:src="@{/home/images/arrow-red-right.png}">
-                </a><i></i>
+                    <!--<img src="../../static/home/images/arrow-red-right.png" th:src="@{/home/images/arrow-red-right.png}">-->
+                    <span style="font-size: 12px;">更多&gt;&gt;</span>
+                </a>
+                <!--<i></i>-->
             </div>
         </div>
         <div class="col-list clearfix">
@@ -223,12 +244,14 @@
             </ul>
         </div>
     </div>
-    <div id="patent" class="index-col-3 border m110">
+    <div id="patent" class="index-col-3 border m110 products">
         <div class="col-title"><span class="title-text fl">专利</span></div>
         <div class="col-more fr">
             <a target="_blank"  th:href="@{/scientific_achievements.html}">
-                <img src="../../static/home/images/arrow-red-right.png" th:src="@{/home/images/arrow-red-right.png}">
-            </a><i></i>
+                <span style="font-size: 12px;">更多&gt;&gt;</span>
+                <!--<img src="../../static/home/images/arrow-red-right.png" th:src="@{/home/images/arrow-red-right.png}">-->
+            </a>
+            <!--<i></i>-->
         </div>
         <div class="col-list clearfix">
             <div  id="div-first-patent" class="index-lately">
@@ -256,13 +279,18 @@
     </div>
 
 
-    <div id="copyright" class="index-col-3 border m110">
+
+
+    <div id="copyright" class="index-col-3 border m110 products" >
         <div class="col-title"><span class="title-text fl">软件著作权</span></div>
         <div class="col-more fr">
             <a target="_blank"  th:href="@{/scientific_achievements.html}">
-                <img src="../../static/home/images/arrow-red-right.png" th:src="@{/home/images/arrow-red-right.png}">
-            </a><i></i>
+                <span style="font-size: 12px;">更多&gt;&gt;</span>
+                <!--<img src="../../static/home/images/arrow-red-right.png" th:src="@{/home/images/arrow-red-right.png}">-->
+            </a>
+            <!--<i></i>-->
         </div>
+
         <div class="col-list clearfix">
             <div id="div-first-software"  class="index-lately">
                 <div class="lately-date fl">
@@ -284,16 +312,19 @@
         </div>
     </div>
 </div>
-<div style="margin: auto;width: 1107px;float: none;"><img src="../../static/home/images/ad-banner.jpg" style="margin-bottom: 8px;margin-top: 8px;"
-                                                          th:src="@{/home/images/ad-banner.jpg}"></div>
+<!--这是干什么用的-->
+<!--<div style="margin: auto;width: 1107px;float: none;"><img src="../../static/home/images/ad-banner.jpg" style="margin-bottom: 8px;margin-top: 8px;"-->
+                                                          <!--th:src="@{/home/images/ad-banner.jpg}"></div>-->
 <div class="index-category-new mt15">
-    <div class="index-col-3 border m110 " id="dynamic">
+    <div class="index-col-3 border m110 " id="dynamic" style="border-top: 3px solid #bc0e05;border-radius: 5px;">
         <div class="col-title">
             <span class="title-text fl">中心动态</span>
             <div class="col-more fr">
                 <a target="_blank" href="#">
-                    <img src="../../static/home/images/arrow-red-right.png" th:src="@{/home/images/arrow-red-right.png}">
-                </a><i></i>
+                    <span style="font-size: 12px;">更多&gt;&gt;</span>
+                    <!--<img src="../../static/home/images/arrow-red-right.png" th:src="@{/home/images/arrow-red-right.png}">-->
+                </a>
+                <!--<i></i>-->
             </div>
         </div>
         <div class="col-list clearfix">
@@ -316,12 +347,14 @@
             </ul>
         </div>
     </div>
-    <div class="index-col-3 border m110">
+    <div class="index-col-3 border m110" style="border-top: 3px solid #bc0e05;border-radius: 5px;">
         <div class="col-title"><span class="title-text fl">文体活动</span></div>
         <div class="col-more fr">
             <a target="_blank"  th:href="@{/Cultural_activity.html}">
-                <img src="../../static/home/images/arrow-red-right.png" th:src="@{/home/images/arrow-red-right.png}">
-            </a><i></i>
+                <span style="font-size: 12px;">更多&gt;&gt;</span>
+                <!--<img src="../../static/home/images/arrow-red-right.png" th:src="@{/home/images/arrow-red-right.png}">-->
+            </a>
+            <!--<i></i>-->
         </div>
         <div class="col-list clearfix">
             <ul id="ul-activity2" class="index-col-list list-num">
@@ -333,12 +366,15 @@
             </ul>
         </div>
     </div>
-    <div class="index-col-3 border m110">
+
+    <div class="index-col-3 border m110" style="border-top: 3px solid #bc0e05;border-radius: 5px;">
         <div class="col-title"><span class="title-text fl">开放课题</span></div>
         <div class="col-more fr">
             <a target="_blank"  th:href="@{/Research_Project.html}">
-                <img src="../../static/home/images/arrow-red-right.png" th:src="@{/home/images/arrow-red-right.png}">
-            </a><i></i>
+                <span style="font-size: 12px;">更多&gt;&gt;</span>
+                <!--<img src="../../static/home/images/arrow-red-right.png" th:src="@{/home/images/arrow-red-right.png}">-->
+            </a>
+            <!--<i></i>-->
         </div>
         <div class="col-list clearfix">
             <ul  id="ul-open-project" class="index-col-list list-num">
@@ -349,20 +385,26 @@
                 </li>
             </ul>
         </div>
-
-
     </div>
 </div>
 <div class="clearfix"></div>
 <div class="public-friendlinks">
     <div class="public-container">
-        <p class="title"><img src="../../static/home/images/73edb0a0ead09dbc7375c7e80178d51.png"
-							  th:src="@{/home/images/73edb0a0ead09dbc7375c7e80178d51.png}">友情链接:</p>
+        <p class="title"><img src="../../static/home/images/friendly-link.png"
+							  th:src="@{/home/images/friendly-link.png}">友情链接:</p>
         <p class="links">
-            <a href="http://www.gdut.edu.cn/"><img src="../../static/home/images/_20180828233811.png" th:src="@{/home/images/_20180828233811.png}"></a>
-            <a href="http://automation.gdut.edu.cn/"><img src="../../static/home/images/_201808282338111.png" th:src="@{home/images/_201808282338111.png}"></a>
-            <a href="http://jsjxy.gdut.edu.cn/"><img src="../../static/home/images/_201808282338112.png" th:src="@{home/images/_201808282338112.png}"></a>
-            <a href="http://yjs.gdut.edu.cn/"><img src="../../static/home/images/_201808282338113.png" th:src="@{home/images/_201808282338113.png}"></a>
+            <a href="http://www.gdut.edu.cn/">
+                <img src="../../static/home/images/gdut.png" th:src="@{/home/images/gdut.png}">
+            </a>
+            <a href="http://automation.gdut.edu.cn/">
+                <img src="../../static/home/images/gdut-auto.png" th:src="@{home/images/gdut-auto.png}">
+            </a>
+            <a href="http://jsjxy.gdut.edu.cn/">
+                <img src="../../static/home/images/gdut-jsj.png" th:src="@{home/images/gdut-jsj.png}">
+            </a>
+            <a href="http://yjs.gdut.edu.cn/">
+                <img src="../../static/home/images/gdut-yjs.png" th:src="@{home/images/gdut-yjs.png}">
+            </a>
         </p>
     </div>
 </div>
@@ -381,6 +423,9 @@
 
 
 <script>
+    function fourOnClick(url) {
+        window.open(url);
+    }
     $(function () {
         var area = document.getElementById('con');
         area.scrollTop = 0;

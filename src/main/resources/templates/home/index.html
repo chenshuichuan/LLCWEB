@@ -19,6 +19,11 @@
             th:src="@{/home/js/jquery-1.12.4.min.js}"></script>
    <!-- <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
 </head>
+
+<style type="text/css">
+    #fdck {border:1px solid #c0c0c0;margin:0 auto;padding:5px;background:#f0f0f0}
+</style>
+
 <body>
 
 
@@ -157,15 +162,15 @@
             <li onclick="fourOnClick('/login')"  style="cursor:pointer;background-color: #ff7a59;" class="item item1">
                 <i class="char"></i><a href="/Research_Team.html" th:href="@{/login}">研究资料中心</a>
             </li>
-            <li onclick="fourOnClick('/Research_Project.html')"  style="cursor:pointer;background-color: #035ba6;" class="item item1">
-                <i class="cg"></i><a href="/Research_Project.html" th:href="@{/Research_Project.html}">项目平台展示</a>
+            <li onclick="fourOnClick('/platform.html')"  style="cursor:pointer;background-color: #035ba6;" class="item item1">
+                <i class="cg"></i><a href="/platform.html" th:href="@{/platform.html}">项目平台展示</a>
             </li>
         </ul>
         <div class="index-contact">
             <i></i>
             <div class="contact-text">
                 <p style="color: #035ba6;">电子邮箱：llcheng@gdut.edu.cn</p>
-                <p style="color: #035ba6;">联系电话：+86-21-51630210</p>
+                <p style="color: #035ba6;">联系电话：+86-20-39322465</p>
             </div>
         </div>
     </div>
@@ -413,6 +418,18 @@
     <hr style="height:1px;border:0px;background-color:#D5D5D5;color:#b7b7b7;"/>
 </div>
 
+
+<!--浮动窗口效果-->
+<div id="imgDiv" style="position:absolute;left:50px;top:60px;border: solid 3px;border-color: #035ba6;text-align: center;">
+    <div id="a" style="font-size:16px; width:35px;height:20px;position:absolute;left:0px;top:-22px;background:salmon;text-align: center;">关闭</div>
+    <a href="https://g.eqxiu.com/s/zLPiIPxz" th:href="@{https://g.eqxiu.com/s/zLPiIPxz}"target="_blank"style="text-align: center;">
+        <h3 style="color: rgba(225,38,26,1);">广东省信息物理融合系统重点实验室招聘研究生啦！</h3>
+        <img src="../../static/home/images/zhaosheng.png" th:src="@{/home/images/zhaosheng.png}" border="1" />
+    </a>
+    <p style="color: rgba(30,36,225,1)">(扫码查看或点击转跳)</p>
+</div>
+
+
 <div th:include="template/footer_template :: footer_template"></div>
 <script type="text/javascript" src="../../static/home/js/jquery-1.12.4.min.js"
         th:src="@{/home/js/jquery-1.12.4.min.js}"></script>
@@ -421,8 +438,72 @@
 <script type="text/javascript" src="../../static/home/page_js/index.js"
         th:src="@{/home/page_js/index.js}"></script>
 
-
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    //拿到模型列表
+    var isFloat = /*[[${isFloat}]]*/ 2;
+    /*]]>*/
+</script>
 <script>
+
+    //隐藏浮动窗口div
+    if(isFloat==='0'||isFloat===0)document.getElementById('imgDiv').style.visibility = "hidden";
+    //进行浮动动画
+    var xin = true,
+        yin = true;
+    var step = 1;
+    var delay = 10;
+    var $obj;
+    $(function() {
+        $obj = $("#imgDiv");
+        var time = window.setInterval("move()", delay);
+        $obj.mouseover(function() {
+            clearInterval(time)
+        });
+        $obj.mouseout(function() {
+            time = window.setInterval("move()", delay)
+        });
+    });
+
+    function move() {
+        var left = $obj.offset().left;
+        var top = $obj.offset().top;
+        var L = T = 0; //左边界和顶部边界
+        var R = $(window).width() - $obj.width(); // 右边界
+        var B = $(window).height() - $obj.height(); //下边界
+
+        //难点:怎样判断广告的4个边框有没有超出可视化范围!
+        if (left < L) {
+            xin = true; // 水平向右移动
+        }
+        if (left > R) {
+            xin = false;
+        }
+        if (top < T) {
+            yin = true;
+        }
+        if (top > B) {
+            yin = false;
+        }
+        //根据有没有超出范围来确定广告的移动方向
+        left += step * (xin == true ? 1 : -1);
+        top  += step * (yin == true ? 1 : -1);
+        // 给div 元素重新定位
+        $obj.offset({
+            top: top,
+            left: left
+        })
+    }
+    //关闭
+    $(function() {
+        $("#a").click(function() {
+            var b = $("#a").parent();
+            $(b).remove();
+        })
+    })
+</script>
+<script>
+
     function fourOnClick(url) {
         window.open(url);
     }

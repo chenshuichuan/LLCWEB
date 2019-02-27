@@ -42,6 +42,7 @@ $(document).ready(function () {
     var openPro = getTopMes("/project/getLatest",6);
     fillTheModel("#ul-open-project", openPro,"/project_brief.html?id=");
 
+
 });
 $(function(){
 

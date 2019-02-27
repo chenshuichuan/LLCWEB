@@ -55,6 +55,11 @@ public class WebPageController {
     @Autowired
     private ActivityRepository activityRepository;
 
+    @Autowired
+    private PlatformRepository platformRepository;
+    @Autowired
+    private ParamsRepository paramsRepository;
+
     /**
      * 生成验证码
      */
@@ -113,6 +118,11 @@ public class WebPageController {
     @RequestMapping({"/","/index.html","/index","/main","/main.html"})
     public ModelAndView index(){
         ModelAndView modelAndView = new ModelAndView("home/index");
+
+        Params params = paramsRepository.findByName("index-float-window");
+        if(params!=null){
+            modelAndView.addObject("isFloat",params.getValue());
+        }
         return modelAndView;
     }
     @ResponseBody
@@ -395,6 +405,14 @@ public class WebPageController {
     @RequestMapping({"/Talent/post_demo.html","/Talent/post_demo"})
     public ModelAndView post_demo(){
         ModelAndView modelAndView = new ModelAndView("home/Talent/post_demo");
+        return modelAndView;
+    }
+    //平台展示页面
+    @RequestMapping({"/platform.html","/platform"})
+    public ModelAndView platform(){
+        ModelAndView modelAndView = new ModelAndView("home/platform");
+        List<Platform> platformList = platformRepository.findByIsPublish(1);
+        modelAndView.addObject("platformList",platformList);
         return modelAndView;
     }
 

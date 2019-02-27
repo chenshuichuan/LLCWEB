@@ -28,27 +28,100 @@
 <!--</body>-->
 <!--</html>-->
 
-<!DOCTYPE html>
+<!--<!DOCTYPE html>-->
+<!--<html>-->
+<!--<head>-->
+    <!--<meta charset="utf-8">-->
+    <!--<title>菜鸟教程(runoob.com)</title>-->
+<!--</head>-->
+<!--<body>-->
+
+<!--<div id="p1">Hello World!</div>-->
+<!--<script>-->
+    <!--for (var i=0;i<100;i++){-->
+        <!--var element = document.createElement("div");-->
+        <!--element.className = "message";-->
+        <!--var textNode = document.createTextNode("Hello world!");-->
+        <!--element.appendChild(textNode);-->
+        <!--document.getElementById("p1").appendChild(element);-->
+    <!--}-->
+
+<!--</script>-->
+
+<!--<p>以上段落通过脚本修改文本。</p>-->
+
+<!--</body>-->
+<!--</html>-->
+
 <html>
 <head>
-    <meta charset="utf-8">
-    <title>菜鸟教程(runoob.com)</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+    <title>带关闭按钮的浮动窗口</title>
 </head>
+<style type="text/css">
+    #fdck {border:1px solid #c0c0c0;margin:0 auto;padding:5px;background:#f0f0f0}
+</style>
 <body>
-
-<div id="p1">Hello World!</div>
-<script>
-    for (var i=0;i<100;i++){
-        var element = document.createElement("div");
-        element.className = "message";
-        var textNode = document.createTextNode("Hello world!");
-        element.appendChild(textNode);
-        document.getElementById("p1").appendChild(element);
+<div id="my-window" style="position: absolute; left: 311; top: 815;visibility :hidden;" onmouseover="clearInterval(interval)" onmouseout="interval = setInterval('changePos()', delay)" align="middle">
+    <span style="CURSOR:hand;color:red;font-weight:bold;font-size:12px" onclick="clearInterval(interval);document.getElementById('my-window').style.visibility = 'hidden'">关闭</span>
+    <div id="fdck">
+        浮动测试TEST
+    </div>
+</div>
+<script language=javascript>
+    var xPos = 20;
+    var yPos = document.body.clientHeight;
+    var step = 1;
+    var delay = 30;
+    var height = 0;
+    var Hoffset = 0;
+    var Woffset = 0;
+    var yon = 0;
+    var xon = 0;
+    var pause = true;
+    var interval;
+    document.getElementById('my-window').style.top = yPos;
+    function changePos() {
+        width = document.body.clientWidth;
+        height = document.body.clientHeight;
+        Hoffset = document.getElementById('my-window').offsetHeight;
+        Woffset = document.getElementById('my-window').offsetWidth;
+        document.getElementById('my-window').style.left = xPos + document.body.scrollLeft;
+        document.getElementById('my-window').style.top = yPos + document.body.scrollTop;
+        if (yon) {
+            yPos = yPos + step;
+        }
+        else {
+            yPos = yPos - step;
+        }
+        if (yPos < 0) {
+            yon = 1;
+            yPos = 0;
+        }
+        if (yPos >= (height - Hoffset)) {
+            yon = 0;
+            yPos = (height - Hoffset);
+        }
+        if (xon) {
+            xPos = xPos + step;
+        }
+        else {
+            xPos = xPos - step;
+        }
+        if (xPos < 0) {
+            xon = 1;
+            xPos = 0;
+        }
+        if (xPos >= (width - Woffset)) {
+            xon = 0;
+            xPos = (width - Woffset);
+        }
     }
-
+    function start() {
+        document.getElementById('my-window').style.visibility = "visible";
+        interval = setInterval('changePos()', delay);
+    }
+    start();
 </script>
-
-<p>以上段落通过脚本修改文本。</p>
-
 </body>
 </html>

@@ -96,7 +96,7 @@ public class FileController {
         }
         //获取当前用户
         Users user=usersService.getCurrentUser();
-        String userName=user.getUsername();
+        String userName="111";//user.getUsername();
         int userId=usersRepository.findByUsername(userName).getId();
         //保存数据
         if(StringUtil.isNull(introduction) || introduction.length()>50){
@@ -262,12 +262,12 @@ public class FileController {
             if(StringUtil.isNull(author)&&StringUtil.isNull(introduction)&&StringUtil.isNull(model)&&StringUtil.isNull(firstDate1)&&StringUtil.isNull(lastDate1)){
                 filePage=fileService.selectByRole(user,currentPage-1,size,fileRepository);
             }
-            else {
-                //日志
-                logger.info("---高级查询---");
-                UsefulFile file = new UsefulFile(user.getUsername(), model, introduction, firstDate, lastDate);
-                filePage = fileService.activeSearch(file, currentPage - 1, size, fileRepository);
-            }
+//            else {
+//                //日志
+//                logger.info("---高级查询---");
+//                UsefulFile file = new UsefulFile(user.getUsername(), model, introduction, firstDate, lastDate);
+//                filePage = fileService.activeSearch(file, currentPage - 1, size, fileRepository);
+//            }
         }
 
         //总记录数

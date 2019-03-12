@@ -43,104 +43,6 @@ public class ActivityController {
 
     /**
      * @Author haien
-     * @Description 搜索活动记录
-     * @Date 2018/10/6
-     * @Param [request]
-     * @return java.util.Map<java.lang.String,java.lang.Object>
-     **/
-    @RequestMapping(value="/page",method = RequestMethod.GET)
-    public Map<String,Object> getPage(HttpServletRequest request){
-        Map<String,Object> map =new HashMap<String,Object>();
-
-        //直接返回前台
-        String draw = request.getParameter("draw");
-        //当前数据的起始位置
-        String startIndex = request.getParameter("startIndex");
-        //数据长度
-        String pageSize = request.getParameter("pageSize");
-        //模糊|高级查询标志
-        String fuzzy = request.getParameter("fuzzySearch");
-        if(draw==null||startIndex==null||pageSize==null){
-            map.put("result", 0);
-            map.put("message", "参数不完整！");
-            return map;
-        }
-        int size = Integer.parseInt(pageSize);
-        //页码
-        int currentPage = Integer.parseInt(startIndex)/size+1;
-        Users user=usersService.getCurrentUser();
-
-        logger.info("size = "+size+",currentPage = "+currentPage);
-
-        Page<Activity> activityPage = null;
-        Pageable pageable=new PageRequest(currentPage-1,size, Sort.Direction.DESC,"startDate");
-        //模糊查找
-        if("true".equals(fuzzy)){
-            String searchValue=request.getParameter("fuzzy");
-            //空搜
-            if(StringUtil.isNull(searchValue)){
-                //日志
-                logger.info("无关键词搜索--默认获取全部活动记录");
-                activityPage=activityRepository.findAll(pageable);
-            }
-            //日志
-            logger.info("模糊查询---关键词："+searchValue);
-            activityPage = activityRepository.fuzzySearch(searchValue,pageable);
-        }
-        //高级查找（空搜也使用高级搜索）
-        else{
-            //日志
-            logger.info("---高级查询---");
-            String title=request.getParameter("title");
-            String author=request.getParameter("author");
-            String peopleList=request.getParameter("peopleList");
-            String group=request.getParameter("group");
-            String activityType=request.getParameter("activityType");
-            String startDate1=request.getParameter("startDate");
-            String endDate1=request.getParameter("endDate");
-            //字符串对象转为日期对象
-            Date startDate=null;
-            Date endDate=null;
-            try {
-                if(!StringUtil.isNull(startDate1)){
-                    startDate=new SimpleDateFormat("yyyy-MM-dd").parse(startDate1);
-                }
-                if(!StringUtil.isNull(endDate1)) {
-                    endDate = new SimpleDateFormat("yyyy-MM-dd").parse(endDate1);
-                }
-            } catch (ParseException e) { //不以“-”格式输入日期则无法正确转换
-                e.printStackTrace();
-                map.put("draw", draw);
-                map.put("result", 0);
-                map.put("message", "日期格式错误！");
-                return map;
-            }
-            //日志
-            logger.info("---高级查询---");
-            Activity activity=new Activity( title,  author,  peopleList,  startDate,  endDate,  group,  activityType);
-            activityPage = activityService.activeSearch(activity, currentPage - 1, size);
-        }
-
-        //总记录数
-        long total = activityPage.getTotalElements();
-        logger.info("total="+total);
-
-        map.put("draw", draw);
-        map.put("result", 1);
-        if(0==total){
-            map.put("total", total);
-            map.put("pageData", activityPage.getContent());
-            map.put("message", "未查询到记录！");
-        }else {
-            map.put("total", total);
-            map.put("pageData", activityPage.getContent());
-            map.put("message", "成功获取分页数据！");
-        }
-        return map;
-    }
-
-    /**
-     * @Author haien
      * @Description 保存活动记录
      * @Date 2018/10/6
      * @Param [request, response]
@@ -208,7 +110,7 @@ public class ActivityController {
             activity = new Activity();
         }
 
-        activity.setAuthor(usersService.getCurrentUser().getUsername());
+       // activity.setAuthor(usersService.getCurrentUser().getUsername());
         activity.setPeopleList(peopleList);
         activity.setTitle(title);
         activity.setStartDate(startDate);

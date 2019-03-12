@@ -126,7 +126,7 @@ public class ResourceServiceImpl<T> implements ResourceService<T> {
         }
 
         //普通用户查找编辑过的文档
-        System.out.println("user = "+user.getUsername());
+        //System.out.println("user = "+user.getUsername());
         resources=resourceRepository.findByAuthorId(user.getId(),page);
         System.out.println("find number = "+resources.getTotalElements());
         return resources;

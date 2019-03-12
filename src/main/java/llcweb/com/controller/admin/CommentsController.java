@@ -39,38 +39,6 @@ public class CommentsController {
     @Autowired
     private CommentsRepository commentsRepository;
 
-    @RequestMapping(value = "/page",method = RequestMethod.GET)
-    @ResponseBody
-    public Map<String,Object> page(HttpServletRequest request, HttpServletResponse response){
-        Map<String,Object> map =new HashMap<String,Object>();
-
-        //直接返回前台
-        String draw = request.getParameter("draw");
-        //当前数据的起始位置 ，如第10条
-        String startIndex = request.getParameter("startIndex");
-        //数据长度
-        String pageSize = request.getParameter("pageSize");
-        int size = Integer.parseInt(pageSize);
-        int currentPage = Integer.parseInt(startIndex)/size+1;
-
-        Users users = new Users();
-        String fuzzy = request.getParameter("fuzzySearch");
-        if("true".equals(fuzzy)){//模糊查找
-            String searchValue = request.getParameter("fuzzy");
-            if (searchValue!=null&&!searchValue.equals("")) {
-                users.setUsername(searchValue);
-            }
-        }
-        //高级查找
-        else{
-            String username = request.getParameter("username");
-            if (username!=null&&!username.equals("")) {
-                users.setUsername(username);
-            }
-        }
-        map.put("message", "hello");
-        return map;
-    }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     @ResponseBody

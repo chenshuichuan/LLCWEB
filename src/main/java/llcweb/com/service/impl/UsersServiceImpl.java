@@ -17,9 +17,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+//import org.springframework.security.core.context.SecurityContextHolder;
+//import org.springframework.security.core.userdetails.UserDetails;
+//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -49,7 +49,7 @@ public class UsersServiceImpl implements UsersService {
     @Override
     public void add(Users user,List<Roles> roles) {
 
-        String username = user.getUsername();
+       // String username = user.getUsername();
         encryptPassword(user);
 
         usersRepository.save(user);
@@ -63,8 +63,8 @@ public class UsersServiceImpl implements UsersService {
      * 加密密码
      */
     private void encryptPassword(Users userEntity){
-        String password = userEntity.getPassword();
-        password = new BCryptPasswordEncoder().encode(password);
+        String password ="111";// userEntity.getPassword();
+       // password = new BCryptPasswordEncoder().encode(password);
         userEntity.setPassword(password);
     }
 
@@ -91,36 +91,38 @@ public class UsersServiceImpl implements UsersService {
 
     @Override
     public Page<Users> getPage(PageParam pageParam, Users users) {
-        //规格定义
-        Specification<Users> specification = new Specification<Users>() {
-
-            @Override
-            public Predicate toPredicate(Root<Users> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-                List<Predicate> predicates = new ArrayList<>(); //所有的断言
-                if(StringUtils.isNotBlank(users.getUsername())){ //添加断言
-                    Predicate likeUserName = cb.like(root.get("username").as(String.class),"%"+users.getUsername()+"%");
-                    predicates.add(likeUserName);
-                }
-                return cb.and(predicates.toArray(new Predicate[0]));
-            }
-        };
-        //分页信息
-        Pageable pageable = new PageRequest(pageParam.getCurrentPage()-1,pageParam.getNumPerPage()); //页码：前端从1开始，jpa从0开始，做个转换
-        //查询
-        return this.usersRepository.findAll(specification,pageable);
+//        //规格定义
+//        Specification<Users> specification = new Specification<Users>() {
+//
+////            @Override
+////            public Predicate toPredicate(Root<Users> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+////                List<Predicate> predicates = new ArrayList<>(); //所有的断言
+////                if(StringUtils.isNotBlank(users.getUsername())){ //添加断言
+////                    Predicate likeUserName = cb.like(root.get("username").as(String.class),"%"+users.getUsername()+"%");
+////                    predicates.add(likeUserName);
+////                }
+////                return cb.and(predicates.toArray(new Predicate[0]));
+////            }
+//        };
+//        //分页信息
+//        Pageable pageable = new PageRequest(pageParam.getCurrentPage()-1,pageParam.getNumPerPage()); //页码：前端从1开始，jpa从0开始，做个转换
+//        //查询
+       // return this.usersRepository.findAll(specification,pageable);
+        return null;
     }
 
     @Override
     public Users getCurrentUser() {
-        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext()
-                .getAuthentication()
-                .getPrincipal();
-        logger.info("username = "+userDetails.getUsername());
-        //logger.info("username = "+userDetails.getPassword());
-        Users users = usersRepository.findByUsernameAndPassword(userDetails.getUsername(),userDetails.getPassword());
-        if(users!=null){
-            logger.info("users id = "+users.getId()+",worker's id="+users.getPeopleId());
-        }
+        Users users = new Users();
+//        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext()
+//                .getAuthentication()
+//                .getPrincipal();
+//        logger.info("username = "+userDetails.getUsername());
+//        //logger.info("username = "+userDetails.getPassword());
+//        Users users = usersRepository.findByUsernameAndPassword(userDetails.getUsername(),userDetails.getPassword());
+//        if(users!=null){
+//            logger.info("users id = "+users.getId()+",worker's id="+users.getPeopleId());
+//        }
         return users;
     }
 

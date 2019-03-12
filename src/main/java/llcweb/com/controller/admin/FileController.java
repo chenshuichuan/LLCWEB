@@ -1,28 +1,18 @@
 package llcweb.com.controller.admin;
 
-import llcweb.com.dao.repository.FileRepository;
-import llcweb.com.domain.models.File;
+import llcweb.com.dao.repository.FilesRepository;
+import llcweb.com.domain.models.Files;
 import llcweb.com.exception.BusinessException;
-import llcweb.com.service.FileService;
-import llcweb.com.tools.StringUtil;
+import llcweb.com.service.FilesService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,9 +27,9 @@ public class FileController {
     private final static Logger logger=LoggerFactory.getLogger(FileController.class);
 
     @Autowired
-    private FileService fileService;
+    private FilesService filesService;
     @Autowired
-    private FileRepository fileRepository;
+    private FilesRepository fileRepository;
 
     /**
      * 获取文件链接
@@ -56,13 +46,13 @@ public class FileController {
         }
 
         //获取文件
-        File file=fileRepository.findOne(id);
+        Files file=fileRepository.findOne(id);
         if(file==null){
             map.put("result",0);
             map.put("message","找不到文件！");
         }else{ //获取文件输出流
             try {
-                fileService.getOutputStream(file.getPath(),response);
+                filesService.getOutputStream(file.getUrl(),response);
             } catch (FileNotFoundException e) {
                 map.put("result",0);
                 map.put("message","找不到该文件！");
@@ -97,13 +87,13 @@ public class FileController {
         //String enFileName = URLEncoder.encode(filename,"utf-8");
         System.out.println("/getFileById id="+idStr);
         int id = Integer.parseInt(idStr);
-        File file =  fileRepository.findOne(id);
-        if(file!=null&&file.getPath()!=null){
+        Files file =  fileRepository.findOne(id);
+        if(file!=null&&file.getUrl()!=null){
             //设置Content-Disposition
-            response.setHeader("Content-Disposition", "attachment;filename="+file.getOriginalName());
+            response.setHeader("Content-Disposition", "attachment;filename="+file.getFileName());
             //读取目标文件，通过response将目标文件写到客户端
             //读取文件
-            String fileName = new String(file.getPath().getBytes("UTF-8"),encoding);
+            String fileName = new String(file.getFileName().getBytes("UTF-8"),encoding);
             InputStream in = new FileInputStream(fileName);
             OutputStream out = response.getOutputStream();
             //写文件
@@ -134,7 +124,7 @@ public class FileController {
         }
 
         //获取文件
-        File file=fileRepository.findOne(id);
+        Files file=fileRepository.findOne(id);
         if(file==null){
             map.put("result",0);
             map.put("message","找不到文件！");

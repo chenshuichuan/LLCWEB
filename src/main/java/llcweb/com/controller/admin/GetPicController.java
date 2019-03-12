@@ -10,8 +10,8 @@ import javax.activation.MimetypesFileTypeMap;
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletResponse;
 
-import llcweb.com.dao.repository.ImageRepository;
-import llcweb.com.domain.models.Image;
+import llcweb.com.dao.repository.FilesRepository;
+import llcweb.com.domain.models.Files;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +32,7 @@ public class GetPicController {
     private HttpServletResponse response;
 
     @Autowired
-    private ImageRepository imageRepository;
+    private FilesRepository filesRepository;
 
     /**
      * @param id 根据图片的id读取图片流并发回页面
@@ -47,7 +47,7 @@ public class GetPicController {
         logger.debug("getPic:id=" + id);
         //获取图片信息
         try {
-            Image pic = imageRepository.findOne(id);
+            Files pic = filesRepository.findOne(id);
             if (pic == null) {
                 responseErrorMessage(response, "pic not exist");
                 return;
@@ -81,12 +81,12 @@ public class GetPicController {
 
         try {
 
-            Image pic = imageRepository.findOne(pic_code);
+            Files pic = filesRepository.findOne(pic_code);
             if (pic == null){
                 throw new RuntimeException("pic not exist");
             }
-            String picUrl = pic.getPath();
-            picUrl = env.getProperty("image.location") + picUrl;
+            String picUrl = pic.getUrl();
+            //picUrl = env.getProperty("image.location") + picUrl;
 
 
             //读取图片文件
@@ -136,14 +136,14 @@ public class GetPicController {
      * @param pic
      * @throws IOException
      */
-    private void sendPic(Image pic) throws IOException {
+    private void sendPic(Files pic) throws IOException {
         if (pic == null) {
             responseErrorMessage(response, "pic not exist");
             return;
         }
-        String picUrl = pic.getPath();
+        String picUrl = pic.getUrl();
 
-        picUrl = env.getProperty("pic.root.path") + picUrl;
+        //picUrl = env.getProperty("pic.root.path") + picUrl;
         char newChar = '/';
         char oldChar = '\\';
         picUrl = picUrl.replace(oldChar, newChar);

@@ -33,7 +33,7 @@
                         <tbody>
                         <tr>
                             <td class="td-first">申请人:</td>
-                            <td class="td-last" th:text="${software.appliPeople}">作者(author)</td>
+                            <td class="td-last">广东工业大学</td>
                         </tr>
                         <tr>
                             <td class="td-first">申请日期:</td>
@@ -42,7 +42,7 @@
                         </tr>
                         <tr>
                             <td class="td-first">申请号:</td>
-                            <td class="td-last" th:text="${software.appliNum}">作者(date)</td>
+                            <td class="td-last" th:text="${software.publicNum}">作者(date)</td>
                         </tr>
                         <tr>
                             <td class="td-first">公开日:</td>
@@ -62,7 +62,7 @@
             </div>
             <div th:if="${image}" align="center" style="width:1000px;margin-left: 260px;margin-top: 10px;">
                 <div style="text-align: left;">软著授权书：</div>
-                <img style="max-width: 800px;max-height: 800px;" th:src="${'/'+image.path}">
+                <img style="max-width: 800px;max-height: 800px;" th:src="${'/images/'+image.fileName+'.'+image.suffix}">
             </div>
         </div>
 

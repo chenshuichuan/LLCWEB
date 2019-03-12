@@ -13,10 +13,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,115 +28,6 @@ public class ActivityController {
     private ActivityService activityService;
     @Resource
     private DocumentRepository documentRepository;
-
-    /**
-     * @Author haien
-     * @Description 保存活动记录
-     * @Date 2018/10/6
-     * @Param [request, response]
-     * @return java.util.Map<java.lang.String,java.lang.Object>
-     **/
-    @RequestMapping(value="/save",method=RequestMethod.POST)
-    public Map<String,Object> save(HttpServletRequest request){
-        Map<String,Object> map=new HashMap<>();
-
-        String id=request.getParameter("id");
-        String title=request.getParameter("title");
-
-        //作者、时间。直接从后台获取不用传输
-        //String author=request.getParameter("author");
-        String peopleList=request.getParameter("peopleList");
-        String startDate1=request.getParameter("startDate");
-        String endDate1=request.getParameter("endDate");
-        String introduction1=request.getParameter("introduction");
-        String group=request.getParameter("model");
-        String activityType=request.getParameter("activityType");
-        String isPublish1=request.getParameter("isPublish");
-        //StringUtil.isNull(author)||
-        if(StringUtil.isNull(title)||
-                StringUtil.isNull(peopleList)||StringUtil.isNull(startDate1)||
-                StringUtil.isNull(endDate1)||StringUtil.isNull(introduction1)||
-                StringUtil.isNull(group)||StringUtil.isNull(activityType)||
-                StringUtil.isNull(activityType)||StringUtil.isNull(isPublish1)){
-            map.put("result", 0);
-            map.put("message", "保存失败,信息不完整！");
-            return map;
-        }
-
-        int introduction=Integer.parseInt(introduction1);
-        int isPublish=Integer.parseInt(isPublish1);
-        Date startDate=null;
-        Date endDate=null;
-        try {
-            if(!StringUtil.isNull(startDate1)){
-                startDate=new SimpleDateFormat("yyyy-MM-dd").parse(startDate1);
-            }
-            if(!StringUtil.isNull(endDate1)) {
-                endDate = new SimpleDateFormat("yyyy-MM-dd").parse(endDate1);
-            }
-        } catch (ParseException e) { //不以“-”格式输入日期则无法正确转换
-            e.printStackTrace();
-            map.put("result", 0);
-            map.put("message", "日期格式错误！");
-            return map;
-        }
-
-        Activity activity=null;
-        //更新
-        if(!StringUtil.isNull(id)&&Integer.parseInt(id)>0){
-            logger.info("更新记录--id="+id+"title="+title+"author=+author");
-            activity = activityRepository.findOne(Integer.parseInt(id));
-            if(activity==null){
-                map.put("result", 0);
-                map.put("message", "查无记录！");
-                return map;
-            }
-        }
-        //添加
-        else {
-            logger.info("新增记录--id="+id+"title="+title);
-            activity = new Activity();
-        }
-
-       // activity.setAuthor(usersService.getCurrentUser().getUsername());
-        activity.setPeopleList(peopleList);
-        activity.setTitle(title);
-        activity.setStartDate(startDate);
-        activity.setEndDate(endDate);
-        activity.setIntroduction(introduction);
-        activity.setActivityType(activityType);
-        activity.setModel(group);
-        activity.setIsPublish(isPublish);
-        activityRepository.save(activity);
-
-        map.put("result", 1);
-        map.put("message", "成功保存记录！");
-        logger.info("成功保存记录！");
-
-        return map;
-    }
-
-    @RequestMapping("/delete")
-    public Map<String,Object> delete(@RequestParam("id")Integer id){
-        Map<String,Object> map=new HashMap<>();
-
-        logger.info("删除记录：id="+id);
-
-        Activity activity=activityRepository.findOne(id);
-        if (activity == null) {
-            map.put("result", 0);
-            logger.info("删除记录失败");
-            map.put("message", "删除记录失败！");
-        }else{
-            activityRepository.delete(id);
-            documentRepository.delete(activity.getIntroduction());
-            logger.info("成功删除记录");
-            map.put("result", 1);
-            map.put("message", "成功删除记录！");
-        }
-
-        return map;
-    }
 
     /**
      * @Author haien

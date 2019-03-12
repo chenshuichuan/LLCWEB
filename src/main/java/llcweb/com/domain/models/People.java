@@ -1,211 +1,228 @@
 package llcweb.com.domain.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
-/***********************************************************************
- * Module:  People.java
- * Author:  Ricardo
- * Purpose: Defines the Class People
- ***********************************************************************/
 import javax.persistence.*;
+import java.util.Date;
 
+/**
+ * 人员管理表 llc_people
+ *
+ * @author ricardo
+ * @date 2019-03-09
+ */
 @Entity
-@Table(name = "people")
+@Table(name = "llc_people" )
 public class People {
+    private static final long serialVersionUID = 1L;
+
     /**
      * 人物id
-     **/
+     */
     @Id
-    @GeneratedValue
-    private int id;
-
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id" )
+    private Integer id;
     /**
-
-     * 人物姓名
+     * 姓名
      */
+    @Column(name = "name" )
     private String name;
-
     /**
-     * 人物头像路径(关联image表)
+     * 手机号
      */
-    private int portrait;
-
-    /**
-     * 职称，教授、副教授、讲师、博士后、博士、硕士，本科生
-     */
-    private String position;
-
-    /**
-     * 个人简介（关联document表）
-     */
-    private int introduction;
-
-    /**
-     * 对于本科生、硕士生、博士生是届数；讲师，教授，等是加入年份
-     */
-    private int grade;
-
-    /**
-     * 手机
-     */
-    @Column(length = 11)
+    @Column(name = "phone" )
     private String phone;
-
     /**
-     * 邮箱
+     * y邮箱
      */
-    @Column(length = 30)
+    @Column(name = "email" )
     private String email;
-
     /**
-     * 性别
+     * 人物头像图片路径，关联image表
      */
-    private String sex;
-
+    @Column(name = "portrait" )
+    private Integer portrait;
     /**
-     * 行政职务
+     * 职位，教授、副教授、讲师、博士后、博士、硕士，本科生
      */
-    private String adminPosition;
-
+    @Column(name = "position" )
+    private String position;
     /**
-     * 最高学历
+     * 关联document表
      */
-    private String highestDegree;
-
+    @Column(name = "introduction" )
+    private Integer introduction;
     /**
-     * 研究领域
+     * 本科生、硕士生、博士生是届数；讲师，教授，等是加入年份
      */
+    @Column(name = "grade" )
+    private Integer grade;
+    /**
+     * 研究方向
+     */
+    @Column(name = "research_field" )
     private String researchField;
-
     /**
      * 学术头衔
      */
+    @Column(name = "academic_title" )
     private String academicTitle;
+    /**
+     * 行政职务
+     */
+    @Column(name = "admin_position" )
+    private String adminPosition;
+    /**
+     * 最高学历
+     */
+    @Column(name = "highest_degree" )
+    private String highestDegree;
+    /**
+     * 性别
+     */
+    @Column(name = "sex" )
+    private String sex;
+    /**
+     * 更新时间
+     */
+    @Column(name = "update_time" )
+    private Date updateTime;
 
     public People() {
-
+        this.updateTime = new Date();
     }
 
-    public People(String name, String position, int grade) {
-        this.name = name;
-        this.position = position;
-        this.grade = grade;
-    }
-
-    public People(String name, int portrait, String position, int introduction, int grade) {
-        this.name = name;
-        this.portrait = portrait;
-        this.position = position;
-        this.introduction = introduction;
-        this.grade = grade;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public int getPortrait() {
-        return portrait;
-    }
-
-    public String getPosition() {
-        return position;
-    }
-
-    public int getIntroduction() {
-        return introduction;
-    }
-
-    public int getGrade() {
-        return grade;
-    }
-
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Integer getId() {
+        return id;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public void setPortrait(int portrait) {
-        this.portrait = portrait;
-    }
-
-    public void setPosition(String position) {
-        this.position = position;
-    }
-
-    public void setIntroduction(int introduction) {
-        this.introduction = introduction;
-    }
-
-    public void setGrade(int grade) {
-        this.grade = grade;
-    }
-
-    public String getPhone() {
-        return phone;
+    public String getName() {
+        return name;
     }
 
     public void setPhone(String phone) {
         this.phone = phone;
     }
 
-    public String getEmail() {
-        return email;
+    public String getPhone() {
+        return phone;
     }
 
     public void setEmail(String email) {
         this.email = email;
     }
 
-    public String getSex() {
-        return sex;
+    public String getEmail() {
+        return email;
     }
 
-    public void setSex(String sex) {
-        this.sex = sex;
+    public void setPortrait(Integer portrait) {
+        this.portrait = portrait;
     }
 
-    public String getAdminPosition() {
-        return adminPosition;
+    public Integer getPortrait() {
+        return portrait;
     }
 
-    public void setAdminPosition(String adminPosition) {
-        this.adminPosition = adminPosition;
+    public void setPosition(String position) {
+        this.position = position;
     }
 
-    public String getHighestDegree() {
-        return highestDegree;
+    public String getPosition() {
+        return position;
     }
 
-    public void setHighestDegree(String highestDegree) {
-        this.highestDegree = highestDegree;
+    public void setIntroduction(Integer introduction) {
+        this.introduction = introduction;
     }
 
-    public String getResearchField() {
-        return researchField;
+    public Integer getIntroduction() {
+        return introduction;
+    }
+
+    public void setGrade(Integer grade) {
+        this.grade = grade;
+    }
+
+    public Integer getGrade() {
+        return grade;
     }
 
     public void setResearchField(String researchField) {
         this.researchField = researchField;
     }
 
-    public String getAcademicTitle() {
-        return academicTitle;
+    public String getResearchField() {
+        return researchField;
     }
 
     public void setAcademicTitle(String academicTitle) {
         this.academicTitle = academicTitle;
     }
+
+    public String getAcademicTitle() {
+        return academicTitle;
+    }
+
+    public void setAdminPosition(String adminPosition) {
+        this.adminPosition = adminPosition;
+    }
+
+    public String getAdminPosition() {
+        return adminPosition;
+    }
+
+    public void setHighestDegree(String highestDegree) {
+        this.highestDegree = highestDegree;
+    }
+
+    public String getHighestDegree() {
+        return highestDegree;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
+                .append("id" , getId())
+                .append("name" , getName())
+                .append("phone" , getPhone())
+                .append("email" , getEmail())
+                .append("portrait" , getPortrait())
+                .append("position" , getPosition())
+                .append("introduction" , getIntroduction())
+                .append("grade" , getGrade())
+                .append("researchField" , getResearchField())
+                .append("academicTitle" , getAcademicTitle())
+                .append("adminPosition" , getAdminPosition())
+                .append("highestDegree" , getHighestDegree())
+                .append("sex" , getSex())
+                .append("updateTime" , getUpdateTime())
+                .toString();
+    }
 }
-
-

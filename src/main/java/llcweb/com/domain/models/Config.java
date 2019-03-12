@@ -3,10 +3,7 @@ package llcweb.com.domain.models;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * 参数配置表 sys_config
@@ -21,19 +18,35 @@ public class Config
 
     /** 参数主键 */
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "config_id" )
     private Long configId;
 
     /** 参数名称 */
+    @Column(name = "config_name" )
     private String configName;
 
     /** 参数键名 */
+    @Column(name = "config_key" )
     private String configKey;
 
     /** 参数键值 */
+    @Column(name = "config_value" )
     private String configValue;
 
     /** 系统内置（Y是 N否） */
+    @Column(name = "config_type" )
     private String configType;
+
+    public Config() {
+    }
+    public Config(Long configId, String configName, String configKey, String configValue, String configType) {
+        this.configId = configId;
+        this.configName = configName;
+        this.configKey = configKey;
+        this.configValue = configValue;
+        this.configType = configType;
+    }
 
     public Long getConfigId()
     {

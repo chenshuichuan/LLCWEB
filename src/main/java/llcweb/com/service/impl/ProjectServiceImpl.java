@@ -34,48 +34,6 @@ public class ProjectServiceImpl implements ProjectService {
 	@Autowired
 	private ProjectRepository projectRepository;
 
-	@Override
-	public Page<Project> findAll(UsefulProject project, int pageNum, int pageSize) {
-		
-		
-        //按时间排序
-        Pageable pageable=new PageRequest(pageNum,pageSize, Sort.Direction.DESC,"startDate");
-       
-		
-        Page<Project> projectList = projectRepository.findAll(new Specification<Project>() {
-
-			@Override
-			public Predicate toPredicate(Root<Project> root, CriteriaQuery<?> query, CriteriaBuilder cd) {
-				 Predicate predicate = cd.conjunction();
-				 if (project.getFirstDate() != null) {
-	                    predicate.getExpressions().add(cd.greaterThanOrEqualTo(root.get("startDate"), project.getFirstDate()));
-	                }
-	             if (project.getLastDate() != null) {
-	                    predicate.getExpressions().add(cd.lessThanOrEqualTo(root.get("startDate"), project.getLastDate()));
-	                }
-				 if(project.getResponsiblePerson() != null) {
-					 predicate.getExpressions().add(cd.like(root.get("responsiblePeople"),"%" +  project.getResponsiblePerson() + "%"));
-				 }
-				 if(project.getRequireNum() != null) {
-					 predicate.getExpressions().add(cd.like(root.get("requireNum"),"%" +  project.getRequireNum() + "%"));
-				 }
-				 if(project.getProjectType() != null) {
-					 predicate.getExpressions().add(cd.like(root.get("projectType"),"%" +  project.getProjectType() + "%"));
-				 }
-				 if(project.getProjectName() != null) {
-					 predicate.getExpressions().add(cd.like(root.get("projectName"),"%" +  project.getProjectName() + "%"));
-				 }
-				 if(project.getTeam() != null) {
-					 predicate.getExpressions().add(cd.like(root.get("team"),"%" +  project.getTeam() + "%"));
-				 }
-				return predicate;
-				
-			}
-        }, pageable);
-        
-		return projectList;
-	}
-	
 	/**
 	 *  添加项目
 	 */

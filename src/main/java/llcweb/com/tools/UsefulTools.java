@@ -23,8 +23,8 @@ public class UsefulTools {
         List<ProductInfo>productInfoList = new ArrayList<>();
 
         for (Paper patent:patentList){
-            productInfoList.add(new ProductInfo(patent.getId(),patent.getTitle(),patent.getDate(),
-                    patent.getIntroduction(),patent.getAuthorList(),patent.getState()));
+            productInfoList.add(new ProductInfo(patent.getId(),patent.getTitle(),patent.getPublicDate(),
+                    Integer.toString(patent.getIntroduction()),patent.getAuthorList(),patent.getState()));
         }
         return productInfoList;
     }
@@ -33,7 +33,7 @@ public class UsefulTools {
 
        for (Patent patent:patentList){
            productInfoList.add(new ProductInfo(patent.getId(),patent.getTitle(),patent.getPublicDate(),
-                   patent.getIntroduction(),patent.getAuthorList(),patent.getState()));
+                   Integer.toString(patent.getIntroduction()),patent.getAuthorList(),patent.getState()));
        }
        return productInfoList;
    }
@@ -43,7 +43,7 @@ public class UsefulTools {
 
         for (Software patent:patentList){
             productInfoList.add(new ProductInfo(patent.getId(),patent.getTitle(),patent.getPublicDate(),
-                    patent.getIntroduction(),patent.getAuthorList(),patent.getState()));
+                    patent.getIntroduction(),patent.getAuthorList(),patent.getStatus()));
         }
         return productInfoList;
     }
@@ -52,7 +52,7 @@ public class UsefulTools {
         List<ProductInfo>productInfoList = new ArrayList<>();
 
         for (Project patent:patentList){
-            productInfoList.add(new ProductInfo(patent.getId(),patent.getProjectName(),patent.getStartDate(),
+            productInfoList.add(new ProductInfo(patent.getId(),patent.getName(),patent.getStartDate(),
                     patent.getResearchField(),patent.getMembers(),patent.getStatus()));
         }
         return productInfoList;
@@ -62,7 +62,7 @@ public class UsefulTools {
         List<ProductInfo>productInfoList = new ArrayList<>();
 
         for (Activity patent:patentList){
-            productInfoList.add(new ProductInfo(patent.getId(),patent.getTitle(),patent.getStartDate(),
+            productInfoList.add(new ProductInfo(patent.getId(),patent.getName(),patent.getStartDate(),
                     patent.getAuthor(),patent.getPeopleList(),patent.getActivityType()));
         }
         return productInfoList;

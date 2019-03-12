@@ -16,30 +16,6 @@ import java.util.List;
  */
 
 public interface PaperRepository extends JpaRepository<Paper,Integer>{
-	
-	//分页查询
-	Page<Paper> findAll(Specification<Paper> spec, Pageable pageable);
-	
-/*	@Query("from Paper p where p.title like %?1%"
-			+ "or p.authorList like %?1%"
-			+ "or p.belongProject like %?1%"
-			+ "or p.periodical like %?1%"
-			)
-	Page<Paper> findByOneKey(String key, Pageable pageable);*/
-
-	Page<Paper> findByAuthorList(String userName, Pageable pageable);
-	
-	/*
-	 * 模糊查询
-	 */
-		@Query(value = "SELECT p from Paper p where p.title like %?1% "
-				+ "or p.authorList like %?1% "
-				+ "or p.belongProject like %?1% "
-				+ "or p.periodical like %?1% ")
-		Page<Paper> findByOneKey(String key, Pageable pageable);
-
-
-	//Page<Paper> findByTeam(String string, Pageable pageable);
 
 	/**
 	 * @Author haien
@@ -48,7 +24,7 @@ public interface PaperRepository extends JpaRepository<Paper,Integer>{
 	 * @Param [count]
 	 * @return java.util.List<llcweb.com.domain.models.Patent>
 	 **/
-	@Query(value="select * from paper where state='发表' order by date desc limit ?1",nativeQuery=true)
+	@Query(value="select * from llc_paper where state='发表' order by public_date desc limit ?1",nativeQuery=true)
 	List<Paper> getLatest(int count);
 	
 }

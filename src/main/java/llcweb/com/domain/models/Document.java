@@ -1,120 +1,144 @@
 package llcweb.com.domain.models;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
 import javax.persistence.*;
 import java.util.Date;
 
 /**
- * 文档类
+ * 文档管理表 llc_document
+ *
+ * @author ricardo
+ * @date 2019-03-09
  */
 @Entity
-@Table(name="document")
-public  class Document {
+@Table(name = "llc_document" )
+public class Document{
+    private static final long serialVersionUID = 1L;
 
-   //文章id
-   @Id
-   @GeneratedValue
-   private Integer id;
-   //作者id
-   private Integer authorId = 0;
-   //作者
-   private String author;
-   //文章标题
-   private String title;
-   //文章内容
-   private String content;
-   //创建时间
-   @Column(columnDefinition="DATE") //指定字段类型和命名
-   private Date createDate;
-   //修改时间
-   @Column(columnDefinition="DATE")
-   private Date modifyDate;
-   //注释
-   private String infor;
-   //组别
-   private String model;
+    /**
+     * 文档id
+     */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id" )
+    private Integer id;
+    /**
+     * 标题
+     */
+    @Column(name = "title" )
+    private String title;
+    /**
+     * 作者名称
+     */
+    @Column(name = "author" )
+    private String author;
+    /**
+     * 内容
+     */
+    @Column(name = "content" )
+    private String content;
+    /**
+     * 文档注释
+     */
+    @Column(name = "infor" )
+    private String infor;
+    /**
+     * 组别
+     */
+    @Column(name = "model" )
+    private String model;
+    /**
+     * 创建时间
+     */
+    @Column(name = "create_time" )
+    private Date createTime;
+    /**
+     * 更新时间
+     */
+    @Column(name = "update_time" )
+    private Date updateTime;
 
-   public Document() {
-   }
+    public Document() {
+        this.updateTime = new Date();
+    }
 
-   public Document(String author, String title, String content, Date createDate, Date modifyDate, String infor, String model) {
-      this.author = author;
-      this.title = title;
-      this.content = content;
-      this.createDate = createDate;
-      this.modifyDate = modifyDate;
-      this.infor = infor;
-      this.model = model;
-   }
-   public Integer getId() {
-      return id;
-   }
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-   public void setId(Integer id) {
-      this.id = id;
-   }
+    public Integer getId() {
+        return id;
+    }
 
-   public Integer getAuthorId() {
-      return authorId;
-   }
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-   public void setAuthorId(Integer authorId) {
-      this.authorId = authorId;
-   }
+    public String getTitle() {
+        return title;
+    }
 
-   public String getAuthor() {
-      return author;
-   }
+    public void setAuthor(String author) {
+        this.author = author;
+    }
 
-   public void setAuthor(String author) {
-      this.author = author;
-   }
+    public String getAuthor() {
+        return author;
+    }
 
-   public String getTitle() {
-      return title;
-   }
+    public void setContent(String content) {
+        this.content = content;
+    }
 
-   public void setTitle(String title) {
-      this.title = title;
-   }
+    public String getContent() {
+        return content;
+    }
 
-   public String getContent() {
-      return content;
-   }
+    public void setInfor(String infor) {
+        this.infor = infor;
+    }
 
-   public void setContent(String content) {
-      this.content = content;
-   }
-
-   public Date getCreateDate() {
-      return createDate;
-   }
-
-   public void setCreateDate(Date createDate) {
-      this.createDate = createDate;
-   }
-
-   public Date getModifyDate() {
-      return modifyDate;
-   }
-
-   public void setModifyDate(Date modifyDate) {
-      this.modifyDate = modifyDate;
-   }
-
-   public String getInfor() {
-      return infor;
-   }
-
-   public void setInfor(String infor) {
-      this.infor = infor;
-   }
-
-    public String getModel() {
-        return model;
+    public String getInfor() {
+        return infor;
     }
 
     public void setModel(String model) {
         this.model = model;
     }
 
+    public String getModel() {
+        return model;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
+                .append("id" , getId())
+                .append("title" , getTitle())
+                .append("author" , getAuthor())
+                .append("content" , getContent())
+                .append("infor" , getInfor())
+                .append("model" , getModel())
+                .append("createTime" , getCreateTime())
+                .append("updateTime" , getUpdateTime())
+                .toString();
+    }
 }

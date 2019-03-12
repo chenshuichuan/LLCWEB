@@ -78,7 +78,7 @@
                 </div>
             </div>
             <div th:if="${image}" align="center" style="width:1000px;margin-top: 5px;margin-left: 260px;">
-                <img style="max-width: 800px;max-height: 800px;" th:src="${'/'+image.path}">
+                <img style="max-width: 800px;max-height: 800px;" th:src="${'/images/'+image.fileName+'.'+image.suffix}">
             </div>
         </div>
         <div style="margin-top: 50px;">

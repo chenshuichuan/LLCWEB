@@ -1,151 +1,226 @@
 package llcweb.com.domain.models;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
 import javax.persistence.*;
 import java.util.Date;
 
 /**
- * @Author haien
- * @Description 论文类
- * @Date 2018/10/7
- **/
+ * 论文成果表 llc_paper
+ *
+ * @author ricardo
+ * @date 2019-03-09
+ */
 @Entity
-@Table(name = "paper")
-public class Paper {
+@Table(name = "llc_paper" )
+public class Paper{
+    private static final long serialVersionUID = 1L;
+
+    /**  */
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id" )
     private Integer id;
-
-    //论文标题
-    @Column(name = "title", length = 64)
+    /**
+     * 题目
+     */
+    @Column(name = "title" )
     private String title;
-
-    //发表日期
-    @Column(name = "date")
-    private Date date;
-
-    //文章简介
-    @Column(name = "introduction", length = 255)
-    private String introduction;
-
-    //作者姓名列表，对应people表的姓名，也可以是外面合作人员
-    @Column(name = "author_list", length = 64)
+    /**
+     * 发表日期
+     */
+    @Column(name = "public_date" )
+    private Date publicDate;
+    /**
+     * 论文介绍
+     */
+    @Column(name = "introduction" )
+    private Integer introduction;
+    /**
+     * 作者列表
+     */
+    @Column(name = "author_list" )
     private String authorList;
-
-    //原文链接
-    @Column(name = "original_link", length = 64)
+    /**
+     * 原文链接
+     */
+    @Column(name = "original_link" )
     private String originalLink;
-
-    //源码链接
-    @Column(name = "source_link", length = 64)
-    private String sourceLink;
-
-    //所属项目id
-    @Column(name = "belong_project", length = 11)
+    /**
+     * 论文文件
+     */
+    @Column(name = "source_file" )
+    private Integer sourceFile;
+    /**
+     * 所属项目id
+     */
+    @Column(name = "belong_project" )
     private String belongProject;
-
-    //发表期刊
-    @Column(name = "periodical", length = 64)
+    /**
+     * 发表期刊
+     */
+    @Column(name = "periodical" )
     private String periodical;
+    /**
+     * 期刊类别
+     */
+    @Column(name = "periodical_type" )
     private String periodicalType;
+    /**
+     * 当前状态
+     */
+    @Column(name = "state" )
     private String state;
-
-    public String getPeriodicalType() {
-        return periodicalType;
-    }
-
-    public void setPeriodicalType(String periodicalType) {
-        this.periodicalType = periodicalType;
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = state;
-    }
+    /**
+     * 项目组
+     */
+    @Column(name = "model" )
+    private String model;
+    /**
+     * 是否发布
+     */
+    @Column(name = "is_publish" )
+    private Integer isPublish;
+    /**
+     * 更新时间
+     */
+    @Column(name = "update_time" )
+    private Date updateTime;
 
     public Paper() {
-    }
-
-    public Integer getId() {
-        return id;
+        this.updateTime = new Date();
     }
 
     public void setId(Integer id) {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public Integer getId() {
+        return id;
     }
 
     public void setTitle(String title) {
         this.title = title;
     }
 
-    public Date getDate() {
-        return date;
+    public String getTitle() {
+        return title;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setPublicDate(Date publicDate) {
+        this.publicDate = publicDate;
     }
 
-    public String getIntroduction() {
-        return introduction;
+    public Date getPublicDate() {
+        return publicDate;
     }
 
-    public void setIntroduction(String introduction) {
+    public void setIntroduction(Integer introduction) {
         this.introduction = introduction;
     }
 
-    public String getAuthorList() {
-        return authorList;
+    public Integer getIntroduction() {
+        return introduction;
     }
 
     public void setAuthorList(String authorList) {
         this.authorList = authorList;
     }
 
-    public String getOriginalLink() {
-        return originalLink;
+    public String getAuthorList() {
+        return authorList;
     }
 
     public void setOriginalLink(String originalLink) {
         this.originalLink = originalLink;
     }
 
-    public String getBelongProject() {
-        return belongProject;
+    public String getOriginalLink() {
+        return originalLink;
+    }
+
+    public void setSourceFile(Integer sourceFile) {
+        this.sourceFile = sourceFile;
+    }
+
+    public Integer getSourceFile() {
+        return sourceFile;
     }
 
     public void setBelongProject(String belongProject) {
         this.belongProject = belongProject;
     }
 
-    public String getSourceLink() {
-        return sourceLink;
-    }
-
-    public void setSourceLink(String sourceLink) {
-        this.sourceLink = sourceLink;
-    }
-
-    public String getPeriodical() {
-        return periodical;
+    public String getBelongProject() {
+        return belongProject;
     }
 
     public void setPeriodical(String periodical) {
         this.periodical = periodical;
     }
 
-    @Override
-    public String toString() {
-        return "Paper [id=" + id + ", title=" + title + ", date=" + date + ", introduction=" + introduction
-                + ", authorList=" + authorList + ", originalLink=" + originalLink + ", belongProject=" + belongProject
-                + ", sourceLink=" + sourceLink + ", periodical=" + periodical + "]";
+    public String getPeriodical() {
+        return periodical;
     }
 
+    public void setPeriodicalType(String periodicalType) {
+        this.periodicalType = periodicalType;
+    }
 
+    public String getPeriodicalType() {
+        return periodicalType;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setIsPublish(Integer isPublish) {
+        this.isPublish = isPublish;
+    }
+
+    public Integer getIsPublish() {
+        return isPublish;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
+                .append("id" , getId())
+                .append("title" , getTitle())
+                .append("publicDate" , getPublicDate())
+                .append("introduction" , getIntroduction())
+                .append("authorList" , getAuthorList())
+                .append("originalLink" , getOriginalLink())
+                .append("sourceFile" , getSourceFile())
+                .append("belongProject" , getBelongProject())
+                .append("periodical" , getPeriodical())
+                .append("periodicalType" , getPeriodicalType())
+                .append("state" , getState())
+                .append("model" , getModel())
+                .append("isPublish" , getIsPublish())
+                .append("updateTime" , getUpdateTime())
+                .toString();
+    }
 }

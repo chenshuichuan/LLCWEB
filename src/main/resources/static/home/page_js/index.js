@@ -12,7 +12,7 @@ $(document).ready(function () {
 
     //公告通知
     var infor = getActivities("/activity/getActivities","activityType=会议纪要&count=6");
-    fillTheInfo("#con1", infor,"/admin/activity/");
+    fillTheInfo("#con1", infor,"#");
 
     //科学研究
     var projects = getTopMes("/project/getLatest",7);

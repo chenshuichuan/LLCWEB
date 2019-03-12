@@ -1,95 +1,137 @@
 package llcweb.com.domain.models;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
 import javax.persistence.*;
 import java.util.Date;
 
 /**
- * @Author haien
- * @Description 访客留言类
- * @Date 2018/10/6
- **/
+ * 访客留言表 llc_comments
+ *
+ * @author ricardo
+ * @date 2019-03-09
+ */
 @Entity
-@Table(name="comments")
+@Table(name = "llc_comments" )
 public class Comments {
-   @Id
-   @GeneratedValue
-   private int id;
-   //
-   private String name;
-   //
-   private String contact;
-   //
-   private String content;
+    private static final long serialVersionUID = 1L;
 
-   private Date date;
-   private String ipAddress;//访客ip地址
-   private int isView;//标记是否已经处理该留言
+    /**  */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id" )
+    private Integer id;
+    /**
+     * 姓名
+     */
+    @Column(name = "name" )
+    private String name;
+    /**
+     * 留言内容
+     */
+    @Column(name = "content" )
+    private String content;
+    /**
+     * 联系方式
+     */
+    @Column(name = "contact" )
+    private String contact;
+    /**
+     * 留言时间
+     */
+    @Column(name = "create_time" )
+    private Date createTime;
+    /**
+     * 管理员是否已经查看过
+     */
+    @Column(name = "is_view" )
+    private Integer isView;
+    /**
+     * ip地址
+     */
+    @Column(name = "ip_address" )
+    private String ipAddress;
 
-   public Comments() {
-   }
+    public Comments() {this.createTime = new Date();
 
-   public Comments(String name, String contact, String content, Date date, String ipAddress, int isView) {
-      this.name = name;
-      this.contact = contact;
-      this.content = content;
-      this.date = date;
-      this.ipAddress = ipAddress;
-      this.isView = isView;
-   }
+    }
 
-   public int getId() {
-      return id;
-   }
+    public Comments(String name,String contact, String content,
+                    Date createTime, String ipAddress, Integer isView ) {
+        this.name = name;
+        this.content = content;
+        this.contact = contact;
+        this.createTime = createTime;
+        this.isView = isView;
+        this.ipAddress = ipAddress;
+    }
 
-   public void setId(int id) {
-      this.id = id;
-   }
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-   public String getName() {
-      return name;
-   }
+    public Integer getId() {
+        return id;
+    }
 
-   public void setName(String name) {
-      this.name = name;
-   }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-   public String getContact() {
-      return contact;
-   }
+    public String getName() {
+        return name;
+    }
 
-   public void setContact(String contact) {
-      this.contact = contact;
-   }
+    public void setContent(String content) {
+        this.content = content;
+    }
 
-   public String getContent() {
-      return content;
-   }
+    public String getContent() {
+        return content;
+    }
 
-   public void setContent(String content) {
-      this.content = content;
-   }
+    public void setContact(String contact) {
+        this.contact = contact;
+    }
 
-   public Date getDate() {
-      return date;
-   }
+    public String getContact() {
+        return contact;
+    }
 
-   public void setDate(Date date) {
-      this.date = date;
-   }
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+    public Date getCreateTime() {
+        return createTime;
+    }
 
-   public String getIpAddress() {
-      return ipAddress;
-   }
+    public void setIsView(Integer isView) {
+        this.isView = isView;
+    }
 
-   public void setIpAddress(String ipAddress) {
-      this.ipAddress = ipAddress;
-   }
+    public Integer getIsView() {
+        return isView;
+    }
 
-   public int getIsView() {
-      return isView;
-   }
+    public void setIpAddress(String ipAddress) {
+        this.ipAddress = ipAddress;
+    }
 
-   public void setIsView(int isView) {
-      this.isView = isView;
-   }
+    public String getIpAddress() {
+        return ipAddress;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
+                .append("id" , getId())
+                .append("name" , getName())
+                .append("content" , getContent())
+                .append("contact" , getContact())
+                .append("createTime" , getCreateTime())
+                .append("isView" , getIsView())
+                .append("ipAddress" , getIpAddress())
+                .toString();
+    }
 }

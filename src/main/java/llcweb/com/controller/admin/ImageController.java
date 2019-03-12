@@ -1,9 +1,9 @@
 package llcweb.com.controller.admin;
 
-import llcweb.com.dao.repository.ImageRepository;
-import llcweb.com.domain.models.Image;
+import llcweb.com.dao.repository.FilesRepository;
+import llcweb.com.domain.models.Files;
 import llcweb.com.exception.BusinessException;
-import llcweb.com.service.ImageService;
+import llcweb.com.service.FilesService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,51 +31,9 @@ public class ImageController {
     private final static Logger logger=LoggerFactory.getLogger(ImageController.class);
 
     @Autowired
-    private ImageService imageService;
+    private FilesService imageService;
     @Autowired
-    private ImageRepository imageRepository;
-
-    /**
-     * 删除图片
-     */
-    /**存在问题：当删除不存在路径的图片记录时，无法成功删除记录*/
-    @RequestMapping("/delete")
-    @Transactional
-    public Map<String,Object> deleteImage(@RequestParam("id")Integer id){
-        Map<String,Object> map=new HashMap<>();
-
-        logger.info("删除图片：id="+id);
-
-        Image image=null;
-        if(id != null && id>0){ //验证参数部分放在controller层，放在service层则删除项目文件、数据库记录分别需要一次验证，更复杂
-            //删除项目文件
-            image=imageRepository.findOne(id);
-            if(image==null){
-                map.put("result",0);
-                map.put("message","找不到该图片！");
-                return map;
-            }
-            try {
-                imageService.deleteResource(image.getPath());
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-                map.put("result",0);
-                map.put("message","找不到该图片！");
-                return map;
-            } catch (BusinessException e) {
-                e.printStackTrace();
-                map.put("result",0);
-                map.put("message",e.getMessage());
-                return map;
-            }
-            //删除数据库记录
-            imageRepository.delete(id);
-        }
-        logger.info("--删除图片"+image.getPath()+"成功--");
-        map.put("result",1);
-        map.put("message","删除成功！");
-        return map;
-    }
+    private FilesRepository filesRepository;
 
     /**
      * 获取图片链接
@@ -92,13 +50,13 @@ public class ImageController {
         }
 
         //获取图片
-        Image image=imageRepository.findOne(id);
+        Files image=filesRepository.findOne(id);
         if(image==null){
             map.put("result",0);
             map.put("message","找不到该图片！");
         }else{ //获取图片输出流
             try {
-                imageService.getOutputStream(image.getPath(),response);
+                imageService.getOutputStream(image.getUrl(),response);
             } catch (FileNotFoundException e) {
                 map.put("result",0);
                 map.put("message","找不到该图片！");
@@ -108,7 +66,7 @@ public class ImageController {
                 map.put("message","格式错误！");
                 return map;
             }
-            logger.info("成功获取图片链接--项目地址:"+image.getPath());
+            //logger.info("成功获取图片链接--项目地址:"+image.getUrl());
             map.put("result",1);
             map.put("message","成功获取图片！");
         }
@@ -121,11 +79,11 @@ public class ImageController {
     @ResponseBody
     public String getImageById(HttpServletRequest request, HttpServletResponse response,Model model
             ,@RequestParam("id")int id) {
-        Image image = imageRepository.findOne(id);
+        Files image = filesRepository.findOne(id);
         if(image==null){
             return "error!";
         }
-        String imgPath = image.getPath();
+        String imgPath = image.getUrl();
         FileInputStream fis = null;
         OutputStream os = null;
         try {

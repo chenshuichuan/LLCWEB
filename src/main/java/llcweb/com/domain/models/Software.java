@@ -1,186 +1,228 @@
 package llcweb.com.domain.models;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
 import javax.persistence.*;
 import java.util.Date;
 
+/**
+ * 软著成果表 llc_software
+ *
+ * @author ricardo
+ * @date 2019-03-09
+ */
 @Entity
-@Table(name = "software")
-public class Software {
+@Table(name = "llc_software" )
+public class Software  {
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * id
+     */
     @Id
-    @GeneratedValue
-    private int id;
-    //标题
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id" )
+    private Integer id;
+    /**
+     * 名称
+     */
+    @Column(name = "title" )
     private String title;
-    //申请日期
-    @Column(columnDefinition = "date")
+    /**
+     * 申请日
+     */
+    @Column(name = "appli_date" )
     private Date appliDate;
-    //摘要
+    /**
+     * 摘要
+     */
+    @Column(name = "introduction" )
     private String introduction;
-    //作者列表
+    /**
+     * 发明人列表
+     */
+    @Column(name = "author_list" )
     private String authorList;
-    //公开链接
-    private String originalLink;
-    //关联的文件id
-    private int sourceFile;
-    //所属项目id
-    private int belongProject;
-    //申请号
-    private String appliNum;
-    //公开号
+    /**
+     * 关联的文件id
+     */
+    @Column(name = "source_file" )
+    private Integer sourceFile;
+    /**
+     * 所属项目
+     */
+    @Column(name = "belong_project" )
+    private String belongProject;
+    /**
+     * 公开号
+     */
+    @Column(name = "public_num" )
     private String publicNum;
-    //公开日
-    @Column(columnDefinition = "date")
+    /**
+     * 公开日
+     */
+    @Column(name = "public_date" )
     private Date publicDate;
-    //代理机构
-    private String agency;
-    //申请人（一般为广东工业大学）
-    private String appliPeople;
-    //状态
-    private String state;
-
+    /**
+     * 状态
+     */
+    @Column(name = "status" )
+    private String status;
+    /**
+     * 权利取得方式
+     */
+    @Column(name = "public_method" )
     private String publicMethod;
+    /**
+     * 权利范围
+     */
+    @Column(name = "right_range" )
     private String rightRange;
-
-    public String getPublicMethod() {
-        return publicMethod;
-    }
-
-    public void setPublicMethod(String publicMethod) {
-        this.publicMethod = publicMethod;
-    }
-
-    public String getRightRange() {
-        return rightRange;
-    }
-
-    public void setRightRange(String rightRange) {
-        this.rightRange = rightRange;
-    }
+    /**
+     * 是否发布
+     */
+    @Column(name = "is_publish" )
+    private Integer isPublish;
+    /**
+     * 更新时间
+     */
+    @Column(name = "update_time" )
+    private Date updateTime;
 
     public Software() {
+        this.updateTime = new Date();
     }
 
-    public Software(String title, Date appliDate, String introduction, String authorList,
-                    String appliNum, String publicNum, Date publicDate) {
-        this.title = title;
-        this.appliDate = appliDate;
-        this.introduction = introduction;
-        this.authorList = authorList;
-        this.appliNum = appliNum;
-        this.publicNum = publicNum;
-        this.publicDate = publicDate;
-        this.appliPeople = appliPeople;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public Integer getId() {
+        return id;
     }
 
     public void setTitle(String title) {
         this.title = title;
     }
 
-    public Date getAppliDate() {
-        return appliDate;
+    public String getTitle() {
+        return title;
     }
 
     public void setAppliDate(Date appliDate) {
         this.appliDate = appliDate;
     }
 
-    public String getIntroduction() {
-        return introduction;
+    public Date getAppliDate() {
+        return appliDate;
     }
 
     public void setIntroduction(String introduction) {
         this.introduction = introduction;
     }
 
-    public String getAuthorList() {
-        return authorList;
+    public String getIntroduction() {
+        return introduction;
     }
 
     public void setAuthorList(String authorList) {
         this.authorList = authorList;
     }
 
-    public String getOriginalLink() {
-        return originalLink;
+    public String getAuthorList() {
+        return authorList;
     }
 
-    public void setOriginalLink(String originalLink) {
-        this.originalLink = originalLink;
-    }
-
-    public int getSourceFile() {
-        return sourceFile;
-    }
-
-    public void setSourceFile(int sourceFile) {
+    public void setSourceFile(Integer sourceFile) {
         this.sourceFile = sourceFile;
     }
 
-    public int getBelongProject() {
-        return belongProject;
+    public Integer getSourceFile() {
+        return sourceFile;
     }
 
-    public void setBelongProject(int belongProject) {
+    public void setBelongProject(String belongProject) {
         this.belongProject = belongProject;
     }
 
-    public String getAppliNum() {
-        return appliNum;
-    }
-
-    public void setAppliNum(String appliNum) {
-        this.appliNum = appliNum;
-    }
-
-    public String getPublicNum() {
-        return publicNum;
+    public String getBelongProject() {
+        return belongProject;
     }
 
     public void setPublicNum(String publicNum) {
         this.publicNum = publicNum;
     }
 
-    public Date getPublicDate() {
-        return publicDate;
+    public String getPublicNum() {
+        return publicNum;
     }
 
     public void setPublicDate(Date publicDate) {
         this.publicDate = publicDate;
     }
 
-    public String getAgency() {
-        return agency;
+    public Date getPublicDate() {
+        return publicDate;
     }
 
-    public void setAgency(String agency) {
-        this.agency = agency;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public String getAppliPeople() {
-        return appliPeople;
+    public String getStatus() {
+        return status;
     }
 
-    public void setAppliPeople(String appliPeople) {
-        this.appliPeople = appliPeople;
+    public void setPublicMethod(String publicMethod) {
+        this.publicMethod = publicMethod;
     }
 
-    public String getState() {
-        return state;
+    public String getPublicMethod() {
+        return publicMethod;
     }
 
-    public void setState(String state) {
-        this.state = state;
+    public void setRightRange(String rightRange) {
+        this.rightRange = rightRange;
+    }
+
+    public String getRightRange() {
+        return rightRange;
+    }
+
+    public void setIsPublish(Integer isPublish) {
+        this.isPublish = isPublish;
+    }
+
+    public Integer getIsPublish() {
+        return isPublish;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
+                .append("id" , getId())
+                .append("title" , getTitle())
+                .append("appliDate" , getAppliDate())
+                .append("introduction" , getIntroduction())
+                .append("authorList" , getAuthorList())
+                .append("sourceFile" , getSourceFile())
+                .append("belongProject" , getBelongProject())
+                .append("publicNum" , getPublicNum())
+                .append("publicDate" , getPublicDate())
+                .append("status" , getStatus())
+                .append("publicMethod" , getPublicMethod())
+                .append("rightRange" , getRightRange())
+                .append("isPublish" , getIsPublish())
+                .append("updateTime" , getUpdateTime())
+                .toString();
     }
 }

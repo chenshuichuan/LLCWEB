@@ -1,7 +1,7 @@
 package llcweb.com.controller.admin;
 
 import llcweb.com.dao.repository.DocumentRepository;
-import llcweb.com.dao.repository.ImageRepository;
+import llcweb.com.dao.repository.FilesRepository;
 import llcweb.com.dao.repository.PeopleRepository;
 import llcweb.com.service.DocumentService;
 import org.slf4j.Logger;
@@ -30,8 +30,6 @@ public class AdminPageController {
     private DocumentService documentService;
     @Autowired
     private PeopleRepository peopleRepository;
-    @Autowired
-    private ImageRepository imageRepository;
 
     @RequestMapping("/test.html")
     public ModelAndView test(){

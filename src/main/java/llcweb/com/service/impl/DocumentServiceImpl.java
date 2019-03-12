@@ -12,7 +12,7 @@ import java.util.List;
 
 
 @Service
-public class DocumentServiceImpl extends ResourceServiceImpl<Document> implements DocumentService{
+public class DocumentServiceImpl implements DocumentService{
     @Autowired
     private DocumentRepository documentRepository;
 

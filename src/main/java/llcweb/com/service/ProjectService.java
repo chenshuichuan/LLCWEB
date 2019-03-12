@@ -15,7 +15,6 @@ import llcweb.com.domain.models.Project;
  */
 public interface ProjectService {
 
-	public Page<Project> findAll(UsefulProject project, int pageNum, int pageSize);
 
 	 public Map<String, Object> add(Project project);
 	 public Map<String, Object> update(Project project);

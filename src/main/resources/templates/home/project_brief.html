@@ -34,7 +34,7 @@
     <div class="container middle_container">
         <div class="middle_content">
             <div style="text-align: center;">
-                <h1 th:text="${project.projectName}"></h1>
+                <h1 th:text="${project.name}"></h1>
                 <!--<div align="center">-->
                     <!--<table >-->
                         <!--<thead>-->
@@ -99,20 +99,14 @@
 <script>
 
     $(document).ready(function () {
-//        //获得简介内容
-//        var urlGetDocumentById="/document/getDocumentById";
-//        var document = getDocumentById(project.introduction,urlGetDocumentById);
-//        var content = document.content;
-//        if(content==null||content==undefined)alert("未获取到简介！请检查数据！");
-//        $("#document-preview").html(document.content);
 
         var pdffile = "/home/pdf-error.pdf";
         var urlGetDocumentById="/file/getFile";
-        var file = getFileById(project.introduction,urlGetDocumentById);
-        var path = file.path;
+        var file = getFileById(project.introductionFile,urlGetDocumentById);
+        var path = file.url;
         if(path==null||path==undefined||path.length<1)alert("未获取到简介！");
         else {
-
+            path = "/images/"+file.fileName+"."+file.suffix;
             pdffile = path;
             var options = {
                 pdfOpenParams: {

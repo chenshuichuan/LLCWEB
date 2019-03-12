@@ -1,12 +1,13 @@
 package llcweb.com.controller.admin;
 
 import llcweb.com.dao.repository.DocumentRepository;
-import llcweb.com.dao.repository.ImageRepository;
+import llcweb.com.dao.repository.FilesRepository;
 import llcweb.com.dao.repository.PeopleRepository;
 import llcweb.com.domain.models.People;
 import llcweb.com.service.PeopleService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,14 +27,8 @@ import java.util.Map;
 public class PeopleController {
     private static final Logger logger = LoggerFactory.getLogger(PeopleController.class);
 
-    @Resource
-    private PeopleService peopleService;
-    @Resource
+    @Autowired
     private PeopleRepository peopleRepository;
-    @Resource
-    private DocumentRepository documentRepository;
-    @Resource
-    private ImageRepository imageRepository;
 
     /**
      * */

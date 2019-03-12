@@ -20,9 +20,6 @@ public interface PatentRepository extends JpaRepository<Patent,Integer>{
 	Page<Patent> findAll(Specification<Patent> specification, Pageable pageable);
 
 
-
-	Page<Patent> findByAuthorList(String userName, Pageable pageable);
-
 	/**
 	 * @Author haien
 	 * @Description 获取最新的专利记录
@@ -30,19 +27,8 @@ public interface PatentRepository extends JpaRepository<Patent,Integer>{
 	 * @Param [count]
 	 * @return java.util.List<llcweb.com.domain.models.Patent>
 	 **/
-	@Query(value="select * from patent where state='授权' order by public_date desc limit ?1",nativeQuery=true)
+	@Query(value="select * from llc_patent where state='授权' order by public_date desc limit ?1",nativeQuery=true)
 	List<Patent> getLatest(int count);
-//	/*
-//	 * 模糊查询
-//	 */
-//	@Query(value = "SELECT p from Patent p where p.title like %?1%"
-//				+ "or p.authorList like %?1%"
-//				+ "or p.belongProject like %?1%"
-//				+ "or p.appliNum like %?1%"
-//				+ "or p.publicNum like %?1%"
-//				+ "or p.agency like %?1%"
-//				+ "or p.appliPeople like %?1%"
-//				)
-//	Page<Patent> findByOneKey(String key, Pageable pageable);
+
 
 }

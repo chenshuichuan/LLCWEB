@@ -1,132 +1,169 @@
 package llcweb.com.domain.models;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
 import javax.persistence.*;
-import java.util.*;
+import java.util.Date;
 
 /**
- * @Author haien
- * @Description 活动类：活动、会议、通知和招聘信息的总类
- * @Date 2018/10/6
- **/
+ * 活动管理表 llc_activity
+ *
+ * @author ricardo
+ * @date 2019-03-09
+ */
 @Entity
-@Table(name="activity")
+@Table(name = "llc_activity" )
 public class Activity {
-   @Id
-   @GeneratedValue
-   private int id;
-   //活动标题
-   private String title;
-   //上传者
-   @Column(length = 30)
-   private String author;
-   //参与人员
-   private String peopleList;
-   //活动日期
-   @Column(columnDefinition = "date")
-   private Date startDate;
-   @Column(columnDefinition = "date")
-   private Date endDate;
-   //活动简介
-   private int introduction;
-   //组别(命名为group更好，但它是MySQL关键字)
-   @Column(length = 30)
-   private String model;
-   //活动类型：活动、会议、通知和招聘
-   @Column(length = 30)
-   private String activityType;
-   //专指通知和招聘信息是否要发布,0/1
-   private int isPublish;
+    private static final long serialVersionUID = 1L;
 
-   public Activity() {
-   }
+    /**  */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id" )
+    private Integer id;
+    /**
+     * 活动名称
+     */
+    @Column(name = "name" )
+    private String name;
+    /**
+     * 活动发布者
+     */
+    @Column(name = "author" )
+    private String author;
+    /**
+     * 活动参与者
+     */
+    @Column(name = "people_list" )
+    private String peopleList;
+    /**
+     * 开始时间
+     */
+    @Column(name = "start_date" )
+    private Date startDate;
+    /**
+     * 结束时间
+     */
+    @Column(name = "end_date" )
+    private Date endDate;
+    /**
+     * 活动简介
+     */
+    @Column(name = "introduction" )
+    private Integer introduction;
+    /**
+     * 组别
+     */
+    @Column(name = "model" )
+    private String model;
+    /**
+     * 活动类型,通知、会议、招聘、活动等
+     */
+    @Column(name = "activity_type" )
+    private String activityType;
+    /**
+     * 是否发布出去
+     */
+    @Column(name = "is_publish" )
+    private Integer isPublish;
 
-   public Activity(String title, String author, String peopleList, Date startDate, Date endDate, String model, String activityType) {
-      this.title = title;
-      this.author = author;
-      this.peopleList = peopleList;
-      this.startDate = startDate;
-      this.endDate = endDate;
-      this.model = model;
-      this.activityType = activityType;
-   }
+    public Activity() {
+    }
 
-   public int getId() {
-      return id;
-   }
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-   public void setId(int id) {
-      this.id = id;
-   }
+    public Integer getId() {
+        return id;
+    }
 
-   public String getTitle() {
-      return title;
-   }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-   public void setTitle(String title) {
-      this.title = title;
-   }
+    public String getName() {
+        return name;
+    }
 
-   public String getAuthor() {
-      return author;
-   }
+    public void setAuthor(String author) {
+        this.author = author;
+    }
 
-   public void setAuthor(String author) {
-      this.author = author;
-   }
+    public String getAuthor() {
+        return author;
+    }
 
-   public String getPeopleList() {
-      return peopleList;
-   }
+    public void setPeopleList(String peopleList) {
+        this.peopleList = peopleList;
+    }
 
-   public void setPeopleList(String peopleList) {
-      this.peopleList = peopleList;
-   }
+    public String getPeopleList() {
+        return peopleList;
+    }
 
-   public Date getStartDate() {
-      return startDate;
-   }
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
 
-   public void setStartDate(Date startDate) {
-      this.startDate = startDate;
-   }
+    public Date getStartDate() {
+        return startDate;
+    }
 
-   public Date getEndDate() {
-      return endDate;
-   }
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
 
-   public void setEndDate(Date endDate) {
-      this.endDate = endDate;
-   }
+    public Date getEndDate() {
+        return endDate;
+    }
 
-   public int getIntroduction() {
-      return introduction;
-   }
+    public void setIntroduction(Integer introduction) {
+        this.introduction = introduction;
+    }
 
-   public void setIntroduction(int introduction) {
-      this.introduction = introduction;
-   }
+    public Integer getIntroduction() {
+        return introduction;
+    }
 
-   public String getModel() {
-      return model;
-   }
+    public void setModel(String model) {
+        this.model = model;
+    }
 
-   public void setModel(String model) {
-      this.model = model;
-   }
+    public String getModel() {
+        return model;
+    }
 
-   public String getActivityType() {
-      return activityType;
-   }
+    public void setActivityType(String activityType) {
+        this.activityType = activityType;
+    }
 
-   public void setActivityType(String activityType) {
-      this.activityType = activityType;
-   }
+    public String getActivityType() {
+        return activityType;
+    }
 
-   public int getIsPublish() {
-      return isPublish;
-   }
+    public void setIsPublish(Integer isPublish) {
+        this.isPublish = isPublish;
+    }
 
-   public void setIsPublish(int isPublish) {
-      this.isPublish = isPublish;
-   }
+    public Integer getIsPublish() {
+        return isPublish;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
+                .append("id" , getId())
+                .append("name" , getName())
+                .append("author" , getAuthor())
+                .append("peopleList" , getPeopleList())
+                .append("startDate" , getStartDate())
+                .append("endDate" , getEndDate())
+                .append("introduction" , getIntroduction())
+                .append("model" , getModel())
+                .append("activityType" , getActivityType())
+                .append("isPublish" , getIsPublish())
+                .toString();
+    }
 }

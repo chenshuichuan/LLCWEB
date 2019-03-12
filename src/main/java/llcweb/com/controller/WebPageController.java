@@ -38,7 +38,7 @@ public class WebPageController {
     @Autowired
     private SoftwareRepository softwareRepository;
     @Autowired
-    private ImageRepository imageRepository;
+    private FilesRepository imageRepository;
 
     @Autowired
     private PeopleRepository peopleRepository;
@@ -362,7 +362,7 @@ public class WebPageController {
         ModelAndView modelAndView = new ModelAndView("home/ResearchProject/professor_demo");
 
         People people = peopleRepository.findOne(id);
-        Image image = imageRepository.findOne(people.getPortrait());
+        Files image = imageRepository.findOne(people.getPortrait());
         modelAndView.addObject("people",people);
         modelAndView.addObject("image",image);
 
@@ -383,7 +383,7 @@ public class WebPageController {
     public ModelAndView graduate_demo(@RequestParam("id")int id){
         ModelAndView modelAndView = new ModelAndView("home/Talent/graduate_demo");
         People people = peopleRepository.findOne(id);
-        Image image = imageRepository.findOne(people.getPortrait());
+        Files image = imageRepository.findOne(people.getPortrait());
         modelAndView.addObject("people",people);
         modelAndView.addObject("image",image);
         return modelAndView;

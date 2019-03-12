@@ -23,7 +23,7 @@ import java.util.Map;
  *@Date: 15:14 2018/8/21
  **/
 @Controller
-@RequestMapping("/comments")
+@RequestMapping("/homes/comments")
 public class CommentsController {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 

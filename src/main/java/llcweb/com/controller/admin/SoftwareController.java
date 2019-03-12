@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/software")
+@RequestMapping("/homes/software")
 public class SoftwareController {
     private static final Logger logger=LoggerFactory.getLogger(SoftwareController.class);
 

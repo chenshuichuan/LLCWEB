@@ -28,7 +28,7 @@ import java.util.Map;
  */
 
 @RestController
-@RequestMapping("/patent")
+@RequestMapping("/homes/patent")
 public class PatentController {
 	private org.slf4j.Logger logger = LoggerFactory.getLogger(this.getClass());
 	

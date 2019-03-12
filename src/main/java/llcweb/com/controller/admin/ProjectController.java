@@ -28,7 +28,7 @@ import java.util.Map;
  * @Date:15:03 2018/9/9
  */
 @Controller
-@RequestMapping("/project")
+@RequestMapping("/homes/project")
 public class ProjectController {
     private org.slf4j.Logger logger = LoggerFactory.getLogger(this.getClass());
 

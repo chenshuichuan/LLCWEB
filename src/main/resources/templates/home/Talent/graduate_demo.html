@@ -81,8 +81,8 @@
                     <div class="container">
                         <div class="row" >
                             <div class="col-md-2" style="text-align: center;" th:if="${image != null}">
-                                <img th:if="${image.path != null}" src="/custom/images/person-img.jpg"
-                                     th:src="${'/'+image.path}" alt="头像" width="175" style="margin-left: 5px;margin-top: 5px;"/>
+                                <img th:if="${image.fileName != null}" src="/custom/images/person-img.jpg"
+                                     th:src="${'/homes/images/'+image.fileName+'.'+image.suffix}" alt="头像" width="175" style="margin-left: 5px;margin-top: 5px;"/>
                             </div>
 
                             <div class="col-md-6" style="text-align: left;">
@@ -150,7 +150,7 @@
 
         if(people.introduction>0){
             //获得简介内容
-            var urlGetDocumentById="/document/getDocumentById";
+            var urlGetDocumentById="/homes/document/getDocumentById";
             var document = getDocumentById(people.introduction,urlGetDocumentById);
             var content = document.content;
             if(content==null||content==undefined)alert("未获取到简介！");

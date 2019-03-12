@@ -23,7 +23,7 @@ import java.util.Map;
  * @Date 2018/10/2
  **/
 @RestController
-@RequestMapping("/people")
+@RequestMapping("/homes/people")
 public class PeopleController {
     private static final Logger logger = LoggerFactory.getLogger(PeopleController.class);
 

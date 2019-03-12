@@ -26,7 +26,7 @@ import java.util.Map;
  *@Date: 15:14 2018/8/21
  **/
 @Controller
-@RequestMapping("/document")
+@RequestMapping("/homes/document")
 public class DocumnetController {
     private static final Logger logger = LoggerFactory.getLogger(DocumnetController.class);
 

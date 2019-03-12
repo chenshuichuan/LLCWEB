@@ -28,7 +28,7 @@ import java.util.Map;
  */
 
 @RestController
-@RequestMapping("/paper")
+@RequestMapping("/homes/paper")
 public class PaperController {
 	private org.slf4j.Logger logger = LoggerFactory.getLogger(this.getClass());
 	
@@ -63,7 +63,7 @@ public class PaperController {
 			List<Paper> papers=paperRepository.getLatest(count);
 			map.put("result", 1);
 			map.put("message", "获取记录成功！");
-			map.put("data",papers);
+			map.put("data",UsefulTools.paperToProductInfo(papers));
 		}
 		return map;
 	}

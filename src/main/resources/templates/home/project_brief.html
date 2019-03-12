@@ -101,12 +101,12 @@
     $(document).ready(function () {
 
         var pdffile = "/home/pdf-error.pdf";
-        var urlGetDocumentById="/file/getFile";
+        var urlGetDocumentById="/homes/file/getFile";
         var file = getFileById(project.introductionFile,urlGetDocumentById);
         var path = file.url;
         if(path==null||path==undefined||path.length<1)alert("未获取到简介！");
         else {
-            path = "/images/"+file.fileName+"."+file.suffix;
+            path = "/homes/images/"+file.fileName+"."+file.suffix;
             pdffile = path;
             var options = {
                 pdfOpenParams: {

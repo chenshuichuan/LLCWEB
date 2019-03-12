@@ -78,7 +78,7 @@
 
     $(document).ready(function () {
         //获得简介内容
-        var urlGetDocumentById="/document/getDocumentById";
+        var urlGetDocumentById="/homes/document/getDocumentById";
         var document = getDocumentById(paper.introduction,urlGetDocumentById);
         var content = document.content;
         if(content==null||content==undefined)$("#div-introduction").html("<p style='color: #e1261a;'>未获取到简介！</p>");

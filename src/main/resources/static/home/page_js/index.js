@@ -11,35 +11,35 @@
 $(document).ready(function () {
 
     //公告通知
-    var infor = getActivities("/activity/getActivities","activityType=会议纪要&count=6");
+    var infor = getActivities("/homes/activity/getActivities","activityType=会议纪要&count=6");
     fillTheInfo("#con1", infor,"#");
 
     //科学研究
-    var projects = getTopMes("/project/getLatest",7);
+    var projects = getTopMes("/homes/project/getLatest",7);
     fillTheModel("#ul-project", projects,"/project_brief.html?id=");
     //学术交流
-    var academicData = getActivities("/activity/getActivities","activityType=开放会议&count=6");
+    var academicData = getActivities("/homes/activity/getActivities","activityType=开放会议&count=6");
     fillTheModel("#ul-academic-exchange", academicData,"/achievement/activity.html?id=");
 
     //论文
-    var paperMes = getTopMes("/paper/getLatest",5);
+    var paperMes = getTopMes("/homes/paper/getLatest",5);
     fillTheProduct("#div-first-paper", "#ul-paper", paperMes,"/achievement/scientific_achievements1.html?id=","#bc0e05");
     //专利
-    paperMes = getTopMes("/patent/getLatest",5);
+    paperMes = getTopMes("/homes/patent/getLatest",5);
     fillTheProduct("#div-first-patent", "#ul-patent", paperMes,"/achievement/scientific_achievements2.html?id=","#fd7e02");
     //软著
-    paperMes = getTopMes("/software/getLatest",5);
+    paperMes = getTopMes("/homes/software/getLatest",5);
     fillTheProduct("#div-first-software", "#ul-software", paperMes,"/achievement/scientific_achievements3.html?id=","#f8b551");
 
     //中心动态
-    var dynamicMes = getActivities("/activity/getActivities","activityType=会议纪要&count=6");
+    var dynamicMes = getActivities("/homes/activity/getActivities","activityType=会议纪要&count=6");
     fillTheModel("#ul-activity", dynamicMes,"#");
     //文体活动
-    dynamicMes = getActivities("/activity/getActivities","activityType=团队建设&count=6");
+    dynamicMes = getActivities("/homes/activity/getActivities","activityType=团队建设&count=6");
     fillTheModel("#ul-activity2", dynamicMes,"/achievement/activity.html?id=");
 
     //开放课题
-    var openPro = getTopMes("/project/getLatest",6);
+    var openPro = getTopMes("/homes/project/getLatest",6);
     fillTheModel("#ul-open-project", openPro,"/project_brief.html?id=");
 
 

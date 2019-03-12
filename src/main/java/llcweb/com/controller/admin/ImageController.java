@@ -26,7 +26,7 @@ import java.util.Map;
  * @Date 22:05 2018/9/5
  **/
 @RestController
-@RequestMapping("/image")
+@RequestMapping("/homes/image")
 public class ImageController {
     private final static Logger logger=LoggerFactory.getLogger(ImageController.class);
 

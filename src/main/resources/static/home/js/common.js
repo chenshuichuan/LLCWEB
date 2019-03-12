@@ -74,50 +74,6 @@ function cancel() {
     $(".content_edit").addClass("appear");
 }
 
-/****************************************删除事件*******************************************/
-function del(obj,type) {
-    var idValue = $(obj).attr("id");
-    var idName = $("tbody.tableContent tr").eq(idValue).find('#id').text();
-
-    $.getJSON('../admin/delete'+type+'?id=' + idName, function (obj) {
-        if (obj.errorCode != "0x03") {
-            var idName = $("tbody.tableContent tr").eq(idValue).remove();
-            // window.location.reload();           //成功后刷新页面
-            alert("删除成功！！！");
-        }
-        else
-            alert("无权访问！！！");
-    });
-}
-
-/****************************************上传图片*******************************************/
-function upLoad() {
-    var fd = new FormData();
-    var values = $(".upload>input[name='name']").val();
-    fd.append("pic", $("#upLoadFile").get(0).files[0]);
-    fd.append("name", 'values');
-    $.ajax({
-        url: '/upload',
-        type: 'POST',
-        processData: false,
-        contentType: false,
-        //dataType:'JSON',
-        data: fd,
-        success: function (obj) {
-            if(obj.status){
-                // alert(obj.data);
-                // window.location.reload();           //成功后刷新页面
-                alert("上传成功！！！！");
-                $(".input_pic_code").val(obj.data);
-                $('#preview img').attr('src', '../getPic?id=' + obj.data);
-            }
-            else{
-                alert("图片已经存在！！！！");
-            }
-            //window.location.reload();           //成功后刷新页面
-        }
-    });
-}
 
 /****************************************动态获取图片的value值*******************************************/
 function getPicInput() {
@@ -260,7 +216,7 @@ function initPeopleList(position,urlGetPeopleByPosition,demoUrl) {
     for (var i=0;i<peopleList.length;i++){
         var imgPath ='/custom/images/person-img.jpg';
         if(peopleList[i].portrait!==undefined&&peopleList[i].portrait!==null&&peopleList[i].portrait!==0)
-            imgPath= '/image/getPath?id='+peopleList[i].portrait;
+            imgPath= '/homes/image/getPath?id='+peopleList[i].portrait;
 // /ResearchProject/professor_demo.html?id=
         htmlText +='<li>' +
             '<a href="'+demoUrl+'?id='+peopleList[i].id+'">' +
@@ -300,11 +256,11 @@ function loadActivity(id) {
             statusbar: 0
         }
     };
-    var urlGetActivitiesById="/activity/getActivitiesById";
+    var urlGetActivitiesById="/homes/activity/getActivitiesById";
     var activity = getFileById(id,urlGetActivitiesById);
 
     var pdffile = "/home/pdf-error.pdf";
-    var urlGetDocumentById="/file/getFile";
+    var urlGetDocumentById="/homes/file/getFile";
     var file = getFileById(activity.introduction,urlGetDocumentById);
     var path = file.path;
     if(path==null||path==undefined||path.length<1)alert("未获取到简介！请检查数据！");

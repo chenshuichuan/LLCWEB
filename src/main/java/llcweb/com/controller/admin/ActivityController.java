@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/activity")
+@RequestMapping("/homes/activity")
 public class ActivityController {
     private static final Logger logger=LoggerFactory.getLogger(ActivityController.class);
 

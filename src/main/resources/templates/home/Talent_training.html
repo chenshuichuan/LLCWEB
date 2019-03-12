@@ -94,7 +94,7 @@
                         <li th:each="people,iterStat : ${peopleList}">
                             <ul>
                                 <li><a target="_blank" th:href="${'/Talent/graduate_demo.html?id='+people.id}">
-                                    <img src="/custom/images/person-img.jpg" th:src="${'/image/getPath?id='+people.portrait}"/>
+                                    <img src="/custom/images/person-img.jpg" th:src="${'/homes/image/getPath?id='+people.portrait}"/>
                                 </a>
 
                                 <li th:text="${people.name}" style="margin-top: -5px;">name</li>

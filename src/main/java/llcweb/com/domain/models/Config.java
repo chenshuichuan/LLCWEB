@@ -11,7 +11,7 @@ import javax.persistence.*;
  * @author ruoyi
  */
 @Entity
-@Table(name="activity")
+@Table(name="sys_config")
 public class Config
 {
     private static final long serialVersionUID = 1L;

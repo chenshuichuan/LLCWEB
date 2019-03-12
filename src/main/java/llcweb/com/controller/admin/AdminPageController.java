@@ -20,7 +20,7 @@ import java.util.List;
  *@Date: 15:14 2018/8/21
  **/
 @Controller
-@RequestMapping("/admin1111111111")
+@RequestMapping("/homes/admin1111111111")
 public class AdminPageController {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 

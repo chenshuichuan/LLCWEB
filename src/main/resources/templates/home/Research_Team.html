@@ -120,14 +120,6 @@
                     </div>
                     <!--图片、老师名称、链接需要改变 -->
                     <ul class="team_content" style="overflow:hidden;">
-                    <!--<li>
-                            <a href="Lecturer.html"><img src="../../static/home/images/yicun.jpg" th:src="@{/home/images/yicun.jpg}" alt="讲师A" width="120"></a>
-                            <a href="Lecturer.html" class="team_name"><h4>讲师A</h4></a>
-                        </li>
-                        <li>
-                            <a href="Lecturer.html"><img src="../../static/home/images/yicun.jpg" th:src="@{/home/images/yicun.jpg}" alt="讲师J" width="120"></a>
-                            <a href="Lecturer.html" class="team_name"><h4>讲师J</h4></a>
-                        </li> -->
                     </ul>
                 </div>
 
@@ -148,13 +140,13 @@
     th:src="@{/home/js/common.js}"></script>
 <script>
 $(function(){
-    var professor = getPeopleByPosition("教授","/people/getByPosition");
+    var professor = getPeopleByPosition("教授","/homes/people/getByPosition");
     //console.log(professor);
     drawPeople(professor.length,professor,'#professor');
-    var associate_pro = getPeopleByPosition("副教授","/people/getByPosition");
+    var associate_pro = getPeopleByPosition("副教授","/homes/people/getByPosition");
     //console.log(associate_pro);
     drawPeople(associate_pro.length,associate_pro,'#associate_pro');
-    var lecturer = getPeopleByPosition("讲师","/people/getByPosition");
+    var lecturer = getPeopleByPosition("讲师","/homes/people/getByPosition");
     //console.log(lecturer);
     drawPeople(lecturer.length,lecturer,'#lecturer');
 });
@@ -167,7 +159,7 @@ function drawPeople(num,data,id){
         var htmlText = '';
 
         if(data[i].portrait!=undefined&&data[i].portrait!=null&&data[i].portrait!=0)
-            imgPath= '/image/getPath?id='+data[i].portrait;
+            imgPath= '/homes/image/getPath?id='+data[i].portrait;
 
         htmlText += '<li>' +
                 '<a href="/ResearchProject/professor_demo.html?id='+data[i].id+'">' +

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+    <title>科学研究——广东省信息物理融合系统重点实验室</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="shortcut icon" href="../../static/home/images/favicon.ico"
+          th:href="@{/home/images/favicon.ico}"/>
+    <link href="../../static/home/css/reset.css" rel="stylesheet"
+          th:href="@{/home/css/reset.css}">
+    <link href="../../static/home/css/public.css" rel="stylesheet"
+          th:href="@{/home/css/public.css}">
+    <link href="../../static/home/css/index.css" rel="stylesheet"
+          th:href="@{/home/css/index.css}">
+    <meta name="description" content="jPaginate - jQuery Pagination Plugin"/>
+    <meta name="keywords" content="jquery, plugin, pagination, fancy"/>
+    <title>科学研究——广东省信息物理融合系统重点实验室</title>
+    <link rel="stylesheet" href="../../static/home/css/header.css" type="text/css"
+          th:href="@{/home/css/header.css}"/>
+    <link rel="stylesheet" href="../../static/home/css/sidebar.css" type="text/css"
+          th:href="@{/home/css/sidebar.css}"/>
+    <link rel="stylesheet" href="../../static/home/css/meeting.css" type="text/css"
+          th:href="@{/home/css/meeting.css}"/>
+    <link rel="stylesheet" href="../../static/home/css/style.css" type="text/css"
+          th:href="@{/home/css/style.css}"/>
+    <script type="text/javascript" src="http://tajs.qq.com/stats?sId=66189406" charset="UTF-8"></script>
+</head>
+<body>
+
+<div th:include="template/header_template :: header_template"></div>
+<div class="meetingpage">
+     <div class="container middle_container">
+         <div class="middle_content">
+            <div class="middle_l" id="temlate_middle">
+                <!-- <h1><span>机构概况</span></h1> -->
+                <ul id="lmenu" class="tmo_list2">
+                    <li class="ll first" id="all-project">
+                        <span>科研方向</span>
+                    </li>
+                    <li class="ll" id="li-info-sys">
+                        <a href="#" class="ll_ref" >
+                            <span>信息物理融合系统</span>
+                        </a>
+                    </li>
+                    <li class="ll" id="li-ai-auto">
+                        <a href="#" class="ll_ref" >
+                            <span>人工智能与知识自动化</span>
+                        </a>
+                    </li>
+                    <li class="ll" id="li-ind-bigdata">
+                        <a href="#" class="ll_ref" >
+                            <span>工业大数据</span>
+                        </a>
+                    </li>
+                    <li class="ll" id="li-taihezi">
+                        <a href="#" class="ll_ref" >
+                            <span>太赫兹安全技术</span>
+                        </a>
+                    </li>
+                    <li class=" ll" id="li-high-compute">
+                        <a href="#" class="ll_ref">
+                            <span>高性能计算</span>
+                        </a>
+                    </li>
+                    <li class="ll" id="li-robot">
+                        <a href="#" class="ll_ref">
+                            <span>智能装备与机器人系统</span>
+                        </a>
+                    </li>
+                    <li class="ll" id="li-deeplearning">
+                        <a href="#" class="ll_ref">
+                            <span>图像计算与处理</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="middle_r">
+                <div class="crumb">
+                    <ul id="crumbs">
+                        <li><a href="index.html">首页</a></li>
+                        <li><span>&nbsp;/&nbsp;</span></li>
+                        <li><a href="Research_Project.html">科研方向</a></li>
+                        <li><span>&nbsp;/&nbsp;</span></li>
+                        <li><a href="#" id="sub-title">异构网络互联融合</a></li>
+                    </ul>
+                </div>
+                <div class="outline_r">
+                    <div class="project_content">
+                        <ul class="news_list margin20" id="ul-projects">
+                            <li>
+                                <a target="_blank" href="Project/projectIndexPage.html?id=2">智能制造物联网的数据感知、传输和海量数据处理</a>
+                                <span>[2013-01-03]</span>
+                            </li>
+                            <li>
+                                <a target="_blank" href="Project/projectIndexPage.html?id=20">体系结构级GPU功耗建模及软件低功耗优化</a>
+                                <span>[2011-01-01]</span>
+                            </li>
+
+                        </ul>
+                    </div>
+                    <div class="demo">
+                        <ul class="pagination" id="ul-pages">
+                            <li><a href="#">&laquo;</a></li>
+                            <li><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">&raquo;</a></li>
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+         <div style="margin-top: 50px;">
+             <hr style="height:1px;border:0px;background-color:#D5D5D5;color:#b7b7b7;"/>
+         </div>
+    </div>
+</div>
+
+<div th:include="template/footer_template :: footer_template"></div>
+<div class="clearfix"></div>
+<script type="text/javascript" src="../../static/home/js/jquery-1.12.4.min.js"
+        th:src="@{/home/js/jquery-1.12.4.min.js}"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../static/home/js/common.js"
+    th:src="@{/home/js/common.js}"></script>
+<!--请求js-->
+<script>
+    var urlGetPage="/project/getPage";
+    var myModel = "all";
+    $(document).ready(function () {
+        //获取对应的内容信息
+        var pages = getProjectByModel(myModel,1,10,urlGetPage);
+        //console.log(pages);
+        fillPage("#ul-projects",pages.tPage);
+        fillPages("#ul-pages",pages.totalPages);
+
+        //监听请求更改
+        $("#all-project").click(function () {
+            listenFun("all",1);
+        });
+        $("#li-taihezi").click(function () {
+            listenFun("太赫兹安全技术",1);
+        });
+        $("#li-ind-bigdata").click(function () {
+            listenFun("工业大数据",1);
+        });
+        $("#li-high-compute").click(function () {
+            listenFun("高性能计算",1);
+        });
+        $("#li-deeplearning").click(function () {
+            listenFun("图像计算与处理",1);
+        });
+        $("#li-robot").click(function () {
+            listenFun("智能装备与机器人系统",1);
+        });
+        $("#li-info-sys").click(function () {
+            listenFun("信息物理融合系统",1);
+        });
+        $("#li-ai-auto").click(function () {
+            listenFun("人工智能与知识自动化",1);
+        });
+
+    });
+
+    function fillPages(ul_id,totalPages) {
+        var father = $(ul_id);
+        father.empty();
+        var str = "<li><a href=\"#\">&laquo;</a></li>";
+        father.append(str);
+
+        for (var i = 1;i<=totalPages;i++){
+            str = "<li><a id='btn-a-"+i+"' class='li_page' href=\"#"+i+"\">"+i+"</a></li>";
+            father.append(str);
+
+            //
+            var pid = "#btn-a-"+i;
+            $(pid).click(function(){
+                var id=$(this).attr("id");
+                var strId = id.split("-");
+                var pageIndex = parseInt(strId[2]);
+                var proType = getCookie("project-type");
+                //alert(proType+pageIndex);
+                var pages = getProjectByModel(myModel,pageIndex,10,urlGetPage);
+                fillPage("#ul-projects",pages.tPage);
+            });
+        }
+        str = "<li><a href=\"#\">&raquo;</a></li>";
+        father.append(str);
+    }
+
+    function listenFun(proType,pageIndex) {
+        myModel = proType;
+        setCookie("project-type",proType);
+        var pages = getProjectByModel(proType,pageIndex,10,urlGetPage);
+        fillPage("#ul-projects",pages.tPage);
+        fillPages("#ul-pages",pages.totalPages);
+    }
+
+    function fillPage(id,data) {
+        var father = $(id);
+        father.empty();
+        for(var i = 0 ; i < data.length; i++){
+            var date = new Date(data[i].date);
+            var str = "<li>\n" +
+                "      <a target=\"_blank\" href=\"/project_brief.html?id="+data[i].id+"\">"+data[i].title+"</a>\n" +
+                "      <span>["+date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()+"]</span>\n" +
+                "      </li>";
+            father.append(str);
+        }
+    }
+    //根据分组获取信息
+    function getProjectByModel(model,pageNum,pageSize,url) {
+        var document =null;
+        //设置同步
+        $.ajax({
+            type : "get",
+            url : url,
+            data :"team=" + model+"&pageNum="+pageNum+"&pageSize="+pageSize,
+            async : false,
+            success : function(data){
+                document = data.data;
+                if(data.result!==1){
+                    alert(data.message);
+                }
+            }
+        });
+        return document;
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,465 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>LLCWEB管理平台</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          th:href="@{https://fonts.googleapis.com/icon?family=Material+Icons}" rel="stylesheet">
+    <link href="../../static/assetss/materialize/css/materialize.min.css"
+          th:href="@{/assetss/materialize/css/materialize.min.css}" media="screen,projection" rel="stylesheet"/>
+    <!-- Bootstrap Styles-->
+    <link href="../../static/assetss/css/bootstrap.css"
+          th:href="@{/assetss/css/bootstrap.css}" rel="stylesheet"/>
+    <!-- FontAwesome Styles-->
+    <link href="../../static/assetss/font-awesome-4.7.0/css/font-awesome.css"
+          th:href="@{/assetss/font-awesome-4.7.0/css/font-awesome.css}" rel="stylesheet"/>
+
+    <!-- Custom Styles-->
+    <link href="../../static/assetss/css/custom-styles.css"
+          th:href="@{/assetss/css/custom-styles.css}" rel="stylesheet"/>
+    <!--//Google Fonts-->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans'
+          th:href="@{http://fonts.googleapis.com/css?family=Open+Sans}" rel='stylesheet' type='text/css'/>
+    <link href="../../static/custom/css/common.css"
+          th:href="@{/custom/css/common.css}" rel="stylesheet"/>
+    <link href="../../static/assetss/plugins/selector/css/bootstrap-select.min.css"
+          th:href="@{/assetss/plugins/selector/css/bootstrap-select.min.css}" rel="stylesheet">
+</head>
+
+<body>
+<div id="wrapper">
+    <!-- top side start-->
+    <div th:include="admin/template/top_side_template :: admin_topside"></div>
+    <!-- top side end-->
+    <!-- left side start-->
+    <nav class="navbar-default navbar-side" role="navigation"
+         th:include="admin/template/left_side_template :: leftside"></nav>
+    <!-- left side end-->
+    <div id="page-wrapper">
+        <div id="header" class="header">
+            <!--<h3 class="page-header">-->
+            <!--Dashboard-->
+            <!--</h3>-->
+            <ol class="breadcrumb">
+                <li><a href="index.html">成果管理</a></li>
+                <li class="active">专利管理</li>
+            </ol>
+        </div>
+        <div id="page-inner">
+            <div class="panel panel-default" style="margin-top: -30px;">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!--view panel 展示论文对应的信息-->
+                            <div id="view-panel" class="panel panel-info">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">专利详细信息</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-md-2" style="text-align: right;">
+                                            <label for="view-title">专利题目：</label>
+                                        </div>
+                                        <div class="col-md-10">
+                                            <span id="view-title" class="form-control-static">专利题目</span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-2" style="text-align: right;">
+                                            <label for="view-abstract">专利摘要：</label>
+                                        </div>
+                                        <div class="col-md-10">
+                                            <span id="view-abstract" class="form-control-static">专利摘要</span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6" >
+                                            <div class="row">
+                                                <div class="col-md-3" style="text-align: right;">
+                                                    <label for="view-original_link">专利链接：</label>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <span id="view-original_link" class="form-control-static">专利链接</span>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-3" style="text-align: right;">
+                                                    <label for="view-title">下载链接：</label>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <span id="view-source_file" class="form-control-static">下载链接</span>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-3" style="text-align: right;">
+                                                    <label for="view-belong_project">所属项目：</label>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <span id="view-belong_project" class="form-control-static">所属项目</span>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-3" style="text-align: right;">
+                                                    <label for="view-appli_num">申请号：</label>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <span id="view-appli_num" class="form-control-static">申请号</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                <div class="col-md-3" style="text-align: right;">
+                                                    <label for="view-public_num">公开号：</label>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <span id="view-public_num" class="form-control-static">公开号</span>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-3" style="text-align: right;">
+                                                    <label for="view-public_date">公开时间：</label>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <span id="view-public_date" class="form-control-static">2018-10-02</span>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-3" style="text-align: right;">
+                                                    <label for="view-agency">代理：</label>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <span id="view-agency" class="form-control-static">粤高</span>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-3" style="text-align: right;">
+                                                    <label for="view-state">当前状态：</label>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <span id="view-state" class="form-control-static">当前状态</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--add panel  -->
+                            <div id="add-panel" class="panel panel-primary" style="display: none;">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">添加专利记录</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <form class="form-horizontal" role="form">
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label">专利题目：</label>
+                                                    <div class="col-sm-10">
+                                                        <input id="add-title" type="text" class="form-control"  placeholder="专利题目">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label">作者：</label>
+                                                    <div class="col-sm-10">
+                                                        <input id="add-author" type="text" class="form-control" placeholder="作者(';'符号分隔)">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label">摘要：</label>
+                                                    <div class="col-sm-10">
+                                                        <textarea id="add-abstract" class="form-control" rows="4"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label">权限：</label>
+                                                    <div class="col-sm-2">
+                                                        <select id="add-profile" class="form-control large selectpicker" title="选择公开权限">
+                                                            <option value="0" data-content="<span class='label label-danger'>公开</span>">公开</option>
+                                                            <option value="1" data-content="<span class='label label-info'>小组</span>">小组</option>
+                                                            <option value="2" data-content="<span class='label label-success'>私有</span>">私有</option>
+                                                        </select>
+                                                    </div>
+                                                    <label class="col-sm-2 control-label">所属项目：</label>
+                                                    <div class="col-sm-6">
+                                                        <select id="add-belong_project" class="form-control large selectpicker" title="选择所属项目">
+                                                            <option value="数据组项目" >数据组项目</option>
+                                                            <option value="网络组项目" >网络组项目</option>
+                                                            <option value="项目100" >项目100</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label">原文链接：</label>
+                                                    <div class="col-sm-10">
+                                                        <input id="add-original_link" type="text" class="form-control" placeholder="原文链接">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label">关联文件：</label>
+                                                    <div class="col-sm-10">
+                                                        <select id="add-source_file" class="form-control large selectpicker" title="选择关联文件">
+                                                            <option value="0" >无</option>
+                                                            <option value="1" >文件1</option>
+                                                            <option value="2" >文件2</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label">代理机构：</label>
+                                                    <div class="col-sm-2">
+                                                        <input id="add-agency" type="text" class="form-control" placeholder="代理机构">
+                                                    </div>
+                                                    <label class="col-sm-2 control-label">申请日：</label>
+                                                    <div class="col-sm-2">
+                                                        <input id="add-appli_date" type="text" class="form-control" placeholder="2018-10-01">
+                                                    </div>
+                                                    <label class="col-sm-2 control-label">当前状态：</label>
+                                                    <div class="col-sm-2">
+                                                        <input id="add-state" type="text" class="form-control" placeholder="撰写、投稿、实审、发表等">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label">申请号：</label>
+                                                    <div class="col-sm-2">
+                                                        <input id="add-appli_num" type="text" class="form-control" placeholder="申请号">
+                                                    </div>
+                                                    <label class="col-sm-2 control-label">公开号：</label>
+                                                    <div class="col-sm-2">
+                                                        <input id="add-public_num" type="text" class="form-control" placeholder="公开号">
+                                                    </div>
+                                                    <label class="col-sm-2 control-label">公开日：</label>
+                                                    <div class="col-sm-2">
+                                                        <input id="add-public_date" type="text" class="form-control" placeholder="2018-10-02">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-sm-2 ">
+                                                    </div>
+                                                    <div class="col-sm-2 ">
+                                                        <button id="btn-add-save" type="button" class="btn btn-info">添加</button>
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <button id="btn-add-cancel" type="button" class="btn btn-warning">取消</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--edit panel-->
+                            <div id="edit-panel" class="panel panel-warning" style="display: none;">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">更改专利信息</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <form class="form-horizontal" role="form">
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label">ID：</label>
+                                                    <div class="col-sm-1">
+                                                        <input id="edit-id" type="text" class="form-control" readonly>
+                                                    </div>
+                                                    <label class="col-sm-2 control-label">专利题目：</label>
+                                                    <div class="col-sm-7">
+                                                        <input id="edit-title" type="text" class="form-control"  placeholder="论文题目">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label">作者：</label>
+                                                    <div class="col-sm-10">
+                                                        <input id="edit-author" type="text" class="form-control" placeholder="作者(';'符号分隔)">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label" for="edit-abstract">摘要：</label>
+                                                    <div class="col-sm-10">
+                                                        <textarea id="edit-abstract" class="form-control" rows="4"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label">权限：</label>
+                                                    <div class="col-sm-2">
+                                                        <select id="edit-role" class="form-control large selectpicker" title="选择公开权限">
+                                                            <option value="0" data-content="<span class='label label-danger'>公开</span>">公开</option>
+                                                            <option value="1" data-content="<span class='label label-info'>小组</span>">小组</option>
+                                                            <option value="2" data-content="<span class='label label-success'>私有</span>">私有</option>
+                                                        </select>
+                                                    </div>
+                                                    <label class="col-sm-2 control-label">所属项目：</label>
+                                                    <div class="col-sm-6">
+                                                        <select id="edit-belong_project" class="form-control large selectpicker" title="选择所属项目">
+                                                            <option value="数据组项目" >数据组项目</option>
+                                                            <option value="网络组项目" >网络组项目</option>
+                                                            <option value="项目100" >项目100</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label">原文链接：</label>
+                                                    <div class="col-sm-10">
+                                                        <input id="edit-original_link" type="text" class="form-control" placeholder="原文链接">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label">关联文件：</label>
+                                                    <div class="col-sm-10">
+                                                        <select id="edit-source_file" class="form-control large selectpicker" title="选择关联文件">
+                                                            <option value="0" >无</option>
+                                                            <option value="1" >文件1</option>
+                                                            <option value="2" >文件2</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label">代理机构：</label>
+                                                    <div class="col-sm-2">
+                                                        <input id="edit-agency" type="text" class="form-control" placeholder="代理机构">
+                                                    </div>
+                                                    <label class="col-sm-2 control-label">申请日：</label>
+                                                    <div class="col-sm-2">
+                                                        <input id="edit-appli_date" type="text" class="form-control" placeholder="2018-10-01">
+                                                    </div>
+                                                    <label class="col-sm-2 control-label">当前状态：</label>
+                                                    <div class="col-sm-2">
+                                                        <input id="edit-state" type="text" class="form-control" placeholder="撰写、投稿、实审、发表等">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label">申请号：</label>
+                                                    <div class="col-sm-2">
+                                                        <input id="edit-appli_num" type="text" class="form-control" placeholder="申请号">
+                                                    </div>
+                                                    <label class="col-sm-2 control-label">公开号：</label>
+                                                    <div class="col-sm-2">
+                                                        <input id="edit-public_num" type="text" class="form-control" placeholder="公开号">
+                                                    </div>
+                                                    <label class="col-sm-2 control-label">公开日：</label>
+                                                    <div class="col-sm-2">
+                                                        <input id="edit-public_date" type="text" class="form-control" placeholder="2018-10-02">
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <div class="col-sm-2 ">
+                                                    </div>
+                                                    <div class="col-sm-2 ">
+                                                        <button id="btn-edit-save" type="button" class="btn btn-info">添加</button>
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <button id="btn-edit-cancel" type="button" class="btn btn-warning">取消</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-10">
+                            <form class="form-inline" role="form" style="float: right;">
+                                <div class="form-group">
+                                    <label class="sr-only" for="search-name">输入关键词</label>
+                                    <input type="text" class="form-control" id="search-name" placeholder="请输入关键词">
+                                    <button type="button" class="btn btn-info" id="btn-advanced-search"><i class="fa fa-search"></i> 查询</button>
+                                </div>
+                                <div class="form-group" style="margin-left: 20px;">
+                                    <button type="button" class="btn" id="btn-add-user"><i class="fa fa-plus-circle"></i> 添加专利</button>
+                                </div>
+                                <div class="form-group" style="margin-left: 20px;">
+                                    <button type="button" class="btn" id="btn-edit-bt" ><i class="fa fa-edit"></i> 编辑测试按钮</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered table-hover"
+                                       id="paper-table">
+                                    <thead>
+                                    <tr>
+                                        <th>题目</th>
+                                        <th>状态</th>
+                                        <th>作者</th>
+                                        <th>权限</th>
+                                        <th>上传时间</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="tb-body">
+                                    <tr>
+                                        <td>dfsdfasdfdgdfgfhfhfghdgdgsdfgsdfgshfhjjfh</td>
+                                        <td>sdfasdfasttygbfghfsdddddddddddddddddddfasdfffffffghnvbncvsrfh</td>
+                                        <td>asdfasdfsdfasdfasdfadsfasdfasdfasdfasdfasdfasdf</td>
+                                        <td>角色权限</td>
+                                        <td>2018-10-01:00:20:60</td>
+                                        <td>操作</td>
+                                    </tr>
+                                    <tr>
+                                        <td>dfsdfasdfdgdfgfhfhfghdgdgsdfgsdfgshfhjjfh</td>
+                                        <td>sdfasdfasttygbfghfsdddddddddddddddddddfasdfffffffghnvbncvsrfh</td>
+                                        <td>asdfasdfsdfasdfasdfadsfasdfasdfasdfasdfasdfasdf</td>
+                                        <td>角色权限</td>
+                                        <td>2018-10-01:00:20:60</td>
+                                        <td>操作</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- /. ROW  -->
+
+
+            <footer th:include="admin/template/footer_template :: admin_footer">
+            </footer>
+        </div>
+        <!-- /. PAGE INNER  -->
+    </div>
+    <!-- /. PAGE WRAPPER  -->
+</div>
+<!-- /. WRAPPER  -->
+<!-- JS Scripts-->
+<!-- jQuery Js -->
+<script src="../../static/assetss/js/jquery-1.10.2.js"
+        th:src="@{/assetss/js/jquery-1.10.2.js}"></script>
+<!-- Bootstrap Js -->
+<script src="../../static/assetss/js/bootstrap.min.js"
+        th:src="@{/assetss/js/bootstrap.min.js}"></script>
+<script src="../../static/assetss/materialize/js/materialize.min.js"
+        th:src="@{/assetss/materialize/js/materialize.min.js}"></script>
+<!-- Metis Menu Js -->
+<script src="../../static/assetss/js/jquery.metisMenu.js"
+        th:src="@{/assetss/js/jquery.metisMenu.js}"></script>
+<!-- DATA TABLE SCRIPTS -->
+<script src="../../static/assetss/js/dataTables/jquery.dataTables.js"
+        th:src="@{/assetss/js/dataTables/jquery.dataTables.js}"></script>
+<script src="../../static/assetss/js/dataTables/dataTables.bootstrap.js"
+        th:src="@{/assetss/js/dataTables/dataTables.bootstrap.js}"></script>
+<!-- lhgdialog -->
+<script src="../../static/assetss/plugins/lhgdialog/lhgdialog.min.js"
+        th:src="@{/assetss/plugins/lhgdialog/lhgdialog.min.js}"></script>
+<!-- SpinJS-->
+<script src="../../static/assetss/plugins/spin-2.1.0/jquery.spin.merge.js"
+        th:src="@{/assetss/plugins/spin-2.1.0/jquery.spin.merge.js}"></script>
+<script src="../../static/assetss/plugins/selector/js/bootstrap-select.min.js"
+        th:src="@{/assetss/plugins/selector/js/bootstrap-select.min.js}"></script>
+<script src="../../static/custom/js/common.js"
+        th:src="@{/custom/js/common.js}"></script>
+<script src="../../static/custom/js/gain_patents.js"
+        th:src="@{/custom/js/gain_patents.js}"></script>
+</body>
+
+</html>

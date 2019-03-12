@@ -1,0 +1,255 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>LLCWEB管理平台</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          th:href="@{https://fonts.googleapis.com/icon?family=Material+Icons}" rel="stylesheet">
+    <link href="../../static/assetss/materialize/css/materialize.min.css"
+          th:href="@{/assetss/materialize/css/materialize.min.css}" media="screen,projection" rel="stylesheet"/>
+    <!-- Bootstrap Styles-->
+    <link href="../../static/assetss/css/bootstrap.css"
+          th:href="@{/assetss/css/bootstrap.css}" rel="stylesheet"/>
+    <!-- FontAwesome Styles-->
+    <link href="../../static/assetss/font-awesome-4.7.0/css/font-awesome.css"
+          th:href="@{/assetss/font-awesome-4.7.0/css/font-awesome.css}" rel="stylesheet"/>
+    <!-- Custom Styles-->
+    <link href="../../static/assetss/css/custom-styles.css"
+          th:href="@{/assetss/css/custom-styles.css}" rel="stylesheet"/>
+    <!-- Google Fonts-->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans'
+          th:href="@{http://fonts.googleapis.com/css?family=Open+Sans}" rel='stylesheet' type='text/css'/>
+    <link href="../../static/assetss/plugins/boostrap-switch/css/bootstrap-switch.min.css"
+          th:href="@{/assetss/plugins/boostrap-switch/css/bootstrap-switch.min.css}" rel="stylesheet">
+
+    <!-- Custom Styles-->
+    <link href="../../static/custom/css/admin-index.css"
+          th:href="@{/custom/css/admin-index.css}" rel="stylesheet"/>
+</head>
+
+<body>
+<div id="wrapper">
+    <!-- top side start-->
+    <div th:include="admin/template/top_side_template :: admin_topside"></div>
+    <!-- top side end-->
+    <!-- left side start-->
+    <nav class="navbar-default navbar-side" role="navigation"
+         th:include="admin/template/left_side_template :: leftside"></nav>
+    <!-- left side end-->
+    <div id="page-wrapper">
+        <div id="header" class="header">
+            <!--<h3 class="page-header">-->
+            <!--Dashboard-->
+            <!--</h3>-->
+            <ol class="breadcrumb">
+                <li><a href="index.html">LLCWEB管理平台</a></li>
+                <li class="active">任务首页</li>
+            </ol>
+        </div>
+
+
+
+
+        <div id="page-inner">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-4 col-sm-12 col-xs-12">
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <a class="btn-a" href="javascript:void(0);">
+                                        <i style="padding-right: 10px;" class="fa fa-sign-in fa-3x pull-right"></i>
+                                        打卡
+                                    </a>
+                                    <!--<a class="waves-effect waves-light btn-large btn-daka">-->
+                                    <!--<i class="material-icons right">cloud</i>-->
+                                    <!--打卡-->
+                                    <!--</a>-->
+                                </div>
+
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <ul class="list-group">
+                                        <li class="list-group-item">
+                                            <span class="badge green">08:40:40</span>
+                                            <i class="text-success fa fa-check-circle"></i>
+                                            上午
+                                        </li>
+                                        <li class="list-group-item">
+                                            <span class="badge">未打卡</span>
+                                            <i class="text-danger fa fa-clock-o"></i>
+                                            下午
+                                        </li>
+                                        <li class="list-group-item">
+                                            <span class="badge">未打卡</span>
+                                            <i class="text-danger fa fa-clock-o"></i>
+                                            晚上
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 col-sm-12 col-xs-12">
+                            <div class="card">
+                                <div class="card-action">
+                                    <b>新的一天，给自己定个小目标吧！</b>
+                                    <a id="btn-add-mytask" href="#"><i style="color: #0b9612;"
+                                                                       class="fa fa-plus fa-lg"></i></a>
+                                    <!--这个控件会卡。。-->
+                                    <!--<span class="switch" data-on="info" data-off="success">-->
+                                    <!--<input  name="my-task-switch" type="checkbox" checked/>-->
+                                    <!--</span>-->
+                                    <a id="btn-finished-task" href="#"><i style="color: #e19e19;"
+                                                                          class="fa fa-circle-o fa-lg"></i></a>
+                                    <a id="btn-unfinished-task" href="#"><i style="color: #0b9612;"
+                                                                            class="fa fa-check-circle fa-lg"></i></a>
+                                </div>
+                                <div class="card-image">
+                                    <div class="collection" style="overflow-y:auto; height:400px;">
+                                        <a href="#!" class="collection-item">今天看10篇论文！
+                                            <span class="badge green">完成</span>
+                                            <span class="badge grey">2018-09-04</span>
+                                        </a>
+                                        <a href="#!" class="collection-item">今天写100000行代码！
+                                            <span class="badge">未完成</span>
+                                            <span class="badge grey">2018-09-04</span>
+                                        </a>
+                                        <a href="#!" class="collection-item">今天写100000行代码！
+                                            <span class="badge">未完成</span>
+                                            <span class="badge grey">2018-09-04</span>
+                                        </a>
+                                        <a href="#!" class="collection-item">今天写100000行代码！
+                                            <span class="badge">未完成</span>
+                                            <span class="badge grey">2018-09-04</span>
+                                        </a>
+                                        <a href="#!" class="collection-item">今天写100000行代码！
+                                            <span class="badge">未完成</span>
+                                            <span class="badge grey">2018-09-04</span>
+                                        </a>
+                                        <a href="#!" class="collection-item">今天写100000行代码！
+                                            <span class="badge">未完成</span>
+                                            <span class="badge grey">2018-09-04</span>
+                                        </a>
+                                        <a href="#!" class="collection-item">今天写100000行代码！
+                                            <span class="badge">未完成</span>
+                                            <span class="badge grey">2018-09-04</span>
+                                        </a>
+                                        <a href="#!" class="collection-item">今天写100000行代码！
+                                            <span class="badge">未完成</span>
+                                            <span class="badge grey">2018-09-04</span>
+                                        </a>
+                                        <a href="#!" class="collection-item">今天写100000行代码！
+                                            <span class="badge">未完成</span>
+                                            <span class="badge grey">2018-09-04</span>
+                                        </a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-md-8 col-sm-12 col-xs-12">
+                            <div class="card">
+                                <div class="card-action">
+                                    <b style="color: #e12fab">太赫兹组</b>任务
+                                    <!--这个控件会卡。。-->
+                                    <div style="float: right;" class="switch" data-on="info" data-off="success">
+                                        <input name="my-task-switch" type="checkbox" checked/>
+                                    </div>
+                                </div>
+                                <div class="card-image">
+                                    <ul class="collection" style="overflow-y:auto; height:400px;">
+                                        <li class="collection-item avatar">
+                                            <i class="circle fa fa-check-circle green"></i>
+                                            <span class="title">XXX完成论文《XXXXXXXXXXXXXXX》</span>
+                                            <p>First Line 请XXX与2018/080/05完成论文、专利设计</p>
+                                            <p>作者<span class="badge">2018-09-05</span></p>
+                                        </li>
+                                        <li class="collection-item avatar">
+                                            <i class="circle fa fa-circle-o red"></i>
+                                            <span class="title">XXX完成论文《XXXXXXXXXXXXXXX》</span>
+                                            <p>First Line 请XXX与2018/080/05完成论文、专利设计</p>
+                                            <p>作者<span class="badge">2018-09-05</span></p>
+
+                                        </li>
+                                        <li class="collection-item avatar">
+                                            <i class="circle fa fa-circle-o red"></i>
+                                            <span class="title">XXX完成论文《XXXXXXXXXXXXXXX》</span>
+                                            <p>First Line 请XXX与2018/080/05完成论文、专利设计</p>
+                                            <p>作者<span class="badge">2018-09-05</span></p>
+
+                                        </li>
+                                        <li class="collection-item avatar">
+                                            <i class="circle fa fa-circle-o red"></i>
+                                            <span class="title">XXX完成论文《XXXXXXXXXXXXXXX》</span>
+                                            <p>First Line 请XXX与2018/080/05完成论文、专利设计</p>
+                                            <p>作者<span class="badge">2018-09-05</span></p>
+
+                                        </li>
+                                        <li class="collection-item avatar">
+                                            <i class="circle fa fa-circle-o red"></i>
+                                            <span class="title">XXX完成论文《XXXXXXXXXXXXXXX》</span>
+                                            <p>First Line 请XXX与2018/080/05完成论文、专利设计</p>
+                                            <p>作者<span class="badge">2018-09-05</span></p>
+
+                                        </li>
+                                        <li class="collection-item avatar">
+                                            <i class="circle fa fa-circle-o red"></i>
+                                            <span class="title">XXX完成论文《XXXXXXXXXXXXXXX》</span>
+                                            <p>First Line 请XXX与2018/080/05完成论文、专利设计</p>
+                                            <p>作者<span class="badge">2018-09-05</span></p>
+
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /. ROW  -->
+            <div class="fixed-action-btn horizontal click-to-toggle">
+                <a href="#header" class="btn-floating btn-large red"><i class="material-icons">publish</i></a>
+            </div>
+            <div class="row">
+                <div class="col-md-4 col-sm-12 col-xs-12">
+                </div>
+                <div class="col-md-4 col-sm-12 col-xs-12">
+                </div>
+            </div>
+            <footer th:include="admin/template/footer_template :: admin_footer">
+            </footer>
+        </div>
+        <!-- /. PAGE INNER  -->
+    </div>
+    <!-- /. PAGE WRAPPER  -->
+</div>
+<!-- /. WRAPPER  -->
+<!-- JS Scripts-->
+<!-- jQuery Js -->
+<script src="../../static/assetss/js/jquery-1.10.2.js"
+        th:src="@{/assetss/js/jquery-1.10.2.js}"></script>
+<!-- Bootstrap Js -->
+<script src="../../static/assetss/js/bootstrap.min.js"
+        th:src="@{/assetss/js/bootstrap.min.js}"></script>
+<script src="../../static/assetss/materialize/js/materialize.min.js"
+        th:src="@{/assetss/materialize/js/materialize.min.js}"></script>
+<!-- Metis Menu Js -->
+<script src="../../static/assetss/js/jquery.metisMenu.js"
+        th:src="@{/assetss/js/jquery.metisMenu.js}"></script>
+<script src="../../static/assetss/plugins/boostrap-switch/js/bootstrap-switch.min.js"
+        th:src="@{/assetss/plugins/boostrap-switch/js/bootstrap-switch.min.js}"></script>
+<!-- Custom Js -->
+<script src="../../static/custom/js/common.js"
+        th:src="@{/custom/js/common.js}"></script>
+<script src="../../static/custom/js/index.js"
+        th:src="@{/custom/js/index.js}"></script>
+
+
+</body>
+</html>

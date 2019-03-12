@@ -1,4 +1,4 @@
-package llcweb.com.dao.repository.myInterface;
+package llcweb.com.dao.myInterface;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

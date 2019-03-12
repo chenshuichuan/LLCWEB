@@ -1,6 +1,5 @@
 package llcweb.com.service.impl;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,7 +9,6 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
-import llcweb.com.tools.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -22,8 +20,6 @@ import org.springframework.stereotype.Service;
 import llcweb.com.dao.repository.PaperRepository;
 import llcweb.com.domain.entity.UsefulPaper;
 import llcweb.com.domain.models.Paper;
-import llcweb.com.domain.models.Roles;
-import llcweb.com.domain.models.Users;
 import llcweb.com.service.PaperService;
 
 @Service

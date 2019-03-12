@@ -4,18 +4,12 @@ import llcweb.com.dao.repository.ActivityRepository;
 import llcweb.com.dao.repository.DocumentRepository;
 import llcweb.com.domain.entities.PageInfo;
 import llcweb.com.domain.models.Activity;
-import llcweb.com.domain.models.Project;
-import llcweb.com.domain.models.Users;
 import llcweb.com.service.ActivityService;
-import llcweb.com.service.UsersService;
 import llcweb.com.tools.StringUtil;
 import llcweb.com.tools.UsefulTools;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -36,8 +30,6 @@ public class ActivityController {
     private ActivityRepository activityRepository;
     @Resource
     private ActivityService activityService;
-    @Resource
-    private UsersService usersService;
     @Resource
     private DocumentRepository documentRepository;
 

@@ -2,10 +2,8 @@ package llcweb.com.controller.admin;
 
 import llcweb.com.dao.repository.PatentRepository;
 import llcweb.com.domain.entities.PageInfo;
-import llcweb.com.domain.entity.UsefulPatent;
 import llcweb.com.domain.models.Patent;
 import llcweb.com.service.PatentService;
-import llcweb.com.service.UsersService;
 import llcweb.com.tools.UsefulTools;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -39,8 +36,6 @@ public class PatentController {
 	private PatentRepository patentRepository;
 	@Autowired
 	private PatentService patentService;
-	@Autowired
-	private UsersService usersService;
 	
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {

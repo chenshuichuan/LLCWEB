@@ -1,6 +1,5 @@
 package llcweb.com.service.impl;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,16 +16,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import llcweb.com.dao.repository.PatentRepository;
 import llcweb.com.domain.entity.UsefulPatent;
-import llcweb.com.domain.models.Paper;
-import llcweb.com.domain.models.Patent;
-import llcweb.com.domain.models.Project;
-import llcweb.com.domain.models.Patent;
-import llcweb.com.domain.models.Roles;
-import llcweb.com.domain.models.Users;
 import llcweb.com.domain.models.Patent;
 import llcweb.com.service.PatentService;
 

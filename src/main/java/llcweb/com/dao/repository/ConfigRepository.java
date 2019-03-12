@@ -1,6 +1,6 @@
 package llcweb.com.dao.repository;
 
-import llcweb.com.domain.models.Params;
+import llcweb.com.domain.models.Config;
 import llcweb.com.domain.models.Platform;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -9,9 +9,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface ParamsRepository extends JpaRepository<Params,Integer> {
+public interface ConfigRepository extends JpaRepository<Config,Integer> {
 
-    Page<Params> findAll(Specification<Params> spec, Pageable pageable);
+    Page<Config> findAll(Specification<Config> spec, Pageable pageable);
 
-    Params findByName(String name);
+    Config findByConfigKey(String key);
 }

@@ -2,26 +2,15 @@ package llcweb.com.controller.admin;
 
 import llcweb.com.dao.repository.SoftwareRepository;
 import llcweb.com.domain.entities.PageInfo;
-import llcweb.com.domain.models.Patent;
 import llcweb.com.domain.models.Software;
-import llcweb.com.domain.models.Users;
-import llcweb.com.service.UsersService;
 import llcweb.com.service.SoftwareService;
-import llcweb.com.tools.StringUtil;
 import llcweb.com.tools.UsefulTools;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,8 +24,7 @@ public class SoftwareController {
     private SoftwareRepository softwareRepository;
     @Resource
     private SoftwareService softwareService;
-    @Resource
-    private UsersService usersService;
+
     /**
      * @Author haien
      * @Description 获取最新的软著记录

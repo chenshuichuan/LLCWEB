@@ -1,6 +1,5 @@
 package llcweb.com.service.impl;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,12 +21,6 @@ import org.springframework.stereotype.Service;
 import llcweb.com.dao.repository.ProjectRepository;
 import llcweb.com.domain.entity.UsefulProject;
 import llcweb.com.domain.models.Project;
-import llcweb.com.domain.models.Project;
-import llcweb.com.domain.models.Project;
-import llcweb.com.domain.models.Project;
-import llcweb.com.domain.models.Project;
-import llcweb.com.domain.models.Roles;
-import llcweb.com.domain.models.Users;
 import llcweb.com.service.ProjectService;
 
 /**
@@ -82,53 +75,6 @@ public class ProjectServiceImpl implements ProjectService {
         
 		return projectList;
 	}
-	
-	
-    /**
-     * 查找用户编辑过的项目
-     */
-    @Override
-    public Page<Project> selectAll(Users user,int pageNum,int pageSize) {
-
-        Page<Project> projects;
-        List<Roles> roles=user.getRoles();
-        Users users = new Users();
-        Pageable page=new PageRequest(pageNum,pageSize, Sort.Direction.DESC,"startDate");
-
-        //管理员查看所有项目
-        for(Roles role:roles){
-            if(role.getrFlag().equals("ADMIN")){
-                projects=projectRepository.findAll(page);
-            	 //projects=projectRepository.findByTeam("car", page);
-                return projects;
-            }
-        }
-
-        //查看某个组的项目
-        for(Roles role:roles){
-            //管理员查看所有项目
-            if(role.getrFlag().equals("ADMIN")){
-                projects=projectRepository.findByTeam("car", page);
-                return projects;
-            }
-        }
-        
-  //查看某个组的项目
-        for(Roles role:roles){
-            //组长查看某个组的项目
-            if(role.getrFlag().equals("GROUP")){
-                projects=projectRepository.findByTeam(users.getTeam(), page);
-                return projects;
-            }
-        }
-        projects=projectRepository.findAll(page);
-        return projects;
-
-/*        //普通用户查找编辑过的项目
-        projects=projectRepository.findByAuthorId(user.getId(),page);
-        return projects;*/
-    }
-	
 	
 	/**
 	 *  添加项目

@@ -9,15 +9,12 @@ import java.io.IOException;
 import javax.activation.MimetypesFileTypeMap;
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.crypto.Data;
 
 import llcweb.com.dao.repository.ImageRepository;
 import llcweb.com.domain.models.Image;
-import llcweb.com.domain.models.Images;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;

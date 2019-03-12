@@ -3,19 +3,11 @@ package llcweb.com.controller.admin;
 
 import llcweb.com.dao.repository.DocumentRepository;
 import llcweb.com.domain.entities.DocumentInfo;
-import llcweb.com.domain.entity.UsefulDocument;
 import llcweb.com.domain.models.Document;
-import llcweb.com.domain.models.Users;
 import llcweb.com.service.DocumentService;
-import llcweb.com.service.UsersService;
-import llcweb.com.tools.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,9 +16,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -45,8 +34,7 @@ public class DocumnetController {
     private DocumentRepository documentRepository;
     @Autowired
     private DocumentService documentService;
-    @Autowired
-    private UsersService usersService;
+
 
 
     /**

@@ -2,11 +2,8 @@ package llcweb.com.controller.admin;
 
 import llcweb.com.dao.repository.PaperRepository;
 import llcweb.com.domain.entities.PageInfo;
-import llcweb.com.domain.entity.UsefulPaper;
 import llcweb.com.domain.models.Paper;
-import llcweb.com.domain.models.Project;
 import llcweb.com.service.PaperService;
-import llcweb.com.service.UsersService;
 import llcweb.com.tools.UsefulTools;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -40,9 +36,7 @@ public class PaperController {
 	private PaperRepository paperRepository;
 	@Autowired
 	private PaperService paperService;
-	@Autowired
-	private UsersService usersService;
-	
+
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
 	    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");

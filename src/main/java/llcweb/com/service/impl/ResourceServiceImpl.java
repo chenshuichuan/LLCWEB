@@ -1,11 +1,9 @@
 package llcweb.com.service.impl;
 
-import llcweb.com.dao.repository.myInterface.ResourceRepository;
+import llcweb.com.dao.myInterface.ResourceRepository;
 import llcweb.com.domain.entity.Resource;
 import llcweb.com.domain.entity.UsefulResource;
 import llcweb.com.domain.models.Image;
-import llcweb.com.domain.models.Roles;
-import llcweb.com.domain.models.Users;
 import llcweb.com.exception.BusinessException;
 import llcweb.com.exception.ReturnCode;
 import llcweb.com.service.ResourceService;
@@ -94,44 +92,6 @@ public class ResourceServiceImpl<T> implements ResourceService<T> {
         //查询
         return resourceRepository.findAll(specification,pageable);
     }
-
-    /**
-     * @Author haien
-     * @Description 根据用户权限查找
-     * @Date 2018/9/21
-     * @Param [user, pageNum, pageSize, resourceRepository]
-     * @return org.springframework.data.domain.Page<T>
-     **/
-    @Override
-    public Page<T> selectByRole(Users user, int pageNum, int pageSize,
-                                ResourceRepository resourceRepository) {
-        Page<T> resources;
-        List<Roles> roles=user.getRoles();
-        Pageable page=new PageRequest(pageNum,pageSize, Sort.Direction.DESC,"createDate");
-
-        //管理员查看所有文档
-        for(Roles role:roles){
-            if(role.getrFlag().equals("ADMIN")){
-                resources=resourceRepository.findAll(page);
-                return resources;
-            }
-        }
-
-        //组长查看本组文档
-        for(Roles role:roles){
-            if(role.getrFlag().equals("GROUP")){
-                resources=resourceRepository.findByModel("user.getModel()",page);
-                return resources;
-            }
-        }
-
-        //普通用户查找编辑过的文档
-        //System.out.println("user = "+user.getUsername());
-        resources=resourceRepository.findByAuthorId(user.getId(),page);
-        System.out.println("find number = "+resources.getTotalElements());
-        return resources;
-    }
-
     /**
      * @Author haien
      * @Description 保存文件到项目

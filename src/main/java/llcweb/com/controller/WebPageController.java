@@ -2,7 +2,6 @@ package llcweb.com.controller;
 
 import llcweb.com.dao.repository.*;
 import llcweb.com.domain.models.*;
-import llcweb.com.service.UsersService;
 import llcweb.com.tools.RandomValidateCodeUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,15 +10,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.awt.image.BufferedImage;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  *@Author: Ricardo
@@ -32,11 +27,7 @@ public class WebPageController {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
-    private UsersRepository usersRepository;
-    @Autowired
     private DocumentRepository documentRepository;
-    @Autowired
-    private UsersService usersService;
     @Autowired
     private ProjectRepository projectRepository;
 
@@ -58,7 +49,7 @@ public class WebPageController {
     @Autowired
     private PlatformRepository platformRepository;
     @Autowired
-    private ParamsRepository paramsRepository;
+    private ConfigRepository paramsRepository;
 
     /**
      * 生成验证码
@@ -119,16 +110,11 @@ public class WebPageController {
     public ModelAndView index(){
         ModelAndView modelAndView = new ModelAndView("home/index");
 
-        Params params = paramsRepository.findByName("index-float-window");
+        Config params = paramsRepository.findByConfigKey("index-float-window");
         if(params!=null){
-            modelAndView.addObject("isFloat",params.getValue());
+            modelAndView.addObject("isFloat",params.getConfigValue());
         }
         return modelAndView;
-    }
-    @ResponseBody
-    @RequestMapping("/hello")
-    public Users hello(){
-       return usersRepository.findOne(1);
     }
 
     //页面映射函数

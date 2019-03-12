@@ -7,9 +7,6 @@ import org.springframework.data.domain.Page;
 
 import llcweb.com.domain.entity.UsefulProject;
 import llcweb.com.domain.models.Project;
-import llcweb.com.domain.models.Project;
-import llcweb.com.domain.models.Users;
-import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * @author tong
@@ -17,19 +14,9 @@ import org.springframework.web.bind.annotation.RequestParam;
  *
  */
 public interface ProjectService {
-	
-	/**
-	 * 查询项目并按照时间分页排序
-	 * @param project
-	 * @param pageNum
-	 * @param pageSize
-	 * @return
-	 */
 
 	public Page<Project> findAll(UsefulProject project, int pageNum, int pageSize);
-	
-	public Page<Project> selectAll(Users user, int pageNum, int pageSize);
-	
+
 	 public Map<String, Object> add(Project project);
 	 public Map<String, Object> update(Project project);
 	 public Map<String, Object> delete(int id);

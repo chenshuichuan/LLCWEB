@@ -5,20 +5,13 @@ import llcweb.com.dao.repository.ImageRepository;
 import llcweb.com.dao.repository.PeopleRepository;
 import llcweb.com.domain.models.People;
 import llcweb.com.service.PeopleService;
-import llcweb.com.service.UsersService;
-import llcweb.com.tools.StringUtil;
-import llcweb.com.tools.ValidatorUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,8 +26,6 @@ import java.util.Map;
 public class PeopleController {
     private static final Logger logger = LoggerFactory.getLogger(PeopleController.class);
 
-    @Resource
-    private UsersService usersService;
     @Resource
     private PeopleService peopleService;
     @Resource

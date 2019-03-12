@@ -3,27 +3,14 @@ package llcweb.com.controller.admin;
 import llcweb.com.dao.repository.DocumentRepository;
 import llcweb.com.dao.repository.ImageRepository;
 import llcweb.com.dao.repository.PeopleRepository;
-import llcweb.com.domain.models.Document;
-import llcweb.com.domain.models.Image;
-import llcweb.com.domain.models.People;
-import llcweb.com.domain.models.Users;
 import llcweb.com.service.DocumentService;
-import llcweb.com.service.UsersService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.imageio.ImageIO;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import java.awt.image.BufferedImage;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,8 +27,6 @@ public class AdminPageController {
     @Autowired
     private DocumentRepository documentRepository;
     @Autowired
-    private UsersService usersService;
-    @Autowired
     private DocumentService documentService;
     @Autowired
     private PeopleRepository peopleRepository;
@@ -55,9 +40,7 @@ public class AdminPageController {
         learnList.add("hello1");
         learnList.add("hello2");
         ModelAndView modelAndView = new ModelAndView("admin/test");
-        //添加当前登录用户
-        Users users = usersService.getCurrentUser();
-        modelAndView.addObject("user", users);
+
         modelAndView.addObject("learnList", learnList);
         return modelAndView;
     }
@@ -65,8 +48,6 @@ public class AdminPageController {
     @RequestMapping({"/","/index.html","/index","/main","/main.html"})
     public ModelAndView index(){
         ModelAndView modelAndView = new ModelAndView("admin/index");
-        Users users = usersService.getCurrentUser();
-        modelAndView.addObject("user", users);
         return modelAndView;
     }
 

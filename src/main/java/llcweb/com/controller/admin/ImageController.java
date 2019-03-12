@@ -1,26 +1,15 @@
 package llcweb.com.controller.admin;
 
 import llcweb.com.dao.repository.ImageRepository;
-import llcweb.com.dao.repository.UsersRepository;
-import llcweb.com.domain.entity.UsefulImage;
 import llcweb.com.domain.models.Image;
-import llcweb.com.domain.models.Users;
 import llcweb.com.exception.BusinessException;
 import llcweb.com.service.ImageService;
-import llcweb.com.service.UsersService;
-import llcweb.com.tools.ImageUtil;
-import llcweb.com.tools.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,9 +17,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -44,10 +30,6 @@ import java.util.Map;
 public class ImageController {
     private final static Logger logger=LoggerFactory.getLogger(ImageController.class);
 
-    @Autowired
-    private UsersRepository usersRepository;
-    @Autowired
-    private UsersService usersService;
     @Autowired
     private ImageService imageService;
     @Autowired

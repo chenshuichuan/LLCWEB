@@ -22,6 +22,12 @@ public interface FileRepository extends JpaRepository<File,Integer>{
     /**
      * 模糊查询
      **/
-    @Query("from File f where f.owner like %?1% or introduction like %?1% or model like %?1%")
-    Page<File> findByOneKey(String key, Pageable pageable);
+    @Query("from File f where f.author like %?1% or f.introduction like %?1% or f.model like %?1%")
+    Page<File> fuzzySearch(String key, Pageable pageable); //排序放在Pageable中做
+
+    /**
+     * 模糊查询
+     **/
+    @Query("from File f where f.author=?1")
+    Page<File> findAllByAuthor(String author, Pageable pageable); //排序放在Pageable中做
 }

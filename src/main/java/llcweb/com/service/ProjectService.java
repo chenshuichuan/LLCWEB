@@ -9,6 +9,7 @@ import llcweb.com.domain.entity.UsefulProject;
 import llcweb.com.domain.models.Project;
 import llcweb.com.domain.models.Project;
 import llcweb.com.domain.models.Users;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * @author tong
@@ -33,7 +34,10 @@ public interface ProjectService {
 	 public Map<String, Object> update(Project project);
 	 public Map<String, Object> delete(int id);
 	 
+	List<UsefulProject> projectsToUsefulProject(List<Project> projectList);
+
+	Page<Project> getPage(String team,int pageNum,int pageSize);
+ 
 	
 
-	
 }

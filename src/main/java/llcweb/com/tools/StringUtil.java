@@ -69,4 +69,28 @@ public class StringUtil {
 		}
 		return true;
 	}
+	/**
+	 * 正则验证用户名是否合格
+	 * @param userName
+	 * @return
+	 */
+	public static boolean isUserName(String userName) {
+		Pattern pattern = Pattern.compile("^[\\u4E00-\\u9FA5\\w]{1,}$");
+		Matcher match = pattern.matcher(userName);
+
+		return match.matches();
+	}
+
+	/**
+	 * 正则验证密码是否合格
+	 * @param password
+	 * @return
+	 */
+	public static boolean isPassword(String password) {
+		Pattern pattern = Pattern.compile("^\\w+$");
+		Matcher match = pattern.matcher(password);
+
+		return match.matches();
+	}
+
 }

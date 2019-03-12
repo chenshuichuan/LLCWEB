@@ -7,20 +7,20 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.*;
 
-/** 用户表
- * 
+/**
+ * 用户表
  */
 @Entity
 @Table(name="users")
 public class Users implements Serializable,UserDetails {
-   /** user id
-    * 
+   /**
+    * user id
     */
    @Id
    @GeneratedValue
    private int id;
-   /** user name
-    * 
+   /**
+    * user name
     */
    private String username;
    //用户密码
@@ -57,7 +57,15 @@ public class Users implements Serializable,UserDetails {
    }
    public Users(){
    }
-
+   public Users(Users users){
+      this.id = users.id;
+      this.username = users.username;
+      this.password = users.password;
+      this.updateTime = users.updateTime;
+      this.peopleId = users.peopleId;
+      this.team = users.team;
+      this.roles = users.roles;
+   }
    public Users(int id,String username,String password,Date updateTime,int peopleId,String team, 
                 List<Roles> roles){
       this.id = id;

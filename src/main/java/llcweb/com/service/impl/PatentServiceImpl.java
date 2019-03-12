@@ -155,6 +155,7 @@ public class PatentServiceImpl implements PatentService {
 	/**
 	 * 删除专利
 	 */
+	@Override
 	public Map<String, Object> delete(int id) {
 
         Map<String, Object> map = new HashMap<>();
@@ -170,7 +171,19 @@ public class PatentServiceImpl implements PatentService {
         return map;
     }
 
-/*	*//**
+	@Override
+	public List<UsefulPatent> patentsToUsefulpatent(List<Patent> patentList) {
+		return null;
+	}
+
+	@Override
+	public Page<Patent> getPage(int pageNum, int pageSize) {
+		Pageable pageable=new PageRequest(pageNum,pageSize, Sort.Direction.DESC,"appliDate");
+		Page<Patent> projectPage= patentRepository.findAll(pageable);
+		return projectPage;
+	}
+
+	/*	*//**
 	 * 分页
 	 *//*
 	@Override

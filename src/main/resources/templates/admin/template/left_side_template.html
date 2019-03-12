@@ -21,10 +21,12 @@
                             class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li id="page-monitor-plan" >
-                            <a href="monitor_plan.html" th:href="@{/admin/monitor_plan.html}">打卡</a>
+                            <a href="monitor_plan.html" th:href="@{/admin/monitor_plan.html}">
+                                <i class="fa fa-check-circle-o fa-lg"></i>打卡</a>
                         </li>
                         <li id="page-monitor_burden" >
-                            <a href="monitor_burden.html" th:href="@{/admin/monitor_burden.html}">打卡管理</a>
+                            <a href="monitor_burden.html" th:href="@{/admin/monitor_burden.html}">
+                                <i class="fa fa-check-circle fa-lg"></i>打卡管理</a>
                         </li>
                     </ul>
                 </li>
@@ -32,45 +34,64 @@
                     <a href="#" class="waves-effect waves-dark"><i class="fa fa-desktop fa-lg"></i>活动管理<span
                             class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li id="page-batch_arrange" >
-                            <a href="arrange_batchs.html" th:href="@{/admin/arrange_batchs.html}">活动记录</a>
+                        <li id="page-manage-activity" >
+                            <a href="arrange_batchs.html" th:href="@{/admin/activity_records.html}">
+                                <i class="fa fa-reorder fa-lg"></i>活动记录</a>
                         </li>
-                        <li id="page-unit_arrange" >
-                            <a href="arrange_units.html" th:href="@{/admin/arrange_units.html}">会议记录</a>
-                        </li>
+                        <!--<li id="page-manage-conference" >-->
+                            <!--<a href="arrange_units.html" th:href="@{/admin/arrange_units.html}">-->
+                                <!--<i class="fa fa-list-alt fa-lg"></i>会议记录</a>-->
+                        <!--</li>-->
+                        <!--<li id="page-manage-notice" >-->
+                            <!--<a href="arrange_units.html" th:href="@{/admin/arrange_units.html}">-->
+                                <!--<i class="fa fa-bullhorn fa-lg"></i>通知</a>-->
+                        <!--</li>-->
+                        <!--<li id="page-manage-recruitment" >-->
+                            <!--<a href="arrange_units.html" th:href="@{/admin/arrange_units.html}">-->
+                                <!--<i class="fa fa-magnet fa-lg"></i>招聘</a>-->
+                        <!--</li>-->
                     </ul>
                 </li>
                 <li id="page-manage" >
                     <a href="#" class="waves-effect waves-dark"><i class="fa fa-cog fa-lg"></i>系统管理<span
                             class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li id="page-manage_workers" >
-                            <a href="system_users.html" th:href="@{/admin/system_users.html}">用户管理</a>
+                        <li id="page-system-users" >
+                            <a href="system_users.html" th:href="@{/admin/system_users.html}">
+                                <i class="fa fa-user-circle fa-lg"></i>用户</a>
                         </li>
-                        <li id="page-manage_department" >
-                            <a href="manage_department.html" th:href="@{/admin/manage_department.html}">人员信息管理</a>
+                        <li id="page-system-people" >
+                            <a href="system_people.html" th:href="@{/admin/system_people.html}">
+                                <i class="fa fa-address-card fa-lg"></i>人员信息</a>
                         </li>
-                        <li id="page-manage_exception" >
-                            <a href="#">系统异常管理</a>
+                        <li id="page-system-visitor" >
+                            <a href="#"><i class="fa fa-comments fa-lg"></i>访客留言</a>
+                        </li>
+                        <li id="page-system-exception" >
+                            <a href="#"><i class="fa fa-cogs fa-lg"></i>系统异常管理</a>
                         </li>
                     </ul>
                 </li>
 
-                <li >
-                    <a href="#" class="waves-effect waves-dark"><i class="fa fa-cog fa-lg"></i>成果管理<span
+                <li id="page-achievement">
+                    <a href="#" class="waves-effect waves-dark"><i class="fa fa-free-code-camp fa-lg"></i>成果管理<span
                             class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li  >
-                            <a href="#">项目管理</a>
+                            <a href="gain_projects.html" th:href="@{/admin/gain_projects.html}">
+                                <i class="fa fa-archive fa-lg"></i>项目</a>
                         </li>
                         <li  >
-                            <a href="manage_workers.html" th:href="@{/admin/manage_workers.html}">论文管理</a>
+                            <a href="gain_papers.html" th:href="@{/admin/gain_papers.html}">
+                                <i class="fa fa-newspaper-o fa-lg"></i>论文</a>
                         </li>
                         <li  >
-                            <a href="manage_department.html" th:href="@{/admin/manage_department.html}">专利管理</a>
+                            <a href="gain_patents.html" th:href="@{/admin/gain_patents.html}">
+                                <i class="fa fa-anchor fa-lg"></i>专利</a>
                         </li>
                         <li  >
-                            <a href="#">分享资源</a>
+                            <a href="gain_softwares.html" th:href="@{/admin/gain_softwares.html}">
+                                <i class="fa fa-wpforms fa-lg"></i>软著</a>
                         </li>
 
                     </ul>
@@ -80,18 +101,22 @@
                             class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li  >
-                            <a href="#">资源文件</a>
+                            <a href="resource_files.html" th:href="@{/admin/resource_files.html}">
+                                <i class="fa fa-file fa-lg"></i>文件</a>
                         </li>
                         <li  >
-                            <a href="manage_workers.html" th:href="@{/admin/manage_workers.html}">图片文件</a>
+                            <a href="resource_images.html" th:href="@{/admin/resource_images.html}">
+                                <i class="fa fa-file-image-o fa-lg"></i>图片</a>
                         </li>
                         <li  >
-                            <a href="resource_document.html" th:href="@{/admin/resource_document.html}">在线文档</a>
+                            <a href="resource_document.html" th:href="@{/admin/resource_document.html}">
+                                <i class="fa fa-file-text-o fa-lg"></i>在线文档</a>
                         </li>
                     </ul>
                 </li>
                 <li id="page-home" >
-                    <a  href="#" class="waves-effect waves-dark"><i class="fa  fa-user fa-lg"></i> 个人中心</a>
+                    <a  href="user_home.html" th:href="@{/admin/user_home.html}"
+                        class="waves-effect waves-dark"><i class="fa  fa-user fa-lg"></i> 个人中心</a>
                 </li>
                 <li id="page-exit" >
                     <a href="/login?logout" th:href="@{/login?logout}" class="waves-effect waves-dark"><i class="fa fa-fw fa-sign-out fa-lg"></i> 退出登录</a>

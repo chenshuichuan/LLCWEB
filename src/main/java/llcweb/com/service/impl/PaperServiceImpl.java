@@ -10,6 +10,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+import llcweb.com.tools.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -27,7 +28,7 @@ import llcweb.com.service.PaperService;
 
 @Service
 public class PaperServiceImpl implements PaperService {
-	
+
 	@Autowired
 	private PaperRepository paperRepository;
 	
@@ -68,43 +69,7 @@ public class PaperServiceImpl implements PaperService {
         
 		return paperList;
 	}
-	
-/*	*//**
-	 * 论文应该不需要权限查看吧。。
-	 *//*
-	@Override
-	public Page<Paper> selectAll(Users user,int pageNum,int pageSize) {
-		
-		Page<Paper> papers;
-		List<Roles> roles = user.getRoles();
-		Users users = new Users();
-		Pageable pageable=new PageRequest(pageNum,pageSize, Sort.Direction.DESC,"date");
-		
-	       //管理员查看所有论文
-        for(Roles role:roles){
-            if(role.getrFlag().equals("ADMIN")){
-            	papers=paperRepository.findAll(pageable);
-            	 //papers=paperRepository.findByAuthorList(users.getUsername(), pageable);
-                return papers;
-            }
-        }
-        
-  //查看某个组的论文
-        for(Roles role:roles){
-            //组长查看某个组的论文
-            if(role.getrFlag().equals("GROUP")){
-                papers=paperRepository.findByAuthorList(users.getUsername(), pageable);
-                return papers;
-            }
-        }
-        papers=paperRepository.findAll(pageable);
-        return papers;
 
-        //普通用户查找编辑过的论文
-        projects=projectRepository.findByAuthorId(user.getId(),page);
-        return projects;
-    }*/
-	
 	/**
 	 * 修改论文信息
 	 */
@@ -125,6 +90,7 @@ public class PaperServiceImpl implements PaperService {
 	/**
 	 * 删除论文
 	 */
+	@Override
 	public Map<String, Object> delete(int id) {
 
         Map<String, Object> map = new HashMap<>();
@@ -140,7 +106,20 @@ public class PaperServiceImpl implements PaperService {
         return map;
     }
 
-/*	*//**
+	@Override
+	public List<UsefulPaper> papersToUsefulPaper(List<Paper> paperList) {
+		return null;
+	}
+
+	@Override
+	public Page<Paper> getPage(int pageNum, int pageSize) {
+		//按时间排序
+		Pageable pageable=new PageRequest(pageNum,pageSize, Sort.Direction.DESC,"date");
+		Page<Paper> projectPage= paperRepository.findAll(pageable);
+		return projectPage;
+	}
+
+	/*	*//**
 	 * 分页
 	 *//*
 	@Override
@@ -192,5 +171,4 @@ public class PaperServiceImpl implements PaperService {
         map.put("msg","添加失败，请确认论文是否已存在！");
         return map;
     }
-	
 }

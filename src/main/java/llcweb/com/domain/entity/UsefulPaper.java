@@ -1,5 +1,7 @@
 package llcweb.com.domain.entity;
 
+import llcweb.com.domain.models.Paper;
+
 import java.util.Date;
 /**
  * @Author tong
@@ -27,6 +29,30 @@ public class UsefulPaper {
 	public UsefulPaper() {
 		
 	}
+	
+	public UsefulPaper(String title, String authorList, String belongProject, String periodical, Date firstDate,
+			Date lastDate) {
+		super();
+		this.title = title;
+		this.authorList = authorList;
+		this.belongProject = belongProject;
+		this.periodical = periodical;
+		this.firstDate = firstDate;
+		this.lastDate = lastDate;
+	}
+
+	public UsefulPaper(Paper paper) {
+		super();
+		this.title = title;
+		this.authorList = authorList;
+		this.belongProject = belongProject;
+		this.periodical = periodical;
+		this.firstDate = firstDate;
+		this.lastDate = lastDate;
+	}
+
+
+
 
 	public String getTitle() {
 		return title;

@@ -9,9 +9,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import llcweb.com.domain.models.Paper;
-import llcweb.com.domain.models.Patent;
-import llcweb.com.domain.models.Patent;
+import java.util.List;
 
 /**
  * Created by:Tong
@@ -20,17 +18,33 @@ import llcweb.com.domain.models.Patent;
  */
 
 public interface PatentRepository extends JpaRepository<Patent,Integer>{
+
 	Page<Patent> findAll(Specification<Patent> specification, Pageable pageable);
 
-//	List<Patent> findByAuthorList(int id);
-/*
-	//模糊查询
-	@Query("from patent p where p.appliDate like %?1% "
-			+ "or p.authorList like %?1% "
-			+ "or p.appliNum like %?1% "
-			+ "or p.publiNum like %?1% "
-			+ "or p.agency like %?1% "
-			+ "or p.appliPeople like %?1% ")
-	Page<Patent> findByOneKey(String string, PageRequest pageRequest);*/
+
+
 	Page<Patent> findByAuthorList(String userName, Pageable pageable);
+
+	/**
+	 * @Author haien
+	 * @Description 获取最新的专利记录
+	 * @Date 2018/10/7
+	 * @Param [count]
+	 * @return java.util.List<llcweb.com.domain.models.Patent>
+	 **/
+	@Query(value="select * from patent where state='授权' order by public_date desc limit ?1",nativeQuery=true)
+	List<Patent> getLatest(int count);
+//	/*
+//	 * 模糊查询
+//	 */
+//	@Query(value = "SELECT p from Patent p where p.title like %?1%"
+//				+ "or p.authorList like %?1%"
+//				+ "or p.belongProject like %?1%"
+//				+ "or p.appliNum like %?1%"
+//				+ "or p.publicNum like %?1%"
+//				+ "or p.agency like %?1%"
+//				+ "or p.appliPeople like %?1%"
+//				)
+//	Page<Patent> findByOneKey(String key, Pageable pageable);
+
 }

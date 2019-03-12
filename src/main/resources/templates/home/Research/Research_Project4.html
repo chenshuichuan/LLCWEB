@@ -4,18 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
     <title>科学研究——广东省信息物理融合系统重点实验室</title>
-    <link rel="shortcut icon" href="../../../static/home/images/bitbug_favicon.ico"
-          th:href="@{/home/images/bitbug_favicon.ico}"/>
+    <link rel="shortcut icon" href="../../../static/home/images/favicon.ico"
+          th:href="@{/home/images/favicon.ico}"/>
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link href="../../../static/home/css/reset.css" rel="stylesheet"
           th:href="@{/home/css/reset.css}">
     <link href="../../../static/home/css/public.css" rel="stylesheet"
-          th:herf="@{/home/css/public.css}">
+          th:href="@{/home/css/public.css}">
     <link href="../../../static/home/css/index.css" rel="stylesheet"
-          th:herf="@{/home/css/index.css}">
-    <script type="text/javascript" src="../../static/home/js/jquery-1.12.4.min.js"
-            th:herf="@{home/js/jquery-1.12.4.min.js}"></script>
-    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+          th:href="@{/home/css/index.css}">
     <meta name="description" content="jPaginate - jQuery Pagination Plugin"/>
     <meta name="keywords" content="jquery, plugin, pagination, fancy"/>
     <link rel="stylesheet" href="../../../static/home/css/header.css" type="text/css"
@@ -26,135 +23,13 @@
           th:href="@{/home/css/meeting.css}"/>
     <link rel="stylesheet" href="../../../static/home/css/style.css" type="text/css"
           th:href="@{/home/css/style.css}"/>
-
 </head>
 <body>
-<div class="public-header">
-    <div class="public-header-top">
-        <div class="public-container">
-            <div class="public-left">
-                <p>欢迎访问广东省信息物理融合系统重点实验室官网</p>
-            </div>
-            <ul class="public-header-list">
-                <li><a href="#">登录</a></li>
-                <li><a href="../contact_us.html">联系我们</a></li>
-            </ul>
-        </div>
-    </div>
-    <div class="public-header-middle public-container clearfix">
-        <div class="public-left">
-            <div class="logo">
-                <a href=""></a>
-            </div>
-        </div>
-        <div class="public-middle">
-
-        </div>
-        <div class="public-right">
-            <div class="public-search" style="margin-right: 40px;">
-                <input type="text" class="public-input-text">
-                <input type="submit" class="public-input-btn" value>
-
-
-
-
-            </div>
-        </div>
-    </div>
-    <div class="public-nav">
-        <ul>
-            <li class="item">
-                <a href="../index.html" class="hon">首页</a>
-            </li>
-            <li class="item">
-                <a href="../Team_introduction.html" class="hon">实验室概况</a>
-                <ul class="subnav">
-                    <li><a href="../Team_introduction.html" class="hon1">团队简介</a></li>
-                    <li><a href="../Institutional_profile.html" class="hon1">机构简介</a></li>
-                    <li><a href="../project_brief.html" class="hon1">项目简介</a></li>
-
-                </ul>
-            </li>
-            <li class="item">
-                <a href="../Research_Team.html" class="hon">科研团队</a>
-                <ul class="subnav">
-                    <li><a href="../Professor.html" class="hon1">教授</a></li>
-                    <li><a href="../Associate_professor.html" class="hon1">副教授</a></li>
-                    <li><a href="../Lecturer.html" class="hon1">讲师</a></li>
-
-                </ul>
-            </li>
-            <li class="item">
-                <a href="../Research_Project.html" class="hon">科学研究</a>
-
-            </li>
-            <li class="item">
-                <a href="../Academic_communication.html" class="hon">学术交流</a>
-            </li>
-            <li class="item">
-                <a href="../scientific_achievements.html" class="hon">科研成果</a>
-            </li>
-            <li class="item">
-                <a href="../Talent_training.html" class="hon">人才培养</a>
-                <ul class="subnav" >
-                    <li><a href="../postdoctor.html" class="hon1">博士后</a></li>
-                    <li><a href="../doctor.html" class="hon1">博士</a></li>
-                    <li><a href="../graduate.html" class="hon1">研究生</a></li>
-                </ul>
-            </li>
-            <li class="item">
-                <a href="../Cultural_activity.html" class="hon">文化活动</a>
-            </li>
-            <li class="item">
-                <a href="../Talent_recruitment.html" class="hon">人才招聘</a>
-            </li>
-        </ul>
-    </div>
-</div>
+<div th:include="template/header_template :: header_template"></div>
 <div class="meetingpage">
      <div class="container middle_container">
         <div class="middle_content">
-            <div class="middle_l" id="temlate_middle">
-                <!-- <h1><span>机构概况</span></h1> -->
-                <ul id="lmenu" class="tmo_list2">
-                    <li class="ll first"><span>科研项目</span></li>
-                    <li class="ll" id="base">
-                        <a href="../Research_Project.html" class="ll_ref" style="margin-top: 26px;">
-
-                            <span>异构网络互联融合</span>
-                        </a>
-                    </li>
-                    <li class="ll" id="network">
-                        <a href="Research_Project1.html" class="ll_ref" >
-
-                            <span>工业过程大数据</span>
-                        </a>
-                    </li>
-                    <li class=" ll" id="bigdata">
-                        <a href="Research_Project2.html" class="ll_ref">
-
-                            <span>高性能计算</span>
-                        </a>
-                    </li>
-                    <li class=" ll" id="machine">
-                        <a href="Research_Project3.html" class="ll_ref">
-
-                            <span>智能制造与知识自动化</span>
-                        </a>
-                    </li>
-                    <li class="ll" id="system">
-                        <a href="Research_Project4.html" class="ll_ref" style="background:#6ad;">
-
-                            <span>智能装备与机器人系统</span>
-                        </a>
-                    </li>
-                    <li class="ll" id="system">
-                        <a href="Research_Project5.html" class="ll_ref">
-
-                            <span>工控系统安全</span>
-                        </a>
-                    </li>
-                </ul>
+            <div class="middle_l" id="temlate_middle" th:include="template/Research_Project4 :: Research_Project4">
             </div>
             <div class="middle_r">
                 <div class="crumb">
@@ -259,21 +134,11 @@
     <div class="public-text">Copyright © 1995-2018 信息物理融合系统广东省重点实验室版权所有&nbsp;&nbsp;&nbsp;备案序号：粤ICP备18032668号-2</div>
 </div>
 
-
+<div th:include="template/footer_template :: footer_template"></div>
+<script type="text/javascript" src="../../../static/home/js/jquery-1.12.4.min.js" th:src="@{../home/js/jquery-1.12.4.min.js}"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="../../../static/home/js/common.js" th:src="@{../home/js/common.js}"></script>
 
 </body>
-    <!--二级菜单栏-->
-    <script>
-     $(function(){
-             $(".public-nav li:has(ul)").hover(function() {
-             $(this).find("a:first").css("background-color","#00428f");
-                 $(this).find(".subnav").css("display","block");
-
-         },function() {
-             $(this).find("a:first").css("background-color","#035ba6");
-             $(this).find(".subnav").css("display","none");
-         })
-     });
-    </script>
 
 </html>

@@ -1,5 +1,7 @@
 package llcweb.com.domain.entity;
 
+import llcweb.com.domain.models.Patent;
+
 import java.util.Date;
 
 /**
@@ -25,6 +27,35 @@ public class UsefulPatent {
 	//按以下时间段搜索
 	public Date firstDate;
 	public Date lastDate;
+	
+
+	public UsefulPatent() {
+		
+	}
+	
+	public UsefulPatent(Patent patent) {
+		super();
+		this.title = title;
+		this.authorList = authorList;
+		this.belongProject = belongProject;
+		this.publicNum = publicNum;
+		this.agency = agency;
+		this.firstDate = firstDate;
+		this.lastDate = lastDate;
+	}
+	
+	public UsefulPatent(String title, String authorList, String belongProject, String publicNum, String agency,
+			Date firstDate, Date lastDate) {
+		super();
+		this.title = title;
+		this.authorList = authorList;
+		this.belongProject = belongProject;
+		this.publicNum = publicNum;
+		this.agency = agency;
+		this.firstDate = firstDate;
+		this.lastDate = lastDate;
+	}
+
 	
 	public String getTitle() {
 		return title;

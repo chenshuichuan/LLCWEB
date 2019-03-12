@@ -10,6 +10,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+import llcweb.com.tools.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -82,6 +83,7 @@ public class ProjectServiceImpl implements ProjectService {
 		return projectList;
 	}
 	
+	
     /**
      * 查找用户编辑过的项目
      */
@@ -149,7 +151,7 @@ public class ProjectServiceImpl implements ProjectService {
 	
 	/*
 	 * 修改项目
-	 * @see llcweb.com.service.ProjectService#update(llcweb.com.domain.models.Project)
+	 * 
 	 */
 
 	@Override
@@ -187,46 +189,23 @@ public class ProjectServiceImpl implements ProjectService {
         return map;
     }
 
-/*	
-	@Override
-	public Page<Project> getPage(int pageNum, int pageSize, Project project) {
-	      
-			Specification<Project> specification = new Specification<Project>() {
-	       	
-	       	@Override
-	       	public Predicate toPredicate(Root<Project> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-	       		List<Predicate> predicates = new ArrayList<>();
-	       		if(project.getTitle() != null) {
-	       			predicates.add(cb.like(root.get("title"),"%" +  project.getTitle() + "%"));
-					 }
-	       		if(project.getMembers() != null) {
-						 predicates.add(cb.like(root.get("members"),"%" +  project.getMembers() + "%"));
-						 }
-	       		if(project.getProjectName() != null) {
-						 predicates.add(cb.like(root.get("projectName"),"%" +  project.getProjectName() + "%"));
-						 }
-	       		if(project.getProjectType() != null) {
-						predicates.add(cb.like(root.get("projectType"),"%" +  project.getProjectType() + "%"));
-						 }
-				 if(project.getResponsiblePerson() != null) {
-					 	predicates.add(cb.like(root.get("responsiblePeople"),"%" +  project.getResponsiblePerson() + "%"));
-				 		}
-				 if(project.getRequireNum() != null) {
-					 	predicates.add(cb.like(root.get("requireNum"),"%" +  project.getRequireNum() + "%"));
-				 		}
-				 if(project.getTeam() != null) {
-					 	predicates.add(cb.like(root.get("team"),"%" +  project.getTeam() + "%"));
-				 		}
-	            return cb.and(predicates.toArray(new Predicate[0]));
-	        }
-	    };
-	    
-	    //分页信息
-	    Pageable pageable = new PageRequest(pageNum,pageSize); //页码
-	    //查询
-	    return projectRepository.findAll(specification,pageable);
-	       }
-*/
-	
+    @Override
+    public List<UsefulProject> projectsToUsefulProject(List<Project> projectList) {
+        return null;
+    }
+
+    @Override
+    public Page<Project> getPage(String team, int pageNum, int pageSize) {
+        //按时间排序
+        Pageable pageable=new PageRequest(pageNum,pageSize, Sort.Direction.DESC,"startDate");
+        Page<Project> projectPage=null;
+
+        if(StringUtil.isNull(team) ||"all".equals(team)){
+            projectPage = projectRepository.findAll(pageable);
+        }else{
+            projectPage = projectRepository.findByTeam(team,pageable);
+        }
+        return projectPage;
+    }
 
 }

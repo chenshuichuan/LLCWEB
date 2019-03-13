@@ -14,11 +14,6 @@ import java.io.OutputStream;
 @Service
 public class FilesServiceImpl implements FilesService {
 
-    @Value("${image.location}")
-    private String imagePath;
-    @Value("${file.location}")
-    private String filePath;
-
     /**
      * @Author haien
      * @Description 客户端获取文件输出流

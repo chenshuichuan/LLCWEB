@@ -262,7 +262,7 @@ function loadActivity(id) {
     var pdffile = "/home/pdf-error.pdf";
     var urlGetDocumentById="/homes/file/getFile";
     var file = getFileById(activity.introduction,urlGetDocumentById);
-    var path = file.path;
+    var path = "/homes/files/"+file.fileName+"."+file.suffix;
     if(path==null||path==undefined||path.length<1)alert("未获取到简介！请检查数据！");
     else pdffile = path;
     //PDFObject.embed(pdffile, "#example1");
@@ -270,7 +270,7 @@ function loadActivity(id) {
     var myPDF = PDFObject.embed(pdffile, "#example1",options);
     var el = document.querySelector("#div-title");
     el.setAttribute("class", (myPDF) ? "success" : "fail");
-    el.innerHTML = (myPDF) ? "<h1>"+activity.title+"</h1>" : "文档加载失败！";
+    el.innerHTML = (myPDF) ? "<h1>"+activity.name+"</h1>" : "文档加载失败！";
 }
 //根据id获取document信息
 function getFileById(id,urlGetFileById) {

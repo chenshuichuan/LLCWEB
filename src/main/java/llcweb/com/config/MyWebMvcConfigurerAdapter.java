@@ -21,11 +21,7 @@ import java.util.List;
 @Configuration
 public class MyWebMvcConfigurerAdapter extends WebMvcConfigurerAdapter {
     private final static Logger logger=LoggerFactory.getLogger(ImageController.class);
-    //获取配置文件中图片的路径
-    @Value("${image.location}")
-    private String imgPath;
-    @Value("${file.location}")
-    private String filePath;
+
     //访问图片方法
     /**
      * 配置静态访问资源
@@ -33,17 +29,6 @@ public class MyWebMvcConfigurerAdapter extends WebMvcConfigurerAdapter {
      */
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        if(imgPath.equals("") || imgPath.equals("${image.location}")){
-            String imagesPath = MyWebMvcConfigurerAdapter.class.getClassLoader().getResource("").getPath();
-            if(imagesPath.indexOf(".jar")>0){
-                imagesPath = imagesPath.substring(0, imagesPath.indexOf(".jar"));
-            }else if(imagesPath.indexOf("classes")>0){
-                imagesPath = "file:"+imagesPath.substring(0, imagesPath.indexOf("classes"));
-            }
-            imagesPath = imagesPath.substring(0, imagesPath.lastIndexOf("/"))+"/images/";
-            imgPath = imagesPath;
-        }
-        logger.info("imagesPath="+imgPath);
         //linux 下
         //registry.addResourceHandler("/images/**").addResourceLocations("file:"+"/root/LLCWEB/images/");
         //registry.addResourceHandler("/files/**").addResourceLocations("file:"+"/root/LLCWEB/files/");
@@ -51,8 +36,8 @@ public class MyWebMvcConfigurerAdapter extends WebMvcConfigurerAdapter {
         //registry.addResourceHandler("/images/**").addResourceLocations("file:"+"E:\\LLCWEB\\images\\");
         //registry.addResourceHandler("/files/**").addResourceLocations("file:"+"E:\\LLCWEB\\files\\");
 
-        registry.addResourceHandler("/homes/images/**").addResourceLocations("file:"+"D:\\temp\\");
-        registry.addResourceHandler("/homes/files/**").addResourceLocations("file:"+"D:\\temp\\");
+        registry.addResourceHandler("/homes/images/**").addResourceLocations("file:"+"E:\\temp\\");
+        registry.addResourceHandler("/homes/files/**").addResourceLocations("file:"+"E:\\temp\\");
         //registry.addResourceHandler("/images/**").addResourceLocations("file:"+"C:\\Users\\Ricardo\\IdeaProjects\\LLCWEB\\images\\");
         //registry.addResourceHandler("/files/**").addResourceLocations("file:"+"C:\\Users\\Ricardo\\IdeaProjects\\LLCWEB\\files\\");
 

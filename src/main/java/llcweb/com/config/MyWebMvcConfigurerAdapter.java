@@ -36,10 +36,10 @@ public class MyWebMvcConfigurerAdapter extends WebMvcConfigurerAdapter {
         //registry.addResourceHandler("/images/**").addResourceLocations("file:"+"E:\\LLCWEB\\images\\");
         //registry.addResourceHandler("/files/**").addResourceLocations("file:"+"E:\\LLCWEB\\files\\");
 
-        registry.addResourceHandler("/homes/images/**").addResourceLocations("file:"+"E:\\temp\\");
-        registry.addResourceHandler("/homes/files/**").addResourceLocations("file:"+"E:\\temp\\");
-        //registry.addResourceHandler("/images/**").addResourceLocations("file:"+"C:\\Users\\Ricardo\\IdeaProjects\\LLCWEB\\images\\");
-        //registry.addResourceHandler("/files/**").addResourceLocations("file:"+"C:\\Users\\Ricardo\\IdeaProjects\\LLCWEB\\files\\");
+        //registry.addResourceHandler("/homes/images/**").addResourceLocations("file:"+"E:\\temp\\");
+        //registry.addResourceHandler("/homes/files/**").addResourceLocations("file:"+"E:\\temp\\");
+        registry.addResourceHandler("/homes/images/**").addResourceLocations("file:"+"/root/LLCWEB/profile/");
+        registry.addResourceHandler("/homes/files/**").addResourceLocations("file:"+"/root/LLCWEB/profile/");
 
         super.addResourceHandlers(registry);
     }
